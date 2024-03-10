@@ -1,0 +1,14 @@
+{
+  "sidebar": {
+    "home": "Accueil",
+    "settings": "Paramètres",
+    "profile": "Profil",
+    "about": "À propos",
+    "becomanInstructor": "Devenir un instructeur",
+    "courses": "Cours",
+    "contact": "Contact",
+    "eur": "Euro",
+    "usd": "Dollar américain",
+    "tnd": "Dinar tunisien"
+  }
+}

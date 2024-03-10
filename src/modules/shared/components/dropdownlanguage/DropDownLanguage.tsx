@@ -11,24 +11,28 @@ import {
 } from '../ui/dropdown-menu';
 import { cn } from 'modules/shared/lib/utility';
 import { getItem, setItem } from 'modules/shared/lib/localStorage';
+import { useTranslation } from 'react-i18next';
 
 export default function DropDownLanguage() {
   const [language, setLanguage] = React.useState(getItem('language') || 'en');
+  const { t, i18n } = useTranslation('translation');
+
   const [onOpenChange, setOnOpenChange] = React.useState(false);
 
   const handleLanguageChange = (selectedLanguage: string) => {
     setLanguage(selectedLanguage);
+    i18n.changeLanguage(selectedLanguage);
     setItem('language', selectedLanguage);
   };
 
   return (
     <DropdownMenu onOpenChange={() => setOnOpenChange(!onOpenChange)}>
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center justify-center gap-1 font-mono text-sm text-white">
+        <div className="flex items-center justify-center gap-1 text-sm text- white">
           <span className="text-[14px] text-gray-400">
-            {language === 'en' && 'English'}
-            {language === 'fr' && 'French'}
-            {language === 'ar' && 'Arabic'}
+            {language === 'en' && t('languages.en')}
+            {language === 'fr' && t('languages.fr')}
+            {language === 'ar' && t('languages.ar')}
           </span>
           <img
             src={ArrowDown}
@@ -43,13 +47,13 @@ export default function DropDownLanguage() {
       <DropdownMenuContent className="">
         <DropdownMenuRadioGroup>
           <DropdownMenuItem onClick={() => handleLanguageChange('en')}>
-            English
+            {t('languages.en')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => handleLanguageChange('fr')}>
-            French
+            {t('languages.fr')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => handleLanguageChange('ar')}>
-            Arabic
+            {t('languages.ar')}
           </DropdownMenuItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>

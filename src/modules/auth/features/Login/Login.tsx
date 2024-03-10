@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useLoginQuery } from 'modules/auth/data/queries/auth.query';
 import { type LoginBody } from 'modules/auth/types/auth';
@@ -8,6 +8,9 @@ import Button from 'modules/shared/components/Button';
 import Input from 'modules/shared/components/Input';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import * as yup from 'yup';
+import { useToast } from 'modules/shared/components/ui/use-toast';
+import { ToastAction } from 'modules/shared/components/ui/toast';
+import { X } from 'lucide-react';
 
 const Login = () => {
   const { isLoading, mutateAsync: login, isError, error } = useLoginQuery();
@@ -27,6 +30,7 @@ const Login = () => {
     ),
   });
 
+  const { toast } = useToast();
   const onSubmit: SubmitHandler<LoginBody> = async (data) => {
     await login(data);
     setIsAuthenticated(true);
@@ -34,7 +38,16 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error((error as Error)?.message, { theme: 'colored' });
+      toast({
+        variant: 'error',
+        title: 'Write your success message Label',
+
+        action: (
+          <ToastAction altText="Try again">
+            <X className="w-5 h-5 bg-transparent" />
+          </ToastAction>
+        ),
+      });
     }
   }, [isError]);
 
@@ -69,11 +82,17 @@ const Login = () => {
 
         <div className="flex justify-center mt-5">
           <Button
-            variant='tertiaryGray'
+            variant="tertiaryGray"
             text="Login"
             size="md"
             disabled={false}
             type="submit"
+            onClick={() =>
+              toast({
+                variant: 'success',
+                title: 'Uh oh! Something went wrong.',
+              })
+            }
             isLoading={isLoading}
           />
         </div>

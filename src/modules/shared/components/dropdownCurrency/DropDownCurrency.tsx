@@ -13,15 +13,34 @@ import {
 } from '../ui/dropdown-menu';
 import { cn } from 'modules/shared/lib/utility';
 import { getItem, setItem } from 'modules/shared/lib/localStorage';
+import { useTranslation } from 'react-i18next';
 
 export default function DropDownCurrency() {
+  const { t } = useTranslation('sidebar');
   const [currency, setCurrency] = React.useState(getItem('currency') || 'EUR');
+  React.useEffect(() => {
+    setCurrency(t('sidebar.eur') || 'EUR');
+  }, [getItem('language')]);
   const [onOpenChange, setOnOpenChange] = React.useState(false);
-  setItem('currency', currency);
+  const onValueChange = (value: string) => {
+    if (value === 'EUR') {
+      setCurrency(t('sidebar.eur'));
+      setItem('currency', currency);
+    }
+    if (value === 'USD') {
+      setCurrency(t('sidebar.usd'));
+      setItem('currency', currency);
+    }
+    if (value === 'TND') {
+      setCurrency(t('sidebar.tnd'));
+      setItem('currency', currency);
+    }
+  };
+
   return (
     <DropdownMenu onOpenChange={() => setOnOpenChange(!onOpenChange)}>
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center justify-center gap-1 font-mono text-sm text-white">
+        <div className="flex items-center justify-center gap-2 text-sm text-white">
           <span className="text-[14px] text-gray-400">{currency}</span>
           <img
             src={ArrowDown}
@@ -34,16 +53,16 @@ export default function DropDownCurrency() {
         </div>
         {/* <ArrowDown /> */}
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="">
+      <DropdownMenuContent className="text-sm w-[6rem]">
         <DropdownMenuRadioGroup>
-          <DropdownMenuItem onClick={() => setCurrency('EUR')}>
-            EUR
+          <DropdownMenuItem onClick={() => onValueChange('EUR')}>
+            {t('sidebar.eur')}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setCurrency('TND')}>
-            TND
+          <DropdownMenuItem onClick={() => onValueChange('TND')}>
+            {t('sidebar.tnd')}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setCurrency('USD')}>
-            USD
+          <DropdownMenuItem onClick={() => onValueChange('TND')}>
+            {t('sidebar.usd')}
           </DropdownMenuItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>

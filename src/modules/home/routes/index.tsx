@@ -1,6 +1,7 @@
 import { Route } from 'react-router-dom';
 import PrivateRoute from 'modules/shared/routes/PrivateRoute';
-import Home from '../views/Home';
+import Home from '../features/Home';
+import MainLayout from 'modules/shared/layout/MainLayout';
 
 export const useHomeRoutes = () => {
   return (
@@ -9,7 +10,9 @@ export const useHomeRoutes = () => {
         path="/home"
         element={
           // <PrivateRoute>
-          <Home />
+          <MainLayout>
+            <Home />
+          </MainLayout>
           // </PrivateRoute>
         }
       />

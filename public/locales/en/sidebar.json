@@ -1,0 +1,14 @@
+{
+  "sidebar": {
+    "home": "Home",
+    "settings": "Settings",
+    "profile": "Profile",
+    "about": "About",
+    "becomanInstructor": "Becom an Instructor",
+    "courses": "Courses",
+    "contact": "Contact",
+    "eur" : "EUR" , 
+    "usd" : "USD",
+    "tnd" : "TND"
+  }
+}

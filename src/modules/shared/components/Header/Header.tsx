@@ -3,38 +3,44 @@ import useAuthStore from 'modules/shared/store/useAuthStore';
 import { Link } from 'react-router-dom';
 import DropdownLanguage from '../dropdownlanguage';
 import DropdownCurrency from '../dropdownCurrency';
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuthStore(
     (state) => state
   );
+  const { t } = useTranslation('sidebar');
 
   // routes data
   const routes = [
     {
-      name: 'Home',
+      name: t(`sidebar.home`),
       path: '/home',
     },
     {
-      name: 'Courses',
+      name: t(`sidebar.courses`),
       path: '/login',
     },
     {
-      name: 'About',
+      name: t(`sidebar.about`),
       path: '/about',
     },
     {
-      name: 'Contact',
+      name: t(`sidebar.contact`),
       path: '/contact',
     },
     {
-      name: 'Becom an Instructor',
+      name: t(`sidebar.becomanInstructor`),
+
       path: '/instructor',
     },
   ];
 
   //check if route is active
   const isActive = (routePath: string) => {
+    if (window.location.pathname === '/') {
+      return routePath === '/home';
+    }
     return window.location.pathname === routePath;
   };
 
