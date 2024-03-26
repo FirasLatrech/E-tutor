@@ -22,12 +22,10 @@
 
 // export default Router;
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Suspense, Fragment } from 'react';
-import { Routes, Route, RouteProps, Navigate } from 'react-router-dom';
-
-import pages from './routes';
+import { Fragment, Suspense } from 'react';
+import { Navigate, Route, type RouteProps, Routes } from 'react-router-dom';
 import LazyLoad from '../components/LazyLoad/LazyLoad';
-import { CloudFog } from 'lucide-react';
+import pages from './routes';
 
 type RouteConfig = {
   exact: boolean | null;
@@ -61,7 +59,6 @@ export const renderRoutes = (routes: RouteConfig[] = []) => (
           />
         );
       })}
-      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   </Suspense>
 );

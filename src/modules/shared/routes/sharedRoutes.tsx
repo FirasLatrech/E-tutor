@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Fragment, lazy } from 'react';
-import { RouteProps } from 'react-router-dom';
+import { type Fragment, lazy } from 'react';
+import { type RouteProps } from 'react-router-dom';
 
 type RouteConfig = {
   exact: boolean | null;
@@ -14,7 +14,7 @@ const routes: RouteConfig[] = [
   {
     exact: true,
     path: '*',
-    component: lazy(() => import('../features/NotFound/NotFound')),
+    component: lazy(async () => await import('../features/NotFound/NotFound')),
   },
 ];
 

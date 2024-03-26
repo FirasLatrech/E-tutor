@@ -1,9 +1,9 @@
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { cn } from 'modules/shared/lib/utility';
 import useAuthStore from 'modules/shared/store/useAuthStore';
-import { Link } from 'react-router-dom';
-import DropdownLanguage from '../dropdownlanguage';
 import DropdownCurrency from '../dropdownCurrency';
-import { useTranslation } from 'react-i18next';
+import DropdownLanguage from '../dropdownlanguage';
 
 const Header = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuthStore(
@@ -15,11 +15,11 @@ const Header = () => {
   const routes = [
     {
       name: t(`sidebar.home`),
-      path: '/home',
+      path: '/',
     },
     {
       name: t(`sidebar.courses`),
-      path: '/login',
+      path: '/courses',
     },
     {
       name: t(`sidebar.about`),
@@ -36,10 +36,13 @@ const Header = () => {
     },
   ];
 
-  //check if route is active
+  // check if route is active
   const isActive = (routePath: string) => {
-    if (window.location.pathname === '/') {
-      return routePath === '/home';
+    if (
+      window.location.pathname === '/' ||
+      window.location.pathname.includes('/category')
+    ) {
+      return routePath === '/';
     }
     return window.location.pathname === routePath;
   };
@@ -69,7 +72,8 @@ const Header = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <DropdownCurrency />
+            {/* <DropdownCurrency /> */}
+
             <DropdownLanguage />
           </div>
         </div>

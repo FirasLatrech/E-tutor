@@ -1,17 +1,17 @@
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
+import { getItem, setItem } from 'modules/shared/lib/localStorage';
+import { cn } from 'modules/shared/lib/utility';
 import ArrowDown from '../../assets/icons/navbar/arrowdown.svg';
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
-  DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { cn } from 'modules/shared/lib/utility';
-import { getItem, setItem } from 'modules/shared/lib/localStorage';
-import { useTranslation } from 'react-i18next';
 
 export default function DropDownLanguage() {
   const [language, setLanguage] = React.useState(getItem('language') || 'en');
@@ -26,7 +26,7 @@ export default function DropDownLanguage() {
   };
 
   return (
-    <DropdownMenu onOpenChange={() => setOnOpenChange(!onOpenChange)}>
+    <DropdownMenu onOpenChange={() => { setOnOpenChange(!onOpenChange); }}>
       <DropdownMenuTrigger asChild>
         <div className="flex items-center justify-center gap-1 text-sm text- white">
           <span className="text-[14px] text-gray-400">
@@ -46,13 +46,13 @@ export default function DropDownLanguage() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="">
         <DropdownMenuRadioGroup>
-          <DropdownMenuItem onClick={() => handleLanguageChange('en')}>
+          <DropdownMenuItem onClick={() => { handleLanguageChange('en'); }}>
             {t('languages.en')}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleLanguageChange('fr')}>
+          <DropdownMenuItem onClick={() => { handleLanguageChange('fr'); }}>
             {t('languages.fr')}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleLanguageChange('ar')}>
+          <DropdownMenuItem onClick={() => { handleLanguageChange('ar'); }}>
             {t('languages.ar')}
           </DropdownMenuItem>
         </DropdownMenuRadioGroup>

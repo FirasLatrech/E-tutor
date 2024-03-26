@@ -7,9 +7,9 @@ import {
   ToastViewport,
 } from 'modules/shared/components/ui/toast';
 import { useToast } from 'modules/shared/components/ui/use-toast';
-import CheckCircle from '../../assets/icons/toast/succes.svg';
 import errer from '../../assets/icons/toast/errer.svg';
 import info from '../../assets/icons/toast/info.svg';
+import CheckCircle from '../../assets/icons/toast/succes.svg';
 import warning from '../../assets/icons/toast/warning.svg';
 
 export function Toaster() {

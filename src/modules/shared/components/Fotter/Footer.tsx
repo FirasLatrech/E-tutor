@@ -1,20 +1,18 @@
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import whiteLogo from 'modules/shared/assets/icons/logo/whiteLogo.svg';
 import { cn } from 'modules/shared/lib/utility';
 import useAuthStore from 'modules/shared/store/useAuthStore';
-import { Link } from 'react-router-dom';
-import DropdownLanguage from '../dropdownlanguage';
-import DropdownCurrency from '../dropdownCurrency';
-
+import ArrowRight from '../../assets/arrow/arrowRight.svg';
+import apple from '../../assets/icons/socialMediaIcon/apple.svg';
 import facebook from '../../assets/icons/socialMediaIcon/facebook.svg';
+import playstore from '../../assets/icons/socialMediaIcon/googleplay.svg';
 import instagram from '../../assets/icons/socialMediaIcon/instagram.svg';
 import linkedin from '../../assets/icons/socialMediaIcon/linkedin.svg';
 import twitter from '../../assets/icons/socialMediaIcon/twitter.svg';
 import youtube from '../../assets/icons/socialMediaIcon/youtube.svg';
-import apple from '../../assets/icons/socialMediaIcon/apple.svg';
-import playstore from '../../assets/icons/socialMediaIcon/googleplay.svg';
-
-import whiteLogo from 'modules/shared/assets/icons/logo/whiteLogo.svg';
-import ArrowRight from '../../assets/arrow/arrowRight.svg';
-import { useTranslation } from 'react-i18next';
+import DropdownCurrency from '../dropdownCurrency';
+import DropdownLanguage from '../dropdownlanguage';
 
 const Footer = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuthStore(

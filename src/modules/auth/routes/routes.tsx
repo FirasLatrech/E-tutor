@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Navigate, RouteProps } from 'react-router-dom';
-import { Fragment, lazy } from 'react';
+import { type Fragment, lazy } from 'react';
+import { Navigate, type RouteProps } from 'react-router-dom';
 import { PATH } from './paths';
 type RouteConfig = {
   exact: boolean | null;
@@ -18,14 +18,14 @@ const routes: RouteConfig[] = [
     exact: true,
     // guard: MainLayout,
     path: PATH.LOGIN,
-    component: lazy(() => import('../features/Login/index')),
+    component: lazy(async () => await import('../features/Login/index')),
     // layout: MainLayout,
   },
   {
     exact: true,
     // guard: MainLayout,
     path: PATH.REGISTER,
-    component: lazy(() => import('../features/Register/index')),
+    component: lazy(async () => await import('../features/Register/index')),
     // layout: MainLayout,
   },
 ];

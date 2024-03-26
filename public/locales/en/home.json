@@ -1,0 +1,30 @@
+{
+  "home": {
+    "header": "Learn with expert anytime anywhere",
+    "paragraph": "Our mision is to help people to find the best course online and learn with expert anytime, anywhere.",
+    "button": "Create Account",
+    "browsetopcategory": "Browse top categories",
+    "wehavemorecategory": "We have more category & subcategory",
+
+    "browseall": "Browse All",
+    "bestsellingcourses": "Best Selling Courses",
+    "ourfeaturecourses": "Our feature courses",
+    "ourfeaturecoursesparagraph": "Our feature courses showcase the best of what we offer, learning experiences",
+    "recentlyaddedcourses": "Recently added courses",
+    "browseallcourse": "Browse all course",
+    "Becomeaninstructor": "Become an instructor",
+    "becomeaninstructorparagraph": "Instructors from around the world teach millions of students on Udemy. We provide the tools and skills to teach what you love.",
+    "startteaching": "Start teaching",
+    "yourteaching&earning": "Your teaching & earning steps",
+    "apptobecomeinstructor": "Apply to become an instructor",
+    "build&edityourprofile": "Build & edit your profile",
+    "createyournewcourse": "Create your new course",
+    "startteaching&earning": "Start teaching & earning",
+    "topinstructorformonth": "Top Instructor for month",
+    "topinstructorformonthparagraph": "Thousands of students waiting for a instructor. Start teaching & earning now!.",
+    "k": "K",
+
+    "trustedcompanies": "Trusted Companies",
+    "trustedcompaniesparagraph": "We are trusted by companies of all sizes. From small business to Fortune 500."
+  }
+}

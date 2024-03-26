@@ -1,16 +1,15 @@
 import { useEffect } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
-
 import { yupResolver } from '@hookform/resolvers/yup';
+import { X } from 'lucide-react';
 import { useLoginQuery } from 'modules/auth/data/queries/auth.query';
 import { type LoginBody } from 'modules/auth/types/auth';
 import Button from 'modules/shared/components/Button';
 import Input from 'modules/shared/components/Input';
+import { ToastAction } from 'modules/shared/components/ui/toast';
+import { useToast } from 'modules/shared/components/ui/use-toast';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import * as yup from 'yup';
-import { useToast } from 'modules/shared/components/ui/use-toast';
-import { ToastAction } from 'modules/shared/components/ui/toast';
-import { X } from 'lucide-react';
 
 const Login = () => {
   const { isLoading, mutateAsync: login, isError, error } = useLoginQuery();
@@ -24,7 +23,7 @@ const Login = () => {
   } = useForm<LoginBody>({
     resolver: yupResolver(
       yup.object().shape({
-        username: yup.string().required('Username is required'),
+        email: yup.string().required('Username is required'),
         password: yup.string().required('Password is required'),
       })
     ),
@@ -32,7 +31,8 @@ const Login = () => {
 
   const { toast } = useToast();
   const onSubmit: SubmitHandler<LoginBody> = async (data) => {
-    await login(data);
+    const res = await login(data);
+    console.log(res);
     setIsAuthenticated(true);
   };
 
@@ -62,8 +62,8 @@ const Login = () => {
         </p>
 
         <Input
-          id="username"
-          name="username"
+          id="email"
+          name="email"
           label="Username"
           placeholder="Username"
           register={register}
@@ -87,12 +87,6 @@ const Login = () => {
             size="md"
             disabled={false}
             type="submit"
-            onClick={() =>
-              toast({
-                variant: 'success',
-                title: 'Uh oh! Something went wrong.',
-              })
-            }
             isLoading={isLoading}
           />
         </div>

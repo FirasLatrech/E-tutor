@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { cn } from 'modules/shared/lib/utility';
 
 export interface InputProps

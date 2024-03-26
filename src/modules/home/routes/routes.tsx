@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Navigate, RouteProps } from 'react-router-dom';
-import { Fragment, lazy } from 'react';
-import { PATH } from './paths';
+import { type Fragment, lazy } from 'react';
+import { Navigate, type RouteProps } from 'react-router-dom';
+import AuthGuard from 'modules/shared/guards/AuthGuard';
 import MainLayout from 'modules/shared/layout/MainLayout';
 import useAuthStore from 'modules/shared/store/useAuthStore';
-import AuthGuard from 'modules/shared/guards/AuthGuard';
+import { PATH } from './paths';
 
 type RouteConfig = {
   exact: boolean | null;
@@ -22,16 +22,32 @@ const routes: RouteConfig[] = [
     exact: true,
     // guard: MainLayout,
     path: PATH.ROOT,
-    component: lazy(() => import('../features/Home/index')),
+    component: lazy(async () => await import('../features/Home/index')),
     layout: MainLayout,
   },
-  // {
-  //   exact: true,
-  //   // guard: MainLayout,
-  //   path: PATH.REGISTER,
-  //   component: lazy(() => import('../views/Register/index')),
-  //   // layout: MainLayout,
-  // },
+  {
+    exact: true,
+    // guard: MainLayout,
+    path: PATH.CATEGORY,
+    component: lazy(async () => await import('../features/category/index')),
+    layout: MainLayout,
+  },
+  {
+    exact: true,
+    // guard: MainLayout,
+    path: PATH.COURSES,
+    component: lazy(async () => await import('../features/courses/index')),
+    layout: MainLayout,
+  },
+  {
+    exact: true,
+    // guard: MainLayout,
+    path: PATH.COURSESBYID,
+    component: lazy(
+      async () => await import('../features/courseDetails/index')
+    ),
+    layout: MainLayout,
+  },
 ];
 
 export default routes;

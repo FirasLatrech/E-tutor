@@ -1,12 +1,10 @@
-import { ToastContainer } from 'react-toastify';
+import { Suspense } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'modules/shared/components/ui/toaster';
 import routes, { renderRoutes } from '../modules/shared/routes';
 import 'react-toastify/dist/ReactToastify.css';
-import { HelmetProvider } from 'react-helmet-async';
-import { Suspense } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Toaster } from 'modules/shared/components/ui/toaster';
-
 
 function App() {
   const queryClient = new QueryClient();

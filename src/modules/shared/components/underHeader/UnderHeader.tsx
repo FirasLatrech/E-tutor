@@ -1,18 +1,17 @@
-import { cn } from 'modules/shared/lib/utility';
-import useAuthStore from 'modules/shared/store/useAuthStore';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import fulllogo from 'modules/shared/assets/icons/logo/fulllogo.svg';
-import Select from '../select';
-import bellIcon from './../../assets/icons/bell.svg';
-import ActiveBellIcon from './../../assets/icons/activebell.svg';
-import HeartIcon from './../../assets/icons/heartIcon.svg';
-import shoppingCart from './../../assets/icons/shoppingCart.svg';
-
-import scoopIcon from './../../assets/icons/scoop.svg';
-import { Input } from '../ui/input';
+import { cn } from 'modules/shared/lib/utility';
+import useAuthStore from 'modules/shared/store/useAuthStore';
 import Button from '../Button';
+import Select from '../select';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { useTranslation } from 'react-i18next';
+import { Input } from '../ui/input';
+import ActiveBellIcon from './../../assets/icons/activebell.svg';
+import bellIcon from './../../assets/icons/bell.svg';
+import HeartIcon from './../../assets/icons/heartIcon.svg';
+import scoopIcon from './../../assets/icons/scoop.svg';
+import shoppingCart from './../../assets/icons/shoppingCart.svg';
 const UnderHeader = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuthStore(
     (state) => state
@@ -21,7 +20,7 @@ const UnderHeader = () => {
 
   // routes data
 
-  //check if route is active
+  // check if route is active
   const isActive = (routePath: string) => {
     return window.location.pathname === routePath;
   };

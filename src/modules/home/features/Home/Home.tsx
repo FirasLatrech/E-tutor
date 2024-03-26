@@ -1,16 +1,21 @@
-import Footer from 'modules/shared/components/Fotter/Footer';
-import Header from 'modules/shared/components/Header';
-import UnderHeader from 'modules/shared/components/underHeader';
-import { useTranslation } from 'react-i18next';
+import BecomeAnInstructor from 'modules/home/components/BecomeAnInstructor';
+import BestSellingCourses from 'modules/home/components/bestSellingCourses';
+import HeroSection from 'modules/home/components/heroSection';
+import RecentlyAddedCourses from 'modules/home/components/recentlyAddedCourses';
+import TopCategory from 'modules/home/components/topCategory';
 
 const Home = () => {
-  const { i18n } = useTranslation('translation');
-  // console.log(i18n);
-  document.body.dir = i18n?.dir();
-
   return (
     // <div className="flex items-center justify-center h-screen">
-    <div className="flex flex-col h-full">hello</div>
+    <div className="flex flex-col h-full">
+      <HeroSection />
+
+      {/* // browse top Category  */}
+      <TopCategory />
+      <BestSellingCourses />
+      <RecentlyAddedCourses />
+      <BecomeAnInstructor />
+    </div>
   );
 };
 

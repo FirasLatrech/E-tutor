@@ -14,6 +14,7 @@ export const requestInterceptor = (
   config: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig => {
   const token = getItem<string>('token');
+
   if (token) {
     config.headers.set('Authorization', `Bearer ${token}`);
   }

@@ -1,8 +1,7 @@
-import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import Backend from 'i18next-http-backend';
+import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { tr } from 'date-fns/locale';
+import Backend from 'i18next-http-backend';
 import { getItem } from 'modules/shared/lib/localStorage';
 i18n
   .use(Backend)
@@ -20,6 +19,8 @@ i18n
     react: {
       useSuspense: false,
     },
+  }).catch((err) => {
+    console.log(err);
   });
 
 export default i18n;
