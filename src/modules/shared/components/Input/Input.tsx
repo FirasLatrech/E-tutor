@@ -13,7 +13,7 @@ export interface Props<
   name: string;
   label?: string;
   disabled?: boolean;
-  register: UseFormRegister<T>;
+  register?: UseFormRegister<T>;
   errors?: FieldErrors<U>;
   variant?: 'default' | 'outlined' | 'rounded';
 }
@@ -32,7 +32,7 @@ const Input = <T extends FieldValues, U extends FieldValues>({
   const getVariantClasses = () => {
     switch (variant) {
       case 'outlined':
-        return 'border border-gray-400  placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent  outline-none hover:border-1  hover:border-primary-300';
+        return 'border border-gray-100  placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-transparent  outline-none hover:border-1 text-[1rem] text-gray-700 font-light	  hover:border-primary-300';
       case 'rounded':
         return 'rounded-lg';
       default:
@@ -41,23 +41,25 @@ const Input = <T extends FieldValues, U extends FieldValues>({
   };
 
   return (
-    <div className="flex flex-col mb-4">
-      <label className="flex text-gray-900" htmlFor={name}>
+    <div className={`flex w-full gap-2 flex-col mb-4`}>
+      <label className="flex font-light  text-gray-900" htmlFor={name}>
         {label ?? ''}
       </label>
       <input
-        className={`w-full p-2 ${getVariantClasses()}    `}
+        className={`w-full py-[0.7rem] px-3 ${getVariantClasses()}    `}
         placeholder={placeholder}
         disabled={disabled}
         value={value}
-        {...register(name as Path<T>)}
+        {...(register && { ...register(name as Path<T>) })}
         {...rest}
       />
-      {errors && errors[name as keyof U] && (
-        <span className="mt-1 text-xs text-red-500">
-          {errors[name as keyof U]?.message as string}
-        </span>
-      )}
+      <span
+        className={`text-xs text-red-500 opacity-0 ${
+          errors && errors[name as keyof U] ? 'opacity-100' : ''
+        }`}
+      >
+        {(errors?.[name as keyof U]?.message as string) || ''}
+      </span>
     </div>
   );
 };

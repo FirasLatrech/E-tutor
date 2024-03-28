@@ -5,13 +5,19 @@ import { BrowserRouter } from 'react-router-dom';
 import './i18n';
 import App from './app/App';
 import './styles.css';
+import StoreProvider from 'modules/shared/provider/StoreProvider';
+import GoogleAuthProvider from 'modules/auth/social-auth/google/google-auth-provider';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <HelmetProvider>
-    <BrowserRouter>
-      <Suspense>
-        <App />
-      </Suspense>
-    </BrowserRouter>
+    <StoreProvider>
+      <GoogleAuthProvider>
+        <BrowserRouter>
+          <Suspense>
+            <App />
+          </Suspense>
+        </BrowserRouter>
+      </GoogleAuthProvider>
+    </StoreProvider>
   </HelmetProvider>
 );

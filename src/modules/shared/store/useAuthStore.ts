@@ -3,14 +3,17 @@ import { logger } from './logger';
 
 interface AuthState {
   isAuthenticated: boolean;
+  user: any;
 }
 
 export interface AuthStore extends AuthState {
   setIsAuthenticated: (args: AuthState['isAuthenticated']) => void;
+  setUser: (args: AuthState['user']) => void;
 }
 
 const initialState: Pick<AuthStore, keyof AuthState> = {
   isAuthenticated: false,
+  user: {},
 };
 
 const useAuthStore = create<AuthStore>()(
@@ -20,7 +23,10 @@ const useAuthStore = create<AuthStore>()(
       setIsAuthenticated: (isAuthenticated) => {
         set(() => ({ isAuthenticated }));
         console.log(isAuthenticated);
-        // TODO: Save Token
+      },
+      setToken: () => {},
+      setUser: (user) => {
+        set(() => ({ user }));
       },
     }),
     'authStore'

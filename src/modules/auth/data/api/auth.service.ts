@@ -3,16 +3,34 @@ import { type LoginBody } from 'modules/auth/types/auth';
 import { api } from 'modules/shared/lib/api';
 
 export const login = async (body: LoginBody) => {
-  // const res = new Promise<boolean>((resolve, reject) => {
-  //   if (body?.username !== 'user' || body?.password !== 'user') {
-  //     reject(new Error('Invalid username or password'));
-  //   }
+  try {
+    const res = await api.post('/auth/email/login', body);
+    if (res.status !== 200) {
+      throw new Error(`Unexpected status code: ${res.status}`);
+    }
+    return res.data;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
+};
 
-  //   resolve(true);
-  // });
+export const register = async (body: LoginBody) => {
+  try {
+    const res = await api.post('/auth/email/register', body);
+    console.log(res);
+    return res;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
+};
+
+export const googleLogin = async (body: any) => {
   console.log(body);
-  const res = await api.post('/auth/email/login', body);
-
-  console.log(res);
-  return res;
+  try {
+    const res = await api.post('/auth/google/login', body);
+    console.log(res);
+    return res;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
 };

@@ -2,10 +2,10 @@
 
 import { type Fragment, lazy } from 'react';
 import { Navigate, type RouteProps } from 'react-router-dom';
-import AuthGuard from 'modules/shared/guards/AuthGuard';
 import MainLayout from 'modules/shared/layout/MainLayout';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import { PATH } from './paths';
+import PrivateRoute from 'modules/shared/routes/PrivateRoute';
 
 type RouteConfig = {
   exact: boolean | null;
@@ -20,28 +20,28 @@ const routes: RouteConfig[] = [
 
   {
     exact: true,
-    // guard: MainLayout,
+    guard: PrivateRoute,
     path: PATH.ROOT,
     component: lazy(async () => await import('../features/Home/index')),
     layout: MainLayout,
   },
   {
     exact: true,
-    // guard: MainLayout,
+    guard: PrivateRoute,
     path: PATH.CATEGORY,
     component: lazy(async () => await import('../features/category/index')),
     layout: MainLayout,
   },
   {
     exact: true,
-    // guard: MainLayout,
+    guard: PrivateRoute,
     path: PATH.COURSES,
     component: lazy(async () => await import('../features/courses/index')),
     layout: MainLayout,
   },
   {
     exact: true,
-    // guard: MainLayout,
+    guard: PrivateRoute,
     path: PATH.COURSESBYID,
     component: lazy(
       async () => await import('../features/courseDetails/index')
