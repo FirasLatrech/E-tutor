@@ -19,7 +19,8 @@ i18n
     react: {
       useSuspense: false,
     },
-  }).catch((err) => {
+  })
+  .catch((err) => {
     console.log(err);
   });
 

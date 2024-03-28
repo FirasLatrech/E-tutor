@@ -38,7 +38,11 @@ export default function DropDownCurrency() {
   };
 
   return (
-    <DropdownMenu onOpenChange={() => { setOnOpenChange(!onOpenChange); }}>
+    <DropdownMenu
+      onOpenChange={() => {
+        setOnOpenChange(!onOpenChange);
+      }}
+    >
       <DropdownMenuTrigger asChild>
         <div className="flex items-center justify-center gap-2 text-sm text-white">
           <span className="text-[14px] text-gray-400">{currency}</span>
@@ -55,13 +59,25 @@ export default function DropDownCurrency() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="text-sm w-[6rem]">
         <DropdownMenuRadioGroup>
-          <DropdownMenuItem onClick={() => { onValueChange('EUR'); }}>
+          <DropdownMenuItem
+            onClick={() => {
+              onValueChange('EUR');
+            }}
+          >
             {t('sidebar.eur')}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => { onValueChange('TND'); }}>
+          <DropdownMenuItem
+            onClick={() => {
+              onValueChange('TND');
+            }}
+          >
             {t('sidebar.tnd')}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => { onValueChange('TND'); }}>
+          <DropdownMenuItem
+            onClick={() => {
+              onValueChange('TND');
+            }}
+          >
             {t('sidebar.usd')}
           </DropdownMenuItem>
         </DropdownMenuRadioGroup>
