@@ -48,6 +48,13 @@ const routes: RouteConfig[] = [
     ),
     layout: MainLayout,
   },
+  {
+    exact: true,
+    // guard: MainLayout,
+    path: PATH.WATCHCOURSE,
+    component: lazy(async () => await import('../features/watchCourse/index')),
+    layout: MainLayout,
+  },
 ];
 
 export default routes;

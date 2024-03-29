@@ -17,7 +17,7 @@ export interface ButtonProps
     | 'tertiarySecondary'
     | 'tertiaryGray';
 
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -94,6 +94,8 @@ const Button: React.FC<ButtonProps> = ({
         return 'px-5 py-2.5 text-sm';
       case 'lg':
         return 'px-7 py-3 text-base';
+      case 'xl':
+        return 'px-10 py-4 text-base';
       default:
         return '';
     }

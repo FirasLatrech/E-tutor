@@ -44,7 +44,16 @@ const Header = () => {
     ) {
       return routePath === '/';
     }
-    return window.location.pathname === routePath;
+
+    if (routePath !== '/') {
+      return (
+        window.location.pathname === routePath ||
+        (window.location.pathname !== '/' &&
+          window.location.pathname.includes(routePath))
+      );
+    }
+
+    return false; // Default return if none of the conditions are met
   };
 
   return (
