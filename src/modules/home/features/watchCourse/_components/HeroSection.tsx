@@ -6,7 +6,7 @@ import folderIcon from 'modules/shared/assets/icons/courseDetails/folderIcon.svg
 import playCircleIcon from 'modules/shared/assets/icons/courseDetails/playEditor.svg';
 import clock from 'modules/shared/assets/icons/courseDetails/clockprimaryicon.svg';
 import { useModal } from 'modules/shared/providers/modal-provider';
-import CustomModal from 'modules/shared/components/CustomModal/customModal';
+import CustomModal from './customModal';
 type Props = {};
 
 

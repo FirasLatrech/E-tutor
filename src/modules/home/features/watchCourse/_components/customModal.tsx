@@ -20,8 +20,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../ui/dialog';
-import Button from '../Button';
+} from 'modules/shared/components/ui/dialog';
+import Button from 'modules/shared/components/Button';
 // @ts-ignore
 
 import ReactStars from 'react-rating-stars-component';
