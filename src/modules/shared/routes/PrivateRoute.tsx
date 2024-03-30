@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import { Navigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 
 interface Props {
@@ -8,8 +8,8 @@ interface Props {
 
 const PrivateRoute: React.FC<Props> = ({ children }) => {
   const { isAuthenticated } = useAuthStore((state) => state);
-
-  return isAuthenticated ? children : <Navigate to="/" />;
+  console.log(isAuthenticated, 'isAuthenticated');
+  return isAuthenticated ? children : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

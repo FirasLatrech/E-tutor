@@ -3,6 +3,8 @@
 import { type Fragment, lazy } from 'react';
 import { Navigate, type RouteProps } from 'react-router-dom';
 import { PATH } from './paths';
+import PublicRoute from 'modules/shared/routes/PublicRoute';
+import MainLayout from '../layout/MainLayout/MainLayout';
 type RouteConfig = {
   exact: boolean | null;
   path: string;
@@ -16,17 +18,17 @@ const routes: RouteConfig[] = [
 
   {
     exact: true,
-    // guard: MainLayout,
+    guard: PublicRoute,
     path: PATH.LOGIN,
     component: lazy(async () => await import('../features/Login/index')),
-    // layout: MainLayout,
+    layout: MainLayout,
   },
   {
     exact: true,
-    // guard: MainLayout,
+    guard: PublicRoute,
     path: PATH.REGISTER,
     component: lazy(async () => await import('../features/Register/index')),
-    // layout: MainLayout,
+    layout: MainLayout,
   },
 ];
 

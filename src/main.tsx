@@ -6,16 +6,23 @@ import './i18n';
 import App from './app/App';
 import './styles.css';
 import ModalProvider from 'modules/shared/providers/modal-provider';
+import StoreProvider from 'modules/shared/provider/StoreProvider';
+import GoogleAuthProvider from 'modules/auth/social-auth/google/google-auth-provider';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <HelmetProvider>
-    <BrowserRouter>
-      <Suspense>
+    <StoreProvider>
+      <BrowserRouter>
         <ModalProvider>
-          
-        <App />
-         </ModalProvider>
-      </Suspense>
-    </BrowserRouter>
+          <GoogleAuthProvider>
+            <BrowserRouter>
+              <Suspense>
+                <App />
+              </Suspense>
+            </BrowserRouter>
+          </GoogleAuthProvider>
+        </ModalProvider>
+      </BrowserRouter>
+    </StoreProvider>
   </HelmetProvider>
 );

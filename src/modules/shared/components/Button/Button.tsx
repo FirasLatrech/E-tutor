@@ -48,7 +48,7 @@ const Button: React.FC<ButtonProps> = ({
 
       case 'secondarySecondary':
         variantClasses =
-          'bg-secondary-100 hover:bg-secondary-200 text-secondary-600';
+          'bg-secondary-100 ease-linear duration-200 hover:bg-secondary-200 text-secondary-600';
         break;
 
       case 'secondaryGray':
@@ -57,12 +57,12 @@ const Button: React.FC<ButtonProps> = ({
 
       case 'tertiaryPrimary':
         variantClasses =
-          'bg-white hover:bg-primary-100 text-primary-500 hover:text-primary-600';
+          'bg-white ease-linear duration-200 hover:bg-primary-100 text-primary-500 hover:text-primary-600';
         break;
 
       case 'tertiarySecondary':
         variantClasses =
-          'bg-white hover:bg-secondary-100 text-secondary-500 hover:text-secondary-600';
+          'bg-white ease-linear duration-200 hover:bg-secondary-100 text-secondary-500 hover:text-secondary-600';
         break;
       case 'tertiaryGray':
         variantClasses = 'bg-white hover:bg-gray-50 text-gray-900';
