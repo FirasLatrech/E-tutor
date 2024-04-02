@@ -16,6 +16,7 @@ export default function BestSellingCoursesForCategory({
 }: {
   id: string | undefined;
 }) {
+  console.log(id);
   const { t } = useTranslation('home');
   return (
     <div className="flex flex-col items-center w-full pb-[70px] pt-[60px] bg-white">

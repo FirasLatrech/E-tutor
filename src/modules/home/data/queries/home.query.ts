@@ -6,6 +6,7 @@ import {
   getAllCategory,
   getBestCourse,
   getBestSellingCourse,
+  getCoursByCategoryId,
   getRecentlyCourses,
   getTopInstructorOfTheMonth,
 } from '../api/home.service';
@@ -51,6 +52,15 @@ export const useTopInstructorForMonth = () =>
     queryKey: ['TopInstructorForMonth'],
     queryFn: async () => {
       const res = await getTopInstructorOfTheMonth();
+      return res;
+    },
+  });
+
+export const useGetCourseByCategoryId = (category_id: string) =>
+  useQuery({
+    queryKey: ['coursesByCategory', category_id],
+    queryFn: async () => {
+      const res = await getCoursByCategoryId(category_id);
       return res;
     },
   });

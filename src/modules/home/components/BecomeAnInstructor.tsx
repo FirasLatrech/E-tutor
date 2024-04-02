@@ -120,14 +120,25 @@ export default function BecomeAnInstructor() {
           </h1>
           {data &&
             data?.map((item: any, index: number) => {
-              console.log(item);
+              const getCountOfTotalEnrollment = (
+                my_courses: {
+                  enrollmentCount: number;
+                }[]
+              ) => {
+                let totalEnrollment = 0;
+                my_courses.forEach((course) => {
+                  totalEnrollment += course?.enrollmentCount;
+                });
+                return totalEnrollment;
+              };
+
               return (
                 <div className="w-[244px] border" key={index}>
-                  <div className=" h-[220px]">
+                  <div className=" h-[220px] overflow-hidden">
                     <img
                       src={item?.photo?.path}
                       alt=""
-                      className="object-cover w-full h-full"
+                      className="object-cover w-full h-full duration-300 hover:scale-125"
                     />
                   </div>
                   <div className="flex flex-col items-center">
@@ -147,7 +158,9 @@ export default function BecomeAnInstructor() {
                       <span>5.0</span>
                     </div>
                     <div>
-                      <span className="text-gray-700">11K</span>
+                      <span className="text-gray-700">
+                        {getCountOfTotalEnrollment(item.my_courses)}
+                      </span>
                       <span className="text-gray-500"> students</span>
                     </div>
                   </div>

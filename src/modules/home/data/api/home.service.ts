@@ -5,7 +5,19 @@ import { api } from 'modules/shared/lib/api';
 export const getAllCategory = async () => {
   try {
     const res = await api.get('/category');
-    console.log(res);
+
+    if (res.status !== 200) {
+      throw new Error(`Unexpected status code: ${res.status}`);
+    }
+    return res?.data?.data;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
+};
+export const getCategoryById = async (categoryId: string) => {
+  try {
+    const res = await api.get(`/category/${categoryId}`);
+
     if (res.status !== 200) {
       throw new Error(`Unexpected status code: ${res.status}`);
     }
@@ -45,6 +57,33 @@ export const getBestCourse = async () => {
   }
 };
 
+// export const getCourseById = async () => {
+//   try {
+//     const res = await api.get(
+//       '/courses?limit=4&sort=[{"orderBy":"enrollmentCount","order":"DESC"}]'
+//     );
+
+//     if (res.status !== 200) {
+//       throw new Error(`Unexpected status code: ${res.status}`);
+//     }
+//     return res?.data?.data;
+//   } catch (error: any) {
+//     return error?.response?.data;
+//   }
+// };
+export const getCoursByCategoryId = async (categoryId: string) => {
+  try {
+    const res = await api.get(`/category/${categoryId}/courses`);
+
+    if (res.status !== 200) {
+      throw new Error(`Unexpected status code: ${res.status}`);
+    }
+    return res?.data?.data;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
+};
+
 export const getRecentlyCourses = async () => {
   try {
     const res = await api.get(
@@ -68,6 +107,18 @@ export const getTopInstructorOfTheMonth = async () => {
       throw new Error(`Unexpected status code: ${res.status}`);
     }
     return res?.data;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
+};
+
+export const getGategoryDetails = async (courseId: number) => {
+  try {
+    const res = await api.get(`/courses/${courseId}/chapters`);
+    if (res.status !== 200) {
+      throw new Error(`Unexpected status code: ${res.status}`);
+    }
+    return res?.data?.data;
   } catch (error: any) {
     return error?.response?.data;
   }
