@@ -39,46 +39,21 @@ import {
   TooltipTrigger,
 } from 'modules/shared/components/ui/tooltip';
 import { cn } from 'modules/shared/lib/utility';
-export default function Course({ id }: { id: string | undefined }) {
+import { useGetCourseByCategoryId } from '../data/queries/home.query';
+import { ICourse } from 'modules/shared/types/course';
+import useDebounce from 'modules/shared/hooks/useDebounce';
+export default function Course({ id }: { id: string }) {
   const [filterState, setFilterState] = useState(false);
-  const courses = [
-    {
-      cover: MachineLeanringCover,
-      tag: 'DESIGN',
-      price: '$57.00',
-      title: 'Machine Learning A-Z™: Hands-On Python ...',
-      fullTitle: 'Machine Learning A-Z™: Hands-On Python & R In Data',
-      rating: '5.0',
-      students: '265.7K',
-    },
-    {
-      cover: MachineLeanringCover,
-      tag: 'DESIGN',
-      price: '$57.00',
-      title: 'Machine Learning A-Z™: Hands-On Python ...',
-      fullTitle: 'Machine Learning A-Z™: Hands-On Python & R In Data',
-      rating: '5.0',
-      students: '265.7K',
-    },
-    {
-      cover: MachineLeanringCover,
-      tag: 'DESIGN',
-      price: '$57.00',
-      title: 'Machine Learning A-Z™: Hands-On Python ...',
-      fullTitle: 'Machine Learning A-Z™: Hands-On Python & R In Data',
-      rating: '5.0',
-      students: '265.7K',
-    },
-    {
-      cover: MachineLeanringCover,
-      tag: 'DESIGN',
-      price: '$57.00',
-      title: 'Machine Learning A-Z™: Hands-On Python ...',
-      fullTitle: 'Machine Learning A-Z™: Hands-On Python & R In Data',
-      rating: '5.0',
-      students: '265.7K',
-    },
-  ];
+  const [search, setSearch] = useState('');
+
+  const debouncedSearchTerm = useDebounce(search, 500);
+  console.log(debouncedSearchTerm);
+  const { data, isPending, error } = useGetCourseByCategoryId(
+    id,
+    debouncedSearchTerm
+  );
+  console.log(data);
+
   return (
     <div className="flex flex-col items-center justify-center pt-[20px] pb-[20px]">
       <div className="w-[83%]">
@@ -86,7 +61,9 @@ export default function Course({ id }: { id: string | undefined }) {
           <div className="flex gap-4">
             <div
               className="flex w-[147px] items-center gap-2 p-3 border border-primary-200 h-[48px]  justify-between cursor-pointer"
-              onClick={() => { setFilterState(!filterState); }}
+              onClick={() => {
+                setFilterState(!filterState);
+              }}
             >
               <div className="flex items-center gap-2">
                 <img
@@ -114,6 +91,9 @@ export default function Course({ id }: { id: string | undefined }) {
                 type="text"
                 placeholder={'UI/UX Design'}
                 className="w-full border-none outline-none placeholder:text-gray-500 "
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
               />
             </div>
           </div>
@@ -157,119 +137,127 @@ export default function Course({ id }: { id: string | undefined }) {
           </div>
         </div>
       </div>
-      <div className="flex gap-12">
-        {filterState && (
-          <div className="w-[300px] bg-white flex flex-col gap-5 duration-500	 transition-all">
-            <Accordion type="multiple">
-              <AccordionItem value="item-1">
-                <AccordionTrigger className="">CATEGORY</AccordionTrigger>
-                <AccordionContent>
-                  <AccordionItem
-                    value="item-2"
-                    className="border-b border-gray-100"
-                  >
-                    <AccordionTrigger className="flex">
-                      <div className="flex items-center gap-3 ">
-                        <img src={webdevelopment} alt="" className="" />
-                        <span>Development</span>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="pt-1 border-l border-r flex  justify-star items-center  p-2 h-[50px] border-gray-100">
-                      <div className="flex items-center w-full h-full space-x-2 ">
+      <div className="flex items-center justify-center w-full">
+        <div className="flex gap-12 w-[83%]">
+          {filterState && (
+            <div className="w-[300px] bg-white flex flex-col gap-5 duration-500	 transition-all">
+              <Accordion type="multiple">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger className="">CATEGORY</AccordionTrigger>
+                  <AccordionContent>
+                    <AccordionItem
+                      value="item-2"
+                      className="border-b border-gray-100"
+                    >
+                      <AccordionTrigger className="flex">
+                        <div className="flex items-center gap-3 ">
+                          <img src={webdevelopment} alt="" className="" />
+                          <span>Development</span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="pt-1 border-l border-r flex  justify-star items-center  p-2 h-[50px] border-gray-100">
+                        <div className="flex items-center w-full h-full space-x-2 ">
+                          <Checkbox
+                            id="terms"
+                            className=" peer text-gray-200 border-gray-200  w-[18px] h-[18px] peer"
+                          />
+                          <label
+                            htmlFor="terms"
+                            className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          >
+                            Web development
+                          </label>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+              <Accordion type="multiple">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger className="">TOOLS</AccordionTrigger>
+
+                  <AccordionContent className="pt-1 border-l border-b border-r border-gray-100 flex  justify-star items-center  p-2 h-[43px]">
+                    <div className="flex items-center justify-between w-full h-full space-x-2">
+                      <div className="flex items-center gap-2">
                         <Checkbox
-                          id="terms"
-                          className=" peer text-gray-200 border-gray-200  w-[18px] h-[18px] peer"
+                          id="Web"
+                          className="text-gray-200 border-gray-200  w-[18px] h-[18px] peer"
                         />
                         <label
-                          htmlFor="terms"
-                          className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          htmlFor="Web"
+                          className="text-sm font-[400]  leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
-                          Web development
+                          React
                         </label>
                       </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-            <Accordion type="multiple">
-              <AccordionItem value="item-1">
-                <AccordionTrigger className="">TOOLS</AccordionTrigger>
-
-                <AccordionContent className="pt-1 border-l border-b border-r border-gray-100 flex  justify-star items-center  p-2 h-[43px]">
-                  <div className="flex items-center justify-between w-full h-full space-x-2">
-                    <div className="flex items-center gap-2">
-                      <Checkbox
-                        id="Web"
-                        className="text-gray-200 border-gray-200  w-[18px] h-[18px] peer"
-                      />
-                      <label
-                        htmlFor="Web"
-                        className="text-sm font-[400]  leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        React
-                      </label>
+                      <span className="text-gray-500"> 1452</span>
                     </div>
-                    <span className="text-gray-500"> 1452</span>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        )}
-
-        <div className={`grid grid-cols-3 gap-4 `}>
-          {/* TODO : render all Course  */}
-
-          {courses.map((course, index) => (
-            <div
-              className="flex w-[294px] flex-col items-center justify-center  bg-white border"
-              key={index}
-            >
-              <div className="h-[183px] w-[294px] overflow-hidden">
-                <img
-                  src={course.cover}
-                  alt=""
-                  width={294}
-                  height={183}
-                  className="duration-300 cursor-pointer hover:scale-125"
-                />
-              </div>
-              <div className="p-2 text-gray-700">
-                <div className="flex items-center justify-between h-[40px] ">
-                  <span className="p-1 text-sm bg-primary-100 text-primary-700">
-                    {course.tag}
-                  </span>
-                  <span className="text-xl text-primary-500">
-                    {course.price}
-                  </span>
-                </div>
-                <div className="text-gray-900 font-[400]  h-[60px] ">
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger className="text-start">
-                        {course.title}
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <span>{course.fullTitle}</span>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-                <SeparatorHorizontal size={1} className="w-full bg-gray-100" />
-                <div className="flex items-center justify-between pt-2 h-[46px]">
-                  <div className="flex items-center gap-1 ">
-                    <img src={staricon} alt="staricon" width={20} />
-                    <span>{course.rating}</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-700">{course.students}</span>
-                    <span className="text-gray-500"> students</span>
-                  </div>
-                </div>
-              </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
-          ))}
+          )}
+
+          <div className="flex gap-3 ">
+            {data &&
+              data?.map((item: ICourse) => {
+                return (
+                  <div
+                    className="flex w-[294px] flex-col items-center justify-center  bg-white border"
+                    style={{ direction: 'ltr' }}
+                    key={item.id}
+                  >
+                    <div className="h-[183px] w-[294px] overflow-hidden ">
+                      <img
+                        src={item.course_thumbnail}
+                        alt=""
+                        width={294}
+                        height={183}
+                        className="duration-300 cursor-pointer hover:scale-125"
+                      />
+                    </div>
+                    <div className="w-full text-gray-700 ">
+                      <div className="flex items-center justify-between h-[40px] p-2 pt-3">
+                        {/* Tags */}
+                        <span className="p-1 text-sm bg-primary-100 text-primary-700">
+                          {item.course_category?.name}
+                        </span>
+
+                        <span className="text-xl text-primary-500">
+                          ${item?.course_price}
+                        </span>
+                      </div>
+                      <div className="text-gray-900 font-[400]  h-[60px] p-2">
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger className="text-start">
+                              {item?.title}
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <span>{item?.title}</span>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </div>
+                      <hr className="w-full mt-1 mb-1 bg-gray-100" />
+                      <div className="flex items-center justify-between pt-2 h-[46px] p-2">
+                        <div className="flex items-center gap-1 ">
+                          <img src={staricon} alt="staricon" width={20} />
+                          <span>{item.rating}</span>
+                        </div>
+                        <div>
+                          <span className="text-gray-700">
+                            {item.enrollmentCount}
+                          </span>
+                          <span className="text-gray-500"> students</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
         </div>
       </div>
 

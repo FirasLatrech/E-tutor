@@ -11,13 +11,26 @@ import {
   TooltipProvider,
 } from 'modules/shared/components/ui/tooltip';
 import OurFeautureCourse from './ourFeautureCourse';
+import {
+  useGetBestCourseByCategoryId,
+  useGetCategoryDetails,
+  useGetCourseByCategoryId,
+} from '../data/queries/home.query';
+import { ICourse } from 'modules/shared/types/course';
+interface categoryDetails {
+  name: string;
+}
 export default function BestSellingCoursesForCategory({
   id,
+  categoryDetails,
 }: {
-  id: string | undefined;
+  id: string;
+  categoryDetails: categoryDetails;
 }) {
-  console.log(id);
+  const { data } = useGetBestCourseByCategoryId(id);
+
   const { t } = useTranslation('home');
+
   return (
     <div className="flex flex-col items-center w-full pb-[70px] pt-[60px] bg-white">
       <motion.span
@@ -26,56 +39,68 @@ export default function BestSellingCoursesForCategory({
         transition={{ duration: 2 }}
         className="text-[40px] font-[600] h-[100px] "
       >
-        {t('home.bestsellingcourses')} in Web Development
+        {t('home.bestsellingcourses')} in {categoryDetails?.name}
       </motion.span>
 
-      <div
-        className="flex w-[294px] flex-col items-center justify-center  bg-white border"
-        style={{ direction: 'ltr' }}
-      >
-        <div className="h-[183px] w-[294px] overflow-hidden ">
-          <img
-            src={MachineLeanringCover}
-            alt=""
-            width={294}
-            height={183}
-            className="duration-300 cursor-pointer hover:scale-125"
-          />
-        </div>
-        <div className="p-2 text-gray-700">
-          <div className="flex items-center justify-between h-[40px] ">
-            {/* Tags */}
-            <span className="p-1 text-sm bg-primary-100 text-primary-700">
-              DESIGN
-            </span>
-            <span className="text-xl text-primary-500">$57</span>
-          </div>
-          <div className="text-gray-900 font-[400]  h-[60px] ">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger className="text-start">
-                  Machine Learning A-Z™: Hands-On Python ...
-                </TooltipTrigger>
-                <TooltipContent>
-                  <span>
-                    Machine Learning A-Z™: Hands-On Python & R In Data
-                  </span>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
-          <SeparatorHorizontal size={1} className="w-full bg-gray-100" />
-          <div className="flex items-center justify-between pt-2 h-[46px]">
-            <div className="flex items-center gap-1 ">
-              <img src={staricon} alt="staricon" width={20} />
-              <span>5.0</span>
-            </div>
-            <div>
-              <span className="text-gray-700">265.7K</span>
-              <span className="text-gray-500"> students</span>
-            </div>
-          </div>
-        </div>
+      <div className="grid grid-cols-4 gap-5">
+        {data &&
+          data?.map((item: ICourse) => {
+            console.log(item);
+            return (
+              <div
+                className="flex w-[294px] flex-col items-center justify-center  bg-white border"
+                style={{ direction: 'ltr' }}
+                key={item.id}
+              >
+                <div className="h-[183px] w-[294px] overflow-hidden ">
+                  <img
+                    src={item.course_thumbnail}
+                    alt=""
+                    width={294}
+                    height={183}
+                    className="duration-300 cursor-pointer hover:scale-125"
+                  />
+                </div>
+                <div className="w-full text-gray-700 ">
+                  <div className="flex items-center justify-between h-[40px] p-2 pt-3">
+                    {/* Tags */}
+                    <span className="p-1 text-sm bg-primary-100 text-primary-700">
+                      {item.course_category?.name}
+                    </span>
+
+                    <span className="text-xl text-primary-500">
+                      ${item?.course_price}
+                    </span>
+                  </div>
+                  <div className="text-gray-900 font-[400]  h-[60px] p-2">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger className="text-start">
+                          {item?.title}
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <span>{item?.title}</span>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                  <hr className="w-full mt-1 mb-1 bg-gray-100" />
+                  <div className="flex items-center justify-between pt-2 h-[46px] p-2">
+                    <div className="flex items-center gap-1 ">
+                      <img src={staricon} alt="staricon" width={20} />
+                      <span>{item.rating}</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-700">
+                        {item.enrollmentCount}
+                      </span>
+                      <span className="text-gray-500"> students</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

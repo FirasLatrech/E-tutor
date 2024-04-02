@@ -21,7 +21,7 @@ export const getCategoryById = async (categoryId: string) => {
     if (res.status !== 200) {
       throw new Error(`Unexpected status code: ${res.status}`);
     }
-    return res?.data?.data;
+    return res?.data;
   } catch (error: any) {
     return error?.response?.data;
   }
@@ -71,14 +71,33 @@ export const getBestCourse = async () => {
 //     return error?.response?.data;
 //   }
 // };
-export const getCoursByCategoryId = async (categoryId: string) => {
+export const getCoursByCategoryId = async (
+  categoryId: string,
+  search: string
+) => {
   try {
-    const res = await api.get(`/category/${categoryId}/courses`);
-
+    const res = await api.get(
+      `/category/${categoryId}/courses?search=${search}`
+    );
+    console.log(res);
     if (res.status !== 200) {
       throw new Error(`Unexpected status code: ${res.status}`);
     }
-    return res?.data?.data;
+    return res?.data;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
+};
+export const getBestCoursByCategoryId = async (categoryId: string) => {
+  try {
+    const res = await api.get(
+      `/category/${categoryId}/courses?limit=4&sort=[{"orderBy":"enrollmentCount","order":"DESC"}]`
+    );
+    console.log(res);
+    if (res.status !== 200) {
+      throw new Error(`Unexpected status code: ${res.status}`);
+    }
+    return res?.data;
   } catch (error: any) {
     return error?.response?.data;
   }

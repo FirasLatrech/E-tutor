@@ -2,14 +2,22 @@ import React from 'react';
 import { SeparatorHorizontal } from 'lucide-react';
 import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
 import barber from 'modules/shared/assets/images/instructorImage/image.png';
-
-export default function PopularInstructor({ id }: { id: string | undefined }) {
+interface categoryDetails {
+  name: string;
+}
+export default function PopularInstructor({
+  id,
+  categoryDetails,
+}: {
+  id: string | undefined;
+  categoryDetails: categoryDetails;
+}) {
   console.log(id);
   return (
     <div className="flex items-center justify-center bg-gray-50">
       <div className="w-[82%] h-[520px] items-center flex justify-center flex-col gap-10">
         <h3 className="text-4xl font-semibold tracking-tight scroll-m-20">
-          Popular instructor in Web Development
+          Popular instructor in {categoryDetails?.name}
         </h3>
         <div>
           <div className="w-[244px] border">

@@ -1,20 +1,34 @@
 import { useParams } from 'react-router';
-import BestSellingCourses from 'modules/home/components/bestSellingCourses';
+
 import BestSellingCoursesForCategory from 'modules/home/components/BestSellingCoursesForCategory';
 import Course from 'modules/home/components/Course';
 import PopularInstructor from 'modules/home/components/PopularInstructor';
 import Populartools from 'modules/home/components/Populartools';
+import { useGetCategoryDetails } from 'modules/home/data/queries/home.query';
+
+interface CategoryDetails {
+  name: string;
+}
 
 const Category = () => {
-  const params = useParams();
+  const params = useParams<{ id: string }>();
   console.log(params);
+  if (!params?.id) return null;
+  const { data: categoryDetails } = useGetCategoryDetails(params.id) as {
+    data: CategoryDetails;
+  };
+
+  console.log(categoryDetails);
+
   return (
-    // <div className="flex items-center justify-center h-screen">
     <div className="flex flex-col h-full">
-      <BestSellingCoursesForCategory id={params?.id} />
+      <BestSellingCoursesForCategory
+        id={params?.id}
+        categoryDetails={categoryDetails}
+      />
       <Populartools id={params?.id} />
-      <PopularInstructor id={params?.id} />
-      <Course id={params?.id} />
+      <PopularInstructor id={params?.id} categoryDetails={categoryDetails} />
+      <Course id={params?.id}  />
     </div>
   );
 };
