@@ -10,7 +10,7 @@ export default function HeroSection() {
       className="flex items-center justify-between w-full bg-[#fdfdfe]"
       style={{ direction: 'ltr' }}
     >
-      <div className="flex items-center justify-end w-full ">
+      <div className="flex items-center justify-center w-full ">
         {' '}
         <div className="flex flex-col items-start justify-center  pl-1  w-[600px] gap-10">
           <div>

@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
+import { TooltipContent } from '@radix-ui/react-tooltip';
+import { SeparatorHorizontal } from 'lucide-react';
+import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
 import filterIcon from 'modules/shared/assets/icons/course/filter.svg';
-
 import primaryFilter from 'modules/shared/assets/icons/course/primaryfilter.svg';
-
-import { Input } from 'modules/shared/components/ui/input';
+import webdevelopment from 'modules/shared/assets/icons/course/webdevelempent.svg';
 import scoopIcon from 'modules/shared/assets/icons/scoop.svg';
+import MachineLeanringCover from 'modules/shared/assets/images/bestsellingcourse/image1.png';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from 'modules/shared/components/ui/accordion';
+import { Checkbox } from 'modules/shared/components/ui/checkbox';
+import { Input } from 'modules/shared/components/ui/input';
 import {
   Pagination,
   PaginationContent,
@@ -28,18 +38,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from 'modules/shared/components/ui/tooltip';
-import { TooltipContent } from '@radix-ui/react-tooltip';
-import { SeparatorHorizontal } from 'lucide-react';
-import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
-import MachineLeanringCover from 'modules/shared/assets/images/bestsellingcourse/image1.png';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from 'modules/shared/components/ui/accordion';
-import webdevelopment from 'modules/shared/assets/icons/course/webdevelempent.svg';
-import { Checkbox } from 'modules/shared/components/ui/checkbox';
 import { cn } from 'modules/shared/lib/utility';
 export default function Course({ id }: { id: string | undefined }) {
   const [filterState, setFilterState] = useState(false);
@@ -88,7 +86,7 @@ export default function Course({ id }: { id: string | undefined }) {
           <div className="flex gap-4">
             <div
               className="flex w-[147px] items-center gap-2 p-3 border border-primary-200 h-[48px]  justify-between cursor-pointer"
-              onClick={() => setFilterState(!filterState)}
+              onClick={() => { setFilterState(!filterState); }}
             >
               <div className="flex items-center gap-2">
                 <img

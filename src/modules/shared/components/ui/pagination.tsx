@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
-
-import { cn } from 'modules/shared/lib/utility';
+import arrowLeft from 'modules/shared/assets/icons/category/arrowleft.svg';
+import arrowRight from 'modules/shared/assets/icons/category/arrowrighPrimary.svg';
 import {
-  ButtonProps,
+  type ButtonProps,
   buttonVariants,
 } from 'modules/shared/components/ui/button';
-import arrowLeft from 'modules/shared/assets/icons/category/arrowleft.svg';
-
-import arrowRight from 'modules/shared/assets/icons/category/arrowrighPrimary.svg';
+import { cn } from 'modules/shared/lib/utility';
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
   <nav
     role="navigation"

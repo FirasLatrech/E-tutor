@@ -1,6 +1,7 @@
 import React, { useTransition } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TooltipTrigger } from '@radix-ui/react-tooltip';
+import { motion } from 'framer-motion';
 import { SeparatorHorizontal } from 'lucide-react';
 import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
 import MachineLeanringCover from 'modules/shared/assets/images/bestsellingcourse/image1.png';
@@ -10,7 +11,6 @@ import {
   TooltipProvider,
 } from 'modules/shared/components/ui/tooltip';
 import OurFeautureCourse from './ourFeautureCourse';
-import { motion } from 'framer-motion';
 export default function BestSellingCoursesForCategory({
   id,
 }: {

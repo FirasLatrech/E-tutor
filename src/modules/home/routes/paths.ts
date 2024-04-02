@@ -4,4 +4,6 @@ export const PATH = {
   CATEGORY: '/category/:id',
   COURSES: '/courses',
   COURSESBYID: '/courses/:id',
+  WATCHCOURSE: '/courses/:id/watch/:chapterId',
+  USER: '/user/:id',
 };

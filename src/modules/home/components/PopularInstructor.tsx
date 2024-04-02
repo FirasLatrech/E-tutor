@@ -1,7 +1,7 @@
 import React from 'react';
-import barber from 'modules/shared/assets/images/instructorImage/image.png';
 import { SeparatorHorizontal } from 'lucide-react';
 import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
+import barber from 'modules/shared/assets/images/instructorImage/image.png';
 
 export default function PopularInstructor({ id }: { id: string | undefined }) {
   console.log(id);

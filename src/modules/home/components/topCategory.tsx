@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { MoveLeft, MoveRight } from 'lucide-react';
 import busniess from 'modules/shared/assets/icons/categoryIcon/busniess.svg';
 import finance from 'modules/shared/assets/icons/categoryIcon/finance&accounting.svg';
@@ -11,11 +12,9 @@ import Header from 'modules/shared/components/Header';
 import UnderHeader from 'modules/shared/components/underHeader';
 import { cn } from 'modules/shared/lib/utility';
 
-import { useNavigate } from 'react-router-dom';
-
 export default function TopCategory() {
   const { t, i18n } = useTranslation('home');
-  
+
   console.log(i18n.language);
   const categories = [
     {

@@ -3,29 +3,29 @@ import { useTranslation } from 'react-i18next';
 import { TooltipTrigger } from '@radix-ui/react-tooltip';
 import { MoveLeft, MoveRight, SeparatorHorizontal } from 'lucide-react';
 import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
+import checkout from 'modules/shared/assets/icons/ourFeautureCourse/checkout.svg';
+import duarationIcon from 'modules/shared/assets/icons/ourFeautureCourse/duration.svg';
+import heartIcon from 'modules/shared/assets/icons/ourFeautureCourse/heartIcon.svg';
+import niveauIcon from 'modules/shared/assets/icons/ourFeautureCourse/niveau.svg';
+import shoppingCartSimple from 'modules/shared/assets/icons/ourFeautureCourse/shoppingCartSimple.svg';
+import userIcon from 'modules/shared/assets/icons/ourFeautureCourse/userIcon.svg';
 import MachineLeanringCover from 'modules/shared/assets/images/bestsellingcourse/image1.png';
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-} from 'modules/shared/components/ui/tooltip';
-import OurFeautureCourse from './ourFeautureCourse';
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from 'modules/shared/components/ui/avatar';
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from 'modules/shared/components/ui/hover-card';
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from 'modules/shared/components/ui/avatar';
-import duarationIcon from 'modules/shared/assets/icons/ourFeautureCourse/duration.svg';
-import niveauIcon from 'modules/shared/assets/icons/ourFeautureCourse/niveau.svg';
-import userIcon from 'modules/shared/assets/icons/ourFeautureCourse/userIcon.svg';
-import heartIcon from 'modules/shared/assets/icons/ourFeautureCourse/heartIcon.svg';
-import checkout from 'modules/shared/assets/icons/ourFeautureCourse/checkout.svg';
-import shoppingCartSimple from 'modules/shared/assets/icons/ourFeautureCourse/shoppingCartSimple.svg';
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+} from 'modules/shared/components/ui/tooltip';
+import OurFeautureCourse from './ourFeautureCourse';
 export default function RecentlyAddedCourses() {
   const courses = [
     {

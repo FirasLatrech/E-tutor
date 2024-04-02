@@ -26,7 +26,11 @@ export default function DropDownLanguage() {
   };
 
   return (
-    <DropdownMenu onOpenChange={() => { setOnOpenChange(!onOpenChange); }}>
+    <DropdownMenu
+      onOpenChange={() => {
+        setOnOpenChange(!onOpenChange);
+      }}
+    >
       <DropdownMenuTrigger asChild>
         <div className="flex items-center justify-center gap-1 text-sm text- white">
           <span className="text-[14px] text-gray-400">
@@ -46,13 +50,25 @@ export default function DropDownLanguage() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="">
         <DropdownMenuRadioGroup>
-          <DropdownMenuItem onClick={() => { handleLanguageChange('en'); }}>
+          <DropdownMenuItem
+            onClick={() => {
+              handleLanguageChange('en');
+            }}
+          >
             {t('languages.en')}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => { handleLanguageChange('fr'); }}>
+          <DropdownMenuItem
+            onClick={() => {
+              handleLanguageChange('fr');
+            }}
+          >
             {t('languages.fr')}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => { handleLanguageChange('ar'); }}>
+          <DropdownMenuItem
+            onClick={() => {
+              handleLanguageChange('ar');
+            }}
+          >
             {t('languages.ar')}
           </DropdownMenuItem>
         </DropdownMenuRadioGroup>

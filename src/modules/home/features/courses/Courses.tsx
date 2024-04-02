@@ -1,9 +1,9 @@
+import { useParams } from 'react-router';
+import BestSellingCourses from 'modules/home/components/bestSellingCourses';
 import BestSellingCoursesForCategory from 'modules/home/components/BestSellingCoursesForCategory';
 import Course from 'modules/home/components/Course';
 import PopularInstructor from 'modules/home/components/PopularInstructor';
 import Populartools from 'modules/home/components/Populartools';
-import BestSellingCourses from 'modules/home/components/bestSellingCourses';
-import { useParams } from 'react-router';
 
 const Courses = () => {
   const params = useParams();
