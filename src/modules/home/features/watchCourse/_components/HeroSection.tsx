@@ -5,22 +5,18 @@ import arrowLeft from 'modules/shared/assets/arrow/arrowLeft.svg';
 import folderIcon from 'modules/shared/assets/icons/courseDetails/folderIcon.svg';
 import playCircleIcon from 'modules/shared/assets/icons/courseDetails/playEditor.svg';
 import clock from 'modules/shared/assets/icons/courseDetails/clockprimaryicon.svg';
-import { useModal } from 'modules/shared/providers/modal-provider';
+
 import CustomModal from './customModal';
 type Props = {};
 
-
 import { useState } from 'react';
+import { useModal } from 'modules/shared/provider/modal-provider';
 
 function HeroSection({}: Props) {
   const { setOpen, setClose } = useModal();
 
   const handleClick = () => {
-    setOpen(
-      <CustomModal title="Write a Review" />
-        
-
-    );
+    setOpen(<CustomModal title="Write a Review" />);
   };
   return (
     <div className="w-full h-[80px] bg-gray-50 flex items-center justify-between">

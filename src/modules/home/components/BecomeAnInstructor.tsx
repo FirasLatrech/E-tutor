@@ -9,8 +9,11 @@ import slackLogo from 'modules/shared/assets/images/companies/slack.svg';
 import verisonLogo from 'modules/shared/assets/images/companies/verison.svg';
 import youtubeLogo from 'modules/shared/assets/images/companies/youtube.svg';
 import barber from 'modules/shared/assets/images/instructorImage/image.png';
+import { useTopInstructorForMonth } from '../data/queries/home.query';
 
 export default function BecomeAnInstructor() {
+  const { data, error, isPending } = useTopInstructorForMonth();
+  console.log(data);
   const { t, i18n } = useTranslation('home');
   const companies = [
     {
@@ -115,25 +118,42 @@ export default function BecomeAnInstructor() {
           <h1 className="text-[32px] text-center font-[500]">
             {t('home.topinstructorformonth')}
           </h1>
-          <div className="w-[244px] border">
-            <img src={barber} alt="" />
-            <div className="flex flex-col items-center">
-              {' '}
-              <span>Devon Lane</span>
-              <span className="text-gray-500">Senior Developer</span>
-            </div>
-            <SeparatorHorizontal size={1} className="w-full bg-gray-100" />
-            <div className="flex items-center justify-between pt-2 h-[46px] p-2">
-              <div className="flex items-center gap-1 ">
-                <img src={staricon} alt="staricon" width={20} />
-                <span>5.0</span>
-              </div>
-              <div>
-                <span className="text-gray-700">265.7K</span>
-                <span className="text-gray-500"> students</span>
-              </div>
-            </div>
-          </div>
+          {data &&
+            data?.map((item: any, index: number) => {
+              console.log(item);
+              return (
+                <div className="w-[244px] border" key={index}>
+                  <div className=" h-[220px]">
+                    <img
+                      src={item?.photo?.path}
+                      alt=""
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                  <div className="flex flex-col items-center">
+                    {' '}
+                    <span>
+                      {item.firstName} {item?.lastName}
+                    </span>
+                    <span className="text-gray-500">Senior Developer</span>
+                  </div>
+                  <SeparatorHorizontal
+                    size={1}
+                    className="w-full bg-gray-100"
+                  />
+                  <div className="flex items-center justify-between pt-2 h-[46px] p-2">
+                    <div className="flex items-center gap-1 ">
+                      <img src={staricon} alt="staricon" width={20} />
+                      <span>5.0</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-700">11K</span>
+                      <span className="text-gray-500"> students</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           <h1 className="flex items-center justify-center text-center text-gray-600">
             {t('home.topinstructorformonthparagraph')}{' '}
             <p className="flex gap-3 cursor-pointer text-primary-500 ">

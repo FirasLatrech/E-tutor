@@ -45,7 +45,7 @@ function RegisterForm() {
     } else {
       toast({
         variant: 'error',
-        title: response?.errors?.message || "something went wrong",
+        title: response?.errors?.message || 'something went wrong',
         action: (
           <ToastAction altText="Try again">
             <X className="w-5 h-5 bg-transparent" />
@@ -83,7 +83,7 @@ function RegisterForm() {
       })
     ),
   });
-  console.log(errors);
+
   return (
     <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
       <div className="w-full gap-[1rem] flex items-start justify-center">
@@ -141,15 +141,15 @@ function RegisterForm() {
         />
       </div>
       <div className="flex items-center justify-between w-full">
-        <div className="flex gap-2 items-start justify-center">
+        <div className="flex items-start justify-center gap-2">
           <Checkbox
             id="remember"
             //  name="rememberMe"
           />
-          <p className="font-light text-sm text-gray-700">
+          <p className="text-sm font-light text-gray-700">
             I Agree with all of your{' '}
             <Link
-              className="text-secondary-500 hover:underline ease-linear duration-250"
+              className="ease-linear text-secondary-500 hover:underline duration-250"
               to="/"
             >
               Terms & Conditions

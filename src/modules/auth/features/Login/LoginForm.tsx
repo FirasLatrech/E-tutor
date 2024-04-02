@@ -14,19 +14,18 @@ import { useToast } from 'modules/shared/components/ui/use-toast';
 function LoginForm() {
   const { mutateAsync: login, isError, error, isPending } = useLoginQuery();
   const { toast } = useToast();
-  const { setIsAuthenticated, isAuthenticated } = useAuthStore(
-    (state) => state
-  );
-
+  const { setIsAuthenticated, isAuthenticated, setUser, setToken } =
+    useAuthStore((state) => state);
+  console.log(isAuthenticated);
   const onSubmit: SubmitHandler<LoginBody> = async (data) => {
     const response = await login(data);
-    console.log(response);
     if (response?.user) {
+      setToken(response?.token);
       setIsAuthenticated(true);
     } else {
       toast({
         variant: 'error',
-        title: response?.errors?.message || "something went wrong",
+        title: response?.errors?.message || 'something went wrong',
 
         action: (
           <ToastAction altText="Try again">
@@ -75,12 +74,12 @@ function LoginForm() {
         errors={errors}
       />
       <div className="flex items-center justify-between w-full">
-        <div className="flex gap-2 items-start justify-center">
+        <div className="flex items-start justify-center gap-2">
           <Checkbox
             id="remember"
             //  name="rememberMe"
           />
-          <p className="font-light text-sm text-gray-700">Remember me</p>
+          <p className="text-sm font-light text-gray-700">Remember me</p>
         </div>
         <SubmitButton isLoading={isPending} text="Sign In" />
       </div>

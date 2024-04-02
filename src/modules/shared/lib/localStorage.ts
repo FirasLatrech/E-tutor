@@ -6,6 +6,7 @@
  */
 const getItem = <T = unknown>(key: string): T | null => {
   const value = window.localStorage.getItem(key);
+
   if (!value) return null;
   return JSON.parse(value);
 };
@@ -18,5 +19,8 @@ const getItem = <T = unknown>(key: string): T | null => {
 const setItem = (key: string, value: unknown) => {
   window.localStorage.setItem(key, JSON.stringify(value));
 };
+const clearItem = (key: string) => {
+  window.localStorage.removeItem(key);
+};
 
-export { getItem, setItem };
+export { getItem, setItem, clearItem };

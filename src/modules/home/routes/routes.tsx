@@ -20,21 +20,21 @@ const routes: RouteConfig[] = [
 
   {
     exact: true,
-    guard: PrivateRoute,
+    // guard: PrivateRoute,
     path: PATH.ROOT,
     component: lazy(async () => await import('../features/Home/index')),
     layout: MainLayout,
   },
   {
     exact: true,
-    guard: PrivateRoute,
+    // guard: PrivateRoute,
     path: PATH.CATEGORY,
     component: lazy(async () => await import('../features/category/index')),
     layout: MainLayout,
   },
   {
     exact: true,
-    guard: PrivateRoute,
+    // guard: PrivateRoute,
     path: PATH.COURSES,
     component: lazy(async () => await import('../features/courses/index')),
     layout: MainLayout,

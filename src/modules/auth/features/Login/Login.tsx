@@ -18,7 +18,6 @@ const Login = () => {
   const { isPending, mutateAsync: login, isError, error } = useLoginQuery();
   const { setIsAuthenticated } = useAuthStore((state) => state);
   const { toast } = useToast();
-
   useEffect(() => {
     if (isError) {
       toast({
@@ -41,21 +40,21 @@ const Login = () => {
       </div>
       <div className="flex h-full w-[55%] items-center justify-center">
         <div className="flex w-[60%] items-center gap-[3rem] flex-col justify-center h-[90%]">
-          <p className="leading-10 font-semibold text-4xl text-black">
+          <p className="text-4xl font-semibold leading-10 text-black">
             Sign in to your account
           </p>
           <LoginForm />
-          <div className="w-full flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center w-full gap-4">
             <div className="h-[1px] w-full bg-gray-100" />
-            <p className="font-light text-gray-500 text-base uppercase whitespace-nowrap">
+            <p className="text-base font-light text-gray-500 uppercase whitespace-nowrap">
               Sign in with
             </p>
             <div className="h-[1px] w-full bg-gray-100" />
           </div>
-          <div className="flex gap-4 w-full -mt-4 items-center justify-between">
+          <div className="flex items-center justify-between w-full gap-4 -mt-4">
             {SocialMediaAuth?.map(
               (props: SocialMediaAuthType, index: number) => {
-                if (props.text === 'google') return <GoogleAuth />;
+                if (props.text === 'google') return <GoogleAuth key={index} />;
                 else return <SocialMediaBtn key={index} {...props} />;
               }
             )}

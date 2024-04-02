@@ -38,6 +38,7 @@ export const errorInterceptor = async (error: AxiosError): Promise<void> => {
     } else if (error.request) {
       console.error(error.request);
     } else {
+      console.log(error);
       console.error('Error', error.message);
     }
     await Promise.reject(error);
