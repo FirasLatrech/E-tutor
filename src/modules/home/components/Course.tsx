@@ -5,6 +5,8 @@ import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
 import filterIcon from 'modules/shared/assets/icons/course/filter.svg';
 import primaryFilter from 'modules/shared/assets/icons/course/primaryfilter.svg';
 import webdevelopment from 'modules/shared/assets/icons/course/webdevelempent.svg';
+import { AnimatePresence, motion } from 'framer-motion';
+
 import scoopIcon from 'modules/shared/assets/icons/scoop.svg';
 import MachineLeanringCover from 'modules/shared/assets/images/bestsellingcourse/image1.png';
 import {
@@ -42,6 +44,9 @@ import { cn } from 'modules/shared/lib/utility';
 import { useGetCourseByCategoryId } from '../data/queries/home.query';
 import { ICourse } from 'modules/shared/types/course';
 import useDebounce from 'modules/shared/hooks/useDebounce';
+import Spinner from 'modules/shared/components/Spinner';
+import { Skeleton } from 'modules/shared/components/ui/skeleton';
+import Button from 'modules/shared/components/Button';
 export default function Course({ id }: { id: string }) {
   const [filterState, setFilterState] = useState(false);
   const [search, setSearch] = useState('');
@@ -94,6 +99,7 @@ export default function Course({ id }: { id: string }) {
                 onChange={(e) => {
                   setSearch(e.target.value);
                 }}
+                value={search}
               />
             </div>
           </div>
@@ -198,66 +204,92 @@ export default function Course({ id }: { id: string }) {
               </Accordion>
             </div>
           )}
-
-          <div className="flex gap-3 ">
-            {data &&
-              data?.map((item: ICourse) => {
-                return (
-                  <div
-                    className="flex w-[294px] flex-col items-center justify-center  bg-white border"
-                    style={{ direction: 'ltr' }}
-                    key={item.id}
-                  >
-                    <div className="h-[183px] w-[294px] overflow-hidden ">
-                      <img
-                        src={item.course_thumbnail}
-                        alt=""
-                        width={294}
-                        height={183}
-                        className="duration-300 cursor-pointer hover:scale-125"
-                      />
-                    </div>
-                    <div className="w-full text-gray-700 ">
-                      <div className="flex items-center justify-between h-[40px] p-2 pt-3">
-                        {/* Tags */}
-                        <span className="p-1 text-sm bg-primary-100 text-primary-700">
-                          {item.course_category?.name}
-                        </span>
-
-                        <span className="text-xl text-primary-500">
-                          ${item?.course_price}
-                        </span>
+          {isPending && (
+            <div className="flex h-[330px] gap-x-6">
+              <Skeleton className="w-[300px] h-[300px]" />
+              <Skeleton className="w-[300px] h-[300px]" />
+              <Skeleton className="w-[300px] h-[300px]" />
+            </div>
+          )}
+          {data && data.length == 0 && (
+            <div className="flex h-[330px] gap-x-6 items-center justify-center w-full">
+              <div className="w-[300px] h-[300px]  items-center justify-center flex flex-col gap-5">
+                <span className="gray-900 text-[53px]   text-pretty   scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl">
+                  No class for this name
+                </span>
+                <Button
+                  text="Clear the Search Input"
+                  onClick={() => {
+                    setSearch('');
+                  }}
+                />
+              </div>
+            </div>
+          )}
+          <motion.div className="flex gap-3 " layout>
+            <AnimatePresence>
+              {data &&
+                data?.map((item: ICourse) => {
+                  return (
+                    <motion.div
+                      className="flex w-[294px] flex-col items-center justify-center  bg-white border"
+                      style={{ direction: 'ltr' }}
+                      key={item.id}
+                      layout
+                      animate={{ opacity: 1 }}
+                      initial={{ opacity: 0 }}
+                    >
+                      <div className="h-[183px] w-[294px] overflow-hidden ">
+                        <img
+                          src={item.course_thumbnail}
+                          alt=""
+                          width={294}
+                          height={183}
+                          className="duration-300 cursor-pointer hover:scale-125"
+                        />
                       </div>
-                      <div className="text-gray-900 font-[400]  h-[60px] p-2">
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger className="text-start">
-                              {item?.title}
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <span>{item?.title}</span>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      </div>
-                      <hr className="w-full mt-1 mb-1 bg-gray-100" />
-                      <div className="flex items-center justify-between pt-2 h-[46px] p-2">
-                        <div className="flex items-center gap-1 ">
-                          <img src={staricon} alt="staricon" width={20} />
-                          <span>{item.rating}</span>
-                        </div>
-                        <div>
-                          <span className="text-gray-700">
-                            {item.enrollmentCount}
+                      <div className="w-full text-gray-700 ">
+                        <div className="flex items-center justify-between h-[40px] p-2 pt-3">
+                          {/* Tags */}
+                          <span className="p-1 text-sm bg-primary-100 text-primary-700">
+                            {item.course_category?.name}
                           </span>
-                          <span className="text-gray-500"> students</span>
+
+                          <span className="text-xl text-primary-500">
+                            ${item?.course_price}
+                          </span>
+                        </div>
+                        <div className="text-gray-900 font-[400]  h-[60px] p-2">
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger className="text-start">
+                                {item?.title}
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <span>{item?.title}</span>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </div>
+                        <hr className="w-full mt-1 mb-1 bg-gray-100" />
+                        <div className="flex items-center justify-between pt-2 h-[46px] p-2">
+                          <div className="flex items-center gap-1 ">
+                            <img src={staricon} alt="staricon" width={20} />
+                            <span>{item.rating}</span>
+                          </div>
+                          <div>
+                            <span className="text-gray-700">
+                              {item.enrollmentCount}
+                            </span>
+                            <span className="text-gray-500"> students</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
+                    </motion.div>
+                  );
+                })}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
 
@@ -268,10 +300,10 @@ export default function Course({ id }: { id: string }) {
               <PaginationPrevious href="#" />
             </PaginationItem>
             <PaginationItem className="rounded-full hover:bg-primary-100">
-              <PaginationLink href="#">1</PaginationLink>
+              <PaginationLink href="#" isActive>1</PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href="#" isActive>
+              <PaginationLink href="#" >
                 2
               </PaginationLink>
             </PaginationItem>
