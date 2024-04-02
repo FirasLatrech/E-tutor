@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'modules/shared/components/ui/toaster';
 import routes, { renderRoutes } from '../modules/shared/routes';
 import 'react-toastify/dist/ReactToastify.css';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
   const queryClient = new QueryClient();
@@ -18,8 +19,7 @@ function App() {
         <Suspense>
           <div className="h-screen ">
             {/* <Router /> */}
-
-            {renderRoutes(routes)}
+              {renderRoutes(routes)}
           </div>
         </Suspense>
         <Toaster />

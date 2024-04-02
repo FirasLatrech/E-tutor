@@ -10,7 +10,7 @@ function MainLayout({ children }: MainLayoutPropsType) {
   return (
     <div className="flex items-center flex-col justify-center h-screen w-full">
       <div className="border-b w-full flex items-center justify-center border-gray-100">
-        <div className="w-[68%] py-4  flex items-center justify-between   ">
+        <div className="w-[68%] py-4 flex items-center justify-between   ">
           <img src={BrandLogo} />
           <div className="flex items-center justify-center gap-[1rem]">
             <Link

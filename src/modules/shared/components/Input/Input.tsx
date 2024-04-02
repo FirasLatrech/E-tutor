@@ -42,7 +42,7 @@ const Input = <T extends FieldValues, U extends FieldValues>({
 
   return (
     <div className={`flex w-full gap-2 flex-col mb-4`}>
-      <label className="flex font-light  text-gray-900" htmlFor={name}>
+      <label className="flex text-sm font-light  text-gray-900" htmlFor={name}>
         {label ?? ''}
       </label>
       <input

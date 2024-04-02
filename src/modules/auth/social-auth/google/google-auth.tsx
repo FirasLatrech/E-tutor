@@ -13,6 +13,7 @@ export default function GoogleAuth() {
   const { setUser } = useAuthStore((state) => state);
 
   const onSuccess = async (tokenResponse: any) => {
+    console.log(tokenResponse);
     if (!tokenResponse.credential) return;
 
     const { status, data } = await authGoogleLoginService({

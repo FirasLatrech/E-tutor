@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import whiteLogo from 'modules/shared/assets/icons/logo/whiteLogo.svg';
 import { cn } from 'modules/shared/lib/utility';
 import useAuthStore from 'modules/shared/store/useAuthStore';
-import ArrowRight from '../../assets/arrow/arrowRight.svg';
+import ArrowRight from '../../assets/icons/arrow/arrowRight.svg';
 import apple from '../../assets/icons/socialMediaIcon/apple.svg';
 import facebook from '../../assets/icons/socialMediaIcon/facebook.svg';
 import playstore from '../../assets/icons/socialMediaIcon/googleplay.svg';

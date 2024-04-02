@@ -55,7 +55,7 @@ const Login = () => {
           <div className="flex gap-4 w-full -mt-4 items-center justify-between">
             {SocialMediaAuth?.map(
               (props: SocialMediaAuthType, index: number) => {
-                if (props.text === 'google') return <GoogleAuth />;
+                if (props.text === 'google') return <GoogleAuth key={index} />;
                 else return <SocialMediaBtn key={index} {...props} />;
               }
             )}

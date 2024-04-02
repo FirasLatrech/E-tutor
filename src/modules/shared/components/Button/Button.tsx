@@ -1,7 +1,6 @@
 import Spinner from 'modules/shared/components/Spinner';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   isLoading?: boolean;
   className?: string;
@@ -18,6 +17,7 @@ export interface ButtonProps
     | 'tertiaryGray';
 
   size?: 'sm' | 'md' | 'lg';
+  additionnalClasses?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -28,6 +28,7 @@ const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   size = 'md',
   disabled,
+  additionnalClasses,
   ...props
 }) => {
   const getVariantClasses = () => {
@@ -65,7 +66,8 @@ const Button: React.FC<ButtonProps> = ({
           'bg-white ease-linear duration-200 hover:bg-secondary-100 text-secondary-500 hover:text-secondary-600';
         break;
       case 'tertiaryGray':
-        variantClasses = 'bg-white hover:bg-gray-50 text-gray-900';
+        variantClasses =
+          'bg-white border border-gray-100 !p-4 !px-8 !text-lg	 !font-semibold !text-gray-600 hover:bg-gray-50 text-gray-900';
         break;
       default:
         break;
@@ -74,7 +76,6 @@ const Button: React.FC<ButtonProps> = ({
     return `
       ${variantClasses}
       font-medium 
-
       text-sm 
       px-5 py-2.5 
       text-center 
@@ -83,6 +84,7 @@ const Button: React.FC<ButtonProps> = ({
       dark:hover:bg-blue-700
       dark:focus:ring-blue-800 
       min-w-[100px]
+      ${additionnalClasses}
     `;
   };
 
