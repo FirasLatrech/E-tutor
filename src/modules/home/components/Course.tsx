@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { TooltipContent } from '@radix-ui/react-tooltip';
 import { SeparatorHorizontal } from 'lucide-react';
 import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
@@ -47,17 +47,63 @@ import useDebounce from 'modules/shared/hooks/useDebounce';
 import Spinner from 'modules/shared/components/Spinner';
 import { Skeleton } from 'modules/shared/components/ui/skeleton';
 import Button from 'modules/shared/components/Button';
+import debounce from 'lodash/debounce';
+import SearchInput from './inputSearch';
+
 export default function Course({ id }: { id: string }) {
+  function LastThreeMonths() {
+    const currentDate = new Date();
+
+    const currentMonth = currentDate.getMonth();
+    console.log(currentMonth);
+    const currentYear = currentDate.getFullYear();
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+
+    // Generate options for the last three months
+    const lastThreeMonths = [];
+    for (let i = 0; i < 3; i++) {
+      let monthIndex = (currentMonth - i + 12) % 12; // Ensure index is within 0-11 range
+      let year = currentYear;
+      if (monthIndex > currentMonth) {
+        year--; // If month is in previous year
+      }
+      lastThreeMonths.push({
+        month: months[currentMonth - 1],
+        year: currentYear,
+        data: `${currentYear}-${
+          currentMonth < 10 ? '0' + currentMonth : currentMonth
+        }-01`,
+      });
+    }
+    return lastThreeMonths;
+  }
+
+  console.log(LastThreeMonths());
   const [filterState, setFilterState] = useState(false);
   const [search, setSearch] = useState('');
-
-  const debouncedSearchTerm = useDebounce(search, 500);
+  const [month, setMonth] = useState('');
+  console.log(month);
+  const debouncedSearchTerm = useDebounce(search, 600);
   console.log(debouncedSearchTerm);
+
   const { data, isPending, error } = useGetCourseByCategoryId(
     id,
-    debouncedSearchTerm
+    debouncedSearchTerm,
+    month
   );
-  console.log(data);
 
   return (
     <div className="flex flex-col items-center justify-center pt-[20px] pb-[20px]">
@@ -90,33 +136,25 @@ export default function Course({ id }: { id: string }) {
                 3
               </span>
             </div>
-            <div className="border-gray-100 border-[1px] w-96  flex items-center justify-center pl-2 pr-2 ">
-              <img src={scoopIcon} alt="scoopIcon" />
-              <Input
-                type="text"
-                placeholder={'UI/UX Design'}
-                className="w-full border-none outline-none placeholder:text-gray-500 "
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                }}
-                value={search}
-              />
-            </div>
+            <SearchInput onSearch={setSearch} />
           </div>
           <div className="flex items-center gap-2">
             <span className="text-gray-700 text-[14px]">Sort By : </span>
-            <Select>
+            <Select
+              onValueChange={(obj) => {
+                setMonth(obj);
+              }}
+            >
               <SelectTrigger className="w-[200px] h-[48px] text-gray-700">
-                <SelectValue placeholder="Browse" />
+                <SelectValue placeholder="month" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup className="text-gray-700 ">
-                  <SelectLabel>Trending</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                  {LastThreeMonths().map((item, index) => (
+                    <SelectItem value={item.data} key={index}>
+                      {item.month}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -300,12 +338,12 @@ export default function Course({ id }: { id: string }) {
               <PaginationPrevious href="#" />
             </PaginationItem>
             <PaginationItem className="rounded-full hover:bg-primary-100">
-              <PaginationLink href="#" isActive>1</PaginationLink>
+              <PaginationLink href="#" isActive>
+                1
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href="#" >
-                2
-              </PaginationLink>
+              <PaginationLink href="#">2</PaginationLink>
             </PaginationItem>
             <PaginationItem>
               <PaginationLink href="#">3</PaginationLink>

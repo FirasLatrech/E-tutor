@@ -63,7 +63,11 @@ export const useTopInstructorForMonth = () =>
     },
   });
 
-export const useGetCourseByCategoryId = (category_id: string, search: string) =>
+export const useGetCourseByCategoryId = (
+  category_id: string,
+  search: string,
+  month: string
+) =>
   useQuery({
     queryKey: [`coursesByCategory/${category_id}/${search}`],
 
@@ -71,7 +75,7 @@ export const useGetCourseByCategoryId = (category_id: string, search: string) =>
       // const cache = getFromCache(`coursesByCategory/${category_id}/${search}`); // try to access the data from cache
       // if (cache) return cache; // use the data if in the cache
 
-      const res = await getCoursByCategoryId(category_id, search);
+      const res = await getCoursByCategoryId(category_id, search, month);
       return res;
     },
   });

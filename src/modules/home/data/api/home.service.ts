@@ -73,11 +73,14 @@ export const getBestCourse = async () => {
 // };
 export const getCoursByCategoryId = async (
   categoryId: string,
-  search: string
+  search: string,
+  month: string
 ) => {
   try {
+    const data = new Date(month);
+    console.log(data);
     const res = await api.get(
-      `/category/${categoryId}/courses?search=${search}`
+      `/category/${categoryId}/courses?search=${search}&sort=[{"orderBy":"createdAt","order":"DESC"}]`
     );
     console.log(res);
     if (res.status !== 200) {
