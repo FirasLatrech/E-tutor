@@ -29,7 +29,7 @@ export interface ICourse {
   course_category?: {
     name: string;
   };
-  course_content: { message: string };
+  course_content: string[];
   target_audience: { message: string };
   course_requirements: { message: string };
   course_curriculum: { message: string };
@@ -47,4 +47,11 @@ export interface ICourse {
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
+  instructor: {
+    firstName: string;
+    lastName: string;
+    photo: {
+      path: string;
+    };
+  }[];
 }

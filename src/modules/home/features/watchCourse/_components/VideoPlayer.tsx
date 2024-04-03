@@ -78,7 +78,7 @@ export const VideoPlayer = ({
           autoPlay
           accentColor="#FF6636"
           // onProgress={(e) => console.log(e.target.currentTime)}
-          playbackId="uNbxnGLKJ00yfbijDO8COxTOyVKT01xpxW"
+          playbackId={playbackId}
         />
       )}
     </div>

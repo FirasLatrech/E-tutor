@@ -41,7 +41,7 @@ const routes: RouteConfig[] = [
   },
   {
     exact: true,
-    guard: PrivateRoute,
+    // guard: PrivateRoute,
     path: PATH.COURSESBYID,
     component: lazy(
       async () => await import('../features/courseDetails/index')

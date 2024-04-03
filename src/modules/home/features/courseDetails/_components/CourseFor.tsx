@@ -1,7 +1,11 @@
 import arrowRight from 'modules/shared/assets/arrow/arrowRightPrimary.svg';
-type Props = {};
+import { ICourse } from 'modules/shared/types/course';
+type Props = {
+  courseDetails: ICourse;
+};
 
-export const CourseFor = (props: Props) => {
+export const CourseFor = ({ courseDetails }: Props) => {
+  console.log(courseDetails.target_audience);
   return (
     <div className="pt-6 w-[70%] flex flex-col gap-8 h-full pb-6">
       <div className="flex flex-col items-start gap-3">

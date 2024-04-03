@@ -4,11 +4,14 @@ import { RegisterBody, type LoginBody } from 'modules/auth/types/auth';
 import { useCallback } from 'react';
 import {
   getAllCategory,
+  getAllCourse,
   getBestCoursByCategoryId,
   getBestCourse,
   getBestSellingCourse,
   getCategoryById,
   getCoursByCategoryId,
+  getCourseById,
+  getInstructorByCategoryId,
   getRecentlyCourses,
   getTopInstructorOfTheMonth,
 } from '../api/home.service';
@@ -97,3 +100,34 @@ export const useGetBestCourseByCategoryId = (category_id: string) =>
       return res;
     },
   });
+
+export const useGetInstructorByCategoryId = (category_id: string) =>
+  useQuery({
+    queryKey: ['BestInstructorByCategory', category_id],
+    queryFn: async () => {
+      const res = await getInstructorByCategoryId(category_id);
+      return res;
+    },
+  });
+export const useGetAllCourse = (search: string, month: string, page: number) =>
+  useQuery({
+    queryKey: [`AllCourses/${search}/${page}`],
+
+    queryFn: async () => {
+      // const cache = getFromCache(`coursesByCategory/${category_id}/${search}`); // try to access the data from cache
+      // if (cache) return cache; // use the data if in the cache
+
+      const res = await getAllCourse(search, month, page);
+      return res;
+    },
+  });
+
+export const useGetCourseById = (id: string) => {
+  return useQuery({
+    queryKey: ['courseById', id],
+    queryFn: async () => {
+      const res = await getCourseById(id);
+      return res;
+    },
+  });
+};

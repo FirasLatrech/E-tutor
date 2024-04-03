@@ -6,7 +6,7 @@ import filterIcon from 'modules/shared/assets/icons/course/filter.svg';
 import primaryFilter from 'modules/shared/assets/icons/course/primaryfilter.svg';
 import webdevelopment from 'modules/shared/assets/icons/course/webdevelempent.svg';
 import { AnimatePresence, motion } from 'framer-motion';
-
+import PriamryUsersIcons from 'modules/shared/assets/icons/courseDetails/PriamryUsersIcons.svg';
 import scoopIcon from 'modules/shared/assets/icons/scoop.svg';
 import MachineLeanringCover from 'modules/shared/assets/images/bestsellingcourse/image1.png';
 import {
@@ -17,15 +17,7 @@ import {
 } from 'modules/shared/components/ui/accordion';
 import { Checkbox } from 'modules/shared/components/ui/checkbox';
 import { Input } from 'modules/shared/components/ui/input';
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from 'modules/shared/components/ui/pagination';
+
 import {
   Select,
   SelectContent,
@@ -41,60 +33,45 @@ import {
   TooltipTrigger,
 } from 'modules/shared/components/ui/tooltip';
 import { cn } from 'modules/shared/lib/utility';
-import {
-  useAllCategory,
-  useGetCourseByCategoryId,
-} from '../data/queries/home.query';
+
 import { ICourse } from 'modules/shared/types/course';
 import useDebounce from 'modules/shared/hooks/useDebounce';
 import Spinner from 'modules/shared/components/Spinner';
 import { Skeleton } from 'modules/shared/components/ui/skeleton';
 import Button from 'modules/shared/components/Button';
 import debounce from 'lodash/debounce';
-import SearchInput from './inputSearch';
+import {
+  useAllCategory,
+  useGetAllCourse,
+  useGetCourseByCategoryId,
+} from 'modules/home/data/queries/home.query';
+import SearchInput from 'modules/home/components/inputSearch';
+import Pagination from 'modules/shared/components/pagination/pagination';
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router';
+import { LastThreeMonths } from '../hooks/LastThreeMonths';
+import Suggestion from './Suggestion';
 
-export default function Course({ id }: { id: string }) {
-  function LastThreeMonths() {
-    const currentDate = new Date();
+interface Category {
+  id: string;
+  name: string;
+  color: string;
+  icon: string;
+  create_by: number;
+  courses_count: number;
+  background_color: string;
+  createdAt: string;
+  deletedAt: string | null;
+}
 
-    const currentMonth = currentDate.getMonth();
-    console.log(currentMonth);
-    const currentYear = currentDate.getFullYear();
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
+export default function Course() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const pagex = searchParams.get('page');
+  const pageCount = pagex ? parseInt(pagex) : 1;
+  console.log(pageCount);
 
-    // Generate options for the last three months
-    const lastThreeMonths = [];
-    for (let i = 0; i < 3; i++) {
-      let monthIndex = (currentMonth - i + 12) % 12; // Ensure index is within 0-11 range
-      let year = currentYear;
-      if (monthIndex > currentMonth) {
-        year--; // If month is in previous year
-      }
-      lastThreeMonths.push({
-        month: months[currentMonth - 1],
-        year: currentYear,
-        data: `${currentYear}-${
-          currentMonth < 10 ? '0' + currentMonth : currentMonth
-        }-01`,
-      });
-    }
-    return lastThreeMonths;
-  }
+  const [page, setPage] = useState(pageCount ? pageCount : 1);
 
-  console.log(LastThreeMonths());
   const [filterState, setFilterState] = useState(false);
   const [search, setSearch] = useState('');
   const [month, setMonth] = useState('');
@@ -102,24 +79,23 @@ export default function Course({ id }: { id: string }) {
   const debouncedSearchTerm = useDebounce(search, 600);
   console.log(debouncedSearchTerm);
 
-  const { data, isPending, error } = useGetCourseByCategoryId(
-    id,
-    debouncedSearchTerm,
-    month
-  );
+  const {
+    data: courseDetails,
+    isPending,
+    error,
+  } = useGetAllCourse(debouncedSearchTerm, month, page);
+  console.log(courseDetails);
+  const data = courseDetails?.data;
+  const totalPageCount = courseDetails?.totalPageCount;
+  console.log(totalPageCount);
+
   const { data: allCategory } = useAllCategory();
-  console.log(allCategory);
-  interface Category {
-    id: string;
-    name: string;
-    color: string;
-    icon: string;
-    create_by: number;
-    courses_count: number;
-    background_color: string;
-    createdAt: string;
-    deletedAt: string | null;
-  }
+
+  const navigate = useNavigate();
+  const handelNaviage = (id: number) => {
+    navigate(`/courses/${id}`);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center pt-[20px] pb-[20px]">
       <div className="w-[83%]">
@@ -175,29 +151,10 @@ export default function Course({ id }: { id: string }) {
             </Select>
           </div>
         </div>
-        <div className="flex items-center justify-between">
-          <div className="flex ">
-            <div className="flex  items-center gap-2 p-3   h-[48px]  justify-between cursor-pointer">
-              Suggestion :
-            </div>
-            <div className="flex items-center gap-2 text-primary-500">
-              <span>user interface</span>
-              <span>user experience</span>
-              <span>web design</span>
-              <span>interface</span>
-              <span>app</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 text-primary-500">
-            <span className="text-gray-900">3,145,684</span>
-            <span className="text-gray-700">
-              results find for “ui/ux design”
-            </span>
-          </div>
-        </div>
+        <Suggestion />
       </div>
       <div className="flex items-center justify-center w-full">
-        <div className="flex gap-12 w-[83%]">
+        <div className="flex gap-4 w-[83%]">
           {filterState && (
             <div className="w-[300px] bg-white flex flex-col gap-5 duration-500	 transition-all">
               <Accordion type="multiple">
@@ -259,6 +216,9 @@ export default function Course({ id }: { id: string }) {
               <Skeleton className="w-[300px] h-[300px]" />
               <Skeleton className="w-[300px] h-[300px]" />
               <Skeleton className="w-[300px] h-[300px]" />
+              <Skeleton className="w-[300px] h-[300px]" />
+
+              <Skeleton className="w-[300px] h-[300px]" />
             </div>
           )}
           {data && data.length == 0 && (
@@ -276,7 +236,14 @@ export default function Course({ id }: { id: string }) {
               </div>
             </div>
           )}
-          <motion.div className="flex gap-3 " layout>
+          <motion.div
+            className={
+              filterState
+                ? 'grid grid-cols-3 gap-6 '
+                : 'grid grid-cols-4 gap-6 '
+            }
+            layout
+          >
             <AnimatePresence>
               {data &&
                 data?.map((item: ICourse) => {
@@ -288,6 +255,7 @@ export default function Course({ id }: { id: string }) {
                       layout
                       animate={{ opacity: 1 }}
                       initial={{ opacity: 0 }}
+                      onClick={() => handelNaviage(item.id)}
                     >
                       <div className="h-[183px] w-[294px] overflow-hidden ">
                         <img
@@ -302,7 +270,7 @@ export default function Course({ id }: { id: string }) {
                         <div className="flex items-center justify-between h-[40px] p-2 pt-3">
                           {/* Tags */}
                           <span className="p-1 text-sm bg-primary-100 text-primary-700">
-                            {item.course_category?.name}
+                            {item.course_categories?.name}
                           </span>
 
                           <span className="text-xl text-primary-500">
@@ -327,7 +295,13 @@ export default function Course({ id }: { id: string }) {
                             <img src={staricon} alt="staricon" width={20} />
                             <span>{item.rating}</span>
                           </div>
-                          <div>
+                          <div className="flex items-center gap-x-2">
+                            <img
+                              src={PriamryUsersIcons}
+                              alt="staricon"
+                              width={20}
+                            />
+
                             <span className="text-gray-700">
                               {item.enrollmentCount}
                             </span>
@@ -344,30 +318,11 @@ export default function Course({ id }: { id: string }) {
       </div>
 
       <div className="pt-6 pb-6">
-        <Pagination>
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious href="#" />
-            </PaginationItem>
-            <PaginationItem className="rounded-full hover:bg-primary-100">
-              <PaginationLink href="#" isActive>
-                1
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">2</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">3</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext href="#" />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+        <Pagination
+          hasNextPage={courseDetails?.hasNextPage}
+          currentPage={page}
+          onPageChange={setPage}
+        />
       </div>
     </div>
   );
