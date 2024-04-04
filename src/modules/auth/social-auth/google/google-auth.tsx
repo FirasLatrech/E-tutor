@@ -3,7 +3,10 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import SocialMediaBtn from 'modules/auth/components/SocialMediaBtn';
 import { SocialMediaAuth } from 'modules/auth/constants/SocialMediaAuth.constant';
-import { useAuthGoogleLoginService } from 'modules/auth/data/queries/auth.query';
+import {
+  useAuthGoogleLoginService,
+  useLoginQuery,
+} from 'modules/auth/data/queries/auth.query';
 import HTTP_CODES_ENUM from 'modules/shared/constants/http-code.constant';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 
@@ -11,6 +14,8 @@ export default function GoogleAuth() {
   const { mutateAsync: authGoogleLoginService } = useAuthGoogleLoginService();
 
   const { setUser } = useAuthStore((state) => state);
+  const { isPending, mutateAsync: login, isError, error } = useLoginQuery();
+  const { setIsAuthenticated, setToken } = useAuthStore((state) => state);
 
   const onSuccess = async (tokenResponse: any) => {
     console.log(tokenResponse);
@@ -25,7 +30,7 @@ export default function GoogleAuth() {
     }
   };
 
-  const login = useGoogleLogin({
+  const Googlelogin = useGoogleLogin({
     onSuccess,
     flow: 'auth-code',
   });
@@ -35,7 +40,7 @@ export default function GoogleAuth() {
       <SocialMediaBtn
         text={SocialMediaAuth[0]?.text}
         icon={SocialMediaAuth[0]?.icon}
-        onClick={() => login()}
+        onClick={() => Googlelogin()}
       />
     </>
   );

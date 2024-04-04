@@ -6,12 +6,15 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useSteps } from '../../../context/StepsContext';
+import { useAllCategory } from 'modules/home/data/queries/home.query';
 
 function BasicInformation() {
   const onSubmit: SubmitHandler<any> = async (data) => {
     console.log(data);
   };
-  console.log('object');
+
+  const { data, isFetching } = useAllCategory();
+  const { currentStep, setCurrentStep } = useSteps();
 
   const {
     register,
@@ -31,7 +34,6 @@ function BasicInformation() {
       })
     ),
   });
-  const { currentStep, setCurrentStep } = useSteps();
   return (
     <div className=" flex justify-center w-full py-6 mt-2">
       <form
@@ -55,7 +57,11 @@ function BasicInformation() {
           errors={errors}
         />
         <div className="flex gap-[2rem]">
-          <SelectGeneric label="Course Category" items={['ddd']} />
+          <SelectGeneric
+            label="Course Category"
+            isLoading={isFetching}
+            items={data && data?.map((item: any) => item.name)}
+          />
           <SelectGeneric label="Course Sub-category" items={['ddd']} />
         </div>
         <Input
@@ -67,10 +73,13 @@ function BasicInformation() {
           errors={errors}
         />
         <div className="flex gap-[2rem]">
-          <SelectGeneric label="Course Language" items={['ddd']} />
+          <SelectGeneric
+            label="Course Language"
+            items={['English', 'French', 'Arabic']}
+          />
           <SelectGeneric
             label="Subtitle Language (Optionnal)"
-            items={['ddd']}
+            items={['English', 'French', 'Arabic']}
           />
           <SelectGeneric label="Course Level" items={['ddd']} />
           <SelectGeneric label="Durations" items={['ddd']} />

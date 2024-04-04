@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import fulllogo from 'modules/shared/assets/icons/logo/fulllogo.svg';
 import { cn } from 'modules/shared/lib/utility';
 import useAuthStore from 'modules/shared/store/useAuthStore';
@@ -12,10 +12,12 @@ import bellIcon from './../../assets/icons/bell.svg';
 import HeartIcon from './../../assets/icons/heartIcon.svg';
 import scoopIcon from './../../assets/icons/scoop.svg';
 import shoppingCart from './../../assets/icons/shoppingCart.svg';
+
 const UnderHeader = () => {
-  const { isAuthenticated, setIsAuthenticated } = useAuthStore(
-    (state) => state
-  );
+  const { isAuthenticated, setIsAuthenticated, user } = useAuthStore();
+  console.log(isAuthenticated);
+  console.log(user);
+  const Fallback = isAuthenticated && user?.firstName[0] + user?.username[0];
   const { t } = useTranslation('underheader');
 
   // routes data
@@ -56,20 +58,30 @@ const UnderHeader = () => {
             </div>
 
             <div className="flex items-center gap-1">
-              {/* <Button
-                text="Create Account"
-                variant="secondaryPrimary"
-                size="md"
-              />
-              <Button text="Sign In" variant="primary" size="md" /> */}
-
-              <Avatar>
-                <AvatarImage
-                  src="https://avatars.githubusercontent.com/u/112077899?v=4"
-                  alt="@shadcn"
-                />
-                <AvatarFallback>FL</AvatarFallback>
-              </Avatar>
+              {isAuthenticated ? (
+                <Avatar>
+                  <AvatarImage src={user?.photo?.path} alt={user.name} />
+                  <AvatarFallback>{Fallback}</AvatarFallback>
+                </Avatar>
+              ) : (
+                <>
+                  <Link to="/register">
+                    <Button
+                      text="Create Account"
+                      variant="secondaryPrimary"
+                      size="md"
+                    />
+                  </Link>
+                  <Link to="/login">
+                    <Button
+                      text="Sign In"
+                      variant="primary"
+                      size="md"
+                      onClick={() => <Navigate to="/login" />}
+                    />
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

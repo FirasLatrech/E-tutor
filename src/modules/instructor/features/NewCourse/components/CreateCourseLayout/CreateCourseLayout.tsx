@@ -17,6 +17,7 @@ function CreateCourseLayout({
         {CreateCourseSteps?.map(({ text, Icon }, index: number) => {
           return (
             <div
+            key={index}
               className={`w-full py-4 gap-3 flex items-center justify-start px-6 gap-1rem ${
                 index == currentStep
                   ? 'border-b-2 border-primary-500 !text-gray-900'

@@ -16,10 +16,15 @@ import { SelectGroup, SelectLabel } from '@radix-ui/react-select';
 interface SelectGenericTypeProps {
   items: string[];
   label: string;
+  isLoading?: boolean;
 }
-function SelectGeneric({ items, label }: SelectGenericTypeProps) {
-  const [value, setValue] = useState<string>();
-
+function SelectGeneric({
+  items,
+  label,
+  isLoading = false,
+}: SelectGenericTypeProps) {
+  const [value, setValue] = useState<string | null>(null);
+  console.log(value);
   return (
     <div className="flex w-full gap-2 flex-col mb-4">
       <label className="flex text-sm font-light  text-gray-900">{label}</label>
@@ -31,18 +36,22 @@ function SelectGeneric({ items, label }: SelectGenericTypeProps) {
         </SelectTrigger>
         <SelectContent className="w-full">
           <SelectGroup className="w-full">
-            {items?.map((item, index) => {
-              return (
-                <SelectItem
-                  value={item}
-                  key={index}
-                  className="w-full"
-                  onClick={(e) => setValue(item)}
-                >
-                  {item}
-                </SelectItem>
-              );
-            })}
+            {isLoading ? (
+              <p>loading...</p>
+            ) : (
+              items?.map((item, index) => {
+                return (
+                  <SelectItem
+                    value={item}
+                    key={index}
+                    className="w-full cursor-pointer"
+                    onClick={(e) => setValue(item)}
+                  >
+                    {item}
+                  </SelectItem>
+                );
+              })
+            )}
           </SelectGroup>
         </SelectContent>
       </Select>

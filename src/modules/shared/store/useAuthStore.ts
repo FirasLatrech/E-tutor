@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { logger } from './logger';
+import { setItem } from '../lib/localStorage';
 
 interface AuthState {
   isAuthenticated: boolean;
@@ -9,6 +10,7 @@ interface AuthState {
 export interface AuthStore extends AuthState {
   setIsAuthenticated: (args: AuthState['isAuthenticated']) => void;
   setUser: (args: AuthState['user']) => void;
+  setToken: (args: string) => void;
 }
 
 const initialState: Pick<AuthStore, keyof AuthState> = {
@@ -22,9 +24,11 @@ const useAuthStore = create<AuthStore>()(
       ...initialState,
       setIsAuthenticated: (isAuthenticated) => {
         set(() => ({ isAuthenticated }));
-        console.log(isAuthenticated);
       },
-      setToken: () => {},
+
+      setToken: (token: string) => {
+        setItem('token', token);
+      },
       setUser: (user) => {
         set(() => ({ user }));
       },

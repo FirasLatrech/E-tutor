@@ -1,10 +1,10 @@
-import axios from 'axios';
 import { type LoginBody } from 'modules/auth/types/auth';
 import { api } from 'modules/shared/lib/api';
 
 export const login = async (body: LoginBody) => {
   try {
     const res = await api.post('/auth/email/login', body);
+
     if (res.status !== 200) {
       throw new Error(`Unexpected status code: ${res.status}`);
     }

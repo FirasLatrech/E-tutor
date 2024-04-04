@@ -7,6 +7,7 @@ import {
 
 const axiosRequestConfig: AxiosRequestConfig = {
   baseURL: import.meta.env.VITE_API_END_POINT,
+  // baseURL: 'http://localhost:3000/api/v1',
   responseType: 'json',
   headers: {
     'Content-Type': 'application/json',
@@ -15,7 +16,6 @@ const axiosRequestConfig: AxiosRequestConfig = {
 };
 
 const api: AxiosInstance = axios.create(axiosRequestConfig);
-
 api.interceptors.request.use(requestInterceptor);
 api.interceptors.response.use(successInterceptor, errorInterceptor);
 

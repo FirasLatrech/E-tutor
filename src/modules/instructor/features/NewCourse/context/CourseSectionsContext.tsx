@@ -3,6 +3,8 @@ import React, { ReactNode, createContext, useContext, useState } from 'react';
 interface CourseSectionsContextType {
   Sections: sectionType[] | null;
   setSections: React.Dispatch<React.SetStateAction<sectionType[] | null>>;
+  Instructors: any[] | null;
+  setInstructors: React.Dispatch<React.SetStateAction<any[] | null>>;
 }
 
 export interface sectionType {
@@ -40,9 +42,14 @@ export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
     },
   ]);
 
+  const [Instructors, setInstructors] = useState<any[] | null>([{ username:"John Doe", pictureLink: '', job: 'UI/Ux Designer' }])
+    console.log(Instructors);
+
   const contextValue: CourseSectionsContextType = {
     Sections,
     setSections,
+    Instructors,
+    setInstructors,
   };
 
   return (

@@ -6,7 +6,9 @@ import { useCallback } from 'react';
 export const useLoginQuery = () =>
   useMutation({
     mutationFn: async (body: LoginBody) => {
+      console.log(body);
       const res = await login(body);
+      console.log(res);
       return res;
     },
   });

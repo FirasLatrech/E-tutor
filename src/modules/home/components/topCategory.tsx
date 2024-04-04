@@ -11,8 +11,24 @@ import Footer from 'modules/shared/components/Fotter/Footer';
 import Header from 'modules/shared/components/Header';
 import UnderHeader from 'modules/shared/components/underHeader';
 import { cn } from 'modules/shared/lib/utility';
+import { getAllCategory } from '../data/api/home.service';
+import { useAllCategory } from '../data/queries/home.query';
+import { Skeleton } from 'modules/shared/components/ui/skeleton';
 
+type Category = {
+  id: number;
+  name: string;
+  color: string;
+  icon: string;
+  create_by: number;
+  background_color: string;
+  courses_count: number;
+  createdAt: string;
+  deletedAt: string | null;
+};
 export default function TopCategory() {
+  const { status, data, error, isPending } = useAllCategory();
+
   const { t, i18n } = useTranslation('home');
 
   console.log(i18n.language);
@@ -65,21 +81,30 @@ export default function TopCategory() {
       <h1 className="text-[900] font-[600] text-[40px]">
         {t('home.browsetopcategory')}
       </h1>
+
       <div className="w-[80%] mx-auto">
         {/* category image  */}
-        <div className="grid grid-cols-4 gap-4" style={{ direction: 'ltr' }}>
-          {categories.map(
-            (category, index) => (
-              console.log(category.bg),
-              (
+        {false ? (
+          <div className="grid grid-cols-4 gap-4">
+            <Skeleton className="w-[320px] h-[110px] " />
+            <Skeleton className="w-[320px] h-[110px] " />
+            <Skeleton className="w-[320px] h-[110px] " />
+            <Skeleton className="w-[320px] h-[110px] " />
+            <Skeleton className="w-[320px] h-[110px] " />
+            <Skeleton className="w-[320px] h-[110px] " />
+          </div>
+        ) : (
+          <div className="grid grid-cols-4 gap-4" style={{ direction: 'ltr' }}>
+            {data &&
+              data?.map((category: Category, index: number) => (
                 <div
                   key={index}
                   className={cn(
                     'flex items-center justify-start gap-5 p-6 hover:shadow-md duration-300 min-w-[25%] cursor-pointer',
-                    `bg-${category.bg}`
+                    `bg-${category.color}`
                   )}
                   style={{
-                    backgroundColor: category.bg,
+                    backgroundColor: category.background_color,
                   }}
                   onClick={() => {
                     navigate(`/category/${category.id}`);
@@ -89,20 +114,19 @@ export default function TopCategory() {
                     className="bg-white w-[70px] h-[70px]   flex items-center justify-center"
                     style={{ backgroundColor: category.color }}
                   >
-                    <img src={category.icon} alt={category.label} />
+                    <img src={finance} />
                   </div>
 
                   <div className="flex flex-col justify-center">
-                    <span className="text-gray-900">{category.label} </span>
-                    <span className="text-gray-600">
-                      {category.cont} Courses
+                    <span className="text-gray-900">{category.name} </span>
+                    <span className="text-courses_countgray-600">
+                      {category.courses_count} Courses
                     </span>
                   </div>
                 </div>
-              )
-            )
-          )}
-        </div>
+              ))}
+          </div>
+        )}
       </div>
       <div className="flex justify-center gap-2 ">
         <p className="text-gray-700 cursor-pointer">
