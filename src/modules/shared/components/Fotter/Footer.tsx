@@ -97,8 +97,9 @@ const Footer = () => {
               mattis odio at.
             </span>
             <div className="flex gap-4 ">
-              {socialMedia.map((social) => (
+              {socialMedia.map((social,index) => (
                 <Link
+                  key={`socialMedia${index}`}
                   to={'#'}
                   className="bg-[#363B4766] w-[50px] h-[50px]  hover:bg-primary-600 duration-500 flex items-center justify-center "
                 >
@@ -115,8 +116,9 @@ const Footer = () => {
                 {t(`footer.top4Category`)}
               </span>
               <div className="flex flex-col gap-2 ">
-                {top_category.map((category) => (
+                {top_category.map((category, index) => (
                   <Link
+                    key={`category${index}`}
                     to={'#'}
                     className="group text-sm h-[36px] text-gray-500 duration-500 hover:text-white hover:border-b-[1px] hover:border-primary-500 flex items-center justify-between"
                   >
@@ -136,8 +138,9 @@ const Footer = () => {
                 {t(`footer.quicklinks`)}
               </span>
               <div className="flex flex-col gap-2 ">
-                {quick_links.map((link) => (
+                {quick_links.map((link, index) => (
                   <Link
+                    key={`link${index}`}
                     to={link.path}
                     className="group text-sm h-[36px] text-gray-500 duration-500 hover:text-white hover:border-b-[1px] hover:border-primary-500 flex items-center justify-between"
                   >
@@ -155,8 +158,9 @@ const Footer = () => {
             <div className="flex flex-col gap-6">
               <span className="text-sm text-white"> {t(`footer.support`)}</span>
               <div className="flex flex-col gap-2 ">
-                {support.map((suport) => (
+                {support.map((suport, index) => (
                   <Link
+                    key={`support${index}`}
                     to={suport.path}
                     className="group text-sm h-[36px] text-gray-500 duration-500 hover:text-white hover:border-b-[1px] hover:border-primary-500 flex items-center justify-between"
                   >

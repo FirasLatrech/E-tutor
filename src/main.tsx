@@ -7,7 +7,7 @@ import App from './app/App';
 import './styles.css';
 import StoreProvider from 'modules/shared/provider/StoreProvider';
 import GoogleAuthProvider from 'modules/auth/social-auth/google/google-auth-provider';
-import ModalProvider from 'modules/shared/providers/modal-provider';
+import ModalProvider from 'modules/shared/providers/Modal/modal-provider';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <HelmetProvider>

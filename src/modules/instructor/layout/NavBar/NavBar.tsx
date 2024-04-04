@@ -8,7 +8,7 @@ import Profile from './components/Profile/Profile';
 function NavBar() {
   const { pathname } = useLocation();
   return (
-    <div className="w-full">
+    <div className="w-full bg-white">
       <div className="w-full py-4 h-[6.25rem] flex items-center justify-center ">
         <div className="flex w-[80%] items-center justify-between ">
           <div className="flex-col flex items-start justify-center gap-[0.5rem]">
@@ -24,7 +24,7 @@ function NavBar() {
           <div className="flex items-center justify-center gap-[1rem]">
             <Search />
             <Notification />
-            <Profile/>
+            <Profile />
           </div>
         </div>
       </div>

@@ -11,7 +11,6 @@
 
 import React, { useState } from 'react';
 
-import { useModal } from 'modules/shared/providers/modal-provider';
 import {
   Dialog,
   DialogContent,
@@ -33,6 +32,7 @@ type Props = {
 import paperPlaneRight from 'modules/shared/assets/icons/courseWatch/paperplaneRight.svg';
 import startIcon from 'modules/shared/assets/icons/courseWatch/start.svg';
 import VideStart from 'modules/shared/assets/icons/courseWatch/videStar.svg';
+import { useModal } from 'modules/shared/providers/Modal/modal-provider';
 const CustomModal = ({ title, defaultOpen }: Props) => {
   const [rating, setRating] = useState(0);
 

@@ -1,16 +1,15 @@
 import Button from 'modules/shared/components/Button';
 
-import arrowLeft from 'modules/shared/assets/arrow/arrowLeft.svg';
+import arrowLeft from 'modules/shared/assets/icons/arrow/arrowLeft.svg';
 
 import folderIcon from 'modules/shared/assets/icons/courseDetails/folderIcon.svg';
 import playCircleIcon from 'modules/shared/assets/icons/courseDetails/playEditor.svg';
 import clock from 'modules/shared/assets/icons/courseDetails/clockprimaryicon.svg';
-import { useModal } from 'modules/shared/providers/modal-provider';
 import CustomModal from './customModal';
+import { useModal } from 'modules/shared/providers/Modal/modal-provider';
 type Props = {};
 
 
-import { useState } from 'react';
 
 function HeroSection({}: Props) {
   const { setOpen, setClose } = useModal();

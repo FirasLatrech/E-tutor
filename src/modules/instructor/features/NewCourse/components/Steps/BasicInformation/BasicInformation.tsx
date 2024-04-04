@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from 'modules/shared/components/Button';
-import SelectGeneric from 'modules/shared/components/DropDownGeneric/SelectGeneric';
+import SelectGeneric from 'modules/shared/components/SelectGeneric/SelectGeneric';
 import Input from 'modules/shared/components/Input';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -76,7 +76,11 @@ function BasicInformation() {
           <SelectGeneric label="Durations" items={['ddd']} />
         </div>
         <div className="flex justify-between items-center w-full mt-4">
-          <Button variant="tertiaryGray" text={'Cancel'} />
+          <Button
+            variant="tertiaryGray"
+            additionnalClasses="!p-4 !px-8 !text-lg"
+            text={'Cancel'}
+          />
           <Button
             variant="primary"
             additionnalClasses="!p-4 !px-8 !text-lg"

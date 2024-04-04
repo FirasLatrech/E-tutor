@@ -1,10 +1,12 @@
 import Spinner from 'modules/shared/components/Spinner';
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   isLoading?: boolean;
   className?: string;
   children?: React.ReactNode;
+  additionnalClasses?: string;
   variant?:
     | 'primary'
     | 'secondary'
@@ -66,7 +68,7 @@ const Button: React.FC<ButtonProps> = ({
         break;
       case 'tertiaryGray':
         variantClasses =
-          'bg-white border border-gray-100 !p-4 !px-8 !text-lg	 !font-semibold !text-gray-600 hover:bg-gray-50 text-gray-900';
+          'bg-white border border-gray-100	 !font-semibold !text-gray-600 hover:bg-gray-50 text-gray-900';
         break;
       default:
         break;

@@ -33,6 +33,7 @@ function AdvanceInformation() {
             <Button
               onClick={() => setCurrentStep((old) => old - 1)}
               variant="tertiaryGray"
+              additionnalClasses="!p-4 !px-8 !text-lg"
               text={currentStep == 0 ? 'Cancel' : 'Previous'}
             />
             <Button

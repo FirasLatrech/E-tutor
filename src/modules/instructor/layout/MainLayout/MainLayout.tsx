@@ -41,7 +41,7 @@ function MainLayout({ children }: MainLayoutPropsType) {
           })}
         </div>
       </div>
-      <div className="w-full flex overflow-y-auto flex-col">
+      <div className="w-full flex bg-gray-50 overflow-y-auto flex-col">
         <NavBar />
         {children}
       </div>

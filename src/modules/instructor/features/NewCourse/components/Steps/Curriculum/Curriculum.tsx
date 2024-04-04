@@ -15,22 +15,26 @@ import CourseLesson from './components/CourseLesson/CourseLesson';
 function Curriculum() {
   const { Sections, setSections } = useCourseSections();
   const { currentStep, setCurrentStep } = useSteps();
+
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <div className="w-[95%] p-2 py-6 flex flex-col gap-3">
-        {Sections?.map((section: sectionType, index: number) => {
+        {Sections?.map((section: sectionType, indexSection: number) => {
           return (
             <div className="bg-gray-50 p-6 !pb-2">
               <CourseSection
                 courseSection={section}
-                SectionNumber={index}
-                key={`section${index}`}
+                SectionNumber={indexSection}
+                key={`section${indexSection}`}
               />
               <div className="py-3 w-full flex flex-col items-center justify-center gap-[1rem]">
-                {section?.lessons?.map((lesson) => {
-                  console.log(section);
+                {section?.lessons?.map((lesson, indexLesson) => {
                   return (
-                    <CourseLesson key={`lesson${index}`} Lesson={lesson} />
+                    <CourseLesson
+                      SectionNumber={indexSection}
+                      key={`lesson${indexSection}${indexLesson}`}
+                      Lesson={lesson}
+                    />
                   );
                 })}
               </div>
@@ -58,6 +62,7 @@ function Curriculum() {
       <div className="flex justify-between items-center pb-4 w-[90%] mt-4">
         <Button
           onClick={() => setCurrentStep((old) => old - 1)}
+          additionnalClasses="!p-4 !px-8 !text-lg"
           variant="tertiaryGray"
           text={currentStep == 0 ? 'Cancel' : 'Previous'}
         />
