@@ -30,8 +30,8 @@ export interface ICourse {
     name: string;
   };
   course_content: string[];
-  target_audience: { message: string };
-  course_requirements: { message: string };
+  target_audience: string[];
+  course_requirements: string[];
   course_curriculum: { message: string };
   welcome_message: string;
   course_level: {

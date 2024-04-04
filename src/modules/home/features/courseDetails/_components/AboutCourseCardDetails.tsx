@@ -15,7 +15,10 @@ import stack from 'modules/shared/assets/icons/courseDetails/stack.svg';
 import trophy from 'modules/shared/assets/icons/courseDetails/trophy.svg';
 import usersIcon from 'modules/shared/assets/icons/courseDetails/usersIcons.svg';
 import Button from 'modules/shared/components/Button';
-type Props = {};
+import { ICourse } from 'modules/shared/types/course';
+type Props = {
+  courseDetails: ICourse;
+};
 const courseDetail = [
   {
     icon: clockIcon,
@@ -75,14 +78,50 @@ const courseIncludes = [
   },
   // Add more course detail objects here...
 ];
-export const AboutCourseCardDetails = (props: Props) => {
+export const AboutCourseCardDetails = ({ courseDetails }: Props) => {
+  const courseIncludes = [
+    {
+      icon: primaryClock,
+      title: courseDetails?.course_descriptions?.duration,
+    },
+    {
+      icon: currency,
+      title: '30-days money-back guarantee',
+    },
+    {
+      icon: notebookPrimary,
+      title: 'Free exercises file & downloadable resources',
+    },
+    {
+      icon: monitor,
+      title: 'Access on mobile , tablet and TV',
+    },
+    {
+      icon: trophy,
+      title: 'Shareable certificate of completion',
+    },
+    {
+      icon: notepadPrimary,
+      title: 'English subtitles',
+    },
+    {
+      icon: stack,
+      title: '100% online course',
+    },
+    // Add more course detail objects here...
+  ];
   return (
     <>
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center gap-2">
-          <span className="font-[300] text-[22px]">$14.00</span>
+          <span className="font-[300] text-[22px]">
+            $
+            {((+courseDetails?.course_price || 0) *
+              (+courseDetails?.discount || 0)) /
+              100}
+          </span>
           <span className="text-gray-500 line-through text-ellipsis ">
-            $26.00
+            ${courseDetails?.course_price}
           </span>
         </div>
 

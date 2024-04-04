@@ -77,12 +77,12 @@ const courseDetails = (props: Props) => {
             <CourseFor courseDetails={data} />
 
             {/* Course requirements: */}
-            <CourseRequirements />
+            <CourseRequirements courseDetails={data} />
 
             {/* Curriculum: */}
             <Curriclum />
             {/* CourseInstuctor  */}
-            <CourseInstructor />
+            <CourseInstructor courseDetails={data} />
 
             {/* courseRetting  */}
             <CourseRetting />
@@ -95,7 +95,7 @@ const courseDetails = (props: Props) => {
         </div>
       </div>
       <div className="w-[360px] h-[1060px] shadow-lg absolute  right-[30px] bg-white flex flex-col self-start">
-        <AboutCourseCardDetails />
+        <AboutCourseCardDetails courseDetails={data} />
       </div>
     </div>
   );
