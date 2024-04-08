@@ -1,6 +1,6 @@
 import UploadFileIcon from 'modules/instructor/assets/icons/CreateCourse/UploadFileIcon';
-import UploadImage from 'modules/instructor/components/UploadImage/UploadImage';
-import UploadVideo from 'modules/instructor/components/UploadVideo/UploadVideo';
+import UploadImage from 'modules/instructor/features/NewCourse/components/Steps/AdvanceInformation/components/UploadImage/UploadImage';
+import UploadVideo from 'modules/instructor/features/NewCourse/components/Steps/AdvanceInformation/components/UploadVideo/UploadVideo';
 import TextEditor from 'modules/shared/components/TextEditor';
 import React, { useState } from 'react';
 import MultipleAnswer from '../../MultipleAnswer';

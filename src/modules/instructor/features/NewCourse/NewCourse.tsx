@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CreateCourseLayout from './components/CreateCourseLayout/CreateCourseLayout';
+import CreateCourseLayout from './layout/CreateCourseLayout/CreateCourseLayout';
 import { CreateCourseSteps } from 'modules/instructor/constants/createCourseSteps.constant';
 import { StepsProvider, useSteps } from './context/StepsContext';
 import { CourseSectionsProvider } from './context/CourseSectionsContext';

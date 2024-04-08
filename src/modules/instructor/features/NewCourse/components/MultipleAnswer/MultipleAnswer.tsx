@@ -1,5 +1,6 @@
 import Input from 'modules/shared/components/Input';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface MultipleAnswerPropsType {
   label: string;
@@ -25,10 +26,16 @@ function MultipleAnswer({ label }: MultipleAnswerPropsType) {
       <div className="flex gap-1 flex-col">
         {value?.map((value, index) => {
           return (
+            <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.99 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+          >
             <div className="ease-linear duration-300">
               <h1 className="text-sm">{`0${index + 1}`}</h1>
               <Input id="tittle" name="tittle" placeholder={`${label}...`} />
-            </div>
+            </div></motion.div>
           );
         })}
       </div>

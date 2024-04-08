@@ -111,6 +111,9 @@ module.exports = {
         },
         Success:{
           500:'#23BD33'
+        },
+        purple:{
+          1:'#41405C'
         }
       },
     },

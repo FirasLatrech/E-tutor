@@ -19,12 +19,12 @@ interface SelectGenericTypeProps {
   isLoading?: boolean;
 }
 function SelectGeneric({
-  items,
+  items = [],
   label,
   isLoading = false,
 }: SelectGenericTypeProps) {
   const [value, setValue] = useState<string | null>(null);
-  console.log(value);
+  console.log(items, "items");
   return (
     <div className="flex w-full gap-2 flex-col mb-4">
       <label className="flex text-sm font-light  text-gray-900">{label}</label>

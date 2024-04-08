@@ -1,4 +1,4 @@
-import arrowRight from 'modules/shared/assets/arrow/arrowRightPrimary.svg';
+import arrowRight from 'modules/shared/assets/icons/arrow/arrowRightPrimary.svg';
 type Props = {};
 
 export const CourseFor = (props: Props) => {

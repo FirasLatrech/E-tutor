@@ -6,5 +6,5 @@ import { PWAConfig } from './src/modules/shared/lib/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), tsconfigPaths(), VitePWA(PWAConfig)],
+  plugins: [react(), tsconfigPaths(), /*VitePWA(PWAConfig)*/],
 });

@@ -1,4 +1,3 @@
-import MuxUploader from '@mux/mux-uploader-react';
 import UploadVideoIcon from 'modules/shared/assets/icons/Upload/UploadVideoIcon';
 import InputFile from 'modules/shared/components/InputFile';
 

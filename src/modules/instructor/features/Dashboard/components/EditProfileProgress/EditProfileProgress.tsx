@@ -31,7 +31,7 @@ function EditProfileProgress() {
           <span className="text-white text-opacity-50 whitespace-nowrap">
             1/4 steps
           </span>
-          <Progress value={25} />
+          <Progress className='!bg-purple-1 rounded-none' value={25} />
           <p className="text-white whitespace-nowrap bg-opacity-95">
             25% completed
           </p>

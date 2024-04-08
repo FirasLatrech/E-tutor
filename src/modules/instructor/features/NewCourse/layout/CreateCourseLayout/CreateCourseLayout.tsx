@@ -1,6 +1,6 @@
 import { CreateCourseSteps } from 'modules/instructor/constants/createCourseSteps.constant';
 import React, { ReactNode } from 'react';
-import SaveChanges from '../SaveChanges/SaveChanges';
+import SaveChanges from '../../components/SaveChanges/SaveChanges';
 
 interface CreateCourseLayoutTypeProps {
   children: ReactNode;

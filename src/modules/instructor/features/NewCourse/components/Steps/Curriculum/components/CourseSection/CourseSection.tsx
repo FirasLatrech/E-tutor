@@ -46,7 +46,7 @@ function CourseSection({
 
   const EditSectionName = (SectionNumber: number, NewName: string) => {
     const IsExistSectionName =
-      Sections?.filter((section: sectionType) => section?.name == NewName) ||
+      Sections?.filter((section: sectionType) => section?.name.toUpperCase() == NewName.toUpperCase()) ||
       [];
     if (IsExistSectionName?.length > 0) return false;
     setSections((old): sectionType[] => {

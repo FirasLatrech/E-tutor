@@ -22,11 +22,33 @@ function CourseLesson({ Lesson, SectionNumber }: CourseLessonPropsType) {
   const { setOpen } = useModal();
   const { Sections, setSections } = useCourseSections();
 
+
+  const DeleteLesson = (SectionNumber:number,LessonName: string) => {
+    setSections((old): sectionType[] => {
+      if (!old) {
+        return [];
+      }
+      return old?.map((section, index) => {
+        if (index === SectionNumber) {
+          return {
+            ...section,
+            lessons:
+              section?.lessons?.filter((lesson: lessonType, index) => 
+              lesson?.name!=LessonName
+                ) || null,
+          };
+        } else {
+          return section;
+        }
+      });
+    });
+  };
+
   const EditLessonName = (NewName: string) => {
     let IsExistLessonName: lessonType[] | undefined = [];
     Sections?.forEach((section: sectionType) => {
       IsExistLessonName = section?.lessons?.filter(
-        (lesson: lessonType) => lesson?.name == NewName
+        (lesson: lessonType) => lesson?.name.toUpperCase() == NewName.toUpperCase()
       );
     });
     if (IsExistLessonName?.length > 0) return false;
@@ -128,7 +150,7 @@ function CourseLesson({ Lesson, SectionNumber }: CourseLessonPropsType) {
                 )
               }
             />
-            <DeleteIcon className="cursor-pointer" />
+            <DeleteIcon className="cursor-pointer" onClick={()=>DeleteLesson(SectionNumber, Lesson?.name)}/>
           </div>
         </div>
       </div>

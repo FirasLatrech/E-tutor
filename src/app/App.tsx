@@ -6,6 +6,8 @@ import { Toaster } from 'modules/shared/components/ui/toaster';
 import routes, { renderRoutes } from '../modules/shared/routes';
 import 'react-toastify/dist/ReactToastify.css';
 import { AnimatePresence } from 'framer-motion';
+import GoogleAuthProvider from 'modules/auth/social-auth/google/google-auth-provider';
+import Grafana from 'grafana';
 
 function App() {
   const queryClient = new QueryClient();
@@ -19,6 +21,7 @@ function App() {
         <Suspense>
           <div className="h-screen ">
             {/* <Router /> */}
+            <Grafana/>
               {renderRoutes(routes)}
           </div>
         </Suspense>

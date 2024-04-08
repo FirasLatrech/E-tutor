@@ -23,8 +23,10 @@
     ]
   },
   "dependencies": {
+    "@grafana/faro-web-sdk": "^1.5.1",
+    "@grafana/faro-web-tracing": "^1.5.1",
+    "@grafana/ui": "^10.4.1",
     "@hookform/resolvers": "^3.1.0",
-    "@mux/mux-uploader-react": "^1.0.0-beta.15",
     "@mux/mux-player-react": "^2.4.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -47,7 +49,7 @@
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
     "concurrently": "^8.0.1",
-    "framer-motion": "^11.0.24",
+    "framer-motion": "^11.0.20",
     "i18next": "^23.10.1",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.5.0",
@@ -63,6 +65,7 @@
     "react-router": "^6.10.0",
     "react-router-dom": "^6.10.0",
     "react-toastify": "^9.1.2",
+    "recharts": "^2.12.4",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.0",

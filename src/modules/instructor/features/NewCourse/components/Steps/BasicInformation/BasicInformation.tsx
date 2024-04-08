@@ -60,7 +60,7 @@ function BasicInformation() {
           <SelectGeneric
             label="Course Category"
             isLoading={isFetching}
-            items={data && data?.map((item: any) => item.name)}
+            items={[]}
           />
           <SelectGeneric label="Course Sub-category" items={['ddd']} />
         </div>

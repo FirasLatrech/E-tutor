@@ -11,7 +11,7 @@ function StatsCard({ Icon, name, backgroundColor }: StatsCardPropsType) {
   return (
     <div
       className={cn(
-        'flex items-center h-[6.8rem] max-w-[19.5rem] w-full justify-start gap-[2rem] duration-300 cursor-pointer',
+        'flex items-center h-[5.8rem] max-w-[19.5rem] w-full justify-start gap-[2rem] duration-300 cursor-pointer',
         `bg-white py-3 px-6`
       )}
     >

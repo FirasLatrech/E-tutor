@@ -7,6 +7,8 @@ import StackIcon from 'modules/instructor/assets/icons/Stats/StackIcon';
 import StatsCard from './components/statsCards/StatsCard';
 import PeopleIcon from 'modules/instructor/assets/icons/Stats/PeopleIcon';
 import EditProfileProgress from './components/EditProfileProgress/EditProfileProgress';
+import RecentActivity from './components/RecentActivity/RecentActivity';
+import RevenueRechart from './components/RevenueChart/RevenueChart';
 
 function Dashboard() {
   const statsCard = [
@@ -61,15 +63,19 @@ function Dashboard() {
   ];
 
   return (
-    <div className="bg-gray-50 h-screen p-8 flex justify-center items-start ">
-      <div className="w-[83%] flex flex-col items-center justify-start">
+    <div className="bg-gray-50 h-screen p-8 flex justify-center items-start pb-[100rem] ">
+      <div className="w-[95%] flex flex-col items-center justify-start">
         <div className="w-full grid grid-cols-4 grid-rows-2 gap-5">
           {statsCard.map((item, index) => {
             return <StatsCard {...item} key={index} />;
           })}
         </div>
-        <div className="w-full mt-8">
+        <div className="w-full flex flex-col gap-[1.5rem] mt-8">
           <EditProfileProgress />
+          <div className='w-full'>
+          <RecentActivity/>
+          <RevenueRechart/>
+          </div>
         </div>
       </div>
     </div>

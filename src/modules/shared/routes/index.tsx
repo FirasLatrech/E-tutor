@@ -29,18 +29,9 @@ export const renderRoutes = (routes: RouteConfig[] = []) => (
             path={route.path}
             element={
               <Guard>
-                <motion.div
-                className="routes-transition  "
-                key={route.path}
-                initial="initial"
-                animate="in"
-                variants={pageVariants}
-                transition={pageTransition}
-              >
                 <Layout>
                   <Component />
                 </Layout>
-                </motion.div>
               </Guard>
             }
           />
