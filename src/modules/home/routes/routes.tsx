@@ -62,6 +62,13 @@ const routes: RouteConfig[] = [
     component: lazy(async () => await import('../features/userProfile/index')),
     layout: MainLayout,
   },
+  {
+    exact: true,
+    // guard: MainLayout,
+    path: PATH.CART,
+    component: lazy(async () => await import('../features/cart/index')),
+    layout: MainLayout,
+  },
 ];
 
 export default routes;

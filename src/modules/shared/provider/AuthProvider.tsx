@@ -23,7 +23,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const isValidToken = (token: string) => {
     const decoded: JwtPayload = jwtDecode(token);
-    console.log(decoded);
 
     const currentTime = Date.now() / 1000;
 

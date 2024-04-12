@@ -49,7 +49,7 @@ export const CourseInstructor = ({ courseDetails }: Props) => {
               >
                 <div className="w-[200px] h-[200px] overflow-hidden rounded-full">
                   <img
-                    src={item.photo.path || InstructorImage}
+                    src={item?.photo?.path || InstructorImage}
                     alt=""
                     width={200}
                     height={200}

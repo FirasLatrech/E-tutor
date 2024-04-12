@@ -91,7 +91,7 @@ export default function RecentlyAddedCourses() {
   const { t, i18n } = useTranslation('home');
   return (
     <div
-      className="flex flex-col items-center w-full gap-10 pb-10 g-white b "
+      className="flex flex-col items-center w-full gap-10 pb-10 jus-c g-white b "
       style={{ direction: 'ltr' }}
     >
       <span className="text-[40px] font-[600] h-[100px]  ">
@@ -99,17 +99,20 @@ export default function RecentlyAddedCourses() {
       </span>
 
       {/* cart  */}
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-4 gap-6 w-[80%] ">
         {data &&
           data?.map((course: Course, index: number) => (
             <HoverCard key={index}>
               <HoverCardTrigger asChild>
-                <div className="flex flex-col items-center justify-center w-full bg-white border">
-                  <div className="h-[183px] w-[294px] overflow-hidden">
+                <div
+                  className="flex flex-col items-center justify-center w-full bg-white border border-gray-100"
+                  key={index}
+                >
+                  <div className="h-[183px] w-[320px] overflow-hidden">
                     <img
                       src={course.course_thumbnail}
                       alt=""
-                      width={294}
+                      width={340}
                       height={183}
                       className="duration-300 cursor-pointer hover:scale-125"
                     />
@@ -117,10 +120,10 @@ export default function RecentlyAddedCourses() {
                   <div className="w-full p-2 text-gray-700">
                     <div className="flex items-center justify-between h-[40px] ">
                       <span className="p-1 text-sm bg-primary-100 text-primary-700">
-                        {course.course_categories.name}
+                        {course?.course_categories?.name}
                       </span>
                       <span className="text-xl text-primary-500">
-                        ${course.course_price}
+                        ${course?.course_price}
                       </span>
                     </div>
                     <div className="text-gray-900 font-[400]  h-[60px] ">
@@ -157,15 +160,15 @@ export default function RecentlyAddedCourses() {
               <HoverCardContent className="w-[395px] p-0    ">
                 <div className="flex items-center justify-between h-[40px] p-2">
                   <span className="p-1 text-sm bg-primary-100 text-primary-700">
-                    {course.course_categories.name}
+                    {course?.course_categories?.name}
                   </span>
                 </div>
-                <div className="p-2">{course.title}</div>
+                <div className="p-2">{course?.title}</div>
                 <div className="flex items-center justify-between h-[70px] p-2">
-                  {course?.instructor?.map((item) => {
+                  {course?.instructor?.map((item, index: number) => {
                     console.log(item);
                     return (
-                      <div className="flex items-center gap-1 ">
+                      <div className="flex items-center gap-1 " key={index}>
                         <Avatar>
                           <AvatarImage src={item?.photo?.path} alt="@Firas" />
                           <AvatarFallback>FL</AvatarFallback>

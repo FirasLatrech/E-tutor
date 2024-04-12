@@ -28,6 +28,7 @@ type Category = {
 };
 export default function TopCategory() {
   const { status, data, error, isPending } = useAllCategory();
+  console.log(data)
 
   const { t, i18n } = useTranslation('home');
 

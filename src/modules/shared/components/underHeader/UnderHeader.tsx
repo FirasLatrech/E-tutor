@@ -12,6 +12,8 @@ import bellIcon from './../../assets/icons/bell.svg';
 import HeartIcon from './../../assets/icons/heartIcon.svg';
 import scoopIcon from './../../assets/icons/scoop.svg';
 import shoppingCart from './../../assets/icons/shoppingCart.svg';
+import useCartStore from 'modules/shared/store/useCartStore';
+import { DropdownMenuDemo } from './_commponets/dropDownProfile';
 
 const UnderHeader = () => {
   const { isAuthenticated, setIsAuthenticated, user } = useAuthStore();
@@ -26,6 +28,8 @@ const UnderHeader = () => {
   const isActive = (routePath: string) => {
     return window.location.pathname === routePath;
   };
+  const { data } = useCartStore();
+  console.log(data);
 
   return (
     <nav className="bg-white  min-h-[88px] flex items-center justify-between border-b-[1px] border-[#E9EAF0] shadow-sm ">
@@ -49,20 +53,26 @@ const UnderHeader = () => {
               <img src={bellIcon} alt="bellIcon" />
               {/* <img src={ActiveBellIcon} alt="ActiveBellIcon" /> */}
               <img src={HeartIcon} alt="HeartIcon" />
-              <div className="relative">
-                <img src={shoppingCart} alt="shoppingCart" />
-                {/* <span className="text-white bg-[#FF6636] rounded-full min-w-4 min-h-4 flex items-center justify-center text-[10px]  absolute -right-1  -top-1">
-                1
-              </span> */}
-              </div>
+              <Link to={'/cart'}>
+                <div className="relative cursor-pointer " onClick={() => {}}>
+                  <img src={shoppingCart} alt="shoppingCart" />
+                  <span className="text-white bg-[#FF6636] rounded-full min-w-4 min-h-4 flex items-center justify-center text-[10px]  absolute -right-1  -top-1">
+                    {data?.length}
+                  </span>
+                </div>
+              </Link>
             </div>
 
             <div className="flex items-center gap-1">
               {isAuthenticated ? (
-                <Avatar>
-                  <AvatarImage src={user?.photo?.path} alt={user.name} />
-                  <AvatarFallback>{Fallback}</AvatarFallback>
-                </Avatar>
+                <>
+                  <DropdownMenuDemo user_id={user?.id || ''}>
+                    <Avatar className="cursor-pointer">
+                      <AvatarImage src={user?.photo?.path} alt={user.name} />
+                      <AvatarFallback>{Fallback}</AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuDemo>
+                </>
               ) : (
                 <>
                   <Link to="/register">
@@ -73,12 +83,7 @@ const UnderHeader = () => {
                     />
                   </Link>
                   <Link to="/login">
-                    <Button
-                      text="Sign In"
-                      variant="primary"
-                      size="md"
-                      onClick={() => <Navigate to="/login" />}
-                    />
+                    <Button text="Sign In" variant="primary" size="md" />
                   </Link>
                 </>
               )}

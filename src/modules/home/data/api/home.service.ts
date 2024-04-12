@@ -176,3 +176,25 @@ export const getGategoryDetails = async (courseId: number) => {
     return error?.response?.data;
   }
 };
+
+export const getCoursDetailsByIds = async (courseIds: string[]) => {
+  try {
+    const res = await api.post('/courses/get-by-ids', courseIds);
+
+    if (res.status !== 200) {
+      throw new Error(`Unexpected status code: ${res.status}`);
+    }
+    return res?.data;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
+};
+export const Checkout = async (courseIds: string[]) => {
+  try {
+    const res = await api.post('/stripe/checkout', courseIds);
+
+    return res.data;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
+};

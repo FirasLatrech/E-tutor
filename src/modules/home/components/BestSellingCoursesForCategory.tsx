@@ -28,7 +28,7 @@ export default function BestSellingCoursesForCategory({
   categoryDetails: categoryDetails;
 }) {
   const { data } = useGetBestCourseByCategoryId(id);
-
+  console.log(data);
   const { t } = useTranslation('home');
 
   return (
@@ -44,6 +44,7 @@ export default function BestSellingCoursesForCategory({
 
       <div className="grid grid-cols-4 gap-5">
         {data &&
+          Array.isArray(data) &&
           data?.map((item: ICourse) => {
             console.log(item);
             return (

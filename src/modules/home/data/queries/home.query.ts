@@ -3,6 +3,7 @@ import { RegisterBody, type LoginBody } from 'modules/auth/types/auth';
 
 import { useCallback } from 'react';
 import {
+  Checkout,
   getAllCategory,
   getAllCourse,
   getBestCoursByCategoryId,
@@ -10,6 +11,7 @@ import {
   getBestSellingCourse,
   getCategoryById,
   getCoursByCategoryId,
+  getCoursDetailsByIds,
   getCourseById,
   getInstructorByCategoryId,
   getRecentlyCourses,
@@ -131,3 +133,18 @@ export const useGetCourseById = (id: string) => {
     },
   });
 };
+export const useCourseDetailsByIds = () =>
+  useMutation({
+    mutationFn: async (body: string[]) => {
+      const res = await getCoursDetailsByIds(body);
+      return res;
+    },
+  });
+
+export const useCheckOut = () =>
+  useMutation({
+    mutationFn: async (body: string[]) => {
+      const res = await Checkout(body);
+      return res;
+    },
+  });

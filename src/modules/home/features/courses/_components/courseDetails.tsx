@@ -92,7 +92,7 @@ export default function Course() {
   const { data: allCategory } = useAllCategory();
 
   const navigate = useNavigate();
-  const handelNaviage = (id: number) => {
+  const handelNaviage = (id: string) => {
     navigate(`/courses/${id}`);
   };
 
@@ -255,7 +255,7 @@ export default function Course() {
                       layout
                       animate={{ opacity: 1 }}
                       initial={{ opacity: 0 }}
-                      onClick={() => handelNaviage(item.id)}
+                      onClick={() => handelNaviage(item?.id)}
                     >
                       <div className="h-[183px] w-[294px] overflow-hidden ">
                         <img
