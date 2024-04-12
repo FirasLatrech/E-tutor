@@ -106,7 +106,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      type="button"
+      type={props?.type || "button"}
       className={`${
         className ?? ''
       } ${getVariantClasses()} ${getSizeClasses()} ${

@@ -1,10 +1,20 @@
-import UploadIcon from 'modules/shared/assets/icons/Upload/UploadImageIcon'
 import React from 'react';
+import UploadIcon from 'modules/shared/assets/icons/Upload/UploadImageIcon';
 
 interface InputFileTypeProps {
   text: string;
+  accept?: string; 
+  onChange?: (file: File) => void; 
 }
-function InputFile({ text }: InputFileTypeProps) {
+
+function InputFile({ text, accept, onChange }: InputFileTypeProps) {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    if (file && onChange) {
+      onChange(file);
+    }
+  };
+
   return (
     <button
       className="bg-primary-100 hover:bg-primary-200 text-primary-500  font-medium 
@@ -25,6 +35,8 @@ function InputFile({ text }: InputFileTypeProps) {
         <input
           type="file"
           className="w-full opacity-0 h-full absolute m-0 block "
+          onChange={handleChange} 
+          accept={accept} 
         />
       </div>
     </button>

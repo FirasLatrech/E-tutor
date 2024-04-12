@@ -1,34 +1,48 @@
-import react, { ReactNode, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { getItem, setItem } from 'modules/shared/lib/localStorage';
-import { cn } from 'modules/shared/lib/utility';
-import ArrowDown from '../../assets/icons/arrow/arrowDown.svg';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
+import React, { useEffect, useState } from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select';
-import { SelectGroup, SelectLabel } from '@radix-ui/react-select';
+import { SelectGroup } from '@radix-ui/react-select';
 
-interface SelectGenericTypeProps {
+import {
+  type FieldErrors,
+  type FieldValues,
+  type Path,
+  type UseFormRegister,
+} from 'react-hook-form';
+export interface Props<
+  T extends FieldValues = FieldValues,
+  U extends FieldValues = FieldValues
+>{
+  name: string;
+  label?: string;
+  disabled?: boolean;
+  register?: UseFormRegister<T>;
+  errors?: FieldErrors<U>;
+  variant?: 'default' | 'outlined' | 'rounded';
+}
+
+
+interface SelectGenericTypeProps extends Props {
   items: string[];
   label: string;
   isLoading?: boolean;
+  value: string | null;
+  onChange: (value: string) => void;
+  
 }
+
 function SelectGeneric({
   items = [],
   label,
   isLoading = false,
+  value,
+  onChange,
+  ...props
 }: SelectGenericTypeProps) {
-  const [value, setValue] = useState<string | null>(null);
-  console.log(items, "items");
+    console.log(props)
   return (
     <div className="flex w-full gap-2 flex-col mb-4">
       <label className="flex text-sm font-light  text-gray-900">{label}</label>
-      <Select>
+      <Select onValueChange={(value)=>onChange(value)}>
         <SelectTrigger className="min-h-[3rem]">
           <span className="text-[16px] font-light text-gray-400">
             {value || 'Select...'}
@@ -39,22 +53,26 @@ function SelectGeneric({
             {isLoading ? (
               <p>loading...</p>
             ) : (
-              items?.map((item, index) => {
-                return (
-                  <SelectItem
-                    value={item}
-                    key={index}
-                    className="w-full cursor-pointer"
-                    onClick={(e) => setValue(item)}
-                  >
-                    {item}
-                  </SelectItem>
-                );
-              })
+              items?.map((item, index) => (
+                <SelectItem
+                  value={item}
+                  key={props?.name+String(index)}
+                  className="w-full cursor-pointer" 
+                >
+                  {item}
+                </SelectItem>
+              ))
             )}
           </SelectGroup>
         </SelectContent>
       </Select>
+      <span
+        className={`text-xs text-red-500 opacity-0 ${
+          props.errors && props.errors[props.name] ? 'opacity-100' : ''
+        }`}
+      >
+        {(props.errors?.[props.name]?.message as string) || ''}
+      </span>
     </div>
   );
 }

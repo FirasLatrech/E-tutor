@@ -6,9 +6,12 @@ import { useCourseSections } from '../../../context/CourseSectionsContext';
 import { useSteps } from '../../../context/StepsContext';
 
 function PublishCourse() {
-  const { Sections, setSections } = useCourseSections();
+  const { Sections, Instructors,  BasicInformation, AdvancedInformation } = useCourseSections();
   const { currentStep, setCurrentStep } = useSteps();
 
+  const CreateNewCourse=()=>{
+      console.log( Sections, Instructors,  BasicInformation, AdvancedInformation )
+  }
   return (
     <div className="w-full px-9 py-4 h-full flex flex-col gap-[3rem]">
       <Message />
@@ -24,7 +27,7 @@ function PublishCourse() {
           variant="primary"
           additionnalClasses="!p-4 !px-8 !text-lg"
           text={'Submit for Review'}
-          onClick={() => setCurrentStep((old) => old + 1)}
+          onClick={() => CreateNewCourse()}
         />
       </div>
     </div>

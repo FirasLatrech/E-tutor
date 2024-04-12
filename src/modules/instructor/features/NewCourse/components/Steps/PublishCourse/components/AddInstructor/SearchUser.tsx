@@ -37,7 +37,7 @@ function SearchUser({
         onBlur={() => setTyping(false)}
       />
       {isTyping && (
-        <div className="w-full z-10 gap-1 bg-white border top-[3.3rem]  border-gray-100 absolute min-h-[12rem]">
+        <div className="w-full z-10 gap-1 shadow-md    bg-white border top-[3.3rem]  border-gray-100 absolute min-h-[12rem]">
           {isLoading ? (
             <p>Loading...</p>
           ) : (

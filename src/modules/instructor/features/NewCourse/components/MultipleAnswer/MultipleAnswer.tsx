@@ -4,40 +4,49 @@ import { motion } from 'framer-motion';
 
 interface MultipleAnswerPropsType {
   label: string;
+  onChange: (newValue: string, index: number) => void;
+  defaultValue: { [key: string]: string };
 }
-function MultipleAnswer({ label }: MultipleAnswerPropsType) {
-  const [value, setValue] = useState<string[]>(['', '', '', '']);
+
+function MultipleAnswer({ label, onChange, defaultValue }: MultipleAnswerPropsType) {
+  const [value, setValue] = useState<{ [key: string]: string }>(defaultValue);
+  console.log(value)
   return (
     <div className="w-full flex flex-col gap-[1rem]">
       <div className="flex w-full justify-between">
         <div className="w-full flex gap-[0.5rem]">
-          <p className="text-gray-900 text-lg leading-6	">{label}</p>
-          <p className="text-lg text-gray-900 leading-6	">{`(${value?.length}/8)`}</p>
+          <p className="text-gray-900 text-lg leading-6">{label}</p>
+          <p className="text-lg text-gray-900 leading-6">{`(${Object.values(value).length}/8)`}</p>
         </div>
         <p
-          onClick={() => value?.length < 8 && setValue((old) => [...old, ''])}
+          onClick={() => Object.values(value).length < 8 && setValue((old) => ({ ...old, [Object.keys(old).length]: '' }))}
           className={`text-primary-500 whitespace-nowrap cursor-pointer hover:color-primary-300 ease-linear duration-200${
-            value?.length >= 8 ? 'cursor-not-allowed' : 'cursor-pointer'
+            Object.values(value).length >= 8 ? ' cursor-not-allowed' : ' cursor-pointer'
           }`}
         >
           + Add New
         </p>
       </div>
       <div className="flex gap-1 flex-col">
-        {value?.map((value, index) => {
-          return (
-            <motion.div
-            key={index}
+        {Object.entries(value).map(([key, value], index) => (
+          <motion.div
+            key={key}
             initial={{ opacity: 0, scale: 0.99 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
           >
             <div className="ease-linear duration-300">
               <h1 className="text-sm">{`0${index + 1}`}</h1>
-              <Input id="tittle" name="tittle" placeholder={`${label}...`} />
-            </div></motion.div>
-          );
-        })}
+              <Input
+                onChange={(e) => onChange(e.target.value, parseInt(key))}
+                id={`input-${index}`}
+                name={`input-${index}`}
+                placeholder={`${label}...`}
+                defaultValue={value|| ''}
+              />
+            </div>
+          </motion.div>
+        ))}
       </div>
     </div>
   );

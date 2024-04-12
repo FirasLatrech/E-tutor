@@ -10,13 +10,14 @@ function AddInstructor() {
   const { Instructors } = useCourseSections();
   const { data, refetch, isFetching } = useUsersQuery({
     page: 1,
-    limit: 10,
+    limit: 5,
     search: searchValue,
     filters: '',
     sort: '',
   });
 
   useEffect(() => {
+    console.log(searchValue)
     refetch();
   }, [searchValue]);
 

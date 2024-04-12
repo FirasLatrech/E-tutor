@@ -34,6 +34,7 @@ function MainLayout({ children }: MainLayoutPropsType) {
                 } ease-linear duration-200`}
                 to={Route?.path}
                 key={index}
+                onClick={()=>setOpenSideBar(false)}
               >
                 <Icon className=" !text-primary-500" />
               {isOpenSideBar &&  <p

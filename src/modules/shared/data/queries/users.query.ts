@@ -1,6 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { getAllUsers } from "../api/user.service";
 import { QueryType } from "modules/shared/types/query";
+import { UploadFile } from "../api/File.service";
 
 export const useUsersQuery = (Query:QueryType) =>
   useQuery({
@@ -10,3 +11,11 @@ export const useUsersQuery = (Query:QueryType) =>
       return res;
     },
   });
+
+  export const useUploadFileQuery = (File:FormData) =>
+    useMutation({
+      mutationFn: async () => {
+        const res = await UploadFile(File);
+        return res;
+      },
+    });

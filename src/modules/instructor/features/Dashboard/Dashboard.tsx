@@ -9,6 +9,7 @@ import PeopleIcon from 'modules/instructor/assets/icons/Stats/PeopleIcon';
 import EditProfileProgress from './components/EditProfileProgress/EditProfileProgress';
 import RecentActivity from './components/RecentActivity/RecentActivity';
 import RevenueRechart from './components/RevenueChart/RevenueChart';
+import ProfileViewChart from './components/ProfileViewChart/ProfileViewChart';
 
 function Dashboard() {
   const statsCard = [
@@ -72,9 +73,10 @@ function Dashboard() {
         </div>
         <div className="w-full flex flex-col gap-[1.5rem] mt-8">
           <EditProfileProgress />
-          <div className='w-full'>
+          <div className='w-full items-start flex gap-[1rem] min-h-[20rem]'>
           <RecentActivity/>
           <RevenueRechart/>
+          <ProfileViewChart/>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { CreateCourseSteps } from 'modules/instructor/constants/createCourseSteps.constant';
 import React, { ReactNode } from 'react';
 import SaveChanges from '../../components/SaveChanges/SaveChanges';
+import CheckedStepIcon from 'modules/instructor/assets/icons/CreateCourse/CheckedStepIcons';
 
 interface CreateCourseLayoutTypeProps {
   children: ReactNode;
@@ -32,6 +33,7 @@ function CreateCourseLayout({
               >
                 {text}
               </p>
+              {currentStep > index && <CheckedStepIcon/> }
             </div>
           );
         })}
