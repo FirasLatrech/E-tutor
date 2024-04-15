@@ -21,8 +21,8 @@ function App() {
         <Suspense>
           <div className="h-screen ">
             {/* <Router /> */}
-            <Grafana/>
-              {renderRoutes(routes)}
+            <Grafana />
+            {renderRoutes(routes)}
           </div>
         </Suspense>
         <Toaster />

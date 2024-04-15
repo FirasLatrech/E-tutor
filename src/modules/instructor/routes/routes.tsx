@@ -30,7 +30,7 @@ const routes: RouteConfig[] = [
   },
   {
     exact: true,
-    guard: PrivateRoute,
+   // guard: PrivateRoute,
     path: PATH.NEW_COURSES,
     component: lazy(async () => await import('../pages/NewCourse')),
     layout: MainLayout,

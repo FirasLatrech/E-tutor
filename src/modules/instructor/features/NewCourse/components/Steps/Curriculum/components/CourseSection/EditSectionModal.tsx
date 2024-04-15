@@ -17,8 +17,6 @@ function EditSectionModal({ Section, Submit }: EditSectionModalPropsType) {
   const [error, setError] = useState<string | null>(null);
   const { setClose } = useModal();
 
-
-
   const ChangeSectionNameHandler = () => {
     const submitted: boolean = Submit(value || Section?.name || '');
     if (!submitted) {
@@ -38,7 +36,7 @@ function EditSectionModal({ Section, Submit }: EditSectionModalPropsType) {
           name="Section"
           label="Section"
           onChange={(e) => setValue(e.target.value)}
-          value={value || Section?.name || ''}
+          value={value || ''}
           placeholder="Write your section name here..."
         />
         <span

@@ -13,7 +13,10 @@ import {
 } from 'modules/auth/constants/SocialMediaAuth.constant';
 import LoginForm from './LoginForm';
 import GoogleAuth from 'modules/auth/social-auth/google/google-auth';
-import { googleClientId, isGoogleAuthEnabled } from 'modules/auth/social-auth/google/google-config';
+import {
+  googleClientId,
+  isGoogleAuthEnabled,
+} from 'modules/auth/social-auth/google/google-config';
 
 const Login = () => {
   const { isPending, mutateAsync: login, isError, error } = useLoginQuery();
@@ -53,11 +56,12 @@ const Login = () => {
             <div className="h-[1px] w-full bg-gray-100" />
           </div>
           <div className="flex items-center justify-between w-full gap-4 -mt-4">
-            {SocialMediaAuth?.map(
-              (props: SocialMediaAuthType, index: number) => {
-                if (props.text === 'google') isGoogleAuthEnabled && googleClientId && <GoogleAuth key={index} />
-                else return <SocialMediaBtn key={index} {...props} />;
-              }
+            {SocialMediaAuth?.map((props: SocialMediaAuthType, index: number) =>
+              props.text === 'google' ? (
+                isGoogleAuthEnabled && googleClientId && <GoogleAuth />
+              ) : (
+                <SocialMediaBtn key={index} {...props} />
+              )
             )}
           </div>
         </div>

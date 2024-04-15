@@ -18,7 +18,6 @@ function EditLessonModal({ Lesson, Submit }: EditSectionModalPropsType) {
   const [error, setError] = useState<string | null>(null);
   const { setClose } = useModal();
 
-
   const ChangeLessonNameHandler = () => {
     const submitted: boolean = Submit(value || Lesson?.name || '');
     if (!submitted) {
@@ -37,7 +36,7 @@ function EditLessonModal({ Lesson, Submit }: EditSectionModalPropsType) {
           name="lesson"
           label="Sesson"
           onChange={(e) => setValue(e.target.value)}
-          value={value || Lesson?.name || ''}
+          value={value || ''}
           placeholder="Write your lesson name here..."
         />
         <span

@@ -11,7 +11,7 @@ import {
 export interface Props<
   T extends FieldValues = FieldValues,
   U extends FieldValues = FieldValues
->{
+> {
   name: string;
   label?: string;
   disabled?: boolean;
@@ -20,14 +20,12 @@ export interface Props<
   variant?: 'default' | 'outlined' | 'rounded';
 }
 
-
 interface SelectGenericTypeProps extends Props {
   items: string[];
   label: string;
   isLoading?: boolean;
   value: string | null;
   onChange: (value: string) => void;
-  
 }
 
 function SelectGeneric({
@@ -38,13 +36,17 @@ function SelectGeneric({
   onChange,
   ...props
 }: SelectGenericTypeProps) {
-    console.log(props)
+  console.log(props);
   return (
     <div className="flex w-full gap-2 flex-col mb-4">
       <label className="flex text-sm font-light  text-gray-900">{label}</label>
-      <Select onValueChange={(value)=>onChange(value)}>
+      <Select onValueChange={(value) => onChange(value)}>
         <SelectTrigger className="min-h-[3rem]">
-          <span className="text-[16px] font-light text-gray-400">
+          <span
+            className={`text-[16px] font-light  ${
+              value ? 'text-gray-700' : 'text-gray-400'
+            }`}
+          >
             {value || 'Select...'}
           </span>
         </SelectTrigger>
@@ -56,8 +58,8 @@ function SelectGeneric({
               items?.map((item, index) => (
                 <SelectItem
                   value={item}
-                  key={props?.name+String(index)}
-                  className="w-full cursor-pointer" 
+                  key={props?.name + String(index)}
+                  className="w-full cursor-pointer"
                 >
                   {item}
                 </SelectItem>

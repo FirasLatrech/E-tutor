@@ -26,6 +26,7 @@
     "@grafana/faro-web-sdk": "^1.5.1",
     "@grafana/faro-web-tracing": "^1.5.1",
     "@grafana/ui": "^10.4.1",
+    "@hello-pangea/dnd": "^16.6.0",
     "@hookform/resolvers": "^3.1.0",
     "@mux/mux-node": "^8.4.1",
     "@mux/mux-player-react": "^2.4.0",

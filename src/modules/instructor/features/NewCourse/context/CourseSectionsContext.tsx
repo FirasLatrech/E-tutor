@@ -1,14 +1,14 @@
 import React, { ReactNode, createContext, useContext, useState } from 'react';
 
 interface CourseSectionsContextType {
-  BasicInformation:any;
-  setBasicInformations:React.Dispatch<React.SetStateAction<any[] | null>>;
+  BasicInformation: any;
+  setBasicInformations: React.Dispatch<React.SetStateAction<any[] | null>>;
   Sections: sectionType[] | null;
   setSections: React.Dispatch<React.SetStateAction<sectionType[] | null>>;
   Instructors: any[] | null;
   setInstructors: React.Dispatch<React.SetStateAction<any[] | null>>;
-  AdvancedInformation:any;
-  setAdvancedInformation:React.Dispatch<React.SetStateAction<any[] | null>>;
+  AdvancedInformation: any;
+  setAdvancedInformation: React.Dispatch<React.SetStateAction<any[] | null>>;
 }
 
 export interface sectionType {
@@ -17,7 +17,11 @@ export interface sectionType {
 }
 export interface lessonType {
   name: string;
-  type: string;
+  video: string;
+  File: string;
+  captions: string;
+  Description: string;
+  Notes: string;
 }
 const CourseSectionsContext = createContext<
   CourseSectionsContextType | undefined
@@ -30,7 +34,9 @@ export interface StepsProviderType {
 export const useCourseSections = (): CourseSectionsContextType => {
   const context = useContext(CourseSectionsContext);
   if (!context) {
-    throw new Error('useSteps must be used within a StepsProvider');
+    throw new Error(
+      'useCourseSections must be used within a CourseSectionsProvider'
+    );
   }
   return context;
 };
@@ -38,29 +44,48 @@ export const useCourseSections = (): CourseSectionsContextType => {
 export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
   const [Sections, setSections] = useState<sectionType[] | null>([
     {
-      name: '',
+      name: 'section 1',
       lessons: [
-        { name: 'lecture 1', type: '' },
-        { name: 'lecture 2', type: '' },
+        {
+          name: 'lecture 1',
+          video: '',
+          File: '',
+          captions: '',
+          Description: '',
+          Notes: '',
+        },
+        {
+          name: 'lecture 2',
+          video: '',
+          File: '',
+          captions: '',
+          Description: '',
+          Notes: '',
+        },
       ],
     },
   ]);
 
-  const [Instructors, setInstructors] = useState<any[] | null>([{ username:"John Doe", pictureLink: '', job: 'UI/Ux Designer' }])
-  const [BasicInformation, setBasicInformations] = useState<any[] | null>(null)
+  const [Instructors, setInstructors] = useState<any[] | null>([
+    { username: 'John Doe', pictureLink: '', job: 'UI/Ux Designer' },
+  ]);
+  const [BasicInformation, setBasicInformations] = useState<any[] | null>(null);
   const [AdvancedInformation, setAdvancedInformation] = useState<any | null>({
     courseDescriptions: '',
-    whatYouWillTeach: {"0":""},
-    targetAudience:{"0":""},
-    courseRequirements: {"0":""},
-  })
+    whatYouWillTeach: { '0': '' },
+    targetAudience: { '0': '' },
+    courseRequirements: { '0': '' },
+  });
 
   const contextValue: CourseSectionsContextType = {
     Sections,
     setSections,
     Instructors,
     setInstructors,
-    setBasicInformations,BasicInformation,setAdvancedInformation,AdvancedInformation
+    setBasicInformations,
+    BasicInformation,
+    setAdvancedInformation,
+    AdvancedInformation,
   };
 
   return (
