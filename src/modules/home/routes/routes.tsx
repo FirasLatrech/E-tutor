@@ -41,7 +41,7 @@ const routes: RouteConfig[] = [
   },
   {
     exact: true,
-    //  guard: PrivateRoute,
+    // guard: PrivateRoute,
     path: PATH.COURSESBYID,
     component: lazy(
       async () => await import('../features/courseDetails/index')
@@ -60,6 +60,13 @@ const routes: RouteConfig[] = [
     // guard: MainLayout,
     path: PATH.USER,
     component: lazy(async () => await import('../features/userProfile/index')),
+    layout: MainLayout,
+  },
+  {
+    exact: true,
+    // guard: MainLayout,
+    path: PATH.CART,
+    component: lazy(async () => await import('../features/cart/index')),
     layout: MainLayout,
   },
 ];

@@ -6,4 +6,5 @@ export const PATH = {
   COURSESBYID: '/courses/:id',
   WATCHCOURSE: '/courses/:id/watch/:chapterId',
   USER: '/user/:id',
+  CART: '/cart',
 };

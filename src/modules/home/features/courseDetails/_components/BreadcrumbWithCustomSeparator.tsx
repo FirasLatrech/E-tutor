@@ -20,7 +20,7 @@ export function BreadcrumbWithCustomSeparator() {
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink>
-            <Link to="/components">Courses</Link>
+            <Link to="/courses">Courses</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />

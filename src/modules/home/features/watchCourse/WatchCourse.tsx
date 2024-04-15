@@ -13,6 +13,8 @@ import { AttachFiles } from './_components/AttachFiels';
 import { Comments } from './_components/Comments';
 import { Progress } from './_components/Progress';
 import { Acordination } from './_components/Acordination';
+import { useParams } from 'react-router';
+import { useGetCourseById } from 'modules/home/data/queries/home.query';
 
 const aboutVideo = [
   {
@@ -29,10 +31,18 @@ const aboutVideo = [
   },
 ];
 const WatchCourse = (props: Props) => {
+  const params = useParams();
+  console.log(params);
+  const course_id = params.id;
+  console.log(course_id);
+  if (!course_id) return null;
+  const { data } = useGetCourseById(course_id);
+  console.log(data);
+
   return (
     <div className="w-full h-full pb-6">
       {/* HerooSection */}
-      <HeroSection />
+      <HeroSection courseDetails={data} />
 
       {/* CourseDetails  */}
       <div className="flex items-center justify-center w-full">
