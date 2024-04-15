@@ -2,17 +2,24 @@ import Button from 'modules/shared/components/Button';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
 import React, { useState } from 'react';
 import UploadedVideo from './UploadedVideo';
+import { UploadVideoForStreaming } from 'modules/shared/data/api/videoStreaming.service';
+import { UploadButton } from '@uploadthing/react';
 
 function AddVideo() {
   const { isOpen, setClose } = useModal();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedFile(file);
+      console.log(file);
+
+      const uploaded = await UploadVideoForStreaming(file);
+      console.log(uploaded);
     }
-    console.log(file);
   };
 
   return (

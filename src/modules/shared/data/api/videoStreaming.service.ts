@@ -2,16 +2,15 @@ import axios from 'axios';
 import { Play } from 'lucide-react';
 import { api } from 'modules/shared/lib/api';
 
-export const UploadVideoForStreaming = async (File: FormData) => {
+export const UploadVideoForStreaming = async (file: File) => {
+
   try {
-    const res = await axios.post(
-      'http://localhost:3000/api/v1/files/video/upload',
-      { file: File },
+    const res = await api.post(
+      '/files/video/upload',
       {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
+        path:
+          'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      },
     );
     console.log(res);
     return res.data;
