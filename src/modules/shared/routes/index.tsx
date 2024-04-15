@@ -42,21 +42,5 @@ export const renderRoutes = (routes: RouteConfig[] = []) => (
 );
 
 const routes: RouteConfig[] = [...pages];
-const pageVariants = {
-  initial: {
-    opacity: 0.25,
-  },
-  in: {
-    opacity: 1,
-  },
-  out: {
-    opacity: 0.25,
-  },
-};
 
-const pageTransition = {
-  type: 'tween',
-  ease: 'linear',
-  duration: 0.5,
-};
 export default routes;

@@ -12,11 +12,10 @@ import { X } from 'lucide-react';
 import { useToast } from 'modules/shared/components/ui/use-toast';
 
 function LoginForm() {
-  const { mutateAsync: login, isError, error, isPending } = useLoginQuery();
+  const { mutateAsync: login, isPending } = useLoginQuery();
   const { toast } = useToast();
   const { setIsAuthenticated, isAuthenticated, setUser, setToken } =
     useAuthStore((state) => state);
-  console.log(isAuthenticated);
   const onSubmit: SubmitHandler<LoginBody> = async (data) => {
     const response = await login(data);
     if (response?.user) {

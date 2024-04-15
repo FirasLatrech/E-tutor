@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
-import useIsMountedRef from '../../auth/hook/useIsMountedRef';
+import useIsMountedRef from '../hook/useIsMountedRef';
 
-import useAuthStore from '../store/useAuthStore';
-import { api } from '../lib/api';
-import { clearTokens, getTokens } from '../utils/token';
-import LazyLoad from '../components/LazyLoad';
+import useAuthStore from '../../shared/store/useAuthStore';
+import { api } from '../../shared/lib/api';
+import { clearTokens, getTokens } from '../../shared/utils/token';
+import LazyLoad from '../../shared/components/LazyLoad';
 import { Navigate } from 'react-router';
 
 interface AuthProviderProps {
@@ -19,11 +19,10 @@ interface JwtPayload {
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const isMounted = useIsMountedRef();
 
-  const { isAuthenticated, setUser, setIsAuthenticated } = useAuthStore();
+  const { isInitialised, setUser, setIsAuthenticated } = useAuthStore();
 
   const isValidToken = (token: string) => {
     const decoded: JwtPayload = jwtDecode(token);
-    console.log(decoded);
 
     const currentTime = Date.now() / 1000;
 
@@ -36,11 +35,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     async function fetchUser() {
-      const { refresh_token } = getTokens();
-
-      if (refresh_token && isValidToken(refresh_token)) {
+      const { access_token } = getTokens();
+      if (access_token && isValidToken(access_token)) {
         const response = await api.get('/auth/me');
-        console.log(response);
         const user = response.data;
         setIsAuthenticated(true);
         setUser(user);
@@ -51,13 +48,11 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     fetchUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // if (!isAuthenticated) {
-  //   return <Navigate to="/login" />;
-  // }
-
+  if(!isInitialised){
+    return <LazyLoad/>
+  }
   return <>{children}</>;
 };
 
