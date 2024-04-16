@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import MultipleAnswer from '../../MultipleAnswer';
 import Button from 'modules/shared/components/Button';
 import { useSteps } from '../../../context/StepsContext';
-import { useCourseSections } from '../../../context/CourseSectionsContext';
+import { CourseInformationType, useCourseSections } from '../../../context/CourseSectionsContext';
 
 function AdvanceInformation() {
   const { AdvancedInformation, setAdvancedInformation } = useCourseSections();
@@ -21,15 +21,17 @@ function AdvanceInformation() {
   }
   return (
     <div className="w-full h-full flex flex-col">
-      <form
-        className="w-[95%] flex flex-col "
-             onSubmit={handleSubmit}
-      >
+      <form className="w-[95%] flex flex-col " onSubmit={handleSubmit}>
         <div className="flex p-8 gap-[2rem] border-b border-gray-100">
-          <UploadImage label={'Course Thumbnail'} onChange={(value:string)=>setCourseDetails((prev:any) => ({
+          <UploadImage
+            label={'Course Thumbnail'}
+            onChange={(value: string) =>
+              setCourseDetails((prev: CourseInformationType) => ({
                 ...prev,
-                CourseThumbnail:value
-              }))}/>
+                CourseThumbnail: value,
+              }))
+            }
+          />
           <UploadVideo label={'Course Trailer'} />
         </div>
         <div className="flex p-8 flex-col gap-[2rem] border-b border-gray-100">
@@ -38,24 +40,39 @@ function AdvanceInformation() {
             value={value}
             setValue={setValue}
           />
-          <MultipleAnswer  defaultValue={AdvancedInformation?.whatYouWillTeach} label="What you will teach in this course" onChange={(value:string, index:number) =>
-              setCourseDetails((prev:any) => ({
+          <MultipleAnswer
+            defaultValue={AdvancedInformation?.whatYouWillTeach}
+            label="What you will teach in this course"
+            onChange={(value: string, index: number) =>
+              setCourseDetails((prev: CourseInformationType) => ({
                 ...prev,
-                whatYouWillTeach: {...prev.whatYouWillTeach, [index]:value}
+                whatYouWillTeach: { ...prev.whatYouWillTeach, [index]: value },
               }))
-            }/>
-          <MultipleAnswer defaultValue={AdvancedInformation?.targetAudience} label="Target Audience"  onChange={(value:string, index:number) =>
-              setCourseDetails((prev:any) => ({
+            }
+          />
+          <MultipleAnswer
+            defaultValue={AdvancedInformation?.targetAudience}
+            label="Target Audience"
+            onChange={(value: string, index: number) =>
+              setCourseDetails((prev: CourseInformationType) => ({
                 ...prev,
-                targetAudience: {...prev.targetAudience, [index]:value}
+                targetAudience: { ...prev.targetAudience, [index]: value },
               }))
-            }/>
-          <MultipleAnswer defaultValue={AdvancedInformation?.courseRequirements} label="Course requirements"  onChange={(value:string, index:number) =>
-              setCourseDetails((prev:any) => ({
+            }
+          />
+          <MultipleAnswer
+            defaultValue={AdvancedInformation?.courseRequirements}
+            label="Course requirements"
+            onChange={(value: string, index: number) =>
+              setCourseDetails((prev: CourseInformationType) => ({
                 ...prev,
-                courseRequirements: {...prev.courseRequirements, [index]:value}
+                courseRequirements: {
+                  ...prev.courseRequirements,
+                  [index]: value,
+                },
               }))
-            }/>
+            }
+          />
           <div className="flex justify-between items-center w-full mt-4">
             <Button
               variant="tertiaryGray"
@@ -64,7 +81,7 @@ function AdvanceInformation() {
               text={currentStep == 0 ? 'Cancel' : 'Previous'}
             />
             <Button
-              type='submit'
+              type="submit"
               variant="primary"
               additionnalClasses="!p-4 !px-8 !text-lg"
               text={'Save & Next'}

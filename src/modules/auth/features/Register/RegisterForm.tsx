@@ -26,7 +26,7 @@ function RegisterForm() {
   const { toast } = useToast();
 
   const onSubmit: SubmitHandler<RegisterBody> = async (data) => {
-    const response: any = await registerAction({
+    const response = await registerAction({
       ...data,
       is_instructor: true,
     });

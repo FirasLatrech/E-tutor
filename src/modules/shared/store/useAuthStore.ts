@@ -5,7 +5,7 @@ import { clearItem, setItem } from '../lib/localStorage';
 interface AuthState {
   isInitialised: boolean;
   isAuthenticated: boolean;
-  user: any;
+  user: User | null;
 }
 
 export interface AuthStore extends AuthState {
@@ -18,7 +18,7 @@ export interface AuthStore extends AuthState {
 const initialState: Pick<AuthStore, keyof AuthState> = {
   isAuthenticated: false,
   isInitialised: false,
-  user: {},
+  user: null,
 };
 
 const useAuthStore = create<AuthStore>()(

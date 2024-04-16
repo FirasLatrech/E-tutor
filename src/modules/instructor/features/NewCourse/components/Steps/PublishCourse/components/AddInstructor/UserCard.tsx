@@ -10,7 +10,7 @@ import React from 'react';
 
 interface UserCardPropsType {
   username: string;
-  pictureLink: string;
+  pictureLink: string | null;
   job: string;
   id: string;
 }

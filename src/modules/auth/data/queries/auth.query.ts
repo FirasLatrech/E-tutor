@@ -25,9 +25,13 @@ export const useRegisterQuery = () =>
     },
   });
 
+interface LoginWithGoogleBody {
+  idToken: string;
+}
+
 export const useAuthGoogleLoginService = () =>
   useMutation({
-    mutationFn: async (body: any) => {
+    mutationFn: async (body: LoginWithGoogleBody) => {
       const res = await googleLogin(body);
       return res;
     },
