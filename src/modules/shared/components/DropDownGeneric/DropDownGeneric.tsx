@@ -24,7 +24,7 @@ function DropDownGeneric({ Options, label, text }: SelectGenericTypeProps) {
           asChild
           className="cursor-pointer py-2 group min-w-[4rem] bg-primary-100"
         >
-          <span className="text-[16px] gap-2 text-primary-500 px-4 font-medium flex items-center justify-between">
+          <span className={`text-[16px] gap-2 text-primary-500 px-4 font-medium flex items-center justify-between`}>
             {text || ''}
             <DownArrowIcon className="!text-primary-400 ease-linear duration-200 group-aria-expanded:rotate-180" />
           </span>

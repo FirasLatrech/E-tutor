@@ -22,7 +22,11 @@ export interface sectionType {
 }
 export interface lessonType {
   name: string;
-  type: string;
+  video: string;
+  File: string;
+  captions: string;
+  Description: string;
+  Notes: string;
 }
 const CourseSectionsContext = createContext<
   CourseSectionsContextType | undefined
@@ -35,7 +39,9 @@ export interface StepsProviderType {
 export const useCourseSections = (): CourseSectionsContextType => {
   const context = useContext(CourseSectionsContext);
   if (!context) {
-    throw new Error('useSteps must be used within a StepsProvider');
+    throw new Error(
+      'useCourseSections must be used within a CourseSectionsProvider'
+    );
   }
   return context;
 };
@@ -43,10 +49,24 @@ export const useCourseSections = (): CourseSectionsContextType => {
 export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
   const [Sections, setSections] = useState<sectionType[] | null>([
     {
-      name: '',
+      name: 'section 1',
       lessons: [
-        { name: 'lecture 1', type: '' },
-        { name: 'lecture 2', type: '' },
+        {
+          name: 'lecture 1',
+          video: '',
+          File: '',
+          captions: '',
+          Description: '',
+          Notes: '',
+        },
+        {
+          name: 'lecture 2',
+          video: '',
+          File: '',
+          captions: '',
+          Description: '',
+          Notes: '',
+        },
       ],
     },
   ]);

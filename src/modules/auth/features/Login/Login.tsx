@@ -7,16 +7,17 @@ import {
 } from 'modules/auth/constants/SocialMediaAuth.constant';
 import { useLoginQuery } from 'modules/auth/data/queries/auth.query';
 import MainLayout from 'modules/auth/layout/MainLayout/MainLayout';
-import GoogleAuth from 'modules/auth/social-auth/google/google-auth';
-import {
-  googleClientId,
-  isGoogleAuthEnabled,
-} from 'modules/auth/social-auth/google/google-config';
+
 import { ToastAction } from 'modules/shared/components/ui/toast';
 import { useToast } from 'modules/shared/components/ui/use-toast';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import LoginImage from '../../assets/images/LogIn/image.png';
 import LoginForm from './LoginForm';
+import GoogleAuth from 'modules/auth/social-auth/google/google-auth';
+import {
+  googleClientId,
+  isGoogleAuthEnabled,
+} from 'modules/auth/social-auth/google/google-config';
 
 const Login = () => {
   const { isPending, mutateAsync: login, isError, error } = useLoginQuery();
@@ -55,17 +56,13 @@ const Login = () => {
             </p>
             <div className="h-[1px] w-full bg-gray-100" />
           </div>
-          <div className="flex items-center justify-between w-full gap-4 -mt-4 max-md:flex-col">
-            <GoogleAuth />
-
-            {SocialMediaAuth?.map(
-              (props: SocialMediaAuthType, index: number) => {
-                if (props.text === 'google')
-                  isGoogleAuthEnabled && googleClientId && (
-                    <GoogleAuth key={index} />
-                  );
-                else return <SocialMediaBtn key={index} {...props} />;
-              }
+          <div className="flex items-center justify-between w-full gap-4 -mt-4">
+            {SocialMediaAuth?.map((props: SocialMediaAuthType, index: number) =>
+              props.text === 'google' ? (
+                isGoogleAuthEnabled && googleClientId && <GoogleAuth />
+              ) : (
+                <SocialMediaBtn key={index} {...props} />
+              )
             )}
           </div>
         </div>

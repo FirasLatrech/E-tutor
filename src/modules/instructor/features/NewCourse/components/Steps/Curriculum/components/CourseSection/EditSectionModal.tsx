@@ -30,15 +30,13 @@ function EditSectionModal({ Section, Submit }: EditSectionModalPropsType) {
 
   return (
     <ModalContainer title={'edit section name'}>
-      <div className="py-2 px-6">
+      <div className="px-6 py-2">
         <Input
           id="Section"
           name="Section"
           label="Section"
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-          value={value || Section?.name || ''}
+          onChange={(e) => setValue(e.target.value)}
+          value={value || ''}
           placeholder="Write your section name here..."
         />
         <span
@@ -48,7 +46,7 @@ function EditSectionModal({ Section, Submit }: EditSectionModalPropsType) {
         >
           {error || '|'}
         </span>
-        <div className="flex justify-between items-center pb-4 w-full mt-4">
+        <div className="flex items-center justify-between w-full pb-4 mt-4">
           <Button
             variant="secondaryGray"
             onClick={() => {

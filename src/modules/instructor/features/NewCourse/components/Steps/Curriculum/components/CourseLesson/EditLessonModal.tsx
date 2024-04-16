@@ -30,15 +30,13 @@ function EditLessonModal({ Lesson, Submit }: EditSectionModalPropsType) {
   };
   return (
     <ModalContainer title={'edit lesson name'}>
-      <div className="py-2 px-6">
+      <div className="px-6 py-2">
         <Input
           id="lesson"
           name="lesson"
           label="Sesson"
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-          value={value || Lesson?.name || ''}
+          onChange={(e) => setValue(e.target.value)}
+          value={value || ''}
           placeholder="Write your lesson name here..."
         />
         <span
@@ -48,7 +46,7 @@ function EditLessonModal({ Lesson, Submit }: EditSectionModalPropsType) {
         >
           {error || '|'}
         </span>
-        <div className="flex justify-between items-center pb-4 w-full mt-4">
+        <div className="flex items-center justify-between w-full pb-4 mt-4">
           <Button
             variant="secondaryGray"
             onClick={() => {

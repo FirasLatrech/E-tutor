@@ -37,15 +37,15 @@ function SelectGeneric({
 }: SelectGenericTypeProps) {
   console.log(props);
   return (
-    <div className="flex w-full gap-2 flex-col mb-4">
-      <label className="flex text-sm font-light  text-gray-900">{label}</label>
-      <Select
-        onValueChange={(value) => {
-          onChange(value);
-        }}
-      >
+    <div className="flex flex-col w-full gap-2 mb-4">
+      <label className="flex text-sm font-light text-gray-900">{label}</label>
+      <Select onValueChange={(value) => onChange(value)}>
         <SelectTrigger className="min-h-[3rem]">
-          <span className="text-[16px] font-light text-gray-400">
+          <span
+            className={`text-[16px] font-light  ${
+              value ? 'text-gray-700' : 'text-gray-400'
+            }`}
+          >
             {value || 'Select...'}
           </span>
         </SelectTrigger>
