@@ -4,6 +4,7 @@ import { type Fragment, lazy } from 'react';
 import { type RouteProps } from 'react-router-dom';
 import MainLayout from '../layout/MainLayout/MainLayout';
 import { PATH } from './paths';
+import PrivateRoute from 'modules/shared/routes/PrivateRoute';
 type RouteConfig = {
   exact: boolean | null;
   path: string;
