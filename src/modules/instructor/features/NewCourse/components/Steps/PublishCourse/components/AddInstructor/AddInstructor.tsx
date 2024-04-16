@@ -17,7 +17,7 @@ function AddInstructor() {
   });
 
   useEffect(() => {
-    console.log(searchValue)
+    console.log(searchValue);
     refetch();
   }, [searchValue]);
 
@@ -37,13 +37,15 @@ function AddInstructor() {
       <div className="flex min-h-[9rem] items-start flex-wrap gap-4 w-full justify-start">
         {Instructors?.map((user: any, index: number) => {
           return (
-            <UserCard
-              key={index}
-              id={user?.id}
-              username={user?.username}
-              job="UI/UX Designer"
-              pictureLink={user?.avatarUrl}
-            />
+            <div className="w-[30%]">
+              <UserCard
+                key={index}
+                id={user?.id}
+                username={user?.username}
+                job="UI/UX Designer"
+                pictureLink={user?.avatarUrl}
+              />
+            </div>
           );
         })}
       </div>

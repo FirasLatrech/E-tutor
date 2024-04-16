@@ -5,11 +5,10 @@ import apple from '../assets/icons/apple.svg';
 export interface SocialMediaAuthType {
   text: string;
   icon: string;
-  href: string;
 }
 
 export const SocialMediaAuth: SocialMediaAuthType[] = [
-  { text: 'google', icon: google, href: '' },
-  { text: 'facebook', icon: facebook, href: '' },
-  { text: 'apple', icon: apple, href: '' },
+  { text: 'google', icon: google},
+  { text: 'facebook', icon: facebook},
+  { text: 'apple', icon: apple},
 ];

@@ -6,6 +6,7 @@ import {
   lessonType,
   sectionType,
   useCourseSections,
+  videoLessonType,
 } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
 import DropDownGeneric from 'modules/shared/components/DropDownGeneric';
 import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
@@ -142,6 +143,36 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
     setClose();
   };
 
+  const AddVideoToLesson = (
+    SectionNumber: number,
+    LessonName: string,
+    video: videoLessonType
+  ) => {
+    setSections((old): sectionType[] => {
+      if (!old) {
+        return [];
+      }
+      return old?.map((section, index) => {
+        if (index === SectionNumber) {
+          return {
+            ...section,
+            lessons:
+              section?.lessons?.map((lesson: lessonType): lessonType => {
+                if (lesson?.name.toUpperCase() == LessonName.toUpperCase()) {
+                  return {
+                    ...lesson,
+                    video: video || lesson?.video || '',
+                  } as lessonType;
+                } else return lesson;
+              }) || null,
+          };
+        } else {
+          return section;
+        }
+      });
+    });
+  };
+
   const EditLessonName = (NewName: string) => {
     let IsExistLessonName: lessonType[] | undefined = [];
     Sections?.forEach((section: sectionType) => {
@@ -177,6 +208,7 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
     });
     return true;
   };
+
   return (
     <Draggable
       draggableId={`Section-${SectionNumber}-${Lesson.name}`}
@@ -213,7 +245,11 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
                       action: () =>
                         setOpen(
                           <ModalContainer title="video">
-                            <AddVideo />
+                            <AddVideo
+                              AddVideoToLesson={AddVideoToLesson}
+                              SectionNumber={SectionNumber}
+                              Lesson={Lesson}
+                            />
                           </ModalContainer>
                         ),
                     },

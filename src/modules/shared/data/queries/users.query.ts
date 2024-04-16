@@ -12,10 +12,3 @@ export const useUsersQuery = (Query:QueryType) =>
     },
   });
 
-  export const useUploadFileQuery = (File:FormData) =>
-    useMutation({
-      mutationFn: async () => {
-        const res = await UploadFile(File);
-        return res;
-      },
-    });

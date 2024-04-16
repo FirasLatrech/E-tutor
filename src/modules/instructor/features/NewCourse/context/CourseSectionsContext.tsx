@@ -15,9 +15,15 @@ export interface sectionType {
   lessons: lessonType[] | null;
   name: string;
 }
+
+export interface videoLessonType {
+  url: string;
+  file: File;
+  id: string;
+}
 export interface lessonType {
   name: string;
-  video: string;
+  video: videoLessonType | null;
   File: string;
   captions: string;
   Description: string;
@@ -48,7 +54,7 @@ export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
       lessons: [
         {
           name: 'lecture 1',
-          video: '',
+          video: null,
           File: '',
           captions: '',
           Description: '',
@@ -56,7 +62,7 @@ export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
         },
         {
           name: 'lecture 2',
-          video: '',
+          video: null,
           File: '',
           captions: '',
           Description: '',
@@ -66,9 +72,7 @@ export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
     },
   ]);
 
-  const [Instructors, setInstructors] = useState<any[] | null>([
-    { username: 'John Doe', pictureLink: '', job: 'UI/Ux Designer' },
-  ]);
+  const [Instructors, setInstructors] = useState<any[] | null>([]);
   const [BasicInformation, setBasicInformations] = useState<any[] | null>(null);
   const [AdvancedInformation, setAdvancedInformation] = useState<any | null>({
     courseDescriptions: '',

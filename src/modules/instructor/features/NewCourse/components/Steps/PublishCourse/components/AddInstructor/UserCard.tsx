@@ -18,9 +18,10 @@ interface UserCardPropsType {
 function UserCard({ username, pictureLink, job, id }: UserCardPropsType) {
   const { setInstructors } = useCourseSections();
   return (
-    <div className="p-4 hover:bg-gray-100 cursor-pointer ease-linear duration-200 min-w-[18rem] bg-gray-50 flex gap-[1rem] items-center justify-between">
+    <div className="p-4 w-full hover:bg-gray-100 cursor-pointer ease-linear duration-200 min-w-[18rem] bg-gray-50 flex gap-[1rem] items-center justify-between">
       <div
         onClick={() => {
+          console.log('added');
           setInstructors((prev) => {
             if (prev?.some((user) => user?.id == id)) return prev;
             return [
@@ -28,6 +29,7 @@ function UserCard({ username, pictureLink, job, id }: UserCardPropsType) {
               { id, username, pictureLink: '', job: 'UI/Ux Designer' },
             ];
           });
+          console.log('added');
         }}
         className="flex gap-[1rem] items-center justify-center"
       >
@@ -48,14 +50,16 @@ function UserCard({ username, pictureLink, job, id }: UserCardPropsType) {
           <p className="leading-5 text-gray-600 text-sm ">{job}</p>
         </div>
       </div>
-      <CloseIcon
-        onClick={() => {
-          setInstructors(
-            (prev) => prev?.filter((user) => user?.id != id) || []
-          );
-        }}
-        className="cursor-pointer"
-      />
+      {
+        <CloseIcon
+          onClick={() => {
+            setInstructors(
+              (prev) => prev?.filter((user) => user?.id != id) || []
+            );
+          }}
+          className="cursor-pointer"
+        />
+      }
     </div>
   );
 }

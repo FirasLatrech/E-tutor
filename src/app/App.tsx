@@ -15,6 +15,7 @@ function App() {
   // console.log(i18n);
   document.body.dir = i18n?.dir();
 
+
   return (
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>

@@ -1,39 +1,75 @@
 'use client';
 
 import { useGoogleLogin } from '@react-oauth/google';
+import { X } from 'lucide-react';
 import SocialMediaBtn from 'modules/auth/components/SocialMediaBtn';
 import { SocialMediaAuth } from 'modules/auth/constants/SocialMediaAuth.constant';
 import { exchangeCodeForIdToken } from 'modules/auth/data/api/auth.service';
-import {
-  useAuthGoogleLoginService,
-} from 'modules/auth/data/queries/auth.query';
+import { useAuthGoogleLoginService } from 'modules/auth/data/queries/auth.query';
+import { ToastAction } from 'modules/shared/components/ui/toast';
+import { useToast } from 'modules/shared/components/ui/use-toast';
 import HTTP_CODES_ENUM from 'modules/shared/constants/http-code.constant';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import { set } from 'react-hook-form';
 
 export default function GoogleAuth() {
   const { mutateAsync: authGoogleLoginService } = useAuthGoogleLoginService();
-
+  const { toast } = useToast();
   const { setUser } = useAuthStore((state) => state);
   const { setIsAuthenticated, setToken } = useAuthStore((state) => state);
 
   const onSuccess = async (tokenResponse: any) => {
-    console.log('success', tokenResponse);
-    const idToken = await exchangeCodeForIdToken(tokenResponse?.code)
-    
+    const idToken = await exchangeCodeForIdToken(tokenResponse?.code);
+
     const { status, data } = await authGoogleLoginService({
-      idToken
+      idToken,
     });
 
     if (status === HTTP_CODES_ENUM.OK) {
+       toast({
+         variant: 'success',
+         title: 'Login successful',
+
+         action: (
+           <ToastAction altText="Login">
+             <X className="w-5 h-5 bg-transparent" />
+           </ToastAction>
+         ),
+       });
       setToken(data.token);
       setIsAuthenticated(true);
       setUser(data.user);
     }
+    else {
+      toast({
+        variant: 'error',
+        title: 'something went wrong',
+
+        action: (
+          <ToastAction altText="Try again">
+            <X className="w-5 h-5 bg-transparent" />
+          </ToastAction>
+        ),
+      });
+    }
+  };
+
+  const onError = () => {
+    toast({
+      variant: 'error',
+      title: 'something went wrong',
+
+      action: (
+        <ToastAction altText="Try again">
+          <X className="w-5 h-5 bg-transparent" />
+        </ToastAction>
+      ),
+    });
   };
 
   const Googlelogin = useGoogleLogin({
     onSuccess,
+    onError,
     flow: 'auth-code',
   });
 
