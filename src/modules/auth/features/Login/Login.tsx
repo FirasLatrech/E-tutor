@@ -38,13 +38,13 @@ const Login = () => {
   }, [isError]);
 
   return (
-    <div className="flex items-center justify-center h-full">
-      <div className="w-[45%] flex items-end justify-end bg-secondary-100 h-full">
+    <div className="flex max-md:mt-10 items-center max-xl:w-full justify-center h-full">
+      <div className="w-[45%] max-xl:hidden flex items-end justify-end bg-secondary-100 h-full">
         <img className="object-contain" src={LoginImage} />
       </div>
-      <div className="flex h-full w-[55%] items-center justify-center">
-        <div className="flex w-[60%] items-center gap-[3rem] flex-col justify-center h-[90%]">
-          <p className="text-4xl font-semibold leading-10 text-black">
+      <div className="flex h-full w-[55%] max-md:w-[85%] max-lg:w-[60%] items-center justify-center">
+        <div className="flex max-xl:w-full  w-[70%] items-center gap-[3rem] flex-col justify-center h-[90%] max-2xl:w-[80%]">
+          <p className="text-4xl max-sm:text-2xl font-semibold leading-10 text-black">
             Sign in to your account
           </p>
           <LoginForm />
@@ -55,7 +55,7 @@ const Login = () => {
             </p>
             <div className="h-[1px] w-full bg-gray-100" />
           </div>
-          <div className="flex items-center justify-between w-full gap-4 -mt-4">
+          <div className="max-lg:flex-col flex items-center justify-between w-full gap-4 -mt-4">
             {SocialMediaAuth?.map((props: SocialMediaAuthType, index: number) =>
               props.text === 'google' ? (
                 isGoogleAuthEnabled && googleClientId && <GoogleAuth />

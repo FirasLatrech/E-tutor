@@ -10,28 +10,29 @@ import SelectGeneric from 'modules/shared/components/SelectGeneric';
 import { useCourseSections } from '../../../context/CourseSectionsContext';
 
 function BasicInformation() {
-
   const { BasicInformation, setBasicInformations } = useCourseSections();
   const onSubmit: SubmitHandler<any> = async (data) => {
     setBasicInformations(data);
-    setCurrentStep(1)
+    setCurrentStep(1);
   };
 
   const { data, isFetching } = useAllCategory();
-  const { currentStep, setCurrentStep } = useSteps();
+  const { setCurrentStep } = useSteps();
 
   const {
     handleSubmit,
     control,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm<any>({
     resolver: yupResolver(
       yup.object().shape({
         tittle: yup.string().required('Tittle is required'),
         subTittle: yup.string().required('Subtittle is required'),
         courseCategory: yup.string().required('Course Category is required'),
-        courseSubCategory: yup.string().required('Course Sub-category is required'),
+        courseSubCategory: yup
+          .string()
+          .required('Course Sub-category is required'),
         courseTopic: yup.string().required('Course Topic is required'),
         courseLanguage: yup.string().required('Course Language is required'),
         subtitleLanguage: yup.string(),
@@ -80,7 +81,7 @@ function BasicInformation() {
             />
           )}
         />
-        <div className="flex gap-[2rem]">
+        <div className="flex gap-[2rem] max-sm:flex-col">
           <Controller
             name="courseCategory"
             control={control}
@@ -89,10 +90,16 @@ function BasicInformation() {
               <SelectGeneric
                 label="Course Category"
                 isLoading={isFetching}
-                items={['ff']}
+                items={
+                  data?.data
+                    ? data.map((item: any) => ({
+                        label: item.name,
+                        value: item.id,
+                      }))
+                    : ['Default category']
+                }
                 {...field}
-              errors={errors}
-
+                errors={errors}
               />
             )}
           />
@@ -105,8 +112,7 @@ function BasicInformation() {
                 label="Course Sub-category"
                 items={['ddd']}
                 {...field}
-              errors={errors}
-
+                errors={errors}
               />
             )}
           />
@@ -125,7 +131,7 @@ function BasicInformation() {
             />
           )}
         />
-        <div className="flex gap-[2rem]">
+        <div className="flex gap-[2rem] max-xl: grid-cols-2 max-xl:grid max-sm:flex-col max-sm:flex">
           <Controller
             name="courseLanguage"
             control={control}
@@ -135,8 +141,7 @@ function BasicInformation() {
                 label="Course Language"
                 items={['English', 'French', 'Arabic']}
                 {...field}
-              errors={errors}
-
+                errors={errors}
               />
             )}
           />
@@ -149,8 +154,7 @@ function BasicInformation() {
                 label="Subtitle Language (Optional)"
                 items={['English', 'French', 'Arabic']}
                 {...field}
-              errors={errors}
-
+                errors={errors}
               />
             )}
           />
@@ -163,8 +167,7 @@ function BasicInformation() {
                 label="Course Level"
                 items={['Beginner', 'Intermediate', 'Advanced']}
                 {...field}
-              errors={errors}
-
+                errors={errors}
               />
             )}
           />
@@ -177,8 +180,7 @@ function BasicInformation() {
                 label="Durations"
                 items={['1 month', '3 months', '6 months', '1 year']}
                 {...field}
-              errors={errors}
-
+                errors={errors}
               />
             )}
           />

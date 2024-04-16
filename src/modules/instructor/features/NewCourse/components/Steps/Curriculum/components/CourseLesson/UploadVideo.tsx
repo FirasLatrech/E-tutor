@@ -15,19 +15,25 @@ function UploadVideoLesson({ AddVideoToLesson, Lesson }: UploadVideoPropsType) {
   const [selectedFile, setSelectedFile] = useState<File | null>(
     Lesson?.video?.file || null
   );
+  const [Error, setError] = useState<string | null>(null);
 
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
     console.log(file);
+    if ((file?.size || 0) > 1024 * 1024 * 1024 * 4) {
+      setError(
+        ' Your file is too large. Please select a file under 4GB in size.'
+      );
+      return;
+    }
     if (file) {
       const data = await mutateAsync(file);
       setSelectedFile(file);
       AddVideoToLesson({ url: data?.file?.path, file, id: data?.file.id });
     }
   };
-
   return (
     <>
       {(data?.file || Lesson?.video?.file) && !isPending ? (
@@ -80,6 +86,7 @@ function UploadVideoLesson({ AddVideoToLesson, Lesson }: UploadVideoPropsType) {
                     type="file"
                     accept="video/*"
                     onChange={handleFileChange}
+                    max={1024 * 1024 * 1024 * 4}
                   />
 
                   <p className="absolute overflow-hidden whitespace-nowrap text-ellipsis w-[94%] text-gray-500 top-3 left-3">
@@ -94,6 +101,7 @@ function UploadVideoLesson({ AddVideoToLesson, Lesson }: UploadVideoPropsType) {
                   {'Upload File'}
                 </label>
               </div>
+              {Error && <div className="text-red-500">{Error}</div>}
             </>
           ) : (
             <div className="flex w-full h-full items-center justify-center gap-2">

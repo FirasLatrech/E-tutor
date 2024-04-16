@@ -10,7 +10,7 @@ import useAuthStore from 'modules/shared/store/useAuthStore';
 interface SearchUserPropsType {
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
-  data: any;
+  data: { data: User[] };
   isLoading: boolean;
 }
 function SearchUser({
@@ -26,7 +26,7 @@ function SearchUser({
   const isAllSelected =
     (
       data?.data
-        ?.map((user: any, index: number) => {
+        ?.map((user: User, index: number) => {
           if (
             (
               Instructors?.filter((instructor) => user?.id == instructor?.id) ||
@@ -48,7 +48,7 @@ function SearchUser({
     Instructors,
     data?.data,
     data?.data
-      ?.map((user: any, index: number) => {
+      ?.map((user: User, index: number) => {
         if (
           (
             Instructors?.filter((instructor) => user?.id == instructor?.id) ||
@@ -79,7 +79,7 @@ function SearchUser({
               <p className="text-gray-500 text-sl leading-5">Loading...</p>
             </div>
           ) : data?.data?.length > 0 && !isAllSelected ? (
-            data?.data?.map((user: any, index: number) => {
+            data?.data?.map((user: User, index: number) => {
               console.log(User?.id, Instructors);
               if (Instructors?.some((instructor) => user?.id == instructor?.id))
                 return;
@@ -89,7 +89,7 @@ function SearchUser({
                   id={user?.id}
                   username={user?.username}
                   job="UI/UX Designer"
-                  pictureLink={user?.avatarUrl}
+                  pictureLink={null}
                 />
               );
             })

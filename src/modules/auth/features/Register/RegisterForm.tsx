@@ -26,7 +26,7 @@ function RegisterForm() {
   const { toast } = useToast();
 
   const onSubmit: SubmitHandler<RegisterBody> = async (data) => {
-    const response: any = await registerAction({
+    const response = await registerAction({
       ...data,
       is_instructor: true,
     });
@@ -86,7 +86,7 @@ function RegisterForm() {
 
   return (
     <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-      <div className="w-full gap-[1rem] flex items-start justify-center">
+      <div className="w-full gap-[1rem] flex items-start justify-center max-sm:flex-col">
         <Input
           id="First Name"
           name="firstName"
@@ -120,7 +120,7 @@ function RegisterForm() {
         register={register}
         errors={errors}
       />{' '}
-      <div className="w-full gap-[1rem] flex items-start justify-center">
+      <div className="w-full gap-[1rem]  max-sm:flex-col flex items-start justify-center">
         <Input
           id="Password"
           name="password"
@@ -140,7 +140,7 @@ function RegisterForm() {
           errors={errors}
         />
       </div>
-      <div className="flex items-center justify-between w-full">
+      <div className="flex items-center max-md:flex-col max-md:gap-3 justify-between w-full">
         <div className="flex items-start justify-center gap-2">
           <Checkbox
             id="remember"

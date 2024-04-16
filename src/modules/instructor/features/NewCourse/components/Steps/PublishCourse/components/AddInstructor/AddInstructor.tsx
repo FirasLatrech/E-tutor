@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import UserCard from './UserCard';
 import SearchUser from './SearchUser';
 import { useUsersQuery } from 'modules/shared/data/queries/users.query';
-import { useCourseSections } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+import { instructorType, useCourseSections } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
 
 function AddInstructor() {
   const [searchValue, setSearchValue] = useState('');
@@ -35,7 +35,7 @@ function AddInstructor() {
         />
       </div>
       <div className="flex min-h-[9rem] items-start flex-wrap gap-4 w-full justify-start">
-        {Instructors?.map((user: any, index: number) => {
+        {Instructors?.map((user: instructorType, index: number) => {
           return (
             <div className="w-[30%]">
               <UserCard
@@ -43,7 +43,7 @@ function AddInstructor() {
                 id={user?.id}
                 username={user?.username}
                 job="UI/UX Designer"
-                pictureLink={user?.avatarUrl}
+                pictureLink={null}
               />
             </div>
           );

@@ -88,13 +88,13 @@ const Button: React.FC<ButtonProps> = ({
       ${additionnalClasses}
     `;
   };
-
+  console.log(size);
   const getSizeClasses = () => {
     switch (size) {
       case 'sm':
         return 'px-3 py-1.5 text-sm';
-      case 'md':
-        return 'px-5 py-2.5 text-sm';
+      case 'lg':
+        return 'px-4 py-2.5 text-sm';
       case 'lg':
         return 'px-7 py-3 text-base';
       case 'xl':
@@ -106,12 +106,12 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      type={props?.type || "button"}
+      type={props?.type || 'button'}
       className={`${
         className ?? ''
       } ${getVariantClasses()} ${getSizeClasses()} ${
         disabled ? 'opacity-50 cursor-not-allowed  ' : ''
-      }`}
+      } `}
       disabled={disabled}
       {...props}
     >

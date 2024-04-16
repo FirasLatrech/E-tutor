@@ -198,7 +198,7 @@ function Curriculum() {
                 lessons: [
                   {
                     name: 'lecture 1',
-                    video: '',
+                    video: null,
                     File: '',
                     captions: '',
                     Description: '',

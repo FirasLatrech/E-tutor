@@ -6,9 +6,18 @@ interface CourseSectionsContextType {
   Sections: sectionType[] | null;
   setSections: React.Dispatch<React.SetStateAction<sectionType[] | null>>;
   Instructors: any[] | null;
-  setInstructors: React.Dispatch<React.SetStateAction<any[] | null>>;
+  setInstructors: React.Dispatch<React.SetStateAction<instructorType[] | null>>;
   AdvancedInformation: any;
-  setAdvancedInformation: React.Dispatch<React.SetStateAction<any[] | null>>;
+  setAdvancedInformation: React.Dispatch<
+    React.SetStateAction<CourseInformationType | null>
+  >;
+}
+
+export interface instructorType {
+  id: string;
+  username: string;
+  pictureLink: string;
+  job: string;
 }
 
 export interface sectionType {
@@ -28,6 +37,14 @@ export interface lessonType {
   captions: string;
   Description: string;
   Notes: string;
+}
+
+export interface CourseInformationType {
+  CourseThumbnail:string;
+  courseDescriptions: string;
+  whatYouWillTeach: Object;
+  targetAudience: Object;
+  courseRequirements: Object;
 }
 const CourseSectionsContext = createContext<
   CourseSectionsContextType | undefined
@@ -72,14 +89,16 @@ export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
     },
   ]);
 
-  const [Instructors, setInstructors] = useState<any[] | null>([]);
+  const [Instructors, setInstructors] = useState<instructorType[] | null>([]);
   const [BasicInformation, setBasicInformations] = useState<any[] | null>(null);
-  const [AdvancedInformation, setAdvancedInformation] = useState<any | null>({
-    courseDescriptions: '',
-    whatYouWillTeach: { '0': '' },
-    targetAudience: { '0': '' },
-    courseRequirements: { '0': '' },
-  });
+  const [AdvancedInformation, setAdvancedInformation] =
+    useState<CourseInformationType | null>({
+      CourseThumbnail:'',
+      courseDescriptions: '',
+      whatYouWillTeach: { '0': '' },
+      targetAudience: { '0': '' },
+      courseRequirements: { '0': '' },
+    });
 
   const contextValue: CourseSectionsContextType = {
     Sections,

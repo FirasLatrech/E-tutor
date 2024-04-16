@@ -45,6 +45,7 @@
     "@react-oauth/google": "^0.12.1",
     "@tanstack/react-query": "^5.28.9",
     "@tanstack/react-query-devtools": "^5.28.10",
+    "@uidotdev/usehooks": "^2.4.1",
     "@uploadthing/react": "^6.4.4",
     "accessible-nprogress": "^2.1.2",
     "axios": "^1.3.6",

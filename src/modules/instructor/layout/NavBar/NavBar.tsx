@@ -11,7 +11,7 @@ function NavBar() {
     <div className="w-full bg-white">
       <div className="w-full py-4 h-[6.25rem] flex items-center justify-center ">
         <div className="flex w-[80%] items-center justify-between ">
-          <div className="flex-col flex items-start justify-center gap-[0.5rem]">
+          <div className="flex-col flex items-start justify-center gap-[0.5rem] max-lg:hidden">
             <h1 className="text-gray-600 text-sm leading-5">Good Morning</h1>
             <p className="text-gray-900 font-medium text-lg leading-5 capitalize">
               {
@@ -21,7 +21,7 @@ function NavBar() {
               }
             </p>
           </div>
-          <div className="flex items-center justify-center gap-[1rem]">
+          <div className="flex items-center justify-center gap-[1rem] max-lg:w-full max-sm:pl-4">
             <Search />
             <Notification />
             <Profile />
