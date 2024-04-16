@@ -18,7 +18,6 @@ export default function GoogleAuth() {
   const { setIsAuthenticated, setToken } = useAuthStore((state) => state);
 
   const onSuccess = async (tokenResponse: any) => {
-    console.log(tokenResponse);
     if (!tokenResponse.credential) return;
 
     const { status, data } = await authGoogleLoginService({
@@ -40,7 +39,9 @@ export default function GoogleAuth() {
       <SocialMediaBtn
         text={SocialMediaAuth[0]?.text}
         icon={SocialMediaAuth[0]?.icon}
-        onClick={() => Googlelogin()}
+        onClick={() => {
+          Googlelogin();
+        }}
       />
     </>
   );

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-function CloseIcon({...props}) {
+function CloseIcon({ ...props }) {
   return (
     <svg
       {...props}
@@ -13,19 +13,19 @@ function CloseIcon({...props}) {
       <path
         d="M12.5 3.5L3.5 12.5"
         stroke="#4E5566"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12.5 12.5L3.5 3.5"
         stroke="#4E5566"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
 }
 
-export default CloseIcon
+export default CloseIcon;

@@ -1,20 +1,21 @@
-import { AboutCourseCardDetails } from './_components/AboutCourseCardDetails';
-
-import { CourseInstructor } from './_components/courseInstructor';
-import { Curriclum } from './_components/Curriclum';
-import { CourseRetting } from './_components/CourseRetting';
-
-import { StudentFeedback } from './_components/StudentFeedback';
-import { RelatedCourse } from './_components/RelatedCourse';
-import { CourseFor } from './_components/CourseFor';
-import { BreadcrumbLink } from './_components/BreadcrumbLink';
-import { Description } from './_components/Description';
-import { WhatWillLearnInCourse } from './_components/WhatWillLearnInCourse';
-import { CourseRequirements } from './_components/CourseRequirements';
-import { VideoPlayer } from '../watchCourse/_components/VideoPlayer';
 import { useParams } from 'react-router';
 import { useGetCourseById } from 'modules/home/data/queries/home.query';
+import Button from 'modules/shared/components/Button';
+import { useModal } from 'modules/shared/providers/Modal/modal-provider';
 import { ICourse } from 'modules/shared/types/course';
+import { VideoPlayer } from '../watchCourse/_components/VideoPlayer';
+import { AboutCourseCardDetails } from './_components/AboutCourseCardDetails';
+import { BreadcrumbLink } from './_components/BreadcrumbLink';
+import CustomModal from './_components/CourseDetailsModal';
+import { CourseFor } from './_components/CourseFor';
+import { CourseInstructor } from './_components/courseInstructor';
+import { CourseRequirements } from './_components/CourseRequirements';
+import { CourseRetting } from './_components/CourseRetting';
+import { Curriclum } from './_components/Curriclum';
+import { Description } from './_components/Description';
+import { RelatedCourse } from './_components/RelatedCourse';
+import { StudentFeedback } from './_components/StudentFeedback';
+import { WhatWillLearnInCourse } from './_components/WhatWillLearnInCourse';
 type Props = {};
 const aboutVideo = [
   {
@@ -30,15 +31,22 @@ const aboutVideo = [
     title: 'Review',
   },
 ];
-
+/**
+ * Renders the course details page with all the necessary components.
+ *
+ * @param {Props} props - The properties passed to the component.
+ * @return {JSX.Element} The rendered course details page.
+ */
 const courseDetails = (props: Props) => {
   const params = useParams();
-  console.log(params);
   const course_id = params.id;
   if (!course_id) return null;
   const { data } = useGetCourseById(course_id);
-  console.log(data);
-  console.log(data?.course_trailer);
+  const { setOpen, setClose } = useModal();
+
+  const handleClick = () => {
+    setOpen(<CustomModal title="Course Details" courseDetails={data} />);
+  };
   return (
     <div className="flex flex-col items-center gap-6 ">
       <div className="w-full">
@@ -49,7 +57,7 @@ const courseDetails = (props: Props) => {
         </div>
         <div className="flex flex-col items-center justify-center w-full bg-white ">
           <div className="w-[80%] h-full pt-4 ">
-            <div className="w-[70%]">
+            <div className="w-[70%]  max-lg:w-full">
               <VideoPlayer
                 title="Firas Latrach"
                 isLocked={false}
@@ -57,7 +65,7 @@ const courseDetails = (props: Props) => {
               />
             </div>
 
-            <div className=" border-b border-gray-100 w-[70%] flex items-center justify-between">
+            <div className=" border-b border-gray-100 w-[70%] max-lg:w-full flex items-center justify-between">
               {aboutVideo.map((item) => {
                 return (
                   <span
@@ -69,6 +77,10 @@ const courseDetails = (props: Props) => {
                 );
               })}
             </div>
+            <div className="h-[60px] w-[70%] items-center justify-start max-lg:flex hidden">
+              <Button text="Course Details" onClick={() => { handleClick(); }} />
+            </div>
+
             <Description courseDetails={data} />
             {/* What you will learn in this course  */}
             <WhatWillLearnInCourse courseDetails={data} />
@@ -90,11 +102,11 @@ const courseDetails = (props: Props) => {
             {/* student Feedback  */}
             <StudentFeedback />
 
-            <RelatedCourse />
+            {/* <RelatedCourse /> */}
           </div>
         </div>
       </div>
-      <div className="w-[360px] h-[1060px] shadow-lg absolute  right-[30px] bg-white flex flex-col self-start">
+      <div className="w-[360px] h-[1060px] shadow-lg absolute  right-[30px] bg-white flex flex-col self-start max-lg:hidden">
         <AboutCourseCardDetails courseDetails={data} />
       </div>
     </div>

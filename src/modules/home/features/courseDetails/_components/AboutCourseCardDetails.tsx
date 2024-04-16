@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import alarmIcon from 'modules/shared/assets/icons/courseDetails/alaram.svg';
 import clockIcon from 'modules/shared/assets/icons/courseDetails/clockIcon.svg';
 import primaryClock from 'modules/shared/assets/icons/courseDetails/clockprimaryicon.svg';
@@ -15,9 +16,8 @@ import stack from 'modules/shared/assets/icons/courseDetails/stack.svg';
 import trophy from 'modules/shared/assets/icons/courseDetails/trophy.svg';
 import usersIcon from 'modules/shared/assets/icons/courseDetails/usersIcons.svg';
 import Button from 'modules/shared/components/Button';
-import { ICourse } from 'modules/shared/types/course';
 import useCartStore from 'modules/shared/store/useCartStore';
-import { useNavigate } from 'react-router';
+import { type ICourse } from 'modules/shared/types/course';
 type Props = {
   courseDetails: ICourse;
 };
@@ -49,7 +49,12 @@ const courseDetail = [
   },
   // Add more course detail objects here...
 ];
-
+/**
+ * Renders the details of a course card including price, discount, course details, buttons for cart and buy now, and additional course inclusions.
+ *
+ * @param {Props} courseDetails - The details of the course to be displayed.
+ * @return {JSX.Element} The JSX element representing the course card details.
+ */
 export const AboutCourseCardDetails = ({ courseDetails }: Props) => {
   const courseIncludes = [
     {
@@ -85,7 +90,7 @@ export const AboutCourseCardDetails = ({ courseDetails }: Props) => {
   const { setData, data } = useCartStore();
   const navigate = useNavigate();
   const handelAddToCart = (id: string) => {
-    let newData = [...data];
+    const newData = [...data];
     if (!data.includes(id)) {
       newData.push(id);
     }
@@ -106,14 +111,14 @@ export const AboutCourseCardDetails = ({ courseDetails }: Props) => {
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center gap-2">
           <span className="font-[300] text-[22px]">
-            $
-            {((+courseDetails?.course_price || 0) *
-              (+courseDetails?.discount || 0)) /
-              100}
-          </span>
-          <span className="text-gray-500 line-through text-ellipsis ">
             ${courseDetails?.course_price}
+            {/* {((+courseDetails?.course_price || 0) *
+              (+courseDetails?.discount || 0)) /
+              100} */}
           </span>
+          {/* <span className="text-gray-500 line-through text-ellipsis ">
+            ${courseDetails?.course_price}
+          </span> */}
         </div>
 
         {/* discounrt  */}
@@ -145,7 +150,9 @@ export const AboutCourseCardDetails = ({ courseDetails }: Props) => {
             text="Add To Cart"
             size="lg"
             className="w-full"
-            onClick={() => handelAddToCart(courseDetails?.id)}
+            onClick={() => {
+              handelAddToCart(courseDetails?.id);
+            }}
           ></Button>
         ) : (
           <Button
@@ -153,7 +160,9 @@ export const AboutCourseCardDetails = ({ courseDetails }: Props) => {
             text="Remove From Cart"
             size="lg"
             className="w-full"
-            onClick={() => handelRemoveFromCart(courseDetails.id)}
+            onClick={() => {
+              handelRemoveFromCart(courseDetails.id);
+            }}
           ></Button>
         )}
         <Button
@@ -161,7 +170,9 @@ export const AboutCourseCardDetails = ({ courseDetails }: Props) => {
           text="Buy Now"
           size="lg"
           className="w-full "
-          onClick={() => handelSendToWatch(courseDetails.id)}
+          onClick={() => {
+            handelSendToWatch(courseDetails.id);
+          }}
         ></Button>
       </div>
       <div className="flex pl-2 pr-2">

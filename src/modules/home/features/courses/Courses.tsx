@@ -1,11 +1,12 @@
 import { useParams } from 'react-router';
 import BestSellingCourses from 'modules/home/components/bestSellingCourses';
 import BestSellingCoursesForCategory from 'modules/home/components/BestSellingCoursesForCategory';
-
 import PopularInstructor from 'modules/home/components/PopularInstructor';
 import Populartools from 'modules/home/components/Populartools';
 import Course from './_components/courseDetails';
-
+/**
+ * Functional component for rendering the Courses.
+ */
 const Courses = () => {
   const params = useParams();
   console.log(params);

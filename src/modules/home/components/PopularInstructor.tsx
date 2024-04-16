@@ -27,7 +27,7 @@ export default function PopularInstructor({
           {data?.map((item: any, index: number) => (
             <div className="w-[244px] border" key={index}>
               <div className="w-[244px] h-[200px] overflow-hidden object-cover">
-                <img src={item?.photo?.path} alt="" />
+                <img src={item?.photo?.path} alt="" className="object-cover " />
               </div>
               <div className="flex flex-col items-center">
                 {' '}

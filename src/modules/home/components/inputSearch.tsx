@@ -1,8 +1,6 @@
-import React, { useEffect, useMemo, useState, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import debounce from 'lodash/debounce';
-
 import scoopIcon from 'modules/shared/assets/icons/scoop.svg';
-
 import { Input } from 'modules/shared/components/ui/input';
 
 interface SearchInputProps {
@@ -32,7 +30,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
   };
 
   const debouncedResults = useMemo(() => {
-    return debounce(() => handleSearch(query), 500);
+    return debounce(() => {
+      handleSearch(query);
+    }, 500);
   }, [handleSearch, query]);
 
   useEffect(() => {

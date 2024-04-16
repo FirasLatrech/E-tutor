@@ -1,9 +1,9 @@
 import Courses from '../assets/icons/Sidebar/Courses';
+import Dashboard from '../assets/icons/Sidebar/dashboard';
 import Earning from '../assets/icons/Sidebar/Earning';
 import MessageIcon from '../assets/icons/Sidebar/Message';
 import NewCourse from '../assets/icons/Sidebar/NewCourse';
 import Settings from '../assets/icons/Sidebar/Settings';
-import Dashboard from '../assets/icons/Sidebar/dashboard';
 import { PATH } from '../routes/paths';
 
 export const InstructorRoutes = [

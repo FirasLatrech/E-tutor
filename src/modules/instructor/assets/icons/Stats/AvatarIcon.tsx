@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const AvatarIcon = ({ ...props }) => (
   <svg
@@ -17,24 +17,23 @@ const AvatarIcon = ({ ...props }) => (
     <path
       d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z"
       stroke="#E34444"
-      stroke-width="2"
-      stroke-miterlimit="10"
+      strokeWidth="2"
+      strokeMiterlimit="10"
     />
     <path
       d="M16 20C18.7614 20 21 17.7614 21 15C21 12.2386 18.7614 10 16 10C13.2386 10 11 12.2386 11 15C11 17.7614 13.2386 20 16 20Z"
       stroke="#E34444"
-      stroke-width="2"
-      stroke-miterlimit="10"
+      strokeWidth="2"
+      strokeMiterlimit="10"
     />
     <path
       d="M7.97461 24.9218C8.72787 23.4408 9.87626 22.1971 11.2926 21.3284C12.709 20.4598 14.3382 20 15.9997 20C17.6613 20 19.2904 20.4598 20.7068 21.3284C22.1232 22.1971 23.2716 23.4407 24.0248 24.9217"
       stroke="#E34444"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
 
-
-export default AvatarIcon
+export default AvatarIcon;

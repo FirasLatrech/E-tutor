@@ -1,14 +1,19 @@
-import React, { ReactNode, createContext, useContext, useState } from 'react';
+import React, {
+  createContext,
+  type ReactNode,
+  useContext,
+  useState,
+} from 'react';
 
 interface CourseSectionsContextType {
-  BasicInformation:any;
-  setBasicInformations:React.Dispatch<React.SetStateAction<any[] | null>>;
+  BasicInformation: any;
+  setBasicInformations: React.Dispatch<React.SetStateAction<any[] | null>>;
   Sections: sectionType[] | null;
   setSections: React.Dispatch<React.SetStateAction<sectionType[] | null>>;
   Instructors: any[] | null;
   setInstructors: React.Dispatch<React.SetStateAction<any[] | null>>;
-  AdvancedInformation:any;
-  setAdvancedInformation:React.Dispatch<React.SetStateAction<any[] | null>>;
+  AdvancedInformation: any;
+  setAdvancedInformation: React.Dispatch<React.SetStateAction<any[] | null>>;
 }
 
 export interface sectionType {
@@ -46,21 +51,26 @@ export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
     },
   ]);
 
-  const [Instructors, setInstructors] = useState<any[] | null>([{ username:"John Doe", pictureLink: '', job: 'UI/Ux Designer' }])
-  const [BasicInformation, setBasicInformations] = useState<any[] | null>(null)
+  const [Instructors, setInstructors] = useState<any[] | null>([
+    { username: 'John Doe', pictureLink: '', job: 'UI/Ux Designer' },
+  ]);
+  const [BasicInformation, setBasicInformations] = useState<any[] | null>(null);
   const [AdvancedInformation, setAdvancedInformation] = useState<any | null>({
     courseDescriptions: '',
-    whatYouWillTeach: {"0":""},
-    targetAudience:{"0":""},
-    courseRequirements: {"0":""},
-  })
+    whatYouWillTeach: { '0': '' },
+    targetAudience: { '0': '' },
+    courseRequirements: { '0': '' },
+  });
 
   const contextValue: CourseSectionsContextType = {
     Sections,
     setSections,
     Instructors,
     setInstructors,
-    setBasicInformations,BasicInformation,setAdvancedInformation,AdvancedInformation
+    setBasicInformations,
+    BasicInformation,
+    setAdvancedInformation,
+    AdvancedInformation,
   };
 
   return (

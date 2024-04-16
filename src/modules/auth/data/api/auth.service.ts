@@ -3,7 +3,7 @@ import { api } from 'modules/shared/lib/api';
 
 export const login = async (body: LoginBody) => {
   try {
-    console.log(body)
+    console.log(body);
     const res = await api.post('/auth/email/login', body);
 
     if (res.status !== 200) {

@@ -1,18 +1,18 @@
+import React from 'react';
+import { motion } from 'framer-motion';
 import AddIcon from 'modules/instructor/assets/icons/CreateCourse/AddIcon';
+import DeleteIcon from 'modules/instructor/assets/icons/CreateCourse/deleteIcon';
 import DragIcon from 'modules/instructor/assets/icons/CreateCourse/DragIcon';
 import EditIcon from 'modules/instructor/assets/icons/CreateCourse/EditIcon';
-import DeleteIcon from 'modules/instructor/assets/icons/CreateCourse/deleteIcon';
 import {
-  lessonType,
-  sectionType,
+  type lessonType,
+  type sectionType,
   useCourseSections,
 } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
 import DropDownGeneric from 'modules/shared/components/DropDownGeneric';
-import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
-import React from 'react';
+import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 import EditLessonModal from './EditLessonModal';
-import { motion } from 'framer-motion';
 
 interface CourseLessonPropsType {
   Lesson: lessonType;
@@ -22,8 +22,7 @@ function CourseLesson({ Lesson, SectionNumber }: CourseLessonPropsType) {
   const { setOpen } = useModal();
   const { Sections, setSections } = useCourseSections();
 
-
-  const DeleteLesson = (SectionNumber:number,LessonName: string) => {
+  const DeleteLesson = (SectionNumber: number, LessonName: string) => {
     setSections((old): sectionType[] => {
       if (!old) {
         return [];
@@ -33,9 +32,9 @@ function CourseLesson({ Lesson, SectionNumber }: CourseLessonPropsType) {
           return {
             ...section,
             lessons:
-              section?.lessons?.filter((lesson: lessonType, index) => 
-              lesson?.name!=LessonName
-                ) || null,
+              section?.lessons?.filter(
+                (lesson: lessonType, index) => lesson?.name != LessonName
+              ) || null,
           };
         } else {
           return section;
@@ -48,7 +47,8 @@ function CourseLesson({ Lesson, SectionNumber }: CourseLessonPropsType) {
     let IsExistLessonName: lessonType[] | undefined = [];
     Sections?.forEach((section: sectionType) => {
       IsExistLessonName = section?.lessons?.filter(
-        (lesson: lessonType) => lesson?.name.toUpperCase() == NewName.toUpperCase()
+        (lesson: lessonType) =>
+          lesson?.name.toUpperCase() == NewName.toUpperCase()
       );
     });
     if (IsExistLessonName?.length > 0) return false;
@@ -98,59 +98,69 @@ function CourseLesson({ Lesson, SectionNumber }: CourseLessonPropsType) {
               Options={[
                 {
                   name: 'Video',
-                  action: () =>
+                  action: () => {
                     setOpen(
                       <ModalContainer title="video">video</ModalContainer>
-                    ),
+                    );
+                  },
                 },
                 {
                   name: 'Attach File',
-                  action: () =>
+                  action: () => {
                     setOpen(
                       <ModalContainer title="Attach File">
                         Attach File
                       </ModalContainer>
-                    ),
+                    );
+                  },
                 },
                 {
                   name: 'Captions',
-                  action: () =>
+                  action: () => {
                     setOpen(
                       <ModalContainer title="Captions">Captions</ModalContainer>
-                    ),
+                    );
+                  },
                 },
                 {
                   name: 'Description',
-                  action: () =>
+                  action: () => {
                     setOpen(
                       <ModalContainer title="Description">
                         Description
                       </ModalContainer>
-                    ),
+                    );
+                  },
                 },
                 {
                   name: '  Lecture Notes',
-                  action: () =>
+                  action: () => {
                     setOpen(
                       <ModalContainer title="Lecture Notes">
                         Lecture Notes
                       </ModalContainer>
-                    ),
+                    );
+                  },
                 },
               ]}
             />
             <EditIcon
               className="cursor-pointer"
-              onClick={() =>
+              onClick={() => {
                 setOpen(
                   <EditLessonModal
                     Submit={(NewName: string) => EditLessonName(NewName)}
                     Lesson={Lesson}
                   />
-                )
-              }
+                );
+              }}
             />
-            <DeleteIcon className="cursor-pointer" onClick={()=>DeleteLesson(SectionNumber, Lesson?.name)}/>
+            <DeleteIcon
+              className="cursor-pointer"
+              onClick={() => {
+                DeleteLesson(SectionNumber, Lesson?.name);
+              }}
+            />
           </div>
         </div>
       </div>

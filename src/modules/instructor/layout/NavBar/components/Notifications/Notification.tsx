@@ -1,5 +1,5 @@
-import NotificationIcon from 'modules/instructor/assets/icons/NavBar/Notification';
 import React from 'react';
+import NotificationIcon from 'modules/instructor/assets/icons/NavBar/Notification';
 
 function Notification() {
   return (

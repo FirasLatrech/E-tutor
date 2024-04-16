@@ -1,10 +1,10 @@
-import { SearchIcon } from 'lucide-react';
-import { useUsersQuery } from 'modules/shared/data/queries/users.query';
-import useDebounce from 'modules/shared/hooks/useDebounce';
 import React, { useEffect, useState } from 'react';
 import { Search } from 'react-router';
-import UserCard from './UserCard';
+import { SearchIcon } from 'lucide-react';
 import { useCourseSections } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+import { useUsersQuery } from 'modules/shared/data/queries/users.query';
+import useDebounce from 'modules/shared/hooks/useDebounce';
+import UserCard from './UserCard';
 
 interface SearchUserPropsType {
   searchValue: string;
@@ -32,9 +32,15 @@ function SearchUser({
         className={`w-full border border-gray-100 pl-[3rem] bg-gray-white py-[0.7rem] px-3  placeholder-gray-500 focus:outline-none  outline-none hover:border-1 text-[1rem] text-gray-700 font-light`}
         placeholder={'Search by username'}
         value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onFocus={() => setTyping(true)}
-        onBlur={() => setTyping(false)}
+        onChange={(e) => {
+          setInputValue(e.target.value);
+        }}
+        onFocus={() => {
+          setTyping(true);
+        }}
+        onBlur={() => {
+          setTyping(false);
+        }}
       />
       {isTyping && (
         <div className="w-full z-10 gap-1 shadow-md    bg-white border top-[3.3rem]  border-gray-100 absolute min-h-[12rem]">

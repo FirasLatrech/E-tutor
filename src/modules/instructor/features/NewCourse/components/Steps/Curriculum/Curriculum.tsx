@@ -1,23 +1,18 @@
-import React from 'react';
+import Button from 'modules/shared/components/Button';
 import {
-  sectionType,
+  type sectionType,
   useCourseSections,
 } from '../../../context/CourseSectionsContext';
-import Button from 'modules/shared/components/Button';
-import DragIcon from 'modules/instructor/assets/icons/CreateCourse/DragIcon';
 import { useSteps } from '../../../context/StepsContext';
-import DeleteIcon from 'modules/instructor/assets/icons/CreateCourse/deleteIcon';
-import EditIcon from 'modules/instructor/assets/icons/CreateCourse/EditIcon';
-import AddIcon from 'modules/instructor/assets/icons/CreateCourse/AddIcon';
-import CourseSection from './components/CourseSection/CourseSection';
 import CourseLesson from './components/CourseLesson/CourseLesson';
+import CourseSection from './components/CourseSection/CourseSection';
 
 function Curriculum() {
   const { Sections, setSections } = useCourseSections();
   const { currentStep, setCurrentStep } = useSteps();
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center w-full">
       <div className="w-[95%] p-2 py-6 flex flex-col gap-3">
         {Sections?.map((section: sectionType, indexSection: number) => {
           return (
@@ -42,7 +37,7 @@ function Curriculum() {
           );
         })}
         <Button
-          onClick={() =>
+          onClick={() => {
             setSections((old: sectionType[] | null) => [
               ...(old || []),
               {
@@ -52,8 +47,8 @@ function Curriculum() {
                   { name: 'lecture 2', type: '' },
                 ],
               },
-            ])
-          }
+            ]);
+          }}
           variant="secondaryPrimary"
           text="Add Sections"
           className="w-full !text-lg"
@@ -61,7 +56,9 @@ function Curriculum() {
       </div>
       <div className="flex justify-between items-center pb-4 w-[90%] mt-4">
         <Button
-          onClick={() => setCurrentStep((old) => old - 1)}
+          onClick={() => {
+            setCurrentStep((old) => old - 1);
+          }}
           additionnalClasses="!p-4 !px-8 !text-lg"
           variant="tertiaryGray"
           text={currentStep == 0 ? 'Cancel' : 'Previous'}
@@ -70,7 +67,9 @@ function Curriculum() {
           variant="primary"
           additionnalClasses="!p-4 !px-8 !text-lg"
           text={'Save & Next'}
-          onClick={() => setCurrentStep((old) => old + 1)}
+          onClick={() => {
+            setCurrentStep((old) => old + 1);
+          }}
         />
       </div>
     </div>

@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Fragment, Suspense } from 'react';
-import { Navigate, Route, type RouteProps, Routes } from 'react-router-dom';
+import { Route, type RouteProps, Routes } from 'react-router-dom';
 import LazyLoad from '../components/LazyLoad/LazyLoad';
 import pages from './routes';
-import { motion } from 'framer-motion';
-
 type RouteConfig = {
   exact: boolean | null;
   path: string;
@@ -19,9 +17,9 @@ export const renderRoutes = (routes: RouteConfig[] = []) => (
       {routes.map((route, index) => {
         const Component = route.component;
 
-        const Guard = route?.guard || Fragment;
+        const Guard = route?.guard ?? Fragment;
 
-        const Layout = route?.layout || Fragment;
+        const Layout = route?.layout ?? Fragment;
 
         return (
           <Route
@@ -42,21 +40,21 @@ export const renderRoutes = (routes: RouteConfig[] = []) => (
 );
 
 const routes: RouteConfig[] = [...pages];
-const pageVariants = {
-  initial: {
-    opacity: 0.25,
-  },
-  in: {
-    opacity: 1,
-  },
-  out: {
-    opacity: 0.25,
-  },
-};
+// const pageVariants = {
+//   initial: {
+//     opacity: 0.25,
+//   },
+//   in: {
+//     opacity: 1,
+//   },
+//   out: {
+//     opacity: 0.25,
+//   },
+// };
 
-const pageTransition = {
-  type: 'tween',
-  ease: 'linear',
-  duration: 0.5,
-};
+// const pageTransition = {
+//   type: 'tween',
+//   ease: 'linear',
+//   duration: 0.5,
+// };
 export default routes;

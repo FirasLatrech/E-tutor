@@ -1,9 +1,6 @@
-import axios from 'axios';
-import MuxPlayer from '@mux/mux-player-react';
 import { useState } from 'react';
-
+import MuxPlayer from '@mux/mux-player-react';
 import { Loader2, Lock } from 'lucide-react';
-
 // import { useConfettiStore } from '@/hooks/use-confetti-store';
 import { cn } from 'modules/shared/lib/utility';
 
@@ -73,8 +70,12 @@ export const VideoPlayer = ({
         <MuxPlayer
           title={title}
           className={cn(!isReady && 'hidden')}
-          onCanPlay={() => setIsReady(true)}
-          onEnded={() => console.log('ended')}
+          onCanPlay={() => {
+            setIsReady(true);
+          }}
+          onEnded={() => {
+            console.log('ended');
+          }}
           autoPlay
           accentColor="#FF6636"
           // onProgress={(e) => console.log(e.target.currentTime)}

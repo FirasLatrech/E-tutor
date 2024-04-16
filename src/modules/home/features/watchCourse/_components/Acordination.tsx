@@ -1,18 +1,13 @@
-import React from 'react';
-import { Progress } from './Progress';
+import playIcon from 'modules/shared/assets/icons/courseWatch/play.svg';
+import { Checkbox } from 'modules/shared/components/ui/checkbox';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from './AcordianationUi';
-import clock from 'modules/shared/assets/icons/courseDetails/clockprimaryicon.svg';
-import checkIcon from 'modules/shared/assets/icons/courseDetails/checkIcon.svg';
-import playCircleIcon from 'modules/shared/assets/icons/courseDetails/playEditor.svg';
-import { Checkbox } from 'modules/shared/components/ui/checkbox';
+import { Progress } from './Progress';
 type Props = {};
-import pauseIcon from 'modules/shared/assets/icons/courseWatch/pause.svg';
-import playIcon from 'modules/shared/assets/icons/courseWatch/play.svg';
 
 export const Acordination = (props: Props) => {
   return (

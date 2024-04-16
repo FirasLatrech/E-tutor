@@ -1,12 +1,10 @@
-import Input from 'modules/shared/components/Input';
 import TextArea from 'modules/shared/components/TextArea/TextArea';
-import React from 'react';
 
 function Message() {
   return (
     <div className="flex flex-col gap-[1.5rem] w-full">
-      <h1 className="capitalize text-gray-900 text-lg leading-5">message</h1>
-      <div className="flex items-center justify-center gap-4 w-full">
+      <h1 className="text-lg leading-5 text-gray-900 capitalize">message</h1>
+      <div className="flex items-center justify-center w-full gap-4">
         <TextArea
           name="welcomeMessage"
           label="Welcome Message"

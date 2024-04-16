@@ -1,16 +1,19 @@
-import React from 'react'
+import React from 'react';
 
 interface StatsBarPropsType {
-    value: number
+  value: number;
 }
 
-function StatsBar({value}:StatsBarPropsType) {
+function StatsBar({ value }: StatsBarPropsType) {
   return (
     <div className="h-[10rem] flex items-end overflow-hidden w-[1.2rem] bg-success-200">
-<span className={`w-full bg-success-500  h-[${Math.round(8*value)}rem]`}></span></div>
-  )
+      <span
+        className={`w-full bg-success-500  h-[${Math.round(8 * value)}rem]`}
+      ></span>
+    </div>
+  );
 }
 
-export default StatsBar
+export default StatsBar;
 
-//h-[${Math.round(value * 100)}%]
+// h-[${Math.round(value * 100)}%]

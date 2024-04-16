@@ -14,7 +14,7 @@ type Props = {};
 
 export const Curriclum = (props: Props) => {
   return (
-    <div className='className="pt-6 w-[70%] flex flex-col gap-8 h-full pb-6'>
+    <div className='className="pt-6 w-[70%] max-lg:w-full flex flex-col gap-8 h-full pb-6'>
       <div className="flex items-center justify-between">
         <div className="text-2xl font-semibold tracking-tight scroll-m-20">
           Curriculum
@@ -31,7 +31,7 @@ export const Curriclum = (props: Props) => {
       <div>
         <Accordion type="multiple">
           <AccordionItem value="item-1">
-            <AccordionTrigger className="flex items-center justify-between ">
+            <AccordionTrigger className="flex items-center justify-between w-full ">
               <div className="flex w-full">Getting Started</div>
               <div className="flex items-center text-gray-800 text-[14px] font-[300] gap-x-2 place-content-end w-[600px]">
                 <img src={playCircleIcon} alt="" />
@@ -62,7 +62,7 @@ export const Curriclum = (props: Props) => {
         </Accordion>
         <Accordion type="multiple">
           <AccordionItem value="item-2">
-            <AccordionTrigger className="flex items-center justify-between">
+            <AccordionTrigger className="flex items-center justify-between w-full">
               <div className="flex w-full">Secret of Good Design</div>
               <div className="flex items-center text-gray-800 text-[14px] font-[300] gap-x-2 place-content-end w-[600px]">
                 <img src={playCircleIcon} alt="" />

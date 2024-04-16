@@ -1,6 +1,4 @@
 import { cn } from 'modules/shared/lib/utility';
-import React, { ReactNode } from 'react';
-import { useNavigate } from 'react-router';
 
 interface categoriyPropsType {
   Icon: any;

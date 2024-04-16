@@ -1,8 +1,4 @@
-import react, { ReactNode, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { getItem, setItem } from 'modules/shared/lib/localStorage';
-import { cn } from 'modules/shared/lib/utility';
-import ArrowDown from '../../assets/icons/arrow/arrowDown.svg';
+import DownArrowIcon from 'modules/shared/assets/icons/arrow/ArrowDown';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,9 +6,6 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select';
-import { SelectGroup, SelectLabel } from '@radix-ui/react-select';
-import DownArrowIcon from 'modules/shared/assets/icons/arrow/ArrowDown';
 
 interface optionType {
   action: () => any;
@@ -24,10 +17,8 @@ interface SelectGenericTypeProps {
   text?: string;
 }
 function DropDownGeneric({ Options, label, text }: SelectGenericTypeProps) {
-  const [value, setValue] = useState<string>();
-
   return (
-    <div className="flex gap-2 flex-col">
+    <div className="flex flex-col gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger
           asChild
@@ -44,7 +35,7 @@ function DropDownGeneric({ Options, label, text }: SelectGenericTypeProps) {
               return (
                 <DropdownMenuItem
                   key={index}
-                  className="w-full font-normal	leading-5	text-sm cursor-pointer ease-linear text-gray-700 duration-200"
+                  className="w-full text-sm font-normal leading-5 text-gray-700 duration-200 ease-linear cursor-pointer"
                   onClick={(e) => item?.action()}
                 >
                   {item?.name}

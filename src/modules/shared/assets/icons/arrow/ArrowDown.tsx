@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function DownArrowIcon({ ...props }) {
   return (
@@ -13,12 +13,12 @@ function DownArrowIcon({ ...props }) {
       <path
         d="M3 10L8 5L13 10"
         stroke="#FF6636"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
 }
 
-export default DownArrowIcon
+export default DownArrowIcon;

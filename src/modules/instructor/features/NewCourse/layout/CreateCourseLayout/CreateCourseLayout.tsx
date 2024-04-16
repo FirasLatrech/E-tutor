@@ -1,7 +1,7 @@
-import { CreateCourseSteps } from 'modules/instructor/constants/createCourseSteps.constant';
-import React, { ReactNode } from 'react';
-import SaveChanges from '../../components/SaveChanges/SaveChanges';
+import React, { type ReactNode } from 'react';
 import CheckedStepIcon from 'modules/instructor/assets/icons/CreateCourse/CheckedStepIcons';
+import { CreateCourseSteps } from 'modules/instructor/constants/createCourseSteps.constant';
+import SaveChanges from '../../components/SaveChanges/SaveChanges';
 
 interface CreateCourseLayoutTypeProps {
   children: ReactNode;
@@ -18,9 +18,9 @@ function CreateCourseLayout({
         {CreateCourseSteps?.map(({ text, Icon }, index: number) => {
           return (
             <div
-            key={index}
+              key={index}
               className={`w-full py-4 gap-3 flex items-center justify-start px-6 gap-1rem ${
-                index == currentStep
+                index === currentStep
                   ? 'border-b-2 border-primary-500 !text-gray-900'
                   : ''
               }`}
@@ -28,12 +28,12 @@ function CreateCourseLayout({
               <Icon />
               <p
                 className={`text-gray-600 leading-7 ${
-                  index == currentStep ? '!text-gray-900' : ''
+                  index === currentStep ? '!text-gray-900' : ''
                 }`}
               >
                 {text}
               </p>
-              {currentStep > index && <CheckedStepIcon/> }
+              {currentStep > index && <CheckedStepIcon />}
             </div>
           );
         })}

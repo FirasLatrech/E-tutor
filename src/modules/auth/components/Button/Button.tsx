@@ -11,7 +11,7 @@ function SubmitButton({ text, isLoading }: ButtonPropsType) {
     <button
       type="submit"
       disabled={isLoading}
-      className="text-white ease-linear duration-200 hover:bg-primary-400 py-3 gap-2 flex px-8 bg-primary-500"
+      className="flex justify-between w-full gap-2 px-8 py-3 text-white duration-200 ease-linear hover:bg-primary-400 bg-primary-500"
     >
       {isLoading ? 'Loading' : text}
       <img

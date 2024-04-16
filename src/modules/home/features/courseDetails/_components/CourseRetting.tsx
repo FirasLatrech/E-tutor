@@ -13,11 +13,11 @@ const ratingData = [
 ];
 export const CourseRetting = (props: Props) => {
   return (
-    <div className="pt-6 w-[70%] flex flex-col gap-8 h-full pb-6">
+    <div className="pt-6 w-[70%] max-lg:w-full flex flex-col gap-8 h-full pb-6">
       <div className="text-2xl font-semibold tracking-tight scroll-m-20">
         Course Reting :
       </div>
-      <div className="flex items-center w-full gap-3">
+      <div className="flex items-center w-full gap-3 max-sm:flex-col">
         <div className="w-[200px] h-[190px] border flex items-center justify-center flex-col gap-3 border-gray-100">
           <span className="text-[42px] text-gray-900 font-[600]">4.8</span>
           <div className="flex items-center gap-x-0">

@@ -3,20 +3,20 @@ import CalendarIcon from 'modules/instructor/assets/icons/Stats/CalendarIcon';
 import CardIcon from 'modules/instructor/assets/icons/Stats/CardIcon';
 import CheckIcon from 'modules/instructor/assets/icons/Stats/CheckIcon';
 import CupIcon from 'modules/instructor/assets/icons/Stats/CupIcon';
-import StackIcon from 'modules/instructor/assets/icons/Stats/StackIcon';
-import StatsCard from './components/statsCards/StatsCard';
 import PeopleIcon from 'modules/instructor/assets/icons/Stats/PeopleIcon';
+import StackIcon from 'modules/instructor/assets/icons/Stats/StackIcon';
 import EditProfileProgress from './components/EditProfileProgress/EditProfileProgress';
+import ProfileViewChart from './components/ProfileViewChart/ProfileViewChart';
 import RecentActivity from './components/RecentActivity/RecentActivity';
 import RevenueRechart from './components/RevenueChart/RevenueChart';
-import ProfileViewChart from './components/ProfileViewChart/ProfileViewChart';
+import StatsCard from './components/statsCards/StatsCard';
 
 function Dashboard() {
   const statsCard = [
     {
       backgroundColor: '#FFEEE8',
       color: '',
-      Icon: AvatarIcon, //PlayIcon,
+      Icon: AvatarIcon, // PlayIcon,
       name: 'Enrolled Courses',
     },
     {
@@ -73,10 +73,10 @@ function Dashboard() {
         </div>
         <div className="w-full flex flex-col gap-[1.5rem] mt-8">
           <EditProfileProgress />
-          <div className='w-full items-start flex gap-[1rem] min-h-[20rem]'>
-          <RecentActivity/>
-          <RevenueRechart/>
-          <ProfileViewChart/>
+          <div className="w-full items-start flex gap-[1rem] min-h-[20rem]">
+            <RecentActivity />
+            <RevenueRechart />
+            <ProfileViewChart />
           </div>
         </div>
       </div>

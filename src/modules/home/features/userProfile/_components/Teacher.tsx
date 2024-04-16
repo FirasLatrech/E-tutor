@@ -1,18 +1,8 @@
-import React from 'react';
-import scoopIcon from 'modules/shared/assets/icons/scoop.svg';
-import { Input } from 'modules/shared/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from 'modules/shared/components/ui/select';
-import barber from 'modules/shared/assets/images/instructorImage/image.png';
 import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
-
+import scoopIcon from 'modules/shared/assets/icons/scoop.svg';
+import barber from 'modules/shared/assets/images/instructorImage/image.png';
+import Button from 'modules/shared/components/Button';
+import { Input } from 'modules/shared/components/ui/input';
 import {
   Pagination,
   PaginationContent,
@@ -22,8 +12,15 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from 'modules/shared/components/ui/pagination';
-import { SeparatorHorizontal } from 'lucide-react';
-import Button from 'modules/shared/components/Button';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from 'modules/shared/components/ui/select';
 type Props = {};
 
 export const Teacher = (props: Props) => {

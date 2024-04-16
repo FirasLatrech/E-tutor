@@ -1,20 +1,13 @@
-import Button from 'modules/shared/components/Button';
-import React from 'react';
-import arrowLeft from 'modules/shared/assets/arrow/arrowLeft.svg';
-type Props = {};
-import folderIcon from 'modules/shared/assets/icons/courseDetails/folderIcon.svg';
-import playCircleIcon from 'modules/shared/assets/icons/courseDetails/playEditor.svg';
-import clock from 'modules/shared/assets/icons/courseDetails/clockprimaryicon.svg';
-import HeroSection from './_components/HeroSection';
-import { VideoPlayer } from './_components/VideoPlayer';
-import { LecturesDescription } from './_components/LecturesDescription';
-import { LectureNotes } from './_components/LectureNotes';
-import { AttachFiles } from './_components/AttachFiels';
-import { Comments } from './_components/Comments';
-import { Progress } from './_components/Progress';
-import { Acordination } from './_components/Acordination';
 import { useParams } from 'react-router';
 import { useGetCourseById } from 'modules/home/data/queries/home.query';
+import { Acordination } from './_components/Acordination';
+import { AttachFiles } from './_components/AttachFiels';
+import { Comments } from './_components/Comments';
+import HeroSection from './_components/HeroSection';
+import { LectureNotes } from './_components/LectureNotes';
+import { LecturesDescription } from './_components/LecturesDescription';
+import { VideoPlayer } from './_components/VideoPlayer';
+type Props = {};
 
 const aboutVideo = [
   {
@@ -32,12 +25,11 @@ const aboutVideo = [
 ];
 const WatchCourse = (props: Props) => {
   const params = useParams();
-  console.log(params);
+
   const course_id = params.id;
-  console.log(course_id);
+
   if (!course_id) return null;
   const { data } = useGetCourseById(course_id);
-  console.log(data);
 
   return (
     <div className="w-full h-full pb-6">

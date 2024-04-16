@@ -1,14 +1,12 @@
 import React from 'react';
+import staricon from 'modules/shared/assets/icons/courseDetails/star.svg';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from 'modules/shared/components/ui/avatar';
-import staricon from 'modules/shared/assets/icons/courseDetails/star.svg';
-
+import { type ICourse } from 'modules/shared/types/course';
 import { BreadcrumbWithCustomSeparator } from './BreadcrumbWithCustomSeparator';
-
-import { ICourse } from 'modules/shared/types/course';
 
 type Props = {
   course_id: string;
@@ -26,13 +24,19 @@ export const BreadcrumbLink = ({ course_id, courseDetails }: Props) => {
         <span className="text-gray-700">{courseDetails?.subtitle}</span>
         <div className="flex items-center justify-between">
           {courseDetails?.instructor?.map(
-            (item: {
-              firstName: string;
-              lastName: string;
-              photo: { path: string };
-            }) => {
+            (
+              item: {
+                firstName: string;
+                lastName: string;
+                photo: { path: string };
+              },
+              index
+            ) => {
               return (
-                <div className="flex items-center justify-center gap-2 text-xs">
+                <div
+                  className="flex items-center justify-center gap-2 text-xs"
+                  key={index}
+                >
                   <Avatar>
                     <AvatarImage src={item?.photo?.path} alt="@Firas" />
                     <AvatarFallback>

@@ -1,19 +1,19 @@
 import React from 'react';
 import checkCircle from 'modules/shared/assets/icons/courseDetails/checkCircle.svg';
-type Props = {
-  courseDetails: ICourse;
-};
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from 'modules/shared/components/ui/avatar';
-import { ICourse } from 'modules/shared/types/course';
+import { type ICourse } from 'modules/shared/types/course';
+type Props = {
+  courseDetails: ICourse;
+};
 export const WhatWillLearnInCourse = ({ courseDetails }: Props) => {
   const course_content = courseDetails?.course_content;
   console.log(course_content);
   return (
-    <div className="pt-6 w-[70%] flex flex-col gap-8 h-full pb-6">
+    <div className="pt-6 w-[70%] max-lg:w-full flex flex-col gap-8 h-full pb-6">
       <div className="w-full h-[300px] bg-[#E1F7E366] p-6 flex flex-col gap-6">
         <div className="text-[24px] font-[600]">
           {' '}

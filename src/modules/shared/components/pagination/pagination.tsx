@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '../ui/button';
 import {
@@ -7,8 +5,6 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
-  PaginationPrevious,
-  PaginationNext,
 } from './../ui/pagination';
 interface PaginationProps {
   currentPage: number;
@@ -46,7 +42,9 @@ const Pagination = ({
           <PaginationItem key={index}>
             <PaginationLink
               isActive={currentPage === index + 1}
-              onClick={() => onPageChange(index + 1)}
+              onClick={() => {
+                onPageChange(index + 1);
+              }}
               href={`courses?page=${currentPage}`}
               className={`${currentPage === index + 1 && 'bg-1/10'}`}
             >

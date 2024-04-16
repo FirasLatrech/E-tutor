@@ -1,9 +1,9 @@
-import SearchIcon from 'modules/instructor/assets/icons/NavBar/SearchIcon';
 import React, { useEffect, useState } from 'react';
-import UserCard from './UserCard';
-import SearchUser from './SearchUser';
-import { useUsersQuery } from 'modules/shared/data/queries/users.query';
+import SearchIcon from 'modules/instructor/assets/icons/NavBar/SearchIcon';
 import { useCourseSections } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+import { useUsersQuery } from 'modules/shared/data/queries/users.query';
+import SearchUser from './SearchUser';
+import UserCard from './UserCard';
 
 function AddInstructor() {
   const [searchValue, setSearchValue] = useState('');
@@ -17,14 +17,14 @@ function AddInstructor() {
   });
 
   useEffect(() => {
-    console.log(searchValue)
+    console.log(searchValue);
     refetch();
   }, [searchValue]);
 
   return (
-    <div className="flex flex-col gap-4 w-full ">
-      <h1 className="capitalize text-gray-900 text-lg leading-5">
-        {`Add Instructor (${Instructors?.length || 0})`}
+    <div className="flex flex-col w-full gap-4 ">
+      <h1 className="text-lg leading-5 text-gray-900 capitalize">
+        {`Add Instructor (${Instructors?.length ?? 0})`}
       </h1>
       <div className="">
         <SearchUser

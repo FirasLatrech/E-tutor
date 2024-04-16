@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { logger } from './logger';
 import { setItem } from '../lib/localStorage';
+import { logger } from './logger';
 
 interface AuthState {
   isAuthenticated: boolean;

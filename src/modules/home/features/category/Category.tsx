@@ -1,5 +1,4 @@
 import { useParams } from 'react-router';
-
 import BestSellingCoursesForCategory from 'modules/home/components/BestSellingCoursesForCategory';
 import Course from 'modules/home/components/Course';
 import PopularInstructor from 'modules/home/components/PopularInstructor';
@@ -28,7 +27,7 @@ const Category = () => {
       />
       <Populartools id={params?.id} />
       <PopularInstructor id={params?.id} categoryDetails={categoryDetails} />
-      <Course id={params?.id}  />
+      <Course id={params?.id} />
     </div>
   );
 };

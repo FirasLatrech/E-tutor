@@ -1,21 +1,21 @@
-import Button from 'modules/shared/components/Button';
-import React, { ReactNode } from 'react';
-import BrandLogo from 'modules/shared/assets/icons/logo/fulllogo.svg';
+import React, { type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import BrandLogo from 'modules/shared/assets/icons/logo/fulllogo.svg';
+import Button from 'modules/shared/components/Button';
 
 interface MainLayoutPropsType {
   children: ReactNode;
 }
 function MainLayout({ children }: MainLayoutPropsType) {
   return (
-    <div className="flex items-center flex-col justify-center h-screen w-full">
-      <div className="border-b w-full flex items-center justify-center border-gray-100">
-        <div className="w-[68%] py-4 flex items-center justify-between   ">
-          <img src={BrandLogo} />
-          <div className="flex items-center justify-center gap-[1rem]">
+    <div className="flex flex-col items-center justify-center w-full h-screen">
+      <div className="flex items-center justify-center w-full border-b border-gray-100">
+        <div className="w-[88%] py-4 flex items-center justify-between max-md:flex-col space-y-3 h-full ">
+          <img src={BrandLogo} className="" />
+          <div className="flex items-center justify-center gap-[2rem]">
             <Link
               to="/register"
-              className="text-gray-600 font-light text-sm hover:underline ease-linear duration-200"
+              className="text-sm font-light text-gray-600 duration-200 ease-linear hover:underline"
             >
               Don't have account?
             </Link>

@@ -1,13 +1,9 @@
 import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
-
 import useIsMountedRef from '../../auth/hook/useIsMountedRef';
-
-import useAuthStore from '../store/useAuthStore';
 import { api } from '../lib/api';
+import useAuthStore from '../store/useAuthStore';
 import { clearTokens, getTokens } from '../utils/token';
-import LazyLoad from '../components/LazyLoad';
-import { Navigate } from 'react-router';
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -39,7 +35,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       if (refresh_token && isValidToken(refresh_token)) {
         const response = await api.get('/auth/me');
-        console.log(response);
+
         const user = response.data;
         setIsAuthenticated(true);
         setUser(user);

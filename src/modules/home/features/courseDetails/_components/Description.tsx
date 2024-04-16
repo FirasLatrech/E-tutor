@@ -1,5 +1,5 @@
-import { ICourse } from 'modules/shared/types/course';
 import React from 'react';
+import { type ICourse } from 'modules/shared/types/course';
 
 type Props = {
   courseDetails: ICourse;
@@ -7,7 +7,7 @@ type Props = {
 
 export const Description = ({ courseDetails }: Props) => {
   return (
-    <div className="pt-6 w-[70%] flex flex-col gap-8 h-full pb-6">
+    <div className="pt-6 w-[70%] max-lg:w-full flex flex-col gap-8 h-full pb-6">
       <div className="text-2xl font-semibold tracking-tight scroll-m-20">
         Description
       </div>

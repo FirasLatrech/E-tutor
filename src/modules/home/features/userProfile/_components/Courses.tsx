@@ -1,6 +1,17 @@
 import React from 'react';
+import { SeparatorHorizontal } from 'lucide-react';
 import scoopIcon from 'modules/shared/assets/icons/scoop.svg';
+import Button from 'modules/shared/components/Button';
 import { Input } from 'modules/shared/components/ui/input';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from 'modules/shared/components/ui/pagination';
 import {
   Select,
   SelectContent,
@@ -11,18 +22,6 @@ import {
   SelectValue,
 } from 'modules/shared/components/ui/select';
 import barber from '../_assets/images/image.png';
-
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from 'modules/shared/components/ui/pagination';
-import { SeparatorHorizontal } from 'lucide-react';
-import Button from 'modules/shared/components/Button';
 type Props = {};
 
 export const Courses = (props: Props) => {

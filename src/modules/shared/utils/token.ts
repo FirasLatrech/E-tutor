@@ -1,4 +1,3 @@
-import { string } from 'yup';
 import { clearItem, getItem, setItem } from '../lib/localStorage';
 
 export const getTokens = () => {
@@ -9,7 +8,7 @@ export const getTokens = () => {
 };
 
 export const setTokens = (
-  access_token: string,
+  access_token?: string,
   refresh_token?: string | null
 ) => {
   setItem('token', access_token);

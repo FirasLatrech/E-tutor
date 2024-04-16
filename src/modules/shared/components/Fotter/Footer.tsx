@@ -1,8 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import whiteLogo from 'modules/shared/assets/icons/logo/whiteLogo.svg';
-import { cn } from 'modules/shared/lib/utility';
-import useAuthStore from 'modules/shared/store/useAuthStore';
 import ArrowRight from '../../assets/icons/arrow/arrowRight.svg';
 import apple from '../../assets/icons/socialMediaIcon/apple.svg';
 import facebook from '../../assets/icons/socialMediaIcon/facebook.svg';
@@ -11,13 +9,10 @@ import instagram from '../../assets/icons/socialMediaIcon/instagram.svg';
 import linkedin from '../../assets/icons/socialMediaIcon/linkedin.svg';
 import twitter from '../../assets/icons/socialMediaIcon/twitter.svg';
 import youtube from '../../assets/icons/socialMediaIcon/youtube.svg';
-import DropdownCurrency from '../dropdownCurrency';
 import DropdownLanguage from '../dropdownlanguage';
 
 const Footer = () => {
-  const { isAuthenticated, setIsAuthenticated } = useAuthStore(
-    (state) => state
-  );
+  // const { setIsAuthenticated } = useAuthStore((state) => state);
 
   const { t } = useTranslation('footer');
   const socialMedia = [
@@ -87,17 +82,17 @@ const Footer = () => {
   ];
 
   return (
-    <nav className="bg-gray-900 shadow-lg h-[438px] flex items-center justify-between flex-col gap-6 w-full ">
-      <div className="pl-6 pr-6 mx-auto h-[400px] flex items-center justify-between ">
-        <div className="flex items-center justify-between space-x-36">
-          <div className="flex flex-col items-start gap-6 justify-start space-x-4 w-[360px]">
+    <nav className="bg-gray-900 shadow-lg h-[438px] max-2xl:h-[600px] flex items-center justify-between flex-col gap-6 w-full ">
+      <div className="pl-6 pr-6 pt-6  mx-auto h-[400px] max-2xl:h-[1000px]   flex items-center justify-between ">
+        <div className="flex items-center justify-between max-2xl:flex-col max-2xl:space-x-0 space-x-36 gap-y-10 ">
+          <div className="flex flex-col items-start gap-6 justify-start space-x-4 w-[360px] max-2xl:w-full ">
             <img src={whiteLogo} alt="logo" />
             <span className="text-sm text-gray-500">
               Aliquam rhoncus ligula est, non pulvinar elit convallis nec. Donec
               mattis odio at.
             </span>
             <div className="flex gap-4 ">
-              {socialMedia.map((social,index) => (
+              {socialMedia.map((social, index) => (
                 <Link
                   key={`socialMedia${index}`}
                   to={'#'}
@@ -208,8 +203,8 @@ const Footer = () => {
         </div>
       </div>
       <div className=" border-t-[1px] border-gray-600 w-full h-[110px] text-[#8C94A3] flex items-center ">
-        <div className="flex items-center justify-center w-full gap-[500px]">
-          <div>
+        <div className="flex items-center justify-center w-full ">
+          <div className="w-full">
             © {new Date().getFullYear()} - {t(`footer.softylines`)}.{' '}
             {t('footer.Desginedby')}{' '}
             <span className="text-white">Firas Latrach</span>.{' '}

@@ -13,23 +13,23 @@ const StackIcon = ({ ...props }) => (
     <path
       d="M4 22L16 29L28 22"
       stroke="#564FFD"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M4 16L16 23L28 16"
       stroke="#564FFD"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M4 10L16 17L28 10L16 3L4 10Z"
       stroke="#564FFD"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

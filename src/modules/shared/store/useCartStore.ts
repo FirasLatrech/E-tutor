@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { logger } from './logger';
 import { getItem, setItem } from '../lib/localStorage';
+import { logger } from './logger';
 
 interface CartState {
   data: string[];
@@ -11,7 +11,7 @@ export interface CartStore extends CartState {
 }
 
 const initialState: Pick<CartStore, keyof CartState> = {
-  data: getItem('cart') || [],
+  data: getItem('cart') ?? [],
 };
 
 const useCartStore = create<CartStore>()(

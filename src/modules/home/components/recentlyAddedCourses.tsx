@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Item } from '@radix-ui/react-dropdown-menu';
 import { TooltipTrigger } from '@radix-ui/react-tooltip';
 import { MoveLeft, MoveRight, SeparatorHorizontal } from 'lucide-react';
 import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
@@ -25,9 +26,8 @@ import {
   TooltipContent,
   TooltipProvider,
 } from 'modules/shared/components/ui/tooltip';
-import OurFeautureCourse from './ourFeautureCourse';
 import { useRecentlyCourses } from '../data/queries/home.query';
-import { Item } from '@radix-ui/react-dropdown-menu';
+import OurFeautureCourse from './ourFeautureCourse';
 export default function RecentlyAddedCourses() {
   interface Course {
     id: number;
@@ -75,7 +75,7 @@ export default function RecentlyAddedCourses() {
     createdAt: string;
     updatedAt: string;
     deletedAt: string | null;
-    instructor: {
+    instructor: Array<{
       id: number;
       email: string;
       username: string;
@@ -84,41 +84,40 @@ export default function RecentlyAddedCourses() {
       photo: {
         path: string;
       };
-    }[];
+    }>;
   }
   const { data, isPending } = useRecentlyCourses();
   console.log(data);
   const { t, i18n } = useTranslation('home');
   return (
     <div
-      className="flex flex-col items-center w-full gap-10 pb-10 jus-c g-white b "
+      className="flex flex-col items-center w-full gap-5 pb-10 jus-c g-white b "
       style={{ direction: 'ltr' }}
     >
-      <span className="text-[40px] font-[600] h-[100px]  ">
+      <span className="text-[40px] max-md:text-[25px] mt-5 font-[600] h-[100px]  ">
         {t('home.recentlyaddedcourses')}
       </span>
 
       {/* cart  */}
-      <div className="grid grid-cols-4 gap-6 w-[80%] ">
+      <div className="grid grid-cols-4 max-md:grid-cols-1 max-lg:grid-cols-2  max-xl:grid-cols-4 max-2xl:grid-cols-5 gap-3 w-[90%] h-full">
         {data &&
           data?.map((course: Course, index: number) => (
             <HoverCard key={index}>
               <HoverCardTrigger asChild>
                 <div
-                  className="flex flex-col items-center justify-center w-full bg-white border border-gray-100"
+                  className="flex flex-col items-center justify-center w-full border border-gray-100 min-w-[297px]"
                   key={index}
                 >
-                  <div className="h-[183px] w-[320px] overflow-hidden">
+                  <div className="h-[200px] overflow-hidden">
                     <img
                       src={course.course_thumbnail}
                       alt=""
-                      width={340}
                       height={183}
-                      className="duration-300 cursor-pointer hover:scale-125"
+                      className="object-cover duration-300 cursor-pointer hover:scale-125 min-w-[297px]"
                     />
                   </div>
-                  <div className="w-full p-2 text-gray-700">
-                    <div className="flex items-center justify-between h-[40px] ">
+                  <div className="w-full p-2 text-gray-700 ">
+                    <div className="flex items-center justify-between h-[40px]  ">
                       <span className="p-1 text-sm bg-primary-100 text-primary-700">
                         {course?.course_categories?.name}
                       </span>

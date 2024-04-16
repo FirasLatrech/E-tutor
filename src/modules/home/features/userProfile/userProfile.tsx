@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { MoveRight } from 'lucide-react';
 import {
   Avatar,
@@ -6,10 +8,8 @@ import {
 } from 'modules/shared/components/ui/avatar';
 import { getItem, setItem } from 'modules/shared/lib/localStorage';
 import { cn } from 'modules/shared/lib/utility';
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Dashbord from './_components/Dashbord';
 import Courses from './_components/Courses';
+import Dashbord from './_components/Dashbord';
 import { Teacher } from './_components/Teacher';
 
 type Props = {};

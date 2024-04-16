@@ -1,17 +1,14 @@
-import Button from 'modules/shared/components/Button';
-
 import arrowLeft from 'modules/shared/assets/icons/arrow/arrowLeft.svg';
-
+import clock from 'modules/shared/assets/icons/courseDetails/clockprimaryicon.svg';
 import folderIcon from 'modules/shared/assets/icons/courseDetails/folderIcon.svg';
 import playCircleIcon from 'modules/shared/assets/icons/courseDetails/playEditor.svg';
-import clock from 'modules/shared/assets/icons/courseDetails/clockprimaryicon.svg';
+import Button from 'modules/shared/components/Button';
+import { useModal } from 'modules/shared/providers/Modal/modal-provider';
+import { type ICourse } from 'modules/shared/types/course';
 import CustomModal from './customModal';
 type Props = {
   courseDetails: ICourse;
 };
-
-import { useState } from 'react';
-import { useModal } from 'modules/shared/provider/modal-provider';
 
 function HeroSection({ courseDetails }: Props) {
   console.log(courseDetails);
@@ -46,7 +43,9 @@ function HeroSection({ courseDetails }: Props) {
         <Button
           text="Write a Review"
           variant="tertiaryPrimary"
-          onClick={() => handleClick()}
+          onClick={() => {
+            handleClick();
+          }}
         />
 
         <Button text="Next lecture" variant="primary" />

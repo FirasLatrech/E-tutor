@@ -9,30 +9,26 @@
 //   DrawerTrigger,
 // } from '@/components/ui/drawer';
 
-import React, { useState } from 'react';
-
+import { useState } from 'react';
+// @ts-expect-error
+import ReactStars from 'react-rating-stars-component';
+import paperPlaneRight from 'modules/shared/assets/icons/courseWatch/paperplaneRight.svg';
+import startIcon from 'modules/shared/assets/icons/courseWatch/start.svg';
+import VideStart from 'modules/shared/assets/icons/courseWatch/videStar.svg';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from 'modules/shared/components/ui/dialog';
-import Button from 'modules/shared/components/Button';
-// @ts-ignore
-
-import ReactStars from 'react-rating-stars-component';
+import { useModal } from 'modules/shared/providers/Modal/modal-provider';
 type Props = {
   title: string;
 
   defaultOpen?: boolean;
 };
-import paperPlaneRight from 'modules/shared/assets/icons/courseWatch/paperplaneRight.svg';
-import startIcon from 'modules/shared/assets/icons/courseWatch/start.svg';
-import VideStart from 'modules/shared/assets/icons/courseWatch/videStar.svg';
-import { useModal } from 'modules/shared/providers/Modal/modal-provider';
 const CustomModal = ({ title, defaultOpen }: Props) => {
   const [rating, setRating] = useState(0);
 
@@ -40,7 +36,9 @@ const CustomModal = ({ title, defaultOpen }: Props) => {
     setRating(newRating);
   };
   const { isOpen, setClose } = useModal();
-  const handleClose = () => setClose();
+  const handleClose = () => {
+    setClose();
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>

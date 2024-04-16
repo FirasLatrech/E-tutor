@@ -1,6 +1,6 @@
-import { cn } from 'modules/shared/lib/utility';
 import React, { ReactNode } from 'react';
 import { useNavigate } from 'react-router';
+import { cn } from 'modules/shared/lib/utility';
 
 interface StatsCardPropsType {
   Icon: any;

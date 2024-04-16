@@ -1,12 +1,12 @@
+import React, { useEffect, useState } from 'react';
 import {
-  sectionType,
+  type sectionType,
   useCourseSections,
 } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
 import Button from 'modules/shared/components/Button';
 import Input from 'modules/shared/components/Input';
-import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
-import React, { useEffect, useState } from 'react';
+import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 
 interface EditSectionModalPropsType {
   Section: sectionType | undefined;
@@ -16,8 +16,6 @@ function EditSectionModal({ Section, Submit }: EditSectionModalPropsType) {
   const [value, setValue] = useState<string | null>(Section?.name || null);
   const [error, setError] = useState<string | null>(null);
   const { setClose } = useModal();
-
-
 
   const ChangeSectionNameHandler = () => {
     const submitted: boolean = Submit(value || Section?.name || '');
@@ -37,7 +35,9 @@ function EditSectionModal({ Section, Submit }: EditSectionModalPropsType) {
           id="Section"
           name="Section"
           label="Section"
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
           value={value || Section?.name || ''}
           placeholder="Write your section name here..."
         />

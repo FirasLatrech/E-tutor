@@ -1,10 +1,12 @@
+import React from 'react';
+import { motion } from 'framer-motion';
 import AddIcon from 'modules/instructor/assets/icons/CreateCourse/AddIcon';
+import DeleteIcon from 'modules/instructor/assets/icons/CreateCourse/deleteIcon';
 import DragIcon from 'modules/instructor/assets/icons/CreateCourse/DragIcon';
 import EditIcon from 'modules/instructor/assets/icons/CreateCourse/EditIcon';
-import DeleteIcon from 'modules/instructor/assets/icons/CreateCourse/deleteIcon';
 import {
   lessonType,
-  sectionType,
+  type sectionType,
   useCourseSections,
 } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
 import {
@@ -14,11 +16,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from 'modules/shared/components/ui/dialog';
-import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
-import React from 'react';
+import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 import EditSectionModal from './EditSectionModal';
-import { motion } from 'framer-motion';
 
 interface CourseSectionPropsType {
   courseSection: sectionType;
@@ -46,8 +46,10 @@ function CourseSection({
 
   const EditSectionName = (SectionNumber: number, NewName: string) => {
     const IsExistSectionName =
-      Sections?.filter((section: sectionType) => section?.name.toUpperCase() == NewName.toUpperCase()) ||
-      [];
+      Sections?.filter(
+        (section: sectionType) =>
+          section?.name.toUpperCase() == NewName.toUpperCase()
+      ) || [];
     if (IsExistSectionName?.length > 0) return false;
     setSections((old): sectionType[] => {
       if (!old) {
@@ -109,10 +111,15 @@ function CourseSection({
             </label>
           </div>
           <div className="flex items-center justify-center gap-3">
-            <AddIcon className="cursor-pointer" onClick={() => AddLesson()} />
+            <AddIcon
+              className="cursor-pointer"
+              onClick={() => {
+                AddLesson();
+              }}
+            />
             <EditIcon
               className="cursor-pointer"
-              onClick={() =>
+              onClick={() => {
                 setOpen(
                   <EditSectionModal
                     Submit={(NewName: string) =>
@@ -120,12 +127,14 @@ function CourseSection({
                     }
                     Section={Sections?.[SectionNumber]}
                   />
-                )
-              }
+                );
+              }}
             />
             <DeleteIcon
               className="cursor-pointer"
-              onClick={() => DeleteSection(SectionNumber)}
+              onClick={() => {
+                DeleteSection(SectionNumber);
+              }}
             />
           </div>
         </div>

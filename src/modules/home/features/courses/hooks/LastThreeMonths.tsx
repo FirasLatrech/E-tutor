@@ -22,7 +22,7 @@ export function LastThreeMonths() {
   // Generate options for the last three months
   const lastThreeMonths = [];
   for (let i = 0; i < 3; i++) {
-    let monthIndex = (currentMonth - i + 12) % 12; // Ensure index is within 0-11 range
+    const monthIndex = (currentMonth - i + 12) % 12; // Ensure index is within 0-11 range
     let year = currentYear;
     if (monthIndex > currentMonth) {
       year--; // If month is in previous year

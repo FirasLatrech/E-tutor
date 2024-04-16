@@ -47,11 +47,11 @@ export interface ICourse {
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
-  instructor: {
+  instructor: Array<{
     firstName: string;
     lastName: string;
     photo: {
       path: string;
     };
-  }[];
+  }>;
 }

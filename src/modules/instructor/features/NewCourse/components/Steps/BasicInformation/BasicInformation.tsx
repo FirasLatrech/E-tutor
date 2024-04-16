@@ -1,20 +1,19 @@
+import React, { useEffect } from 'react';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAllCategory } from 'modules/home/data/queries/home.query';
 import Button from 'modules/shared/components/Button';
 import Input from 'modules/shared/components/Input';
-import React, { useEffect } from 'react';
-import { SubmitHandler, useForm, Controller } from 'react-hook-form';
-import * as yup from 'yup';
-import { useSteps } from '../../../context/StepsContext';
-import { useAllCategory } from 'modules/home/data/queries/home.query';
 import SelectGeneric from 'modules/shared/components/SelectGeneric';
+import * as yup from 'yup';
 import { useCourseSections } from '../../../context/CourseSectionsContext';
+import { useSteps } from '../../../context/StepsContext';
 
 function BasicInformation() {
-
   const { BasicInformation, setBasicInformations } = useCourseSections();
   const onSubmit: SubmitHandler<any> = async (data) => {
     setBasicInformations(data);
-    setCurrentStep(1)
+    setCurrentStep(1);
   };
 
   const { data, isFetching } = useAllCategory();
@@ -24,14 +23,16 @@ function BasicInformation() {
     handleSubmit,
     control,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm<any>({
     resolver: yupResolver(
       yup.object().shape({
         tittle: yup.string().required('Tittle is required'),
         subTittle: yup.string().required('Subtittle is required'),
         courseCategory: yup.string().required('Course Category is required'),
-        courseSubCategory: yup.string().required('Course Sub-category is required'),
+        courseSubCategory: yup
+          .string()
+          .required('Course Sub-category is required'),
         courseTopic: yup.string().required('Course Topic is required'),
         courseLanguage: yup.string().required('Course Language is required'),
         subtitleLanguage: yup.string(),
@@ -91,8 +92,7 @@ function BasicInformation() {
                 isLoading={isFetching}
                 items={['ff']}
                 {...field}
-              errors={errors}
-
+                errors={errors}
               />
             )}
           />
@@ -105,8 +105,7 @@ function BasicInformation() {
                 label="Course Sub-category"
                 items={['ddd']}
                 {...field}
-              errors={errors}
-
+                errors={errors}
               />
             )}
           />
@@ -135,8 +134,7 @@ function BasicInformation() {
                 label="Course Language"
                 items={['English', 'French', 'Arabic']}
                 {...field}
-              errors={errors}
-
+                errors={errors}
               />
             )}
           />
@@ -149,8 +147,7 @@ function BasicInformation() {
                 label="Subtitle Language (Optional)"
                 items={['English', 'French', 'Arabic']}
                 {...field}
-              errors={errors}
-
+                errors={errors}
               />
             )}
           />
@@ -163,8 +160,7 @@ function BasicInformation() {
                 label="Course Level"
                 items={['Beginner', 'Intermediate', 'Advanced']}
                 {...field}
-              errors={errors}
-
+                errors={errors}
               />
             )}
           />
@@ -177,8 +173,7 @@ function BasicInformation() {
                 label="Durations"
                 items={['1 month', '3 months', '6 months', '1 year']}
                 {...field}
-              errors={errors}
-
+                errors={errors}
               />
             )}
           />

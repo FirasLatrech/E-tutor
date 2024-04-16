@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function conversation() {
-  return (
-    <div>conversation</div>
-  )
+  return <div>conversation</div>;
 }
 
-export default conversation
+export default conversation;

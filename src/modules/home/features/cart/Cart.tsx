@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { BreadcrumbWithCustomSeparator } from '../courseDetails/_components/BreadcrumbWithCustomSeparator';
-import Button from 'modules/shared/components/Button';
-import useCartStore from 'modules/shared/store/useCartStore';
+import { useNavigate, useParams } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { X } from 'lucide-react';
 import {
   useCheckOut,
   useCourseDetailsByIds,
 } from 'modules/home/data/queries/home.query';
-import { ICourse } from 'modules/shared/types/course';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { useNavigate, useParams } from 'react-router';
-import { useSearchParams } from 'react-router-dom';
-import { useToast } from 'modules/shared/components/ui/use-toast';
+import Button from 'modules/shared/components/Button';
 import { ToastAction } from 'modules/shared/components/ui/toast';
-import { X } from 'lucide-react';
+import { useToast } from 'modules/shared/components/ui/use-toast';
 import useAuthStore from 'modules/shared/store/useAuthStore';
+import useCartStore from 'modules/shared/store/useCartStore';
+import { type ICourse } from 'modules/shared/types/course';
+import { BreadcrumbWithCustomSeparator } from '../courseDetails/_components/BreadcrumbWithCustomSeparator';
 
 function Cart() {
   const { mutateAsync: courseDetailsByIds } = useCourseDetailsByIds();
@@ -60,8 +60,8 @@ function Cart() {
           </ToastAction>
         ),
       });
-      setData([]);
       setCourseDetails([]);
+      setData([]);
     }
 
     if (searchParams.get('canceled')) {

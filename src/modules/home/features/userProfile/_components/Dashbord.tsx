@@ -1,15 +1,14 @@
 import React from 'react';
+import { SeparatorHorizontal } from 'lucide-react';
 import busniess from 'modules/shared/assets/icons/categoryIcon/busniess.svg';
 import finance from 'modules/shared/assets/icons/categoryIcon/finance&accounting.svg';
 import it from 'modules/shared/assets/icons/categoryIcon/it&software.svg';
 import label from 'modules/shared/assets/icons/categoryIcon/label.svg';
-import { cn } from 'modules/shared/lib/utility';
-import { SeparatorHorizontal } from 'lucide-react';
-import barber from '../_assets/images/image.png';
 import Button from 'modules/shared/components/Button';
-
+import { cn } from 'modules/shared/lib/utility';
 import arrowLeft from '../_assets/icons/arrowLeft.svg';
 import arrowRight from '../_assets/icons/arrowRight.svg';
+import barber from '../_assets/images/image.png';
 type Props = {};
 const categories = [
   {

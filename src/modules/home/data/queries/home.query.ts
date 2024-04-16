@@ -1,7 +1,7 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { RegisterBody, type LoginBody } from 'modules/auth/types/auth';
-
 import { useCallback } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { type LoginBody, RegisterBody } from 'modules/auth/types/auth';
+import BestSellingCourses from 'modules/home/components/bestSellingCourses';
 import {
   Checkout,
   getAllCategory,
@@ -17,7 +17,6 @@ import {
   getRecentlyCourses,
   getTopInstructorOfTheMonth,
 } from '../api/home.service';
-import BestSellingCourses from 'modules/home/components/bestSellingCourses';
 
 const getFromCache = (key: string) => {
   const queryClient = useQueryClient();

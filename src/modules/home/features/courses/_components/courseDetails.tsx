@@ -1,14 +1,19 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import { TooltipContent } from '@radix-ui/react-tooltip';
-import { SeparatorHorizontal } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import SearchInput from 'modules/home/components/inputSearch';
+import {
+  useAllCategory,
+  useGetAllCourse,
+  useGetCourseByCategoryId,
+} from 'modules/home/data/queries/home.query';
 import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
 import filterIcon from 'modules/shared/assets/icons/course/filter.svg';
 import primaryFilter from 'modules/shared/assets/icons/course/primaryfilter.svg';
-import webdevelopment from 'modules/shared/assets/icons/course/webdevelempent.svg';
-import { AnimatePresence, motion } from 'framer-motion';
 import PriamryUsersIcons from 'modules/shared/assets/icons/courseDetails/PriamryUsersIcons.svg';
-import scoopIcon from 'modules/shared/assets/icons/scoop.svg';
-import MachineLeanringCover from 'modules/shared/assets/images/bestsellingcourse/image1.png';
+import Button from 'modules/shared/components/Button';
+import Pagination from 'modules/shared/components/pagination/pagination';
 import {
   Accordion,
   AccordionContent,
@@ -17,37 +22,24 @@ import {
 } from 'modules/shared/components/ui/accordion';
 import { Checkbox } from 'modules/shared/components/ui/checkbox';
 import { Input } from 'modules/shared/components/ui/input';
-
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from 'modules/shared/components/ui/select';
+import { Skeleton } from 'modules/shared/components/ui/skeleton';
 import {
   Tooltip,
   TooltipProvider,
   TooltipTrigger,
 } from 'modules/shared/components/ui/tooltip';
-import { cn } from 'modules/shared/lib/utility';
-
-import { ICourse } from 'modules/shared/types/course';
 import useDebounce from 'modules/shared/hooks/useDebounce';
-import Spinner from 'modules/shared/components/Spinner';
-import { Skeleton } from 'modules/shared/components/ui/skeleton';
-import Button from 'modules/shared/components/Button';
-import debounce from 'lodash/debounce';
-import {
-  useAllCategory,
-  useGetAllCourse,
-  useGetCourseByCategoryId,
-} from 'modules/home/data/queries/home.query';
-import SearchInput from 'modules/home/components/inputSearch';
-import Pagination from 'modules/shared/components/pagination/pagination';
-import { Navigate, useLocation, useNavigate, useParams } from 'react-router';
+import { useWindowSize } from 'modules/shared/lib/useWindowSize';
+import { cn } from 'modules/shared/lib/utility';
+import { type ICourse } from 'modules/shared/types/course';
 import { LastThreeMonths } from '../hooks/LastThreeMonths';
 import Suggestion from './Suggestion';
 
@@ -62,45 +54,51 @@ interface Category {
   createdAt: string;
   deletedAt: string | null;
 }
-
+/**
+ * Renders the Course component.
+ *
+ * @return {JSX.Element} The rendered Course component.
+ */
 export default function Course() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const pagex = searchParams.get('page');
   const pageCount = pagex ? parseInt(pagex) : 1;
-  console.log(pageCount);
 
-  const [page, setPage] = useState(pageCount ? pageCount : 1);
+  const [page, setPage] = useState(pageCount || 1);
 
   const [filterState, setFilterState] = useState(false);
   const [search, setSearch] = useState('');
   const [month, setMonth] = useState('');
-  console.log(month);
+
   const debouncedSearchTerm = useDebounce(search, 600);
-  console.log(debouncedSearchTerm);
 
   const {
     data: courseDetails,
     isPending,
     error,
   } = useGetAllCourse(debouncedSearchTerm, month, page);
-  console.log(courseDetails);
+
   const data = courseDetails?.data;
-  const totalPageCount = courseDetails?.totalPageCount;
-  console.log(totalPageCount);
 
   const { data: allCategory } = useAllCategory();
-
   const navigate = useNavigate();
   const handelNaviage = (id: string) => {
     navigate(`/courses/${id}`);
   };
+  const windowSize = useWindowSize();
+
+  useEffect(() => {
+    if (windowSize.width < 540) {
+      setFilterState(false);
+    }
+  }, [windowSize]);
 
   return (
     <div className="flex flex-col items-center justify-center pt-[20px] pb-[20px]">
       <div className="w-[83%]">
         <div className="flex items-center justify-between">
-          <div className="flex gap-4">
+          <div className="flex gap-4 max-lg:flex-col">
             <div
               className="flex w-[147px] items-center gap-2 p-3 border border-primary-200 h-[48px]  justify-between cursor-pointer"
               onClick={() => {
@@ -129,7 +127,7 @@ export default function Course() {
             </div>
             <SearchInput onSearch={setSearch} />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 max-lg:hidden">
             <span className="text-gray-700 text-[14px]">Sort By : </span>
             <Select
               onValueChange={(obj) => {
@@ -154,7 +152,7 @@ export default function Course() {
         <Suggestion />
       </div>
       <div className="flex items-center justify-center w-full">
-        <div className="flex gap-4 w-[83%]">
+        <div className="flex gap-4 w-[93%]">
           {filterState && (
             <div className="w-[300px] bg-white flex flex-col gap-5 duration-500	 transition-all">
               <Accordion type="multiple">
@@ -221,7 +219,7 @@ export default function Course() {
               <Skeleton className="w-[300px] h-[300px]" />
             </div>
           )}
-          {data && data.length == 0 && (
+          {data && data.length === 0 && (
             <div className="flex h-[330px] gap-x-6 items-center justify-center w-full">
               <div className="w-[300px] h-[300px]  items-center justify-center flex flex-col gap-5">
                 <span className="gray-900 text-[53px]   text-pretty   scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl">
@@ -239,8 +237,8 @@ export default function Course() {
           <motion.div
             className={
               filterState
-                ? 'grid grid-cols-3 gap-6 '
-                : 'grid grid-cols-4 gap-6 '
+                ? 'grid grid-cols-3   max-md:grid-cols-1 max-lg:grid-cols-1  max-xl:grid-cols-2 max-2xl:grid-cols-3 gap-3 w-[90%] h-full '
+                : 'grid grid-cols-4   max-md:grid-cols-1 max-lg:grid-cols-2  max-xl:grid-cols-3 max-2xl:grid-cols-4 gap-8 w-[90%] h-full'
             }
             layout
           >
@@ -249,21 +247,22 @@ export default function Course() {
                 data?.map((item: ICourse) => {
                   return (
                     <motion.div
-                      className="flex w-[294px] flex-col items-center justify-center  bg-white border"
+                      className="flex flex-col items-center justify-center w-full bg-white border border-gray-100 min-w-[297px]"
                       style={{ direction: 'ltr' }}
                       key={item.id}
                       layout
                       animate={{ opacity: 1 }}
                       initial={{ opacity: 0 }}
-                      onClick={() => handelNaviage(item?.id)}
+                      onClick={() => {
+                        handelNaviage(item?.id);
+                      }}
                     >
-                      <div className="h-[183px] w-[294px] overflow-hidden ">
+                      <div className="h-[183px]  overflow-hidden ">
                         <img
                           src={item.course_thumbnail}
                           alt=""
-                          width={294}
                           height={183}
-                          className="duration-300 cursor-pointer hover:scale-125"
+                          className="duration-300 min-w-[297px] object-cover cursor-pointer hover:scale-125"
                         />
                       </div>
                       <div className="w-full text-gray-700 ">

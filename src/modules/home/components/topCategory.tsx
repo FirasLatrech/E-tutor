@@ -9,11 +9,17 @@ import label from 'modules/shared/assets/icons/categoryIcon/label.svg';
 import personaldevelopment from 'modules/shared/assets/icons/categoryIcon/personaldevelopment.svg';
 import Footer from 'modules/shared/components/Fotter/Footer';
 import Header from 'modules/shared/components/Header';
+import { Skeleton } from 'modules/shared/components/ui/skeleton';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from 'modules/shared/components/ui/tooltip';
 import UnderHeader from 'modules/shared/components/underHeader';
 import { cn } from 'modules/shared/lib/utility';
 import { getAllCategory } from '../data/api/home.service';
 import { useAllCategory } from '../data/queries/home.query';
-import { Skeleton } from 'modules/shared/components/ui/skeleton';
 
 type Category = {
   id: number;
@@ -28,7 +34,7 @@ type Category = {
 };
 export default function TopCategory() {
   const { status, data, error, isPending } = useAllCategory();
-  console.log(data)
+  console.log(data);
 
   const { t, i18n } = useTranslation('home');
 
@@ -79,7 +85,7 @@ export default function TopCategory() {
 
   return (
     <div className="bg-white h-[680px] flex flex-col items-center justify-center gap-10">
-      <h1 className="text-[900] font-[600] text-[40px]">
+      <h1 className="text-[900] font-[600] max-md:text-[20px] text-[40px]">
         {t('home.browsetopcategory')}
       </h1>
 
@@ -95,13 +101,16 @@ export default function TopCategory() {
             <Skeleton className="w-[320px] h-[110px] " />
           </div>
         ) : (
-          <div className="grid grid-cols-4 gap-4" style={{ direction: 'ltr' }}>
+          <div
+            className="grid grid-cols-4   max-md:grid-cols-1 max-lg:grid-cols-2  max-xl:grid-cols-3 max-2xl:grid-cols-4 gap-3 w-[90%] h-full"
+            style={{ direction: 'ltr' }}
+          >
             {data &&
               data?.map((category: Category, index: number) => (
                 <div
                   key={index}
                   className={cn(
-                    'flex items-center justify-start gap-5 p-6 hover:shadow-md duration-300 min-w-[25%] cursor-pointer',
+                    'flex items-center justify-start gap-5 p-6 hover:shadow-md duration-300  w-full cursor-pointer',
                     `bg-${category.color}`
                   )}
                   style={{
@@ -112,14 +121,24 @@ export default function TopCategory() {
                   }}
                 >
                   <div
-                    className="bg-white w-[70px] h-[70px]   flex items-center justify-center"
+                    className="bg-white min-w-[70px] min-h-[70px]   flex items-center justify-center"
                     style={{ backgroundColor: category.color }}
                   >
                     <img src={finance} />
                   </div>
 
                   <div className="flex flex-col justify-center">
-                    <span className="text-gray-900">{category.name} </span>
+                    {/* <span className="text-gray-900">{category.name} </span> */}
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger className="text-start">
+                          {category?.name.substring(0, 10) + '...'}
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <span>{category?.name}</span>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                     <span className="text-courses_countgray-600">
                       {category.courses_count} Courses
                     </span>

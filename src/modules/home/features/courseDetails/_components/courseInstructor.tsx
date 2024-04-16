@@ -1,8 +1,8 @@
-import InstructorImage from 'modules/shared/assets/images/instructorImage/image.png';
 import startIcon from 'modules/shared/assets/icons/bestSelling/star.svg';
-import userIcon from 'modules/shared/assets/icons/courseDetails/PriamryUsersIcons.svg';
 import playCircleIcon from 'modules/shared/assets/icons/courseDetails/playCircle.svg';
-import { ICourse } from 'modules/shared/types/course';
+import userIcon from 'modules/shared/assets/icons/courseDetails/PriamryUsersIcons.svg';
+import InstructorImage from 'modules/shared/assets/images/instructorImage/image.png';
+import { type ICourse } from 'modules/shared/types/course';
 type Props = {
   courseDetails: ICourse;
 };
@@ -35,7 +35,7 @@ export const CourseInstructor = ({ courseDetails }: Props) => {
   const instructor = courseDetails?.instructor;
   console.log(instructor);
   return (
-    <div className="pt-6 w-[70%] flex flex-col gap-8 h-full pb-6">
+    <div className="pt-6 w-[70%] max-lg:w-full flex flex-col gap-8 h-full pb-6">
       <div className="flex flex-col items-start justify-between gap-5">
         <div className="text-2xl font-semibold tracking-tight scroll-m-20">
           Course instructor ({instructor?.length})
@@ -44,16 +44,16 @@ export const CourseInstructor = ({ courseDetails }: Props) => {
           {instructor?.map((item: instructor, index: number) => {
             return (
               <div
-                className="border border-gray-100 h-[238px] w-full p-3 flex gap-4"
+                className="border border-gray-100  h-[238px] max-sm:h-full w-full p-3 flex gap-4"
                 key={index}
               >
-                <div className="w-[200px] h-[200px] overflow-hidden rounded-full">
+                <div className="w-[200px] h-[200px] max-sm:h-full overflow-hidden rounded-full max-sm:hidden">
                   <img
                     src={item?.photo?.path || InstructorImage}
                     alt=""
                     width={200}
                     height={200}
-                    className="object-cover rounded-full"
+                    className="object-cover rounded-full "
                   />
                 </div>
                 <div className="flex flex-col gap-4 w-[70%]">
@@ -85,11 +85,8 @@ export const CourseInstructor = ({ courseDetails }: Props) => {
                     ))}
                   </div>
                   <div className=" text-[14px] font-[300] text-gray-700 ">
-                    One day Vako had enough with the 9-to-5 grind, or more like
-                    9-to-9 in his case, and quit his job, or more like got
-                    himself fired from his own startup. He decided to work on
-                    his dream: be his own boss, travel the world, only do the
-                    work he enjoyed...
+                    One day Vako had enough with the One day Vako had enough
+                    with the One day Vako had enough with the
                     <span className="font-[600] hover:underline cursor-pointer">
                       READ MORE
                     </span>

@@ -1,6 +1,6 @@
+import apple from '../assets/icons/apple.svg';
 import facebook from '../assets/icons/facebook.svg';
 import google from '../assets/icons/google.svg';
-import apple from '../assets/icons/apple.svg';
 
 export interface SocialMediaAuthType {
   text: string;

@@ -1,13 +1,13 @@
+import React, { useEffect, useState } from 'react';
 import {
-  lessonType,
+  type lessonType,
   sectionType,
   useCourseSections,
 } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
 import Button from 'modules/shared/components/Button';
 import Input from 'modules/shared/components/Input';
-import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
-import React, { useEffect, useState } from 'react';
+import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 
 interface EditSectionModalPropsType {
   Lesson: lessonType | undefined;
@@ -17,7 +17,6 @@ function EditLessonModal({ Lesson, Submit }: EditSectionModalPropsType) {
   const [value, setValue] = useState<string | null>(Lesson?.name || null);
   const [error, setError] = useState<string | null>(null);
   const { setClose } = useModal();
-
 
   const ChangeLessonNameHandler = () => {
     const submitted: boolean = Submit(value || Lesson?.name || '');
@@ -36,7 +35,9 @@ function EditLessonModal({ Lesson, Submit }: EditSectionModalPropsType) {
           id="lesson"
           name="lesson"
           label="Sesson"
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
           value={value || Lesson?.name || ''}
           placeholder="Write your lesson name here..."
         />

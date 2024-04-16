@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import AttatchmentIcon from 'modules/shared/assets/icons/courseDetails/fielText.svg';
+import replayIcon from 'modules/shared/assets/icons/courseDetails/replayIcon.svg';
 import Button from 'modules/shared/components/Button';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from 'modules/shared/components/ui/avatar';
-
-import replayIcon from 'modules/shared/assets/icons/courseDetails/replayIcon.svg';
 import { Input } from 'modules/shared/components/ui/input';
 type Comment = {
   id: number;
@@ -17,7 +17,6 @@ type Comment = {
   content: string;
   children: Comment[] | [];
 };
-import { motion, AnimatePresence } from 'framer-motion';
 
 const mockComments: Comment[] = [
   {

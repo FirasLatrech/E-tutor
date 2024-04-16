@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
-import { cn } from 'modules/shared/lib/utility';
-import playCircleIcon from 'modules/shared/assets/icons/courseDetails/playEditor.svg';
-const Accordion = AccordionPrimitive.Root;
 import checkIcon from 'modules/shared/assets/icons/courseDetails/checkIcon.svg';
 import clock from 'modules/shared/assets/icons/courseDetails/clockprimaryicon.svg';
+import playCircleIcon from 'modules/shared/assets/icons/courseDetails/playEditor.svg';
+import { cn } from 'modules/shared/lib/utility';
 import { date } from 'yup';
+const Accordion = AccordionPrimitive.Root;
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>

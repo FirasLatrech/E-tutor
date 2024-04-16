@@ -1,5 +1,5 @@
 import { api } from 'modules/shared/lib/api';
-import { QueryType } from 'modules/shared/types/query';
+import { type QueryType } from 'modules/shared/types/query';
 
 export const getAllUsers = async ({
   page = 1,

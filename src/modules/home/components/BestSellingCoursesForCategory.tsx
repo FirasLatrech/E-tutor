@@ -10,13 +10,10 @@ import {
   TooltipContent,
   TooltipProvider,
 } from 'modules/shared/components/ui/tooltip';
-import OurFeautureCourse from './ourFeautureCourse';
-import {
-  useGetBestCourseByCategoryId,
-  useGetCategoryDetails,
-  useGetCourseByCategoryId,
-} from '../data/queries/home.query';
-import { ICourse } from 'modules/shared/types/course';
+import { useNavigation } from 'modules/shared/hooks/useNavigation';
+import { type ICourse } from 'modules/shared/types/course';
+import { useGetBestCourseByCategoryId } from '../data/queries/home.query';
+
 interface categoryDetails {
   name: string;
 }
@@ -30,36 +27,41 @@ export default function BestSellingCoursesForCategory({
   const { data } = useGetBestCourseByCategoryId(id);
   console.log(data);
   const { t } = useTranslation('home');
-
+  const goTo = useNavigation();
+  const handelNaviage = (id: string) => {
+    goTo(`/courses/${id}`);
+  };
   return (
     <div className="flex flex-col items-center w-full pb-[70px] pt-[60px] bg-white">
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
-        className="text-[40px] font-[600] h-[100px] "
+        className="text-[40px] font-[600]  max-xl:text-[30px] "
       >
         {t('home.bestsellingcourses')} in {categoryDetails?.name}
       </motion.span>
 
-      <div className="grid grid-cols-4 gap-5">
+      <div className="grid grid-cols-4 gap-3 max-md:grid-cols-1 max-lg:grid-cols-2 max-xl:grid-cols-3 max-2xl:grid-cols-5 w-[90%] ">
         {data &&
           Array.isArray(data) &&
           data?.map((item: ICourse) => {
             console.log(item);
             return (
               <div
-                className="flex w-[294px] flex-col items-center justify-center  bg-white border"
+                className="flex flex-col items-center justify-center w-full bg-white border min-w-[297px]"
                 style={{ direction: 'ltr' }}
                 key={item.id}
+                onClick={() => {
+                  handelNaviage(item?.id);
+                }}
               >
-                <div className="h-[183px] w-[294px] overflow-hidden ">
+                <div className="h-[183px]  overflow-hidden ">
                   <img
                     src={item.course_thumbnail}
                     alt=""
-                    width={294}
                     height={183}
-                    className="duration-300 cursor-pointer hover:scale-125"
+                    className="duration-300 min-w-[297px] cursor-pointer hover:scale-125"
                   />
                 </div>
                 <div className="w-full text-gray-700 ">

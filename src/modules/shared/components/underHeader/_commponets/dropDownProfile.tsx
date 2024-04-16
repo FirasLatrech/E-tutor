@@ -1,39 +1,24 @@
-import {
-  Cloud,
-  CreditCard,
-  Github,
-  Keyboard,
-  LifeBuoy,
-  LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  Settings,
-  User,
-  UserPlus,
-  Users,
-} from 'lucide-react';
-
+import React from 'react';
+import { useNavigate } from 'react-router';
+import { CreditCard, LogOut, Settings, User } from 'lucide-react';
+import useAuthStore from 'modules/shared/store/useAuthStore';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '../../ui/dropdown-menu';
-import { Button } from '../../ui/button';
-import React from 'react';
-import { useNavigate } from 'react-router';
-import useAuthStore from 'modules/shared/store/useAuthStore';
-
+/**
+ * Renders a dropdown menu for the user with various options such as profile, billing, settings, and logout.
+ *
+ * @param {React.ReactNode} children - The content of the dropdown menu trigger.
+ * @param {string} user_id - The user's ID for navigation purposes.
+ * @return {JSX.Element} The dropdown menu JSX element.
+ */
 export function DropdownMenuDemo({
   children,
   user_id,
@@ -78,7 +63,11 @@ export function DropdownMenuDemo({
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => handelLogOut()}>
+        <DropdownMenuItem
+          onClick={() => {
+            handelLogOut();
+          }}
+        >
           <LogOut className="w-4 h-4 mr-2" />
           <span>Log out</span>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>

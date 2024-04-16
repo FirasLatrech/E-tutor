@@ -1,14 +1,17 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { TooltipContent } from '@radix-ui/react-tooltip';
+import { AnimatePresence, motion } from 'framer-motion';
+import debounce from 'lodash/debounce';
 import { SeparatorHorizontal } from 'lucide-react';
 import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
 import filterIcon from 'modules/shared/assets/icons/course/filter.svg';
 import primaryFilter from 'modules/shared/assets/icons/course/primaryfilter.svg';
 import webdevelopment from 'modules/shared/assets/icons/course/webdevelempent.svg';
-import { AnimatePresence, motion } from 'framer-motion';
-
 import scoopIcon from 'modules/shared/assets/icons/scoop.svg';
 import MachineLeanringCover from 'modules/shared/assets/images/bestsellingcourse/image1.png';
+import Button from 'modules/shared/components/Button';
+import Spinner from 'modules/shared/components/Spinner';
 import {
   Accordion,
   AccordionContent,
@@ -35,22 +38,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from 'modules/shared/components/ui/select';
+import { Skeleton } from 'modules/shared/components/ui/skeleton';
 import {
   Tooltip,
   TooltipProvider,
   TooltipTrigger,
 } from 'modules/shared/components/ui/tooltip';
+import useDebounce from 'modules/shared/hooks/useDebounce';
+import { useNavigation } from 'modules/shared/hooks/useNavigation';
 import { cn } from 'modules/shared/lib/utility';
+import { type ICourse } from 'modules/shared/types/course';
 import {
   useAllCategory,
   useGetCourseByCategoryId,
 } from '../data/queries/home.query';
-import { ICourse } from 'modules/shared/types/course';
-import useDebounce from 'modules/shared/hooks/useDebounce';
-import Spinner from 'modules/shared/components/Spinner';
-import { Skeleton } from 'modules/shared/components/ui/skeleton';
-import Button from 'modules/shared/components/Button';
-import debounce from 'lodash/debounce';
 import SearchInput from './inputSearch';
 
 export default function Course({ id }: { id: string }) {
@@ -78,7 +79,7 @@ export default function Course({ id }: { id: string }) {
     // Generate options for the last three months
     const lastThreeMonths = [];
     for (let i = 0; i < 3; i++) {
-      let monthIndex = (currentMonth - i + 12) % 12; // Ensure index is within 0-11 range
+      const monthIndex = (currentMonth - i + 12) % 12; // Ensure index is within 0-11 range
       let year = currentYear;
       if (monthIndex > currentMonth) {
         year--; // If month is in previous year
@@ -98,10 +99,13 @@ export default function Course({ id }: { id: string }) {
   const [filterState, setFilterState] = useState(false);
   const [search, setSearch] = useState('');
   const [month, setMonth] = useState('');
-  console.log(month);
-  const debouncedSearchTerm = useDebounce(search, 600);
-  console.log(debouncedSearchTerm);
 
+  const debouncedSearchTerm = useDebounce(search, 600);
+  const goTo = useNavigation();
+
+  const handelNaviage = (id: string) => {
+    goTo(`/courses/${id}`);
+  };
   const { data, isPending, error } = useGetCourseByCategoryId(
     id,
     debouncedSearchTerm,
@@ -197,7 +201,7 @@ export default function Course({ id }: { id: string }) {
         </div>
       </div>
       <div className="flex items-center justify-center w-full">
-        <div className="flex gap-12 w-[83%]">
+        <div className="flex gap-12 w-[90%]">
           {filterState && (
             <div className="w-[300px] bg-white flex flex-col gap-5 duration-500	 transition-all">
               <Accordion type="multiple">
@@ -276,26 +280,35 @@ export default function Course({ id }: { id: string }) {
               </div>
             </div>
           )}
-          <motion.div className="flex gap-3 " layout>
+          <motion.div
+            layout
+            className={
+              filterState
+                ? 'grid grid-cols-3   max-md:grid-cols-1 max-lg:grid-cols-1  max-xl:grid-cols-2 max-2xl:grid-cols-3 gap-3  h-full '
+                : 'grid grid-cols-4   max-md:grid-cols-1 max-lg:grid-cols-2  max-xl:grid-cols-3 max-2xl:grid-cols-4 gap-8  h-full'
+            }
+          >
             <AnimatePresence>
               {data &&
                 data?.map((item: ICourse) => {
                   return (
                     <motion.div
-                      className="flex w-[294px] flex-col items-center justify-center  bg-white border"
+                      className="flex min-w-[294px] flex-col items-center justify-center  bg-white border"
                       style={{ direction: 'ltr' }}
                       key={item.id}
                       layout
                       animate={{ opacity: 1 }}
                       initial={{ opacity: 0 }}
+                      onClick={() => {
+                        handelNaviage(item?.id);
+                      }}
                     >
-                      <div className="h-[183px] w-[294px] overflow-hidden ">
+                      <div className="h-[183px]  overflow-hidden ">
                         <img
                           src={item.course_thumbnail}
                           alt=""
-                          width={294}
                           height={183}
-                          className="duration-300 cursor-pointer hover:scale-125"
+                          className="duration-300 cursor-pointer hover:scale-125 min-w-[294px] object-cover"
                         />
                       </div>
                       <div className="w-full text-gray-700 ">
@@ -343,7 +356,7 @@ export default function Course({ id }: { id: string }) {
         </div>
       </div>
 
-      <div className="pt-6 pb-6">
+      {/* <div className="pt-6 pb-6">
         <Pagination>
           <PaginationContent>
             <PaginationItem>
@@ -368,7 +381,7 @@ export default function Course({ id }: { id: string }) {
             </PaginationItem>
           </PaginationContent>
         </Pagination>
-      </div>
+      </div> */}
     </div>
   );
 }

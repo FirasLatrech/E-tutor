@@ -3,8 +3,8 @@ import UploadIcon from 'modules/shared/assets/icons/Upload/UploadImageIcon';
 
 interface InputFileTypeProps {
   text: string;
-  accept?: string; 
-  onChange?: (file: File) => void; 
+  accept?: string;
+  onChange?: (file: File) => void;
 }
 
 function InputFile({ text, accept, onChange }: InputFileTypeProps) {
@@ -35,8 +35,8 @@ function InputFile({ text, accept, onChange }: InputFileTypeProps) {
         <input
           type="file"
           className="w-full opacity-0 h-full absolute m-0 block "
-          onChange={handleChange} 
-          accept={accept} 
+          onChange={handleChange}
+          accept={accept}
         />
       </div>
     </button>
