@@ -12,11 +12,10 @@ import useAuthStore from 'modules/shared/store/useAuthStore';
 import * as yup from 'yup';
 
 function LoginForm() {
-  const { mutateAsync: login, isError, error, isPending } = useLoginQuery();
+  const { mutateAsync: login, isPending } = useLoginQuery();
   const { toast } = useToast();
   const { setIsAuthenticated, isAuthenticated, setUser, setToken } =
     useAuthStore((state) => state);
-  console.log(isAuthenticated);
   const onSubmit: SubmitHandler<LoginBody> = async (data) => {
     const response = await login(data);
     if (response?.user) {

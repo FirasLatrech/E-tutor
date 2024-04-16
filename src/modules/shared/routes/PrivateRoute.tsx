@@ -7,9 +7,8 @@ interface Props {
 }
 
 const PrivateRoute: React.FC<Props> = ({ children }) => {
-  const { isAuthenticated } = useAuthStore((state) => state);
-  console.log(isAuthenticated, 'isAuthenticated');
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  const { isAuthenticated, isInitialised } = useAuthStore((state) => state);
+  return isAuthenticated && isInitialised ? children : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;
