@@ -18,9 +18,6 @@ import { DropdownMenuDemo } from './_commponets/dropDownProfile';
  */
 const UnderHeader = () => {
   const { isAuthenticated, user } = useAuthStore();
-  console.log(user);
-
-  console.log(user?.photo_url);
   const Fallback = isAuthenticated && user?.firstName[0] + user?.lastName[0];
   const { t } = useTranslation('underheader');
   console.log(user?.photo?.path ?? user?.photo_url);
@@ -72,10 +69,7 @@ const UnderHeader = () => {
                 <>
                   <DropdownMenuDemo user_id={user?.id || ''}>
                     <Avatar className="cursor-pointer">
-                      <AvatarImage
-                        src={user?.photo?.path ?? user?.photo_url}
-                        alt={user.name}
-                      />
+                      <AvatarImage src={user?.photo?.path ?? user?.photo_url} />
                       <AvatarFallback>{Fallback}</AvatarFallback>
                     </Avatar>
                   </DropdownMenuDemo>
