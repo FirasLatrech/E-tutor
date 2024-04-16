@@ -18,9 +18,12 @@ import { DropdownMenuDemo } from './_commponets/dropDownProfile';
  */
 const UnderHeader = () => {
   const { isAuthenticated, user } = useAuthStore();
-  const Fallback = isAuthenticated && user?.firstName[0] + user?.username[0];
-  const { t } = useTranslation('underheader');
+  console.log(user);
 
+  console.log(user?.photo_url);
+  const Fallback = isAuthenticated && user?.firstName[0] + user?.lastName[0];
+  const { t } = useTranslation('underheader');
+  console.log(user?.photo?.path ?? user?.photo_url);
   // routes data
 
   // check if route is active
@@ -69,7 +72,10 @@ const UnderHeader = () => {
                 <>
                   <DropdownMenuDemo user_id={user?.id || ''}>
                     <Avatar className="cursor-pointer">
-                      <AvatarImage src={user?.photo?.path} alt={user.name} />
+                      <AvatarImage
+                        src={user?.photo?.path ?? user?.photo_url}
+                        alt={user.name}
+                      />
                       <AvatarFallback>{Fallback}</AvatarFallback>
                     </Avatar>
                   </DropdownMenuDemo>

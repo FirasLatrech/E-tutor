@@ -27,6 +27,13 @@ const routes: RouteConfig[] = [
   },
   {
     exact: true,
+    // guard: PrivateRoute,
+    path: PATH.HOME,
+    component: lazy(async () => await import('../features/Home/index')),
+    layout: MainLayout,
+  },
+  {
+    exact: true,
     //  guard: PrivateRoute,
     path: PATH.CATEGORY,
     component: lazy(async () => await import('../features/category/index')),

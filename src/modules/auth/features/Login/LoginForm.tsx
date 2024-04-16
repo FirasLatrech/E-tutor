@@ -10,10 +10,12 @@ import { ToastAction } from 'modules/shared/components/ui/toast';
 import { useToast } from 'modules/shared/components/ui/use-toast';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import * as yup from 'yup';
+import { useNavigation } from 'modules/shared/hooks/useNavigation';
 
 function LoginForm() {
   const { mutateAsync: login, isPending } = useLoginQuery();
   const { toast } = useToast();
+  const goTo = useNavigation();
   const { setIsAuthenticated, isAuthenticated, setUser, setToken } =
     useAuthStore((state) => state);
   const onSubmit: SubmitHandler<LoginBody> = async (data) => {
@@ -21,6 +23,7 @@ function LoginForm() {
     if (response?.user) {
       setToken(response?.token);
       setIsAuthenticated(true);
+      goTo('/');
     } else {
       toast({
         variant: 'error',

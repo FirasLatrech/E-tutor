@@ -4,10 +4,9 @@ import { useGoogleLogin } from '@react-oauth/google';
 import SocialMediaBtn from 'modules/auth/components/SocialMediaBtn';
 import { SocialMediaAuth } from 'modules/auth/constants/SocialMediaAuth.constant';
 import { exchangeCodeForIdToken } from 'modules/auth/data/api/auth.service';
-import {
-  useAuthGoogleLoginService,
-} from 'modules/auth/data/queries/auth.query';
+import { useAuthGoogleLoginService } from 'modules/auth/data/queries/auth.query';
 import HTTP_CODES_ENUM from 'modules/shared/constants/http-code.constant';
+import { useNavigation } from 'modules/shared/hooks/useNavigation';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import { set } from 'react-hook-form';
 
@@ -16,19 +15,22 @@ export default function GoogleAuth() {
 
   const { setUser } = useAuthStore((state) => state);
   const { setIsAuthenticated, setToken } = useAuthStore((state) => state);
-
+  const goTo = useNavigation();
   const onSuccess = async (tokenResponse: any) => {
     console.log('success', tokenResponse);
-    const idToken = await exchangeCodeForIdToken(tokenResponse?.code)
-    
+    const idToken = await exchangeCodeForIdToken(tokenResponse?.code);
+
     const { status, data } = await authGoogleLoginService({
-      idToken
+      idToken,
     });
+    console.log(data);
+    console.log(status);
 
     if (status === HTTP_CODES_ENUM.OK) {
       setToken(data.token);
       setIsAuthenticated(true);
       setUser(data.user);
+      goTo('/home');
     }
   };
 
