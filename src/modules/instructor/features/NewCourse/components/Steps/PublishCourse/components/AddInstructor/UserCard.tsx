@@ -1,12 +1,10 @@
 import CloseIcon from 'modules/instructor/assets/icons/CreateCourse/CloseIcon';
-import DeleteIcon from 'modules/instructor/assets/icons/CreateCourse/deleteIcon';
 import { useCourseSections } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from 'modules/shared/components/ui/avatar';
-import React from 'react';
 
 interface UserCardPropsType {
   username: string;
@@ -23,7 +21,7 @@ function UserCard({ username, pictureLink, job, id }: UserCardPropsType) {
         onClick={() => {
           console.log('added');
           setInstructors((prev) => {
-            if (prev?.some((user) => user?.id == id)) return prev;
+            if (prev?.some((user) => user?.id === id)) return prev;
             return [
               ...(prev || []),
               { id, username, pictureLink: '', job: 'UI/Ux Designer' },
@@ -44,10 +42,10 @@ function UserCard({ username, pictureLink, job, id }: UserCardPropsType) {
           <AvatarFallback>FL</AvatarFallback>
         </Avatar>
         <div className="flex flex-col items-start justify-center gap-2">
-          <p className="capitalize text-gray-900 text-sm font-semibold">
+          <p className="text-sm font-semibold text-gray-900 capitalize">
             {username}
           </p>
-          <p className="leading-5 text-gray-600 text-sm ">{job}</p>
+          <p className="text-sm leading-5 text-gray-600 ">{job}</p>
         </div>
       </div>
       {

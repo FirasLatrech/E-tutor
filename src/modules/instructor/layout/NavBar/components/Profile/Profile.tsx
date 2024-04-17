@@ -1,9 +1,9 @@
+import React from 'react';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from 'modules/shared/components/ui/avatar';
-import React from 'react';
 
 function Profile() {
   return (

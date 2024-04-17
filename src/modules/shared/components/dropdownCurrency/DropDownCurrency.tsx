@@ -17,9 +17,9 @@ import {
 
 export default function DropDownCurrency() {
   const { t } = useTranslation('sidebar');
-  const [currency, setCurrency] = React.useState(getItem('currency') || 'EUR');
+  const [currency, setCurrency] = React.useState(getItem('currency') ?? 'EUR');
   React.useEffect(() => {
-    setCurrency(t('sidebar.eur') || 'EUR');
+    setCurrency(t('sidebar.eur') ?? 'EUR');
   }, [getItem('language')]);
   const [onOpenChange, setOnOpenChange] = React.useState(false);
   const onValueChange = (value: string) => {

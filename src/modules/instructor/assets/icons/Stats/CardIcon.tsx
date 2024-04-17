@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const CardIcon = ({ ...props }) => (
   <svg
@@ -17,33 +17,32 @@ const CardIcon = ({ ...props }) => (
     <path
       d="M28 7H4C3.44772 7 3 7.44772 3 8V24C3 24.5523 3.44772 25 4 25H28C28.5523 25 29 24.5523 29 24V8C29 7.44772 28.5523 7 28 7Z"
       stroke="#1D2026"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M20.9995 21H24.9995"
       stroke="#1D2026"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M14.9995 21H16.9995"
       stroke="#1D2026"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M2.99951 12.1074H28.9995"
       stroke="#1D2026"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
 
-
-export default CardIcon
+export default CardIcon;

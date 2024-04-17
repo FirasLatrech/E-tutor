@@ -1,1 +1,1 @@
-export { default } from 'modules/instructor/features/conversations'
+export { default } from 'modules/instructor/features/conversations';

@@ -1,12 +1,12 @@
+import React, { useEffect, useState } from 'react';
 import {
-  sectionType,
+  type sectionType,
   useCourseSections,
 } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
 import Button from 'modules/shared/components/Button';
 import Input from 'modules/shared/components/Input';
-import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
-import React, { useEffect, useState } from 'react';
+import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 
 interface EditSectionModalPropsType {
   Section: sectionType | undefined;
@@ -30,7 +30,7 @@ function EditSectionModal({ Section, Submit }: EditSectionModalPropsType) {
 
   return (
     <ModalContainer title={'edit section name'}>
-      <div className="py-2 px-6">
+      <div className="px-6 py-2">
         <Input
           id="Section"
           name="Section"
@@ -46,7 +46,7 @@ function EditSectionModal({ Section, Submit }: EditSectionModalPropsType) {
         >
           {error || '|'}
         </span>
-        <div className="flex justify-between items-center pb-4 w-full mt-4">
+        <div className="flex items-center justify-between w-full pb-4 mt-4">
           <Button
             variant="secondaryGray"
             onClick={() => {

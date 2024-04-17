@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-function DragIcon({...props}) {
+function DragIcon({ ...props }) {
   return (
     <svg
       {...props}
@@ -13,26 +13,26 @@ function DragIcon({...props}) {
       <path
         d="M4 10H16"
         stroke="#1D2026"
-        stroke-width="1.3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M4 5H16"
         stroke="#1D2026"
-        stroke-width="1.3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M4 15H16"
         stroke="#1D2026"
-        stroke-width="1.3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
 }
 
-export default DragIcon
+export default DragIcon;

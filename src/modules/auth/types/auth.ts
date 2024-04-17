@@ -11,10 +11,3 @@ export interface RegisterBody {
   lastName: string;
   confirmPassword: string;
 }
-
-export interface GoogleTokenResponse {
-  code: string;
-  authuser:string;
-  prompt: string;
-  scope: string;
-}

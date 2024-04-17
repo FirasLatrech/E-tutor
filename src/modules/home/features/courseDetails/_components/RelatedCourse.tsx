@@ -1,21 +1,15 @@
-import React from 'react';
-import StudentsFeedbackSelect from './StudentFeedbackSelect';
+import { MoveRight, SeparatorHorizontal } from 'lucide-react';
 import staricon from 'modules/shared/assets/icons/courseDetails/star.svg';
-type Props = {};
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from 'modules/shared/components/ui/avatar';
 import MachineLeanringCover from 'modules/shared/assets/images/bestsellingcourse/image1.png';
-import Button from 'modules/shared/components/Button';
-import { MoveLeft, MoveRight, SeparatorHorizontal } from 'lucide-react';
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from 'modules/shared/components/ui/tooltip';
+
+type Props = {};
 const courses = [
   {
     cover: MachineLeanringCover,
@@ -26,15 +20,7 @@ const courses = [
     rating: '5.0',
     students: '265.7K',
   },
-  {
-    cover: MachineLeanringCover,
-    tag: 'DESIGN',
-    price: '$57.00',
-    title: 'Machine Learning A-Z™: Hands-On Python ...',
-    fullTitle: 'Machine Learning A-Z™: Hands-On Python & R In Data',
-    rating: '5.0',
-    students: '265.7K',
-  },
+
   {
     cover: MachineLeanringCover,
     tag: 'DESIGN',
@@ -47,7 +33,7 @@ const courses = [
 ];
 export const RelatedCourse = (props: Props) => {
   return (
-    <div className="pt-6 w-[100%] flex flex-col gap-8 h-full pb-6">
+    <div className="pt-6 w-[95%]  flex flex-col gap-8 h-full pb-6">
       <div className="flex items-center justify-between">
         <div className="text-2xl font-semibold tracking-tight scroll-m-20">
           Related Courses

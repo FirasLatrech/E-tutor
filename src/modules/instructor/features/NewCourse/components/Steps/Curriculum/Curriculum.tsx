@@ -1,17 +1,13 @@
 import { Droppable, Draggable } from '@hello-pangea/dnd';
 import { DragDropContext } from '@hello-pangea/dnd';
 import {
-  sectionType,
+  type sectionType,
   useCourseSections,
 } from '../../../context/CourseSectionsContext';
-import Button from 'modules/shared/components/Button';
-import DragIcon from 'modules/instructor/assets/icons/CreateCourse/DragIcon';
 import { useSteps } from '../../../context/StepsContext';
-import DeleteIcon from 'modules/instructor/assets/icons/CreateCourse/deleteIcon';
-import EditIcon from 'modules/instructor/assets/icons/CreateCourse/EditIcon';
-import AddIcon from 'modules/instructor/assets/icons/CreateCourse/AddIcon';
-import CourseSection from './components/CourseSection/CourseSection';
 import CourseLesson from './components/CourseLesson/CourseLesson';
+import CourseSection from './components/CourseSection/CourseSection';
+import Button from 'modules/shared/components/Button';
 
 function Curriculum() {
   const { Sections, setSections } = useCourseSections();
@@ -126,7 +122,7 @@ function Curriculum() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center w-full">
       <DragDropContext onDragEnd={onDragEndSections}>
         <Droppable droppableId={'sections'}>
           {(droppableProvider) => (
@@ -190,7 +186,7 @@ function Curriculum() {
           )}
         </Droppable>
         <Button
-          onClick={() =>
+          onClick={() => {
             setSections((old: sectionType[] | null) => [
               ...(old || []),
               {
@@ -206,8 +202,8 @@ function Curriculum() {
                   },
                 ],
               },
-            ])
-          }
+            ]);
+          }}
           variant="secondaryPrimary"
           text="Add Sections"
           className="w-[94%] flex items-center justify-center !mr-0 !text-lg "

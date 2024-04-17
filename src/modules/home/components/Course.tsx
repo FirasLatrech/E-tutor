@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
 import { TooltipContent } from '@radix-ui/react-tooltip';
+import { AnimatePresence, motion } from 'framer-motion';
+import debounce from 'lodash/debounce';
 import { SeparatorHorizontal } from 'lucide-react';
 import staricon from 'modules/shared/assets/icons/bestSelling/star.svg';
 import filterIcon from 'modules/shared/assets/icons/course/filter.svg';
@@ -7,6 +10,8 @@ import primaryFilter from 'modules/shared/assets/icons/course/primaryfilter.svg'
 import webdevelopment from 'modules/shared/assets/icons/course/webdevelempent.svg';
 import scoopIcon from 'modules/shared/assets/icons/scoop.svg';
 import MachineLeanringCover from 'modules/shared/assets/images/bestsellingcourse/image1.png';
+import Button from 'modules/shared/components/Button';
+import Spinner from 'modules/shared/components/Spinner';
 import {
   Accordion,
   AccordionContent,
@@ -33,52 +38,92 @@ import {
   SelectTrigger,
   SelectValue,
 } from 'modules/shared/components/ui/select';
+import { Skeleton } from 'modules/shared/components/ui/skeleton';
 import {
   Tooltip,
   TooltipProvider,
   TooltipTrigger,
 } from 'modules/shared/components/ui/tooltip';
+import useDebounce from 'modules/shared/hooks/useDebounce';
+import { useNavigation } from 'modules/shared/hooks/useNavigation';
 import { cn } from 'modules/shared/lib/utility';
-export default function Course({ id }: { id: string | undefined }) {
+import { type ICourse } from 'modules/shared/types/course';
+import {
+  useAllCategory,
+  useGetCourseByCategoryId,
+} from '../data/queries/home.query';
+import SearchInput from './inputSearch';
+
+export default function Course({ id }: { id: string }) {
+  function LastThreeMonths() {
+    const currentDate = new Date();
+
+    const currentMonth = currentDate.getMonth();
+    console.log(currentMonth);
+    const currentYear = currentDate.getFullYear();
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+
+    // Generate options for the last three months
+    const lastThreeMonths = [];
+    for (let i = 0; i < 3; i++) {
+      const monthIndex = (currentMonth - i + 12) % 12; // Ensure index is within 0-11 range
+      let year = currentYear;
+      if (monthIndex > currentMonth) {
+        year--; // If month is in previous year
+      }
+      lastThreeMonths.push({
+        month: months[currentMonth - 1],
+        year: currentYear,
+        data: `${currentYear}-${
+          currentMonth < 10 ? '0' + currentMonth : currentMonth
+        }-01`,
+      });
+    }
+    return lastThreeMonths;
+  }
+
+  console.log(LastThreeMonths());
   const [filterState, setFilterState] = useState(false);
-  const courses = [
-    {
-      cover: MachineLeanringCover,
-      tag: 'DESIGN',
-      price: '$57.00',
-      title: 'Machine Learning A-Z™: Hands-On Python ...',
-      fullTitle: 'Machine Learning A-Z™: Hands-On Python & R In Data',
-      rating: '5.0',
-      students: '265.7K',
-    },
-    {
-      cover: MachineLeanringCover,
-      tag: 'DESIGN',
-      price: '$57.00',
-      title: 'Machine Learning A-Z™: Hands-On Python ...',
-      fullTitle: 'Machine Learning A-Z™: Hands-On Python & R In Data',
-      rating: '5.0',
-      students: '265.7K',
-    },
-    {
-      cover: MachineLeanringCover,
-      tag: 'DESIGN',
-      price: '$57.00',
-      title: 'Machine Learning A-Z™: Hands-On Python ...',
-      fullTitle: 'Machine Learning A-Z™: Hands-On Python & R In Data',
-      rating: '5.0',
-      students: '265.7K',
-    },
-    {
-      cover: MachineLeanringCover,
-      tag: 'DESIGN',
-      price: '$57.00',
-      title: 'Machine Learning A-Z™: Hands-On Python ...',
-      fullTitle: 'Machine Learning A-Z™: Hands-On Python & R In Data',
-      rating: '5.0',
-      students: '265.7K',
-    },
-  ];
+  const [search, setSearch] = useState('');
+  const [month, setMonth] = useState('');
+
+  const debouncedSearchTerm = useDebounce(search, 600);
+  const goTo = useNavigation();
+
+  const handelNaviage = (id: string) => {
+    goTo(`/courses/${id}`);
+  };
+  const { data, isPending, error } = useGetCourseByCategoryId(
+    id,
+    debouncedSearchTerm,
+    month
+  );
+  const { data: allCategory } = useAllCategory();
+  console.log(allCategory);
+  interface Category {
+    id: string;
+    name: string;
+    color: string;
+    icon: string;
+    create_by: number;
+    courses_count: number;
+    background_color: string;
+    createdAt: string;
+    deletedAt: string | null;
+  }
   return (
     <div className="flex flex-col items-center justify-center pt-[20px] pb-[20px]">
       <div className="w-[83%]">
@@ -86,7 +131,9 @@ export default function Course({ id }: { id: string | undefined }) {
           <div className="flex gap-4">
             <div
               className="flex w-[147px] items-center gap-2 p-3 border border-primary-200 h-[48px]  justify-between cursor-pointer"
-              onClick={() => { setFilterState(!filterState); }}
+              onClick={() => {
+                setFilterState(!filterState);
+              }}
             >
               <div className="flex items-center gap-2">
                 <img
@@ -108,29 +155,25 @@ export default function Course({ id }: { id: string | undefined }) {
                 3
               </span>
             </div>
-            <div className="border-gray-100 border-[1px] w-96  flex items-center justify-center pl-2 pr-2 ">
-              <img src={scoopIcon} alt="scoopIcon" />
-              <Input
-                type="text"
-                placeholder={'UI/UX Design'}
-                className="w-full border-none outline-none placeholder:text-gray-500 "
-              />
-            </div>
+            <SearchInput onSearch={setSearch} />
           </div>
           <div className="flex items-center gap-2">
             <span className="text-gray-700 text-[14px]">Sort By : </span>
-            <Select>
+            <Select
+              onValueChange={(obj) => {
+                setMonth(obj);
+              }}
+            >
               <SelectTrigger className="w-[200px] h-[48px] text-gray-700">
-                <SelectValue placeholder="Browse" />
+                <SelectValue placeholder="month" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup className="text-gray-700 ">
-                  <SelectLabel>Trending</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
+                  {LastThreeMonths().map((item, index) => (
+                    <SelectItem value={item.data} key={index}>
+                      {item.month}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -157,135 +200,175 @@ export default function Course({ id }: { id: string | undefined }) {
           </div>
         </div>
       </div>
-      <div className="flex gap-12">
-        {filterState && (
-          <div className="w-[300px] bg-white flex flex-col gap-5 duration-500	 transition-all">
-            <Accordion type="multiple">
-              <AccordionItem value="item-1">
-                <AccordionTrigger className="">CATEGORY</AccordionTrigger>
-                <AccordionContent>
-                  <AccordionItem
-                    value="item-2"
-                    className="border-b border-gray-100"
-                  >
-                    <AccordionTrigger className="flex">
-                      <div className="flex items-center gap-3 ">
-                        <img src={webdevelopment} alt="" className="" />
-                        <span>Development</span>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="pt-1 border-l border-r flex  justify-star items-center  p-2 h-[50px] border-gray-100">
-                      <div className="flex items-center w-full h-full space-x-2 ">
+      <div className="flex items-center justify-center w-full">
+        <div className="flex gap-12 w-[90%]">
+          {filterState && (
+            <div className="w-[300px] bg-white flex flex-col gap-5 duration-500	 transition-all">
+              <Accordion type="multiple">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger className="">CATEGORY</AccordionTrigger>
+                  <AccordionContent>
+                    {allCategory &&
+                      allCategory.map((item: Category) => {
+                        return (
+                          <AccordionContent
+                            className="pt-1 border-l border-r flex border-b  justify-star items-center  p-2 h-[50px] border-gray-100"
+                            key={item?.id}
+                          >
+                            <div className="flex items-center w-full h-full space-x-2 ">
+                              <Checkbox
+                                id="terms"
+                                className=" peer text-gray-200 border-gray-200  w-[18px] h-[18px] peer"
+                              />
+                              <label
+                                htmlFor="terms"
+                                className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                              >
+                                {item.name}
+                              </label>
+                            </div>
+                          </AccordionContent>
+                        );
+                      })}
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+              <Accordion type="multiple">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger className="">TOOLS</AccordionTrigger>
+
+                  <AccordionContent className="pt-1 border-l border-b border-r border-gray-100 flex  justify-star items-center  p-2 h-[43px]">
+                    <div className="flex items-center justify-between w-full h-full space-x-2">
+                      <div className="flex items-center gap-2">
                         <Checkbox
-                          id="terms"
-                          className=" peer text-gray-200 border-gray-200  w-[18px] h-[18px] peer"
+                          id="Web"
+                          className="text-gray-200 border-gray-200  w-[18px] h-[18px] peer"
                         />
                         <label
-                          htmlFor="terms"
-                          className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          htmlFor="Web"
+                          className="text-sm font-[400]  leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
-                          Web development
+                          React
                         </label>
                       </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-            <Accordion type="multiple">
-              <AccordionItem value="item-1">
-                <AccordionTrigger className="">TOOLS</AccordionTrigger>
-
-                <AccordionContent className="pt-1 border-l border-b border-r border-gray-100 flex  justify-star items-center  p-2 h-[43px]">
-                  <div className="flex items-center justify-between w-full h-full space-x-2">
-                    <div className="flex items-center gap-2">
-                      <Checkbox
-                        id="Web"
-                        className="text-gray-200 border-gray-200  w-[18px] h-[18px] peer"
-                      />
-                      <label
-                        htmlFor="Web"
-                        className="text-sm font-[400]  leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        React
-                      </label>
+                      <span className="text-gray-500"> 1452</span>
                     </div>
-                    <span className="text-gray-500"> 1452</span>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        )}
-
-        <div className={`grid grid-cols-3 gap-4 `}>
-          {/* TODO : render all Course  */}
-
-          {courses.map((course, index) => (
-            <div
-              className="flex w-[294px] flex-col items-center justify-center  bg-white border"
-              key={index}
-            >
-              <div className="h-[183px] w-[294px] overflow-hidden">
-                <img
-                  src={course.cover}
-                  alt=""
-                  width={294}
-                  height={183}
-                  className="duration-300 cursor-pointer hover:scale-125"
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+          )}
+          {isPending && (
+            <div className="flex h-[330px] gap-x-6">
+              <Skeleton className="w-[300px] h-[300px]" />
+              <Skeleton className="w-[300px] h-[300px]" />
+              <Skeleton className="w-[300px] h-[300px]" />
+            </div>
+          )}
+          {data && data.length == 0 && (
+            <div className="flex h-[330px] gap-x-6 items-center justify-center w-full">
+              <div className="w-[300px] h-[300px]  items-center justify-center flex flex-col gap-5">
+                <span className="gray-900 text-[53px]   text-pretty   scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-3xl">
+                  No class for this name
+                </span>
+                <Button
+                  text="Clear the Search Input"
+                  onClick={() => {
+                    setSearch('');
+                  }}
                 />
               </div>
-              <div className="p-2 text-gray-700">
-                <div className="flex items-center justify-between h-[40px] ">
-                  <span className="p-1 text-sm bg-primary-100 text-primary-700">
-                    {course.tag}
-                  </span>
-                  <span className="text-xl text-primary-500">
-                    {course.price}
-                  </span>
-                </div>
-                <div className="text-gray-900 font-[400]  h-[60px] ">
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger className="text-start">
-                        {course.title}
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <span>{course.fullTitle}</span>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-                <SeparatorHorizontal size={1} className="w-full bg-gray-100" />
-                <div className="flex items-center justify-between pt-2 h-[46px]">
-                  <div className="flex items-center gap-1 ">
-                    <img src={staricon} alt="staricon" width={20} />
-                    <span>{course.rating}</span>
-                  </div>
-                  <div>
-                    <span className="text-gray-700">{course.students}</span>
-                    <span className="text-gray-500"> students</span>
-                  </div>
-                </div>
-              </div>
             </div>
-          ))}
+          )}
+          <motion.div
+            layout
+            className={
+              filterState
+                ? 'grid grid-cols-3   max-md:grid-cols-1 max-lg:grid-cols-1  max-xl:grid-cols-2 max-2xl:grid-cols-3 gap-3  h-full '
+                : 'grid grid-cols-4   max-md:grid-cols-1 max-lg:grid-cols-2  max-xl:grid-cols-3 max-2xl:grid-cols-4 gap-8  h-full'
+            }
+          >
+            <AnimatePresence>
+              {data &&
+                data?.map((item: ICourse) => {
+                  return (
+                    <motion.div
+                      className="flex min-w-[294px] flex-col items-center justify-center  bg-white border"
+                      style={{ direction: 'ltr' }}
+                      key={item.id}
+                      layout
+                      animate={{ opacity: 1 }}
+                      initial={{ opacity: 0 }}
+                      onClick={() => {
+                        handelNaviage(item?.id);
+                      }}
+                    >
+                      <div className="h-[183px]  overflow-hidden ">
+                        <img
+                          src={item.course_thumbnail}
+                          alt=""
+                          height={183}
+                          className="duration-300 cursor-pointer hover:scale-125 min-w-[294px] object-cover"
+                        />
+                      </div>
+                      <div className="w-full text-gray-700 ">
+                        <div className="flex items-center justify-between h-[40px] p-2 pt-3">
+                          {/* Tags */}
+                          <span className="p-1 text-sm bg-primary-100 text-primary-700">
+                            {item.course_category?.name}
+                          </span>
+
+                          <span className="text-xl text-primary-500">
+                            ${item?.course_price}
+                          </span>
+                        </div>
+                        <div className="text-gray-900 font-[400]  h-[60px] p-2">
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger className="text-start">
+                                {item?.title}
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <span>{item?.title}</span>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </div>
+                        <hr className="w-full mt-1 mb-1 bg-gray-100" />
+                        <div className="flex items-center justify-between pt-2 h-[46px] p-2">
+                          <div className="flex items-center gap-1 ">
+                            <img src={staricon} alt="staricon" width={20} />
+                            <span>{item.rating}</span>
+                          </div>
+                          <div>
+                            <span className="text-gray-700">
+                              {item.enrollmentCount}
+                            </span>
+                            <span className="text-gray-500"> students</span>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
 
-      <div className="pt-6 pb-6">
+      {/* <div className="pt-6 pb-6">
         <Pagination>
           <PaginationContent>
             <PaginationItem>
               <PaginationPrevious href="#" />
             </PaginationItem>
             <PaginationItem className="rounded-full hover:bg-primary-100">
-              <PaginationLink href="#">1</PaginationLink>
+              <PaginationLink href="#" isActive>
+                1
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href="#" isActive>
-                2
-              </PaginationLink>
+              <PaginationLink href="#">2</PaginationLink>
             </PaginationItem>
             <PaginationItem>
               <PaginationLink href="#">3</PaginationLink>
@@ -298,7 +381,7 @@ export default function Course({ id }: { id: string | undefined }) {
             </PaginationItem>
           </PaginationContent>
         </Pagination>
-      </div>
+      </div> */}
     </div>
   );
 }

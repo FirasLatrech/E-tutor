@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import MuxPlayer from '@mux/mux-node';
+import UploadFileIcon from 'modules/instructor/assets/icons/CreateCourse/UploadFileIcon';
 import Button from 'modules/shared/components/Button';
 import InputFile from 'modules/shared/components/InputFile';
-import UploadFileIcon from 'modules/instructor/assets/icons/CreateCourse/UploadFileIcon';
 import { UploadVideoForStreaming } from 'modules/shared/data/api/videoStreaming.service';
-import MuxPlayer from '@mux/mux-node';
 
 function UploadImage({ label, onChange }: { label: string; onChange: any }) {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -18,7 +18,7 @@ function UploadImage({ label, onChange }: { label: string; onChange: any }) {
 
   return (
     <div className="w-full flex-col gap-[1rem] flex items-start justify-start">
-      <p className="font-medium leading-5 text-lg">{label}</p>
+      <p className="text-lg font-medium leading-5">{label}</p>
       <div className="w-full gap-[2rem] flex items-start justify-start">
         <div className="bg-gray-50 w-full p-[1.6rem] flex items-center justify-center">
           {uploadedFile ? (

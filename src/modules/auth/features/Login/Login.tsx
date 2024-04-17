@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { X } from 'lucide-react';
+import SocialMediaBtn from 'modules/auth/components/SocialMediaBtn';
+import {
+  SocialMediaAuth,
+  type SocialMediaAuthType,
+} from 'modules/auth/constants/SocialMediaAuth.constant';
 import { useLoginQuery } from 'modules/auth/data/queries/auth.query';
+
 import { ToastAction } from 'modules/shared/components/ui/toast';
 import { useToast } from 'modules/shared/components/ui/use-toast';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import LoginImage from '../../assets/images/LogIn/image.png';
-import MainLayout from 'modules/auth/layout/MainLayout/MainLayout';
-import SocialMediaBtn from 'modules/auth/components/SocialMediaBtn';
-import {
-  SocialMediaAuth,
-  SocialMediaAuthType,
-} from 'modules/auth/constants/SocialMediaAuth.constant';
 import LoginForm from './LoginForm';
 import GoogleAuth from 'modules/auth/social-auth/google/google-auth';
 import {

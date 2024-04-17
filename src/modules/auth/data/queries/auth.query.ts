@@ -1,7 +1,7 @@
-import { useMutation } from '@tanstack/react-query';
-import { RegisterBody, type LoginBody } from 'modules/auth/types/auth';
-import { googleLogin, login, register } from '../api/auth.service';
 import { useCallback } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { type LoginBody, type RegisterBody } from 'modules/auth/types/auth';
+import { googleLogin, login, register } from '../api/auth.service';
 
 export const useLoginQuery = () =>
   useMutation({

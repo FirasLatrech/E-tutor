@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import alarmIcon from 'modules/shared/assets/icons/courseDetails/alaram.svg';
 import clockIcon from 'modules/shared/assets/icons/courseDetails/clockIcon.svg';
 import primaryClock from 'modules/shared/assets/icons/courseDetails/clockprimaryicon.svg';
@@ -15,7 +16,11 @@ import stack from 'modules/shared/assets/icons/courseDetails/stack.svg';
 import trophy from 'modules/shared/assets/icons/courseDetails/trophy.svg';
 import usersIcon from 'modules/shared/assets/icons/courseDetails/usersIcons.svg';
 import Button from 'modules/shared/components/Button';
-type Props = {};
+import useCartStore from 'modules/shared/store/useCartStore';
+import { type ICourse } from 'modules/shared/types/course';
+type Props = {
+  courseDetails: ICourse;
+};
 const courseDetail = [
   {
     icon: clockIcon,
@@ -44,46 +49,76 @@ const courseDetail = [
   },
   // Add more course detail objects here...
 ];
-const courseIncludes = [
-  {
-    icon: primaryClock,
-    title: 'Lifetime access',
-  },
-  {
-    icon: currency,
-    title: '30-days money-back guarantee',
-  },
-  {
-    icon: notebookPrimary,
-    title: 'Free exercises file & downloadable resources',
-  },
-  {
-    icon: monitor,
-    title: 'Access on mobile , tablet and TV',
-  },
-  {
-    icon: trophy,
-    title: 'Shareable certificate of completion',
-  },
-  {
-    icon: notepadPrimary,
-    title: 'English subtitles',
-  },
-  {
-    icon: stack,
-    title: '100% online course',
-  },
-  // Add more course detail objects here...
-];
-export const AboutCourseCardDetails = (props: Props) => {
+/**
+ * Renders the details of a course card including price, discount, course details, buttons for cart and buy now, and additional course inclusions.
+ *
+ * @param {Props} courseDetails - The details of the course to be displayed.
+ * @return {JSX.Element} The JSX element representing the course card details.
+ */
+export const AboutCourseCardDetails = ({ courseDetails }: Props) => {
+  const courseIncludes = [
+    {
+      icon: primaryClock,
+      title: courseDetails?.course_descriptions?.duration,
+    },
+    {
+      icon: currency,
+      title: '30-days money-back guarantee',
+    },
+    {
+      icon: notebookPrimary,
+      title: 'Free exercises file & downloadable resources',
+    },
+    {
+      icon: monitor,
+      title: 'Access on mobile , tablet and TV',
+    },
+    {
+      icon: trophy,
+      title: 'Shareable certificate of completion',
+    },
+    {
+      icon: notepadPrimary,
+      title: 'English subtitles',
+    },
+    {
+      icon: stack,
+      title: '100% online course',
+    },
+    // Add more course detail objects here...
+  ];
+  const { setData, data } = useCartStore();
+  const navigate = useNavigate();
+  const handelAddToCart = (id: string) => {
+    const newData = [...data];
+    if (!data.includes(id)) {
+      newData.push(id);
+    }
+    setData(newData);
+  };
+  const handelRemoveFromCart = (id: string) => {
+    let newData = [...data];
+    if (data.includes(id)) {
+      newData = newData.filter((item) => item !== id);
+    }
+    setData(newData);
+  };
+  const handelSendToWatch = (id: string) => {
+    navigate(`watch/${id}`);
+  };
   return (
     <>
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center gap-2">
-          <span className="font-[300] text-[22px]">$14.00</span>
-          <span className="text-gray-500 line-through text-ellipsis ">
-            $26.00
+          <span className="font-[300] text-[22px]">
+            ${courseDetails?.course_price}
+            {/* {((+courseDetails?.course_price || 0) *
+              (+courseDetails?.discount || 0)) /
+              100} */}
           </span>
+          {/* <span className="text-gray-500 line-through text-ellipsis ">
+            ${courseDetails?.course_price}
+          </span> */}
         </div>
 
         {/* discounrt  */}
@@ -109,17 +144,35 @@ export const AboutCourseCardDetails = (props: Props) => {
         ))}
       </div>
       <div className="p-3">
-        <Button
-          variant="primary"
-          text="Add To Cart"
-          size="lg"
-          className="w-full"
-        ></Button>
+        {!data?.includes(courseDetails?.id) ? (
+          <Button
+            variant="primary"
+            text="Add To Cart"
+            size="lg"
+            className="w-full"
+            onClick={() => {
+              handelAddToCart(courseDetails?.id);
+            }}
+          ></Button>
+        ) : (
+          <Button
+            variant="primary"
+            text="Remove From Cart"
+            size="lg"
+            className="w-full"
+            onClick={() => {
+              handelRemoveFromCart(courseDetails.id);
+            }}
+          ></Button>
+        )}
         <Button
           variant="secondaryPrimary"
           text="Buy Now"
           size="lg"
           className="w-full "
+          onClick={() => {
+            handelSendToWatch(courseDetails.id);
+          }}
         ></Button>
       </div>
       <div className="flex pl-2 pr-2">

@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import { Navigate, useNavigate } from 'react-router';
+import { Navigate } from 'react-router';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 
 interface Props {

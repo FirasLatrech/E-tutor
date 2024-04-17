@@ -1,4 +1,9 @@
-import React, { ReactNode, createContext, useContext, useState } from 'react';
+import React, {
+  createContext,
+  type ReactNode,
+  useContext,
+  useState,
+} from 'react';
 
 interface StepsContextType {
   currentStep: number;

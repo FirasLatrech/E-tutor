@@ -1,11 +1,9 @@
-import { SearchIcon } from 'lucide-react';
-import { useUsersQuery } from 'modules/shared/data/queries/users.query';
-import useDebounce from 'modules/shared/hooks/useDebounce';
 import React, { useEffect, useState } from 'react';
 import { Search } from 'react-router';
-import UserCard from './UserCard';
+import { SearchIcon } from 'lucide-react';
 import { useCourseSections } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
 import useAuthStore from 'modules/shared/store/useAuthStore';
+import UserCard from './UserCard';
 
 interface SearchUserPropsType {
   searchValue: string;

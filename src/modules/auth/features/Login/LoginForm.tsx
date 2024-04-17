@@ -1,19 +1,21 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { type SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { X } from 'lucide-react';
+import SubmitButton from 'modules/auth/components/Button/Button';
+import { useLoginQuery } from 'modules/auth/data/queries/auth.query';
 import { type LoginBody } from 'modules/auth/types/auth';
 import Input from 'modules/shared/components/Input';
-import * as yup from 'yup';
-import SubmitButton from 'modules/auth/components/Button/Button';
 import { Checkbox } from 'modules/shared/components/ui/checkbox';
-import { useLoginQuery } from 'modules/auth/data/queries/auth.query';
-import useAuthStore from 'modules/shared/store/useAuthStore';
 import { ToastAction } from 'modules/shared/components/ui/toast';
-import { X } from 'lucide-react';
 import { useToast } from 'modules/shared/components/ui/use-toast';
+import useAuthStore from 'modules/shared/store/useAuthStore';
+import * as yup from 'yup';
+import { useNavigation } from 'modules/shared/hooks/useNavigation';
 
 function LoginForm() {
   const { mutateAsync: login, isPending } = useLoginQuery();
   const { toast } = useToast();
+  const goTo = useNavigation();
   const { setIsAuthenticated, isAuthenticated, setUser, setToken } =
     useAuthStore((state) => state);
   const onSubmit: SubmitHandler<LoginBody> = async (data) => {
@@ -21,6 +23,7 @@ function LoginForm() {
     if (response?.user) {
       setToken(response?.token);
       setIsAuthenticated(true);
+      goTo('/');
     } else {
       toast({
         variant: 'error',
@@ -72,14 +75,15 @@ function LoginForm() {
         register={register}
         errors={errors}
       />
-      <div className="flex items-center justify-between w-full">
-        <div className="flex items-start justify-center gap-2">
+      <div className="flex items-center justify-between gap-2 max-md:flex-col max-md:w-full">
+        <div className="flex items-start justify-start w-full gap-2">
           <Checkbox
             id="remember"
             //  name="rememberMe"
           />
           <p className="text-sm font-light text-gray-700">Remember me</p>
         </div>
+
         <SubmitButton isLoading={isPending} text="Sign In" />
       </div>
     </form>

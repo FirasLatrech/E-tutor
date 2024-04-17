@@ -1,3 +1,4 @@
+import React from 'react';
 import ArrowDown from 'modules/instructor/assets/icons/Stats/ArrowDown';
 import Button from 'modules/shared/components/Button';
 import {
@@ -6,7 +7,6 @@ import {
   AvatarImage,
 } from 'modules/shared/components/ui/avatar';
 import { Progress } from 'modules/shared/components/ui/progress';
-import React from 'react';
 
 function EditProfileProgress() {
   return (
@@ -31,7 +31,7 @@ function EditProfileProgress() {
           <span className="text-white text-opacity-50 whitespace-nowrap">
             1/4 steps
           </span>
-          <Progress className='!bg-purple-1 rounded-none' value={25} />
+          <Progress className="!bg-purple-1 rounded-none" value={25} />
           <p className="text-white whitespace-nowrap bg-opacity-95">
             25% completed
           </p>

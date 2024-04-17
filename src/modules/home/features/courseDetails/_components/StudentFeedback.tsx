@@ -1,17 +1,17 @@
 import React from 'react';
-import StudentsFeedbackSelect from './StudentFeedbackSelect';
 import staricon from 'modules/shared/assets/icons/courseDetails/star.svg';
-type Props = {};
+import Button from 'modules/shared/components/Button';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from 'modules/shared/components/ui/avatar';
-import Button from 'modules/shared/components/Button';
+import StudentsFeedbackSelect from './StudentFeedbackSelect';
+type Props = {};
 
 export const StudentFeedback = (props: Props) => {
   return (
-    <div className="pt-6 w-[70%] flex flex-col gap-8 h-full pb-6">
+    <div className="pt-6 w-[70%]  max-lg:w-full flex flex-col gap-8 h-full pb-6">
       <div className="flex items-center justify-between">
         <div className="text-2xl font-semibold tracking-tight scroll-m-20">
           Students Feedback

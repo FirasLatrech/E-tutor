@@ -11,6 +11,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from 'modules/shared/components/ui/avatar';
+import { Skeleton } from 'modules/shared/components/ui/skeleton';
 import {
   Tooltip,
   TooltipContent,
@@ -18,7 +19,6 @@ import {
   TooltipTrigger,
 } from 'modules/shared/components/ui/tooltip';
 import { useBestCourse } from '../data/queries/home.query';
-import { Skeleton } from 'modules/shared/components/ui/skeleton';
 export default function OurFeautureCourse() {
   const { t } = useTranslation('home');
   const { data, error, isPending } = useBestCourse();
@@ -74,7 +74,7 @@ export default function OurFeautureCourse() {
     <div className="flex items-center justify-center w-full h-full pt-20 ">
       <div className=" flex flex-col gap-y-4 bg-white w-[90%] p-10  border border-gray-100  ">
         <div className="flex items-center justify-between">
-          <span className="text-gray-900 font-[600] text-[34px]">
+          <span className="text-gray-900 font-[600] max-md:text-[20px] text-[34px]">
             {t('home.ourfeaturecourses')}
           </span>
           <p className=" w-[400px] text-gray-700 ">
@@ -83,91 +83,93 @@ export default function OurFeautureCourse() {
         </div>
         {isPending ? (
           <div>
-            <Skeleton className="w-[660px] h-[200px]" />
+            <Skeleton className="w-[660px] h-[220px]" />
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3">
-            {data &&
-              data?.map((item: Course) => (
-                <div
-                  className="flex duration-150 "
-                  key={item.id}
-                  style={{ direction: 'ltr' }}
-                >
-                  <div className="flex duration-300 hover:shadow-xl">
-                    <div className="w-[220px] h-[187px]">
-                      <img
-                        src={item.course_thumbnail}
-                        alt=""
-                        className="w-full h-full"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between p-3 border border-gray-100 min-w-[350px]">
-                      <div className="flex items-center justify-between h-[40px] ">
-                        {/* Tags */}
-                        <span className="p-1 text-sm bg-primary-100 text-primary-700">
-                          {item.course_categories?.name}
-                        </span>
-                        <span className="text-xl text-primary-500">
-                          ${item.course_price}
-                        </span>
+          <div className="overflow-hidden">
+            <div className="grid grid-cols-2 gap-3 overflow-auto max-xl:grid-cols-1">
+              {data &&
+                data?.map((item: Course) => (
+                  <div
+                    className="flex duration-150 "
+                    key={item.id}
+                    style={{ direction: 'ltr' }}
+                  >
+                    <div className="flex duration-300 hover:shadow-xl">
+                      <div className="min-w-[220px] h-[200px]">
+                        <img
+                          src={item.course_thumbnail}
+                          alt=""
+                          className="w-full h-full"
+                        />
                       </div>
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger className="text-start">
-                            {item.title}
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <span>{item.title}</span>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                      <div className="flex items-center justify-between h-[70px]">
-                        <div className="flex items-center gap-1">
-                          <Avatar>
-                            <AvatarImage
-                              src="https://avatars.githubusercontent.com/u/112077899?v=4"
-                              alt="@Firas"
-                            />
-                            <AvatarFallback>FL</AvatarFallback>
-                          </Avatar>
-                          <span>Firas Latrach</span>
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-1 ">
-                            <img src={staricon} alt="staricon" width={20} />
-                            <span className="text-gray-900">
-                              {item.rating.toFixed(1)}{' '}
-                              <span className="text-gray-400">(357,914)</span>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <SeparatorHorizontal
-                        size={1}
-                        className="w-full bg-gray-100 "
-                      />
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center justify-between gap-2">
-                          <img src={userIcon} alt="" />
-                          <span>
-                            {item.enrollmentCount}{' '}
-                            <span className="text-gray-500">studnet</span>
+                      <div className="flex flex-col justify-between p-3 border border-gray-100 min-w-[350px] w-full h-[200px]">
+                        <div className="flex items-center justify-between h-[40px] ">
+                          {/* Tags */}
+                          <span className="p-1 text-sm bg-primary-100 text-primary-700">
+                            {item.course_categories?.name}
+                          </span>
+                          <span className="text-xl text-primary-500">
+                            ${item.course_price}
                           </span>
                         </div>
-                        <div className="flex items-center justify-between gap-2">
-                          <img src={niveauIcon} alt="" />
-                          <span>{item?.course_level?.name}</span>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger className="text-start">
+                              {item.title}
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <span>{item.title}</span>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                        <div className="flex items-center justify-between h-[70px]">
+                          <div className="flex items-center gap-1">
+                            <Avatar>
+                              <AvatarImage
+                                src="https://avatars.githubusercontent.com/u/112077899?v=4"
+                                alt="@Firas"
+                              />
+                              <AvatarFallback>FL</AvatarFallback>
+                            </Avatar>
+                            <span>Firas Latrach</span>
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-1 ">
+                              <img src={staricon} alt="staricon" width={20} />
+                              <span className="text-gray-900">
+                                {item.rating.toFixed(1)}{' '}
+                                <span className="text-gray-400">(357,914)</span>
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                        <div className="flex items-center justify-between gap-2">
-                          <img src={duarationIcon} alt="" />
-                          <span>{item?.durations}</span>
+                        <SeparatorHorizontal
+                          size={1}
+                          className="w-full bg-gray-100 "
+                        />
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center justify-between gap-2">
+                            <img src={userIcon} alt="" />
+                            <span>
+                              {item.enrollmentCount}{' '}
+                              <span className="text-gray-500">studnet</span>
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between gap-2">
+                            <img src={niveauIcon} alt="" />
+                            <span>{item?.course_level?.name}</span>
+                          </div>
+                          <div className="flex items-center justify-between gap-2">
+                            <img src={duarationIcon} alt="" />
+                            <span>{item?.durations}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
         )}
       </div>

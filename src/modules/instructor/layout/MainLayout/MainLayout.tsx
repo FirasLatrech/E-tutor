@@ -1,18 +1,12 @@
+import { type ReactNode, useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import SmallLogo from 'modules/instructor/assets/icons/Sidebar/SmallLogo';
+import toggleSideBarIcon from 'modules/instructor/assets/images/SideBar/arrowLeft.png';
 import { InstructorRoutes } from 'modules/instructor/constants/instructorRoutes.constant';
-import React, { ReactNode, useEffect, useState } from 'react';
-import {
-  Link,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useParams,
-} from 'react-router-dom';
 import BrandLogo from 'modules/shared/assets/icons/logo/whitelogo.svg';
 import NavBar from '../NavBar/NavBar';
 import { motion } from 'framer-motion';
 import { PATH } from 'modules/instructor/routes/paths';
-import toggleSideBarIcon from 'modules/instructor/assets/images/SideBar/arrowLeft.png';
-import SmallLogo from 'modules/instructor/assets/icons/Sidebar/SmallLogo';
 import menuSideBar from 'modules/instructor/assets/icons/Sidebar/menu.svg';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import MenuLogo from 'modules/instructor/assets/icons/Sidebar/MenuLogo';

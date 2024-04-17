@@ -20,7 +20,20 @@ export interface ButtonProps
 
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }
-
+/**
+ * Renders a button component with different variants based on the input parameters.
+ *
+ * @param {string} text - The text displayed on the button.
+ * @param {boolean} isLoading - Flag indicating if the button is in a loading state.
+ * @param {string} className - Additional CSS classes for styling the button.
+ * @param {React.ReactNode} children - React nodes for additional content inside the button.
+ * @param {string} variant - The variant of the button ('primary', 'secondary', etc.).
+ * @param {string} size - The size of the button ('sm', 'md', 'lg', 'xl').
+ * @param {boolean} disabled - Flag indicating if the button is disabled.
+ * @param {string} additionnalClasses - Additional CSS classes for styling the button.
+ * @param {...any} props - Additional props to be spread on the button element.
+ * @return {React.ReactElement} The rendered button component.
+ */
 const Button: React.FC<ButtonProps> = ({
   text,
   isLoading,

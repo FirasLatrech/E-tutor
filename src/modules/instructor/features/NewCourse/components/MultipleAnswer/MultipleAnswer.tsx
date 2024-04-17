@@ -1,27 +1,38 @@
-import Input from 'modules/shared/components/Input';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Input from 'modules/shared/components/Input';
 
 interface MultipleAnswerPropsType {
   label: string;
   onChange: (newValue: string, index: number) => void;
-  defaultValue: { [key: string]: string };
+  defaultValue: Record<string, string>;
 }
 
-function MultipleAnswer({ label, onChange, defaultValue }: MultipleAnswerPropsType) {
-  const [value, setValue] = useState<{ [key: string]: string }>(defaultValue);
-  console.log(value)
+function MultipleAnswer({
+  label,
+  onChange,
+  defaultValue,
+}: MultipleAnswerPropsType) {
+  const [value, setValue] = useState<Record<string, string>>(defaultValue);
+  console.log(value);
   return (
     <div className="w-full flex flex-col gap-[1rem]">
       <div className="flex w-full justify-between">
         <div className="w-full flex gap-[0.5rem]">
           <p className="text-gray-900 text-lg leading-6">{label}</p>
-          <p className="text-lg text-gray-900 leading-6">{`(${Object.values(value).length}/8)`}</p>
+          <p className="text-lg text-gray-900 leading-6">{`(${
+            Object.values(value).length
+          }/8)`}</p>
         </div>
         <p
-          onClick={() => Object.values(value).length < 8 && setValue((old) => ({ ...old, [Object.keys(old).length]: '' }))}
+          onClick={() => {
+            Object.values(value).length < 8 &&
+              setValue((old) => ({ ...old, [Object.keys(old).length]: '' }));
+          }}
           className={`text-primary-500 whitespace-nowrap cursor-pointer hover:color-primary-300 ease-linear duration-200${
-            Object.values(value).length >= 8 ? ' cursor-not-allowed' : ' cursor-pointer'
+            Object.values(value).length >= 8
+              ? ' cursor-not-allowed'
+              : ' cursor-pointer'
           }`}
         >
           + Add New
@@ -38,11 +49,13 @@ function MultipleAnswer({ label, onChange, defaultValue }: MultipleAnswerPropsTy
             <div className="ease-linear duration-300">
               <h1 className="text-sm">{`0${index + 1}`}</h1>
               <Input
-                onChange={(e) => onChange(e.target.value, parseInt(key))}
+                onChange={(e) => {
+                  onChange(e.target.value, parseInt(key));
+                }}
                 id={`input-${index}`}
                 name={`input-${index}`}
                 placeholder={`${label}...`}
-                defaultValue={value|| ''}
+                defaultValue={value || ''}
               />
             </div>
           </motion.div>

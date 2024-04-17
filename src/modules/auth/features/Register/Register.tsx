@@ -1,12 +1,10 @@
+import SocialMediaBtn from 'modules/auth/components/SocialMediaBtn';
 import {
   SocialMediaAuth,
-  SocialMediaAuthType,
+  type SocialMediaAuthType,
 } from 'modules/auth/constants/SocialMediaAuth.constant';
-import RegisterForm from './RegisterForm';
-import SocialMediaBtn from 'modules/auth/components/SocialMediaBtn';
-
 import RegisterImage from '../../assets/images/signUp/image.png';
-import MainLayout from 'modules/auth/layout/MainLayout/MainLayout';
+import RegisterForm from './RegisterForm';
 
 const Register = () => {
   return (

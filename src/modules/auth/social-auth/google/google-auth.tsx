@@ -10,6 +10,7 @@ import { GoogleTokenResponse } from 'modules/auth/types/auth';
 import { ToastAction } from 'modules/shared/components/ui/toast';
 import { useToast } from 'modules/shared/components/ui/use-toast';
 import HTTP_CODES_ENUM from 'modules/shared/constants/http-code.constant';
+import { useNavigation } from 'modules/shared/hooks/useNavigation';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import { set } from 'react-hook-form';
 
@@ -26,6 +27,8 @@ export default function GoogleAuth() {
     const { status, data } = await authGoogleLoginService({
       idToken,
     });
+    console.log(data);
+    console.log(status);
 
     if (status === HTTP_CODES_ENUM.OK) {
       toast({
@@ -79,7 +82,9 @@ export default function GoogleAuth() {
       <SocialMediaBtn
         text={SocialMediaAuth[0]?.text}
         icon={SocialMediaAuth[0]?.icon}
-        onClick={() => Googlelogin()}
+        onClick={() => {
+          Googlelogin();
+        }}
       />
     </>
   );

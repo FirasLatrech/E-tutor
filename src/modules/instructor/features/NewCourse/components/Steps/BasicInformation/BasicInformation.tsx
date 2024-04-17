@@ -1,13 +1,13 @@
+import React, { useEffect } from 'react';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useAllCategory } from 'modules/home/data/queries/home.query';
 import Button from 'modules/shared/components/Button';
 import Input from 'modules/shared/components/Input';
-import React, { useEffect } from 'react';
-import { SubmitHandler, useForm, Controller } from 'react-hook-form';
-import * as yup from 'yup';
-import { useSteps } from '../../../context/StepsContext';
-import { useAllCategory } from 'modules/home/data/queries/home.query';
 import SelectGeneric from 'modules/shared/components/SelectGeneric';
+import * as yup from 'yup';
 import { useCourseSections } from '../../../context/CourseSectionsContext';
+import { useSteps } from '../../../context/StepsContext';
 
 function BasicInformation() {
   const { BasicInformation, setBasicInformations } = useCourseSections();

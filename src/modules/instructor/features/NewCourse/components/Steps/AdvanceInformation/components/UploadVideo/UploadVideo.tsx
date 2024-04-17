@@ -24,7 +24,7 @@ function UploadVideo({ label }: { label: string }) {
         className="opacity"
         endpoint="https://httpbin.org/put"
         onSuccess={(object) => console.log(object)}
-  />*/}
+  /> */}
     </div>
   );
 }

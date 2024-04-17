@@ -1,4 +1,3 @@
-import React, { useTransition } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TooltipTrigger } from '@radix-ui/react-tooltip';
 import { SeparatorHorizontal } from 'lucide-react';
@@ -9,65 +8,33 @@ import {
   TooltipContent,
   TooltipProvider,
 } from 'modules/shared/components/ui/tooltip';
-import OurFeautureCourse from './ourFeautureCourse';
+import { useNavigation } from 'modules/shared/hooks/useNavigation';
+import { type ICourse } from 'modules/shared/types/course';
 import { useBestSellingCourse } from '../data/queries/home.query';
-interface Course {
-  id: number;
-  title: string;
-  subtitle: string | null;
-  durations: string;
-  course_thumbnail: string;
-  rating: number;
-  course_trailer: string;
-  course_descriptions: {
-    overview: string;
-    objectives: string[];
-    duration: string;
-    format: string;
-    level: string;
-    certification: boolean;
-    prerequisites: string[];
-  };
-  course_categories: {
-    id: number;
-    name: string;
-    color: string;
-    icon: string;
-    create_by: number;
-    background_color: string;
-    courses_count: number;
-    createdAt: string;
-    deletedAt: string | null;
-  };
-  course_content: { message: string };
-  target_audience: { message: string };
-  course_requirements: { message: string };
-  course_curriculum: { message: string };
-  welcome_message: string;
-  congratulation_message: string;
-  course_price: string;
-  enrollmentCount: number;
-  discount: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string | null;
-}
+import OurFeautureCourse from './ourFeautureCourse';
 export default function BestSellingCourses() {
-  const { status, data, error, isPending } = useBestSellingCourse();
-  console.log(data);
+  const { data } = useBestSellingCourse();
+
   const { t } = useTranslation('home');
+  const goTo = useNavigation();
+  const handelNaviage = (id: string) => {
+    goTo(`/courses/${id}`);
+  };
   return (
-    <div className="flex flex-col items-center w-full bg-gray-50 ">
-      <span className="text-[40px] font-[600] h-[100px] ">
+    <div className="flex flex-col items-center w-full bg-gray-50 gap-y-6 ">
+      <span className="text-[40px] font-[600] h-[100px] max-2xl:h-full ">
         {t('home.bestsellingcourses')}
       </span>
-      <div className="grid grid-cols-5 gap-3">
-        {data?.map((item: Course) => {
+      <div className="grid grid-cols-4 max-md:grid-cols-1 max-lg:grid-cols-2  max-xl:grid-cols-4 max-2xl:grid-cols-5 gap-3 w-[90%] h-full">
+        {data?.map((item: ICourse) => {
           return (
             <div
-              className="flex flex-col items-center justify-center  bg-white w-[250px] h-[340px]  shadow-md"
+              className="flex flex-col items-center justify-center  bg-white w-full h-[340px] min-w-[279px]  shadow-md"
               key={item.id}
               style={{ direction: 'ltr' }}
+              onClick={() => {
+                handelNaviage(item?.id);
+              }}
             >
               <div className="h-[183px] w-full overflow-hidden">
                 <img
@@ -77,9 +44,8 @@ export default function BestSellingCourses() {
                       : MachineLeanringCover
                   }
                   alt=""
-                  width={294}
                   height={183}
-                  className="duration-300 cursor-pointer hover:scale-125"
+                  className="object-cover duration-300 cursor-pointer hover:scale-125 min-w-[279px]"
                 />
               </div>
               <div className="w-full p-2 text-gray-700">

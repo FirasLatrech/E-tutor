@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-function UploadVideoIcon({...props}) {
+function UploadVideoIcon({ ...props }) {
   return (
     <svg
       {...props}
@@ -18,18 +18,18 @@ function UploadVideoIcon({...props}) {
       <path
         d="M62.0039 108.5C87.6852 108.5 108.504 87.6812 108.504 62C108.504 36.3188 87.6852 15.5 62.0039 15.5C36.3227 15.5 15.5039 36.3188 15.5039 62C15.5039 87.6812 36.3227 108.5 62.0039 108.5Z"
         stroke="#B7BAC7"
-        stroke-width="6"
-        stroke-miterlimit="10"
+        strokeWidth="6"
+        strokeMiterlimit="10"
       />
       <path
         d="M77.5 62L54.25 46.5V77.5L77.5 62Z"
         stroke="#B7BAC7"
-        stroke-width="6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
 }
 
-export default UploadVideoIcon
+export default UploadVideoIcon;

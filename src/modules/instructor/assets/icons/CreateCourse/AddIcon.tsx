@@ -13,16 +13,16 @@ function AddIcon({ ...props }) {
       <path
         d="M3.75 12H20.25"
         stroke="#8C94A3"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12 3.75V20.25"
         stroke="#8C94A3"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

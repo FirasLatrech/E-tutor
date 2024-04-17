@@ -34,8 +34,8 @@ export default function BecomeAnInstructor() {
   ];
   return (
     <div className="w-full bg-gray-50">
-      <div className="w-[90%] mx-auto pb-5 h-[400px] flex items-center justify-between  gap-10">
-        <div className="bg-[#FF6636] text-white w-[55%] flex ">
+      <div className="w-[90%] mx-auto pb-5 h-[400px] max-2xl:h-full max-2xl:flex-col flex items-center justify-between  gap-10">
+        <div className="bg-[#FF6636] text-white w-[55%] max-2xl:w-full flex ">
           <div className="flex flex-col gap-6 p-5">
             <span className="text-[40px]">{t('home.Becomeaninstructor')}</span>
             <span className="font-[300] text-sm w-[440px]">
@@ -62,99 +62,119 @@ export default function BecomeAnInstructor() {
             {/* <img src={instructor} alt="" width={510} height={300} /> */}
           </div>
         </div>
-        <div className="w-[50%] bg-white text-gray-900 h-[271px] p-5 flex flex-col gap-5">
+        <div className="w-[50%] max-2xl:w-full bg-white text-gray-900 h-[271px] max-2xl:h-full p-5 flex flex-col gap-5">
           <span className="text-[32px] font-[400]">
             {t('home.yourteaching&earning')}
           </span>
-          <div className="flex flex-col items-start gap-6 ">
-            <div className="flex items-center justify-between w-full">
-              <div className="flex items-center gap-2">
-                <span className="flex items-center justify-center w-[60px] h-[60px] rounded-full bg-secondary-100 font-[700] text-secondary-500 text-[25px]">
-                  1{' '}
-                </span>
-                <span className="text-[19px] text-gray-900 font-[400]">
-                  {' '}
-                  {t('home.apptobecomeinstructor')}{' '}
-                </span>
+          <div className="overflow-auto ">
+            <div className="flex flex-col items-start gap-6 min-w-[300px] overflow-auto ">
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-2">
+                  <span className="flex items-center justify-center min-w-[60px] min-h-[60px] rounded-full bg-secondary-100 font-[700] text-secondary-500 text-[25px]">
+                    1{' '}
+                  </span>
+                  <span className="text-[19px] text-gray-900 font-[400]">
+                    {' '}
+                    {t('home.apptobecomeinstructor')}{' '}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="flex items-center justify-center min-w-[60px] min-h-[60px] rounded-full bg-[#FFF0F0] font-[700] text-[25px] text-primary-500">
+                    2{' '}
+                  </span>
+                  <span className="text-[19px] text-gray-900 font-[400]">
+                    {' '}
+                    {t('home.build&edityourprofile')}{' '}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="flex items-center justify-center w-[60px] h-[60px] rounded-full bg-[#FFF0F0] font-[700] text-[25px] text-primary-500">
-                  2{' '}
-                </span>
-                <span className="text-[19px] text-gray-900 font-[400]">
-                  {' '}
-                  {t('home.build&edityourprofile')}{' '}
-                </span>
-              </div>
-            </div>
-            <div className="flex items-center justify-between w-full">
-              <div className="flex items-center gap-2">
-                <span className="flex items-center justify-center w-[60px] h-[60px] rounded-full bg-[#FFF0F0] font-[700] text-[25px] text-primary-500">
-                  3{' '}
-                </span>
-                <span className="text-[19px] text-gray-900 font-[400]">
-                  {' '}
-                  {t('home.createyournewcourse')}{' '}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span
-                  className="flex items-center justify-center w-[60px] h-[60px] rounded-full bg-success-100 font-[700] text-[25px] 
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-2">
+                  <span className="flex items-center justify-center min-w-[60px] min-h-[60px] rounded-full bg-[#FFF0F0] font-[700] text-[25px] text-primary-500">
+                    3{' '}
+                  </span>
+                  <span className="text-[19px] text-gray-900 font-[400]">
+                    {' '}
+                    {t('home.createyournewcourse')}{' '}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span
+                    className="flex items-center justify-center min-w-[60px] min-h-[60px] rounded-full bg-success-100 font-[700] text-[25px] 
                 text-success-500"
-                >
-                  4{' '}
-                </span>
-                <span className="text-[19px] text-gray-900 font-[400]">
-                  {' '}
-                  {t('home.startteaching&earning')}{' '}
-                </span>
+                  >
+                    4{' '}
+                  </span>
+                  <span className="text-[19px] text-gray-900 font-[400]">
+                    {' '}
+                    {t('home.startteaching&earning')}{' '}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="flex items-center justify-center ">
-        <div className=" bg-white w-[80%] p-10 flex flex-col gap-10 border">
-          <h1 className="text-[32px] text-center font-[500]">
+        <div className=" bg-white w-[90%] p-10 flex flex-col gap-10  ">
+          <h1 className="text-[32px] max-md:text-[20px] text-center font-[500]">
             {t('home.topinstructorformonth')}
           </h1>
-          {data &&
-            data?.map((item: any, index: number) => {
-              console.log(item);
-              return (
-                <div className="w-[244px] border" key={index}>
-                  <div className=" h-[220px]">
-                    <img
-                      src={item?.photo?.path}
-                      alt=""
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                  <div className="flex flex-col items-center">
-                    {' '}
-                    <span>
-                      {item.firstName} {item?.lastName}
-                    </span>
-                    <span className="text-gray-500">Senior Developer</span>
-                  </div>
-                  <SeparatorHorizontal
-                    size={1}
-                    className="w-full bg-gray-100"
-                  />
-                  <div className="flex items-center justify-between pt-2 h-[46px] p-2">
-                    <div className="flex items-center gap-1 ">
-                      <img src={staricon} alt="staricon" width={20} />
-                      <span>5.0</span>
+          <div className="overflow-hidden">
+            <div className="grid grid-cols-5 overflow-auto">
+              {data &&
+                data?.map((item: any, index: number) => {
+                  const getCountOfTotalEnrollment = (
+                    my_courses: Array<{
+                      enrollmentCount: number;
+                    }>
+                  ) => {
+                    let totalEnrollment = 0;
+                    my_courses.forEach((course) => {
+                      totalEnrollment += course?.enrollmentCount;
+                    });
+                    return totalEnrollment;
+                  };
+
+                  return (
+                    <div className="min-w-[244px] border " key={index}>
+                      <div className=" h-[220px] overflow-hidden">
+                        <img
+                          src={item?.photo?.path}
+                          alt=""
+                          className="object-cover w-full h-full duration-300 hover:scale-125"
+                        />
+                      </div>
+                      <div className="flex flex-col items-center">
+                        {' '}
+                        <span>
+                          {item.firstName} {item?.lastName}
+                        </span>
+                        <span className="text-gray-500">Senior Developer</span>
+                      </div>
+                      <SeparatorHorizontal
+                        size={1}
+                        className="w-full bg-gray-100"
+                      />
+                      <div className="flex items-center justify-between pt-2 h-[46px] p-2">
+                        <div className="flex items-center gap-1 ">
+                          <img src={staricon} alt="staricon" width={20} />
+                          <span>5.0</span>
+                        </div>
+                        <div>
+                          <span className="text-gray-700">
+                            {getCountOfTotalEnrollment(item.my_courses)}
+                          </span>
+                          <span className="text-gray-500"> students</span>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-gray-700">11K</span>
-                      <span className="text-gray-500"> students</span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          <h1 className="flex items-center justify-center text-center text-gray-600">
+                  );
+                })}
+            </div>
+          </div>
+
+          <h1 className="flex items-center justify-center text-center text-gray-600 max-md:text-sm">
             {t('home.topinstructorformonthparagraph')}{' '}
             <p className="flex gap-3 cursor-pointer text-primary-500 ">
               {t('home.Becomeaninstructor')}{' '}
@@ -175,16 +195,16 @@ export default function BecomeAnInstructor() {
           </h1>
         </div>
       </div>
-      <div className="h-[384px] flex items-center justify-center gap-10">
-        <div className="flex flex-col gap-8 ">
-          <span className="text-[32px] text-gray-900">
+      <div className="flex items-center justify-center gap-10 mt-10 mb-10 max-xl:flex-col">
+        <div className="flex flex-col items-center gap-8 ">
+          <span className="text-[32px] max-md:text-[20px] text-gray-900">
             6.3{t('home.k')} {t('home.trustedcompanies')}
           </span>
-          <span className="w-[350px] text-gray-500 text-sm">
+          <span className="w-[350px] text-gray-500 text-sm max-md:text-xs max-md:pl-2">
             {t('home.trustedcompaniesparagraph')}
           </span>
         </div>
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-4 gap-5 pl-6 pr-6 max-xl:flex max-xl:flex-wrap ">
           {companies.map((company, index) => (
             <div
               className="h-[100px] w-[200px] flex items-center justify-center bg-white"

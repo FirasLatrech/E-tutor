@@ -1,15 +1,15 @@
+import React, { useState } from 'react';
 import UploadFileIcon from 'modules/instructor/assets/icons/CreateCourse/UploadFileIcon';
 import UploadImage from 'modules/instructor/features/NewCourse/components/Steps/AdvanceInformation/components/UploadImage/UploadImage';
 import UploadVideo from 'modules/instructor/features/NewCourse/components/Steps/AdvanceInformation/components/UploadVideo/UploadVideo';
-import TextEditor from 'modules/shared/components/TextEditor';
-import React, { useState } from 'react';
-import MultipleAnswer from '../../MultipleAnswer';
 import Button from 'modules/shared/components/Button';
 import { useSteps } from '../../../context/StepsContext';
 import {
   CourseInformationType,
   useCourseSections,
 } from '../../../context/CourseSectionsContext';
+import TextEditor from 'modules/shared/components/TextEditor';
+import MultipleAnswer from '../../MultipleAnswer';
 
 function AdvanceInformation() {
   const { AdvancedInformation, setAdvancedInformation } = useCourseSections();
@@ -79,7 +79,9 @@ function AdvanceInformation() {
           <div className="flex justify-between items-center w-full mt-4">
             <Button
               variant="tertiaryGray"
-              onClick={() => setCurrentStep((old) => old - 1)}
+              onClick={() => {
+                setCurrentStep((old) => old - 1);
+              }}
               additionnalClasses="!p-4 !px-8 !text-lg"
               text={currentStep == 0 ? 'Cancel' : 'Previous'}
             />

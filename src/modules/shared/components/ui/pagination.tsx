@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
+import { MoreHorizontal } from 'lucide-react';
 import arrowLeft from 'modules/shared/assets/icons/category/arrowleft.svg';
 import arrowRight from 'modules/shared/assets/icons/category/arrowrighPrimary.svg';
 import {

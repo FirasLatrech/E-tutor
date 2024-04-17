@@ -3,9 +3,9 @@
 import { type Fragment, lazy } from 'react';
 import { Navigate, type RouteProps } from 'react-router-dom';
 import MainLayout from 'modules/shared/layout/MainLayout';
+import PrivateRoute from 'modules/shared/routes/PrivateRoute';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import { PATH } from './paths';
-import PrivateRoute from 'modules/shared/routes/PrivateRoute';
 
 type RouteConfig = {
   exact: boolean | null;
@@ -20,8 +20,15 @@ const routes: RouteConfig[] = [
 
   {
     exact: true,
-    guard: PrivateRoute,
+    // guard: PrivateRoute,
     path: PATH.ROOT,
+    component: lazy(async () => await import('../features/Home/index')),
+    layout: MainLayout,
+  },
+  {
+    exact: true,
+    // guard: PrivateRoute,
+    path: PATH.HOME,
     component: lazy(async () => await import('../features/Home/index')),
     layout: MainLayout,
   },
@@ -41,7 +48,7 @@ const routes: RouteConfig[] = [
   },
   {
     exact: true,
-    //  guard: PrivateRoute,
+    // guard: PrivateRoute,
     path: PATH.COURSESBYID,
     component: lazy(
       async () => await import('../features/courseDetails/index')
@@ -60,6 +67,13 @@ const routes: RouteConfig[] = [
     // guard: MainLayout,
     path: PATH.USER,
     component: lazy(async () => await import('../features/userProfile/index')),
+    layout: MainLayout,
+  },
+  {
+    exact: true,
+    // guard: MainLayout,
+    path: PATH.CART,
+    component: lazy(async () => await import('../features/cart/index')),
     layout: MainLayout,
   },
 ];

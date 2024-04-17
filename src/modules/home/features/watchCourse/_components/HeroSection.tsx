@@ -1,22 +1,25 @@
-import Button from 'modules/shared/components/Button';
-
 import arrowLeft from 'modules/shared/assets/icons/arrow/arrowLeft.svg';
-
+import clock from 'modules/shared/assets/icons/courseDetails/clockprimaryicon.svg';
 import folderIcon from 'modules/shared/assets/icons/courseDetails/folderIcon.svg';
 import playCircleIcon from 'modules/shared/assets/icons/courseDetails/playEditor.svg';
-import clock from 'modules/shared/assets/icons/courseDetails/clockprimaryicon.svg';
-import CustomModal from './customModal';
-type Props = {};
-
-import { useState } from 'react';
+import Button from 'modules/shared/components/Button';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
+import { type ICourse } from 'modules/shared/types/course';
+import CustomModal from './customModal';
+type Props = {
+  courseDetails: ICourse;
+};
 
-function HeroSection({}: Props) {
+function HeroSection({ courseDetails }: Props) {
+  console.log(courseDetails);
   const { setOpen, setClose } = useModal();
 
   const handleClick = () => {
     setOpen(<CustomModal title="Write a Review" />);
   };
+  const courseDescription = courseDetails && courseDetails.course_descriptions;
+  console.log(courseDescription);
+
   return (
     <div className="w-full h-[80px] bg-gray-50 flex items-center justify-between">
       <div className="flex items-center pl-5 gap-x-6">
@@ -25,17 +28,14 @@ function HeroSection({}: Props) {
         </div>
 
         <div className="flex flex-col gap-y-2">
-          <div>
-            Complete Website Responsive Design: from Figma to Webflow to Website
-            Design
-          </div>
+          <div>{courseDetails?.title}</div>
           <div className="flex items-center gap-x-2 text-gray-700 font-[300] text-[14px]">
             <img src={folderIcon} alt="" />
             <span>6 Section</span>
             <img src={playCircleIcon} alt="" />
-            <span> 202 lectures</span>
+            <span> {courseDescription?.format} lectures</span>
             <img src={clock} alt="" />
-            <span>19h 37m</span>
+            <span>{courseDescription?.duration}</span>
           </div>
         </div>
       </div>
@@ -43,7 +43,9 @@ function HeroSection({}: Props) {
         <Button
           text="Write a Review"
           variant="tertiaryPrimary"
-          onClick={() => handleClick()}
+          onClick={() => {
+            handleClick();
+          }}
         />
 
         <Button text="Next lecture" variant="primary" />

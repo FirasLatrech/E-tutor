@@ -1,9 +1,8 @@
+import { useLocation } from 'react-router';
 import { InstructorRoutes } from 'modules/instructor/constants/instructorRoutes.constant';
-import React, { ReactNode } from 'react';
-import { Outlet, useLocation } from 'react-router';
-import Search from './components/search/Search';
 import Notification from './components/Notifications/Notification';
 import Profile from './components/Profile/Profile';
+import Search from './components/search/Search';
 
 function NavBar() {
   const { pathname } = useLocation();

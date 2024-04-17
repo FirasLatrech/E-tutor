@@ -1,4 +1,3 @@
-import SearchIcon from 'modules/instructor/assets/icons/NavBar/SearchIcon';
 import React, { useEffect, useState } from 'react';
 import UserCard from './UserCard';
 import SearchUser from './SearchUser';
@@ -22,9 +21,9 @@ function AddInstructor() {
   }, [searchValue]);
 
   return (
-    <div className="flex flex-col gap-4 w-full ">
-      <h1 className="capitalize text-gray-900 text-lg leading-5">
-        {`Add Instructor (${Instructors?.length || 0})`}
+    <div className="flex flex-col w-full gap-4 ">
+      <h1 className="text-lg leading-5 text-gray-900 capitalize">
+        {`Add Instructor (${Instructors?.length ?? 0})`}
       </h1>
       <div className="">
         <SearchUser

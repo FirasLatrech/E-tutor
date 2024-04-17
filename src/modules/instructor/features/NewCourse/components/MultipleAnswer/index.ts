@@ -1,1 +1,1 @@
-export { default } from './MultipleAnswer'
+export { default } from './MultipleAnswer';

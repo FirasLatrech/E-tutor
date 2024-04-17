@@ -3,15 +3,14 @@ import EditIcon from 'modules/instructor/assets/icons/CreateCourse/EditIcon';
 import { Draggable } from '@hello-pangea/dnd';
 import DeleteIcon from 'modules/instructor/assets/icons/CreateCourse/deleteIcon';
 import {
-  lessonType,
-  sectionType,
+  type lessonType,
+  type sectionType,
   useCourseSections,
   videoLessonType,
 } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
 import DropDownGeneric from 'modules/shared/components/DropDownGeneric';
-import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
-import React from 'react';
+import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 import EditLessonModal from './EditLessonModal';
 import { motion } from 'framer-motion';
 import AddDescription from './AddDescription';
@@ -229,10 +228,10 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
             ref={draggableProvider.innerRef}
             {...draggableProvider.dragHandleProps}
           >
-            <div className="flex items-center h-full py-2 justify-between gap-2 bg-white w-full px-6">
+            <div className="flex items-center justify-between w-full h-full gap-2 px-6 py-2 bg-white">
               <div className="flex items-center justify-start gap-2">
                 <DragIcon />
-                <p className="text-gray-900 leading-5 text-sm">
+                <p className="text-sm leading-5 text-gray-900">
                   {Lesson?.name}
                 </p>
               </div>

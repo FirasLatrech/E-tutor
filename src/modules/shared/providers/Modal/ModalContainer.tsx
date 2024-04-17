@@ -1,3 +1,4 @@
+import { type ReactNode } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -5,7 +6,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from 'modules/shared/components/ui/dialog';
-import React, { ReactNode, useState } from 'react';
 import { useModal } from './modal-provider';
 
 interface ModalContainerPropsType {
@@ -16,7 +16,12 @@ interface ModalContainerPropsType {
 function ModalContainer({ children, title }: ModalContainerPropsType) {
   const { isOpen, setClose } = useModal();
   return (
-    <Dialog open={isOpen} onOpenChange={() => setClose()}>
+    <Dialog
+      open={isOpen}
+      onOpenChange={() => {
+        setClose();
+      }}
+    >
       <DialogTrigger asChild></DialogTrigger>
       <DialogContent className="sm:max-w-[495px] min-w-[40rem]">
         <DialogHeader>

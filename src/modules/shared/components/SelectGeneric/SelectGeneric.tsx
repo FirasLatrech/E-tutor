@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select';
-import { SelectGroup } from '@radix-ui/react-select';
-
 import {
   type FieldErrors,
   type FieldValues,
   type Path,
   type UseFormRegister,
 } from 'react-hook-form';
+import { SelectGroup } from '@radix-ui/react-select';
+import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/select';
 export interface Props<
   T extends FieldValues = FieldValues,
   U extends FieldValues = FieldValues
@@ -38,8 +37,8 @@ function SelectGeneric({
 }: SelectGenericTypeProps) {
   console.log(props);
   return (
-    <div className="flex w-full gap-2 flex-col mb-4">
-      <label className="flex text-sm font-light  text-gray-900">{label}</label>
+    <div className="flex flex-col w-full gap-2 mb-4">
+      <label className="flex text-sm font-light text-gray-900">{label}</label>
       <Select onValueChange={(value) => onChange(value)}>
         <SelectTrigger className="min-h-[3rem]">
           <span

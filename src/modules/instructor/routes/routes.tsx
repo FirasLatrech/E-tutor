@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { type Fragment, lazy } from 'react';
-import { Navigate, type RouteProps } from 'react-router-dom';
-import { PATH } from './paths';
-import PublicRoute from 'modules/shared/routes/PublicRoute';
+import { type RouteProps } from 'react-router-dom';
 import MainLayout from '../layout/MainLayout/MainLayout';
+import { PATH } from './paths';
 import PrivateRoute from 'modules/shared/routes/PrivateRoute';
 type RouteConfig = {
   exact: boolean | null;

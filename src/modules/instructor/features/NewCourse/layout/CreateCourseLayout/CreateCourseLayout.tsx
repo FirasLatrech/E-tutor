@@ -1,8 +1,8 @@
-import { CreateCourseSteps } from 'modules/instructor/constants/createCourseSteps.constant';
-import React, { ReactNode } from 'react';
-import SaveChanges from '../../components/SaveChanges/SaveChanges';
+import React, { type ReactNode } from 'react';
 import CheckedStepIcon from 'modules/instructor/assets/icons/CreateCourse/CheckedStepIcons';
 import { useMediaQuery } from '@uidotdev/usehooks';
+import SaveChanges from '../../components/SaveChanges/SaveChanges';
+import { CreateCourseSteps } from 'modules/instructor/constants/createCourseSteps.constant';
 
 interface CreateCourseLayoutTypeProps {
   children: ReactNode;

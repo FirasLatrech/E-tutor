@@ -1,19 +1,19 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { type SubmitHandler, useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { RegisterBody, type LoginBody } from 'modules/auth/types/auth';
-import Input from 'modules/shared/components/Input';
-import * as yup from 'yup';
+import { X } from 'lucide-react';
 import SubmitButton from 'modules/auth/components/Button/Button';
-import { Checkbox } from 'modules/shared/components/ui/checkbox';
 import {
   useLoginQuery,
   useRegisterQuery,
 } from 'modules/auth/data/queries/auth.query';
-import useAuthStore from 'modules/shared/store/useAuthStore';
-import { Link } from 'react-router-dom';
-import { toast, useToast } from 'modules/shared/components/ui/use-toast';
+import { type LoginBody, type RegisterBody } from 'modules/auth/types/auth';
+import Input from 'modules/shared/components/Input';
+import { Checkbox } from 'modules/shared/components/ui/checkbox';
 import { ToastAction } from 'modules/shared/components/ui/toast';
-import { X } from 'lucide-react';
+import { toast, useToast } from 'modules/shared/components/ui/use-toast';
+import useAuthStore from 'modules/shared/store/useAuthStore';
+import * as yup from 'yup';
 
 function RegisterForm() {
   const {
@@ -78,7 +78,7 @@ function RegisterForm() {
           .required('Password is required'),
         confirmPassword: yup
           .string()
-          //.oneOf([yup.ref('password'), undefined], 'Passwords must match')
+          // .oneOf([yup.ref('password'), undefined], 'Passwords must match')
           .required('Please confirm your password'),
       })
     ),

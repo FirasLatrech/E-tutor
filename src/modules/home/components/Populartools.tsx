@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import arrowLeft from 'modules/shared/assets/icons/category/arrowleft.svg';
 import arrowRight from 'modules/shared/assets/icons/category/arrowright.svg';
+import { useWindowSize } from 'modules/shared/lib/useWindowSize';
 
 export default function Populartools({ id }: { id: string | undefined }) {
   console.log(id);
@@ -29,18 +30,6 @@ export default function Populartools({ id }: { id: string | undefined }) {
       name: 'Angular',
       count: '2,736',
     },
-    {
-      name: 'VueJS',
-      count: '2,736',
-    },
-    {
-      name: 'NodeJS',
-      count: '2,736',
-    },
-    {
-      name: 'ExpressJS',
-      count: '2,736',
-    },
   ];
   const popularKeyword = [
     'HTML 5',
@@ -49,12 +38,10 @@ export default function Populartools({ id }: { id: string | undefined }) {
     'ReactJS',
     'NextJS',
     'Angular',
-    'VueJS',
-    'NodeJS',
-    'ExpressJS',
   ];
+  const width = useWindowSize().width;
   const [page, setPage] = useState(0);
-  const cardsPerPage = 6;
+  const cardsPerPage = width / 200;
   const totalPages = Math.ceil(tools.length / cardsPerPage);
 
   const handleNextPage = () => {
@@ -102,7 +89,7 @@ export default function Populartools({ id }: { id: string | undefined }) {
           </div>
         ))}
       </div>
-      <div className="w-[82%] flex items-center gap-5 ">
+      {/* <div className="w-[82%] flex items-center gap-5 ">
         <span className="text-gray-900 text-[18px] font-[400]">
           Popular keyword:
         </span>
@@ -113,7 +100,7 @@ export default function Populartools({ id }: { id: string | undefined }) {
             </span>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

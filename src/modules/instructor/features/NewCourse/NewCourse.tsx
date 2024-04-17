@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import CreateCourseLayout from './layout/CreateCourseLayout/CreateCourseLayout';
-import { CreateCourseSteps } from 'modules/instructor/constants/createCourseSteps.constant';
-import { StepsProvider, useSteps } from './context/StepsContext';
-import { CourseSectionsProvider } from './context/CourseSectionsContext';
 import { motion } from 'framer-motion';
+import { CreateCourseSteps } from 'modules/instructor/constants/createCourseSteps.constant';
+import { CourseSectionsProvider } from './context/CourseSectionsContext';
+import { StepsProvider, useSteps } from './context/StepsContext';
+import CreateCourseLayout from './layout/CreateCourseLayout/CreateCourseLayout';
 
 function NewCourse() {
   const { currentStep } = useSteps();
