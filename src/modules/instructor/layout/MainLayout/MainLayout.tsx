@@ -102,7 +102,7 @@ function MainLayout({ children }: MainLayoutPropsType) {
           })}
         </div>
       </div>
-      {isOpenSideBar && (
+      {isOpenSideBar && hideSideBar && (
         <div
           onClick={() => setOpenSideBar(false)}
           className="w-screen left-0 top-0 bg-[#00000080] h-screen fixed z-40 opacity-50"
