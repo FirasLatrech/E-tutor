@@ -8,7 +8,7 @@ export interface SocialMediaAuthType {
 }
 
 export const SocialMediaAuth: SocialMediaAuthType[] = [
-  { text: 'google', icon: google},
-  { text: 'facebook', icon: facebook},
-  { text: 'apple', icon: apple},
+  { text: 'google', icon: google },
+  { text: 'facebook', icon: facebook },
+  { text: 'apple', icon: apple },
 ];

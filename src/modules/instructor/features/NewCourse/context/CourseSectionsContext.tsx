@@ -45,7 +45,7 @@ export interface lessonType {
 }
 
 export interface CourseInformationType {
-  CourseThumbnail:string;
+  CourseThumbnail: string;
   courseDescriptions: string;
   whatYouWillTeach: Object;
   targetAudience: Object;
@@ -98,7 +98,7 @@ export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
   const [BasicInformation, setBasicInformations] = useState<any[] | null>(null);
   const [AdvancedInformation, setAdvancedInformation] =
     useState<CourseInformationType | null>({
-      CourseThumbnail:'',
+      CourseThumbnail: '',
       courseDescriptions: '',
       whatYouWillTeach: { '0': '' },
       targetAudience: { '0': '' },

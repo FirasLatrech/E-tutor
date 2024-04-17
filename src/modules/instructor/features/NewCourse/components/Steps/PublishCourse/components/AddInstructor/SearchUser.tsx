@@ -42,7 +42,6 @@ function SearchUser({
     setSearchValue(inputValue);
   }, 500);
 
- 
   return (
     <div className="w-[38rem] max-lg:w-full relative ">
       <SearchIcon className="absolute top-[25%] left-[0.8rem]" />

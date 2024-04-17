@@ -50,8 +50,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     fetchUser();
   }, []);
 
-  if(!isInitialised){
-    return <LazyLoad/>
+  if (!isInitialised) {
+    return <LazyLoad />;
   }
   return <>{children}</>;
 };

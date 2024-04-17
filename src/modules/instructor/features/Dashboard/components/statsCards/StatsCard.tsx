@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { useNavigate } from 'react-router';
 import { cn } from 'modules/shared/lib/utility';
+import CountUpNumberCounter from 'modules/shared/components/CountUpNumberCounter/CountUpNumberCounter';
 
 interface StatsCardPropsType {
   Icon: any;
@@ -20,7 +21,9 @@ function StatsCard({ Icon, name, backgroundColor }: StatsCardPropsType) {
       </div>
 
       <div className="flex flex-col gap-[0.75rem] justify-center">
-        <span className="text-2xl text-gray-900 leading-8">19,132</span>
+        <span className="text-2xl text-gray-900 leading-8">
+          <CountUpNumberCounter value={1132} />
+        </span>
         <span className="text-gray-700 whitespace-nowrap text-sm leading-5">
           {name}{' '}
         </span>

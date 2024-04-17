@@ -5,7 +5,7 @@ import { clearItem, setItem } from '../lib/localStorage';
 interface AuthState {
   isInitialised: boolean;
   isAuthenticated: boolean;
-  user: User | null;
+  user: any | null;
 }
 
 export interface AuthStore extends AuthState {

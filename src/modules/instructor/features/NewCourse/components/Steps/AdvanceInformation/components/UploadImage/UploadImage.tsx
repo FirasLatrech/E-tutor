@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import MuxPlayer from '@mux/mux-node';
+import { useState } from 'react';
 import UploadFileIcon from 'modules/instructor/assets/icons/CreateCourse/UploadFileIcon';
-import Button from 'modules/shared/components/Button';
 import InputFile from 'modules/shared/components/InputFile';
 import { UploadVideoForStreaming } from 'modules/shared/data/api/videoStreaming.service';
 

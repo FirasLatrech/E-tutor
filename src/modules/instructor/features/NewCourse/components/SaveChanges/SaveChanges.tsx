@@ -1,4 +1,3 @@
-import React, { ReactNode } from 'react';
 import { CreateCourseSteps } from 'modules/instructor/constants/createCourseSteps.constant';
 import Button from 'modules/shared/components/Button';
 

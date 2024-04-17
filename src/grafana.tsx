@@ -9,7 +9,7 @@ function Grafana() {
       app: {
         name: 'e-tutor',
         version: '1.0.0',
-        environment: 'production',
+        environment:'dev'
       },
       instrumentations: [
         ...getWebInstrumentations(),

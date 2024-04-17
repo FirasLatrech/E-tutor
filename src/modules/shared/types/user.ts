@@ -5,7 +5,7 @@ interface User {
   socialId: string;
   firstName: string;
   my_courses: any[];
-  username: string ;
+  username: string;
   lastName: string;
   role: {
     id: number;
@@ -17,7 +17,7 @@ interface User {
     name: string;
     __entity: string;
   };
-  createdAt: string; 
+  createdAt: string;
   updatedAt: string;
-  deletedAt: string | null; 
+  deletedAt: string | null;
 }

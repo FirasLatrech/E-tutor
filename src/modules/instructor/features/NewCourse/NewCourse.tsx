@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CreateCourseSteps } from 'modules/instructor/constants/createCourseSteps.constant';
 import { CourseSectionsProvider } from './context/CourseSectionsContext';

@@ -78,7 +78,12 @@ const courseDetails = (props: Props) => {
               })}
             </div>
             <div className="h-[60px] w-[70%] items-center justify-start max-lg:flex hidden">
-              <Button text="Course Details" onClick={() => { handleClick(); }} />
+              <Button
+                text="Course Details"
+                onClick={() => {
+                  handleClick();
+                }}
+              />
             </div>
 
             <Description courseDetails={data} />

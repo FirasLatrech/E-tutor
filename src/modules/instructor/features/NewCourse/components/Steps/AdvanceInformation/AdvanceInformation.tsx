@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import UploadFileIcon from 'modules/instructor/assets/icons/CreateCourse/UploadFileIcon';
+import { useState } from 'react';
 import UploadImage from 'modules/instructor/features/NewCourse/components/Steps/AdvanceInformation/components/UploadImage/UploadImage';
 import UploadVideo from 'modules/instructor/features/NewCourse/components/Steps/AdvanceInformation/components/UploadVideo/UploadVideo';
 import Button from 'modules/shared/components/Button';

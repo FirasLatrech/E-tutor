@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import SearchIcon from 'modules/instructor/assets/icons/NavBar/SearchIcon';
-import Input from 'modules/shared/components/Input';
 
 function Search() {
   const [value, setValue] = useState<string>();

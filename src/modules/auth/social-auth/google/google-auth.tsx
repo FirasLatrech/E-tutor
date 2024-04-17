@@ -13,14 +13,18 @@ import { useNavigation } from 'modules/shared/hooks/useNavigation';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import { set } from 'react-hook-form';
 
-
 export default function GoogleAuth() {
   const { mutateAsync: authGoogleLoginService } = useAuthGoogleLoginService();
   const { toast } = useToast();
   const { setUser } = useAuthStore((state) => state);
   const { setIsAuthenticated, setToken } = useAuthStore((state) => state);
 
-  const onSuccess = async (tokenResponse: Omit<CodeResponse, "error" | "error_description" | "error_uri">  )=> {
+  const onSuccess = async (
+    tokenResponse: Omit<
+      CodeResponse,
+      'error' | 'error_description' | 'error_uri'
+    >
+  ) => {
     const idToken = await exchangeCodeForIdToken(tokenResponse?.code);
     console.log(tokenResponse);
     const { status, data } = await authGoogleLoginService({

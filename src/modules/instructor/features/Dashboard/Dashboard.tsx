@@ -10,6 +10,8 @@ import ProfileViewChart from './components/ProfileViewChart/ProfileViewChart';
 import RecentActivity from './components/RecentActivity/RecentActivity';
 import RevenueRechart from './components/RevenueChart/RevenueChart';
 import StatsCard from './components/statsCards/StatsCard';
+import CourseRating from './components/CourseRating/CourseRating';
+import CourseOverview from './components/CourseOverview/CourseOverview';
 
 function Dashboard() {
   const statsCard = [
@@ -73,10 +75,14 @@ function Dashboard() {
         </div>
         <div className="w-full flex flex-col gap-[1.5rem] mt-8">
           <EditProfileProgress />
-          <div className="w-full items-start flex gap-[1rem] min-h-[20rem]">
+          <div className="w-full items-start flex gap-[1rem] min-h-[20rem] max-xl:grid max-xl:grid-cols-2 max-xl:grid-rows-2">
             <RecentActivity />
             <RevenueRechart />
             <ProfileViewChart />
+          </div>
+          <div className="w-full items-start flex gap-[1rem] min-h-[20rem]">
+            <CourseRating />
+            <CourseOverview />
           </div>
         </div>
       </div>

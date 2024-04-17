@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import UserCard from './UserCard';
 import SearchUser from './SearchUser';
 import { useUsersQuery } from 'modules/shared/data/queries/users.query';
-import { instructorType, useCourseSections } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+import {
+  instructorType,
+  useCourseSections,
+} from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
 
 function AddInstructor() {
   const [searchValue, setSearchValue] = useState('');

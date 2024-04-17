@@ -240,7 +240,7 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
                   text="contents"
                   Options={[
                     {
-                      name: 'Video',
+                      label: 'Video',
                       action: () =>
                         setOpen(
                           <ModalContainer title="video">
@@ -253,7 +253,7 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
                         ),
                     },
                     {
-                      name: 'Attach File',
+                      label: 'Attach File',
                       action: () =>
                         setOpen(
                           <ModalContainer title="Attach File">
@@ -262,7 +262,7 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
                         ),
                     },
                     {
-                      name: 'Captions',
+                      label: 'Captions',
                       action: () =>
                         setOpen(
                           <ModalContainer title="Captions">
@@ -275,7 +275,7 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
                         ),
                     },
                     {
-                      name: 'Description',
+                      label: 'Description',
                       action: () =>
                         setOpen(
                           <ModalContainer title="Add Lecture Description">
@@ -288,7 +288,7 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
                         ),
                     },
                     {
-                      name: 'Lecture Notes',
+                      label: 'Lecture Notes',
                       action: () =>
                         setOpen(
                           <ModalContainer title="Lecture Notes">
