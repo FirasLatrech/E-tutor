@@ -66,7 +66,7 @@ function Dashboard() {
   return (
     <div className="bg-gray-50 h-screen p-8 flex justify-center items-start pb-[100rem] ">
       <div className="w-[95%] flex flex-col items-center justify-start">
-        <div className="w-full grid grid-cols-4 grid-rows-2 gap-5">
+        <div className="w-full grid grid-cols-4 grid-rows-2 gap-5  max-xl:grid-cols-3 max-xl:grid-rows-3 max-lg:grid-cols-2 max-lg:grid-rows-4">
           {statsCard.map((item, index) => {
             return <StatsCard {...item} key={index} />;
           })}

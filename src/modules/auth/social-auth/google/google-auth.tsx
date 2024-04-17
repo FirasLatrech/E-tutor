@@ -6,7 +6,6 @@ import SocialMediaBtn from 'modules/auth/components/SocialMediaBtn';
 import { SocialMediaAuth } from 'modules/auth/constants/SocialMediaAuth.constant';
 import { exchangeCodeForIdToken } from 'modules/auth/data/api/auth.service';
 import { useAuthGoogleLoginService } from 'modules/auth/data/queries/auth.query';
-import { GoogleTokenResponse } from 'modules/auth/types/auth';
 import { ToastAction } from 'modules/shared/components/ui/toast';
 import { useToast } from 'modules/shared/components/ui/use-toast';
 import HTTP_CODES_ENUM from 'modules/shared/constants/http-code.constant';

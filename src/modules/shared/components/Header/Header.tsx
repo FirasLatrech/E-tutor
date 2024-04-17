@@ -40,7 +40,7 @@ const Header = () => {
     {
       name: t(`sidebar.becomanInstructor`),
 
-      path: '/instructor',
+      path: '/instructor/Dashboard',
     },
   ];
 

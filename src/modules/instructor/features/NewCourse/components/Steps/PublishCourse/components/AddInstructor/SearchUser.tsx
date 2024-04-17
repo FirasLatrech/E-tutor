@@ -4,6 +4,7 @@ import { SearchIcon } from 'lucide-react';
 import { useCourseSections } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import UserCard from './UserCard';
+import useDebounce from 'modules/shared/hooks/useDebounce';
 
 interface SearchUserPropsType {
   searchValue: string;
@@ -40,27 +41,10 @@ function SearchUser({
   useDebounce(() => {
     setSearchValue(inputValue);
   }, 500);
-  console.log(
-    data?.data?.length > 0 && !isAllSelected,
-    isAllSelected,
-    Instructors,
-    data?.data,
-    data?.data
-      ?.map((user: User, index: number) => {
-        if (
-          (
-            Instructors?.filter((instructor) => user?.id == instructor?.id) ||
-            []
-          )?.length > 0
-        ) {
-          return user;
-        }
-      })
-      .filter((user: any) => user !== undefined),
-    'data?.data?.length > 0 && !isAllSelected '
-  );
+
+ 
   return (
-    <div className="w-[38rem] relative ">
+    <div className="w-[38rem] max-lg:w-full relative ">
       <SearchIcon className="absolute top-[25%] left-[0.8rem]" />
       <input
         className={`w-full border border-gray-100 pl-[3rem] bg-gray-white py-[0.7rem] px-3  placeholder-gray-500 focus:outline-none  outline-none hover:border-1 text-[1rem] text-gray-700 font-light`}

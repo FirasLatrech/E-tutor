@@ -21,7 +21,9 @@ function StatsCard({ Icon, name, backgroundColor }: StatsCardPropsType) {
 
       <div className="flex flex-col gap-[0.75rem] justify-center">
         <span className="text-2xl text-gray-900 leading-8">19,132</span>
-        <span className="text-gray-700 text-sm leading-5">{name} </span>
+        <span className="text-gray-700 whitespace-nowrap text-sm leading-5">
+          {name}{' '}
+        </span>
       </div>
     </div>
   );

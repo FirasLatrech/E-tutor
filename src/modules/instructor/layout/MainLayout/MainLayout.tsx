@@ -31,7 +31,6 @@ function MainLayout({ children }: MainLayoutPropsType) {
 
   return (
     <div className="w-screen min-h-screen h-screen pb-full flex">
-      {!isOpenSideBar && <MenuLogo onClick={() => setOpenSideBar(true)} />}
       <div
         className={`max-w-[17.5rem] z-50 ease-linear duration-300 h-full bg-gray-900 ${
           isOpenSideBar ? 'w-[17.5rem]' : 'w-[5rem] '
@@ -103,7 +102,10 @@ function MainLayout({ children }: MainLayoutPropsType) {
         />
       )}
       <div className="w-full flex bg-gray-50 overflow-y-auto flex-col">
-        <NavBar />
+        <NavBar
+          setOpenSideBar={setOpenSideBar}
+          isOpenSideBar={isOpenSideBar || !hideSideBar}
+        />
         {children}
       </div>
     </div>

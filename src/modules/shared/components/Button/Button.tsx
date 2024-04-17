@@ -124,7 +124,7 @@ const Button: React.FC<ButtonProps> = ({
         className ?? ''
       } ${getVariantClasses()} ${getSizeClasses()} ${
         disabled ? 'opacity-50 cursor-not-allowed  ' : ''
-      } `}
+      } whitespace-nowrap `}
       disabled={disabled}
       {...props}
     >
