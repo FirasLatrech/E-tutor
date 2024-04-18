@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
   type sectionType,
-  useCourseSections,
-} from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+  useCourseCreation,
+} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 import Button from 'modules/shared/components/Button';
 import Input from 'modules/shared/components/Input';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';

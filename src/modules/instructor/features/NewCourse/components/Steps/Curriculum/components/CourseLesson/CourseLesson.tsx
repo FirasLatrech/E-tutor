@@ -5,9 +5,9 @@ import DeleteIcon from 'modules/instructor/assets/icons/CreateCourse/deleteIcon'
 import {
   type lessonType,
   type sectionType,
-  useCourseSections,
   videoLessonType,
-} from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+  useCourseCreation,
+} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 import DropDownGeneric from 'modules/shared/components/DropDownGeneric';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
 import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
@@ -25,7 +25,7 @@ interface CourseLessonPropsType {
 }
 function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
   const { setOpen, setClose } = useModal();
-  const { Sections, setSections } = useCourseSections();
+  const { Sections, setSections } = useCourseCreation();
 
   const DeleteLesson = (SectionNumber: number, LessonName: string) => {
     setSections((old): sectionType[] => {

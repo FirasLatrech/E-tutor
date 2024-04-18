@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CreateCourseSteps } from 'modules/instructor/constants/createCourseSteps.constant';
-import { CourseSectionsProvider } from './context/CourseSectionsContext';
 import { StepsProvider, useSteps } from './context/StepsContext';
 import CreateCourseLayout from './layout/CreateCourseLayout/CreateCourseLayout';
+import { CourseSectionsProvider } from './context/CourseCreationContext';
 
 function NewCourse() {
   const { currentStep } = useSteps();

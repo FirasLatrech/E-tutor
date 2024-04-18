@@ -6,13 +6,13 @@ import Button from 'modules/shared/components/Button';
 import { useSteps } from '../../../context/StepsContext';
 import {
   CourseInformationType,
-  useCourseSections,
-} from '../../../context/CourseSectionsContext';
+  useCourseCreation,
+} from '../../../context/CourseCreationContext';
 import TextEditor from 'modules/shared/components/TextEditor';
 import MultipleAnswer from '../../MultipleAnswer';
 
 function AdvanceInformation() {
-  const { AdvancedInformation, setAdvancedInformation } = useCourseSections();
+  const { AdvancedInformation, setAdvancedInformation } = useCourseCreation();
   const { currentStep, setCurrentStep } = useSteps();
   const [value, setValue] = useState<string>('');
   const [courseDetails, setCourseDetails] = useState<any>(AdvancedInformation);

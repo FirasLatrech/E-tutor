@@ -7,8 +7,8 @@ import EditIcon from 'modules/instructor/assets/icons/CreateCourse/EditIcon';
 import {
   lessonType,
   type sectionType,
-  useCourseSections,
-} from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+  useCourseCreation,
+} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 import {
   Dialog,
   DialogContent,
@@ -28,7 +28,7 @@ function CourseSection({
   courseSection,
   SectionNumber,
 }: CourseSectionPropsType) {
-  const { Sections, setSections } = useCourseSections();
+  const { Sections, setSections } = useCourseCreation();
   const { setOpen } = useModal();
 
   const DeleteSection = (SectionNumber: number) => {
@@ -68,42 +68,41 @@ function CourseSection({
     });
     return true;
   };
- const AddLesson = () => {
-   setSections((old): sectionType[] => {
-     if (!old) {
-       return [];
-     }
+  const AddLesson = () => {
+    setSections((old): sectionType[] => {
+      if (!old) {
+        return [];
+      }
 
-     const existingNames = new Set<string>();
-     old[SectionNumber]?.lessons?.forEach((lesson) => {
-       existingNames.add(lesson.name);
-     });
+      const existingNames = new Set<string>();
+      old[SectionNumber]?.lessons?.forEach((lesson) => {
+        existingNames.add(lesson.name);
+      });
 
-     let newLessonName = `lecture ${
-       old[SectionNumber]?.lessons?.length || 0 + 1
-     }`;
-     while (existingNames.has(newLessonName)) {
-       newLessonName = `lecture ${parseInt(newLessonName.split(' ')[1]) + 1}`;
-     }
+      let newLessonName = `lecture ${
+        old[SectionNumber]?.lessons?.length || 0 + 1
+      }`;
+      while (existingNames.has(newLessonName)) {
+        newLessonName = `lecture ${parseInt(newLessonName.split(' ')[1]) + 1}`;
+      }
 
-     return old?.map((section, index) => {
-       if (index === SectionNumber) {
-         return {
-           ...section,
-           lessons: [
-             ...(section?.lessons || []),
-             {
-               name: newLessonName,
-             } as lessonType,
-           ],
-         };
-       } else {
-         return section;
-       }
-     });
-   });
- };
-
+      return old?.map((section, index) => {
+        if (index === SectionNumber) {
+          return {
+            ...section,
+            lessons: [
+              ...(section?.lessons || []),
+              {
+                name: newLessonName,
+              } as lessonType,
+            ],
+          };
+        } else {
+          return section;
+        }
+      });
+    });
+  };
 
   return (
     <>

@@ -17,8 +17,8 @@ const axiosRequestConfig: AxiosRequestConfig = {
 };
 
 const api: AxiosInstance = axios.create(axiosRequestConfig);
+api.interceptors.response.use((Response) => Response, RefreshTokenInterceptor);
 api.interceptors.request.use(requestInterceptor);
-api.interceptors.response.use(successInterceptor, errorInterceptor)
-api.interceptors.response.use((Response)=>Response, RefreshTokenInterceptor);
+api.interceptors.response.use(successInterceptor, errorInterceptor);
 
 export { api };

@@ -1,5 +1,5 @@
 import CloseIcon from 'modules/instructor/assets/icons/CreateCourse/CloseIcon';
-import { useCourseSections } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+import { useCourseCreation } from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 import {
   Avatar,
   AvatarFallback,
@@ -14,7 +14,7 @@ interface UserCardPropsType {
 }
 
 function UserCard({ username, pictureLink, job, id }: UserCardPropsType) {
-  const { setInstructors } = useCourseSections();
+  const { setInstructors } = useCourseCreation();
   return (
     <div className="p-4 w-full hover:bg-gray-100 cursor-pointer ease-linear duration-200 min-w-[18rem] bg-gray-50 flex gap-[1rem] items-center justify-between">
       <div

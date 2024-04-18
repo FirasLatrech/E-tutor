@@ -48,6 +48,8 @@ export const errorInterceptor = async (error: AxiosError): Promise<void> => {
 };
 
 export  const RefreshTokenInterceptor = async (error:any) => {
+      console.log('refresh');
+
   const { clearToken, setToken } =
   useAuthStore((state) => state);
   if (error?.response?.status === 503) {
@@ -59,7 +61,6 @@ export  const RefreshTokenInterceptor = async (error:any) => {
     previousRequest.sent = true
 
     try {
-      console.log('refresh')
       const response = await api.get('/auth/refresh')
       const { accessToken } = response.data.payload
       setToken(accessToken)

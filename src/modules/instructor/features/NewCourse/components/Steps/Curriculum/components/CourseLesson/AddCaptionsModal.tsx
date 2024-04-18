@@ -1,8 +1,8 @@
 import {
   lessonType,
   sectionType,
-  useCourseSections,
-} from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+  useCourseCreation,
+} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 import Button from 'modules/shared/components/Button';
 import TextArea from 'modules/shared/components/TextArea/TextArea';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';

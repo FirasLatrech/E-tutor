@@ -9,7 +9,7 @@ import UploadVideoLesson from './UploadVideo';
 import {
   lessonType,
   videoLessonType,
-} from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 
 interface AddVideoPropsType {
   AddVideoToLesson: (
@@ -40,7 +40,7 @@ function AddVideo({
         <div className="flex gap-1">
           <strong className="text-sm text-gray-900">Note:</strong>
           <span className="text-sm text-gray-700">
-           file should be at least 720p and less than 4.0 GB.
+            file should be at least 720p and less than 4.0 GB.
           </span>
         </div>
         <div className="flex justify-between items-center w-full">

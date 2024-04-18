@@ -6,11 +6,12 @@ import Button from 'modules/shared/components/Button';
 import Input from 'modules/shared/components/Input';
 import SelectGeneric from 'modules/shared/components/SelectGeneric';
 import * as yup from 'yup';
-import { useCourseSections } from '../../../context/CourseSectionsContext';
+import { BasicInformationType, useCourseCreation } from '../../../context/CourseCreationContext';
 import { useSteps } from '../../../context/StepsContext';
 
+
 function BasicInformation() {
-  const { BasicInformation, setBasicInformations } = useCourseSections();
+  const { BasicInformation, setBasicInformations } = useCourseCreation();
   const onSubmit: SubmitHandler<any> = async (data) => {
     setBasicInformations(data);
     setCurrentStep(1);
@@ -24,7 +25,7 @@ function BasicInformation() {
     control,
     formState: { errors },
     setValue,
-  } = useForm<any>({
+  } = useForm<BasicInformationType>({
     resolver: yupResolver(
       yup.object().shape({
         tittle: yup.string().required('Tittle is required'),
@@ -42,13 +43,14 @@ function BasicInformation() {
     ),
   });
 
-  useEffect(() => {
-    if (BasicInformation) {
-      Object.entries(BasicInformation).forEach(([key, value]) => {
-        setValue(key, value);
-      });
-    }
-  }, [BasicInformation]);
+useEffect(() => {
+  if (BasicInformation) {
+    Object.entries(BasicInformation).forEach(([key, value]) => {
+        setValue(key as keyof BasicInformationType, value as any);
+      
+    });
+  }
+}, [BasicInformation]);
 
   return (
     <div className="flex justify-center w-full py-6 mt-2">
@@ -91,11 +93,8 @@ function BasicInformation() {
                 label="Course Category"
                 isLoading={isFetching}
                 items={
-                  data?.data
-                    ? data.map((item: any) => ({
-                        label: item.name,
-                        value: item.id,
-                      }))
+                  data && !isFetching
+                    ? data?.map((item: any) => item?.name || '')
                     : ['Default category']
                 }
                 {...field}

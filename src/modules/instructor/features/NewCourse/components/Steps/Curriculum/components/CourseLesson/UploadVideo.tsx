@@ -4,7 +4,7 @@ import { LoadingSpinner } from 'modules/shared/assets/icons/Loaders/Loader';
 import {
   lessonType,
   videoLessonType,
-} from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 interface UploadVideoPropsType {
   AddVideoToLesson: (video: videoLessonType) => void;
   Lesson: lessonType;

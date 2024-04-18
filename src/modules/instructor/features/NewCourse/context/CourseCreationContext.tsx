@@ -1,3 +1,4 @@
+import { CourseInformationType, instructorType, sectionType } from 'modules/instructor/types/createCrouseSteps.type';
 import React, {
   createContext,
   type ReactNode,
@@ -5,65 +6,46 @@ import React, {
   useState,
 } from 'react';
 
-interface CourseSectionsContextType {
+interface CourseCreationContextType {
   BasicInformation: any;
   setBasicInformations: React.Dispatch<React.SetStateAction<any[] | null>>;
   Sections: sectionType[] | null;
   setSections: React.Dispatch<React.SetStateAction<sectionType[] | null>>;
-  Instructors: any[] | null;
+  Instructors: instructorType[] | null;
   setInstructors: React.Dispatch<React.SetStateAction<instructorType[] | null>>;
-  AdvancedInformation: any;
+  AdvancedInformation: CourseInformationType | null;
   setAdvancedInformation: React.Dispatch<
     React.SetStateAction<CourseInformationType | null>
   >;
 }
 
-export interface instructorType {
-  id: string;
-  username: string;
-  pictureLink: string;
-  job: string;
+export interface BasicInformationType {
+  tittle: string;
+  subTittle: string;
+  courseCategory: string;
+  courseSubCategory: string;
+  courseTopic: string;
+  courseLanguage: string;
+  subtitleLanguage?: string;
+  courseLevel: string;
+  courseDuration: string;
 }
 
-export interface sectionType {
-  lessons: lessonType[] | null;
-  name: string;
-}
 
-export interface videoLessonType {
-  url: string;
-  file: File;
-  id: string;
-}
-export interface lessonType {
-  name: string;
-  video: videoLessonType | null;
-  File: string;
-  captions: string;
-  Description: string;
-  Notes: string;
-}
 
-export interface CourseInformationType {
-  CourseThumbnail:string;
-  courseDescriptions: string;
-  whatYouWillTeach: Object;
-  targetAudience: Object;
-  courseRequirements: Object;
-}
-const CourseSectionsContext = createContext<
-  CourseSectionsContextType | undefined
+const CourseCreationContext = createContext<
+  CourseCreationContextType | undefined
 >(undefined);
 
 export interface StepsProviderType {
   children: ReactNode;
 }
 
-export const useCourseSections = (): CourseSectionsContextType => {
-  const context = useContext(CourseSectionsContext);
+export const useCourseCreation = (): CourseCreationContextType => {
+  const context = useContext(CourseCreationContext);
   if (!context) {
     throw new Error(
-      'useCourseSections must be used within a CourseSectionsProvider'
+      'useCourseCreation must be used within a CourseSectionsProvider'
     );
   }
   return context;
@@ -98,14 +80,14 @@ export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
   const [BasicInformation, setBasicInformations] = useState<any[] | null>(null);
   const [AdvancedInformation, setAdvancedInformation] =
     useState<CourseInformationType | null>({
-      CourseThumbnail:'',
+      CourseThumbnail: '',
       courseDescriptions: '',
       whatYouWillTeach: { '0': '' },
       targetAudience: { '0': '' },
       courseRequirements: { '0': '' },
     });
 
-  const contextValue: CourseSectionsContextType = {
+  const contextValue: CourseCreationContextType = {
     Sections,
     setSections,
     Instructors,
@@ -117,10 +99,10 @@ export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
   };
 
   return (
-    <CourseSectionsContext.Provider value={contextValue}>
+    <CourseCreationContext.Provider value={contextValue}>
       {children}
-    </CourseSectionsContext.Provider>
+    </CourseCreationContext.Provider>
   );
 };
 
-export default CourseSectionsContext;
+export default CourseCreationContext;

@@ -4,7 +4,15 @@ import { api } from 'modules/shared/lib/api';
 
 export const getAllCategory = async () => {
   try {
-    const res = await api.get('/category');
+    const res = await api.get('/category', {
+      params: {
+        orderBy: {
+          orderBy: 'createdAt',
+          order: 'DESC',
+        },
+        order:"asc"
+      },
+    });
 
     if (res.status !== 200) {
       throw new Error(`Unexpected status code: ${res.status}`);

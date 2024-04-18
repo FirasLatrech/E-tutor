@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Search } from 'react-router';
 import { SearchIcon } from 'lucide-react';
-import { useCourseSections } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+import { useCourseCreation } from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 import useAuthStore from 'modules/shared/store/useAuthStore';
 import UserCard from './UserCard';
 import useDebounce from 'modules/shared/hooks/useDebounce';
@@ -20,7 +20,7 @@ function SearchUser({
 }: SearchUserPropsType) {
   const [isTyping, setTyping] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState('');
-  const { Instructors } = useCourseSections();
+  const { Instructors } = useCourseCreation();
   const { user: User } = useAuthStore((state) => state);
   const isAllSelected =
     (
@@ -42,7 +42,6 @@ function SearchUser({
     setSearchValue(inputValue);
   }, 500);
 
- 
   return (
     <div className="w-[38rem] max-lg:w-full relative ">
       <SearchIcon className="absolute top-[25%] left-[0.8rem]" />

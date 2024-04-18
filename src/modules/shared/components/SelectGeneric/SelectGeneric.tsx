@@ -20,10 +20,10 @@ export interface Props<
 }
 
 interface SelectGenericTypeProps extends Props {
-  items: string[];
+  items: string[] | null;
   label: string;
   isLoading?: boolean;
-  value: string | null;
+  value: string | undefined;
   onChange: (value: string) => void;
 }
 

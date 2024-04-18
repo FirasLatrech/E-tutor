@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import UserCard from './UserCard';
 import SearchUser from './SearchUser';
 import { useUsersQuery } from 'modules/shared/data/queries/users.query';
-import { instructorType, useCourseSections } from 'modules/instructor/features/NewCourse/context/CourseSectionsContext';
+import {
+  instructorType,
+  useCourseCreation,
+} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 
 function AddInstructor() {
   const [searchValue, setSearchValue] = useState('');
-  const { Instructors } = useCourseSections();
+  const { Instructors } = useCourseCreation();
   const { data, refetch, isFetching } = useUsersQuery({
     page: 1,
     limit: 5,

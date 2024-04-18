@@ -2,15 +2,15 @@ import { Droppable, Draggable } from '@hello-pangea/dnd';
 import { DragDropContext } from '@hello-pangea/dnd';
 import {
   type sectionType,
-  useCourseSections,
-} from '../../../context/CourseSectionsContext';
+  useCourseCreation,
+} from '../../../context/CourseCreationContext';
 import { useSteps } from '../../../context/StepsContext';
 import CourseLesson from './components/CourseLesson/CourseLesson';
 import CourseSection from './components/CourseSection/CourseSection';
 import Button from 'modules/shared/components/Button';
 
 function Curriculum() {
-  const { Sections, setSections } = useCourseSections();
+  const { Sections, setSections } = useCourseCreation();
   const { currentStep, setCurrentStep } = useSteps();
 
   const onDragEndLessons = (result: any) => {

@@ -1,13 +1,13 @@
 import React from 'react';
 import Button from 'modules/shared/components/Button';
-import { useCourseSections } from '../../../context/CourseSectionsContext';
+import { useCourseCreation } from '../../../context/CourseCreationContext';
 import { useSteps } from '../../../context/StepsContext';
 import AddInstructor from './components/AddInstructor/AddInstructor';
 import Message from './components/Message/Message';
 
 function PublishCourse() {
   const { Sections, Instructors, BasicInformation, AdvancedInformation } =
-    useCourseSections();
+    useCourseCreation();
   const { currentStep, setCurrentStep } = useSteps();
 
   const CreateNewCourse = () => {
