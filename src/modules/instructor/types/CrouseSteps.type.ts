@@ -25,9 +25,8 @@ export interface lessonType {
 }
 
 export interface CourseInformationType {
-  CourseThumbnail: string;
-  courseDescriptions: string;
-  whatYouWillTeach: Object;
-  targetAudience: Object;
-  courseRequirements: Object;
+  course_thumbnail: string;
+  course_content: Object;
+  target_audience: Object;
+  course_requirements: Object;
 }

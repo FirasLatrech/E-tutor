@@ -19,11 +19,15 @@ export interface Props<
   variant?: 'default' | 'outlined' | 'rounded';
 }
 
+export interface option {
+  value: string;
+  label: string;
+}
 interface SelectGenericTypeProps extends Props {
-  items: string[] | null;
+  items: option[] | null;
   label: string;
   isLoading?: boolean;
-  value: string | undefined;
+  value: string | number |undefined;
   onChange: (value: string) => void;
 }
 
@@ -35,18 +39,36 @@ function SelectGeneric({
   onChange,
   ...props
 }: SelectGenericTypeProps) {
-  console.log(props);
+  const [selectedValue, setselectedValue] = useState<option | null>(null);
+
+  useEffect(() => {
+    if (value) {
+      const selectedItem = items?.find((item) => item.value === value);
+      if (selectedItem) {
+        setselectedValue(selectedItem);
+      }
+    }
+  }, [items, value]);
+
   return (
     <div className="flex flex-col w-full gap-2 mb-4">
       <label className="flex text-sm font-light text-gray-900">{label}</label>
-      <Select onValueChange={(value) => onChange(value)}>
+      <Select
+        onValueChange={(value) => {
+          const selectedItem = items?.find((item) => item.value === value);
+          if (selectedItem) {
+            setselectedValue(selectedItem);
+            onChange(value);
+          }
+        }}
+      >
         <SelectTrigger className="min-h-[3rem]">
           <span
             className={`text-[16px] font-light  ${
-              value ? 'text-gray-700' : 'text-gray-400'
+              selectedValue ? 'text-gray-700' : 'text-gray-400'
             }`}
           >
-            {value || 'Select...'}
+            {selectedValue?.label || 'Select...'}
           </span>
         </SelectTrigger>
         <SelectContent className="w-full">
@@ -56,11 +78,12 @@ function SelectGeneric({
             ) : (
               items?.map((item, index) => (
                 <SelectItem
-                  value={item}
+                  onClick={() => setselectedValue(item)}
+                  value={item?.value}
                   key={props?.name + String(index)}
                   className="w-full cursor-pointer"
                 >
-                  {item}
+                  {item?.label}
                 </SelectItem>
               ))
             )}
@@ -77,5 +100,4 @@ function SelectGeneric({
     </div>
   );
 }
-
 export default SelectGeneric;

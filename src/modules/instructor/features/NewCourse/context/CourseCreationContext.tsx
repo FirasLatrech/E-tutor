@@ -1,4 +1,8 @@
-import { CourseInformationType, instructorType, sectionType } from 'modules/instructor/types/createCrouseSteps.type';
+import {
+  CourseInformationType,
+  instructorType,
+  sectionType,
+} from 'modules/instructor/types/CrouseSteps.type';
 import React, {
   createContext,
   type ReactNode,
@@ -20,18 +24,16 @@ interface CourseCreationContextType {
 }
 
 export interface BasicInformationType {
-  tittle: string;
-  subTittle: string;
-  courseCategory: string;
-  courseSubCategory: string;
-  courseTopic: string;
-  courseLanguage: string;
-  subtitleLanguage?: string;
-  courseLevel: string;
-  courseDuration: string;
+  title: string;
+  subtitle: string;
+  course_category_id: string;
+  course_sub_category_id: string;
+  course_topic: string;
+  course_language_id: number;
+  subtitle_language_id?: number;
+  course_level_id: number;
+  durations: string;
 }
-
-
 
 const CourseCreationContext = createContext<
   CourseCreationContextType | undefined
@@ -80,11 +82,10 @@ export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
   const [BasicInformation, setBasicInformations] = useState<any[] | null>(null);
   const [AdvancedInformation, setAdvancedInformation] =
     useState<CourseInformationType | null>({
-      CourseThumbnail: '',
-      courseDescriptions: '',
-      whatYouWillTeach: { '0': '' },
-      targetAudience: { '0': '' },
-      courseRequirements: { '0': '' },
+      course_thumbnail: '',
+      course_content: { '0': '' },
+      target_audience: { '0': '' },
+      course_requirements: { '0': '' },
     });
 
   const contextValue: CourseCreationContextType = {

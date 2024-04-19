@@ -1,25 +1,70 @@
 import React, { useEffect } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useAllCategory } from 'modules/home/data/queries/home.query';
+import {
+  useAllCategory,
+  useGetCourseById,
+} from 'modules/home/data/queries/home.query';
 import Button from 'modules/shared/components/Button';
 import Input from 'modules/shared/components/Input';
 import SelectGeneric from 'modules/shared/components/SelectGeneric';
 import * as yup from 'yup';
-import { BasicInformationType, useCourseCreation } from '../../../context/CourseCreationContext';
+import {
+  BasicInformationType,
+  useCourseCreation,
+} from '../../../context/CourseCreationContext';
 import { useSteps } from '../../../context/StepsContext';
-
+import { useLevelsQuery } from 'modules/shared/data/queries/level.query';
+import { uselanguagesQuery } from 'modules/shared/data/queries/language.query';
+import {
+  useCreateCourseMutation,
+  useUpdateCourseMutation,
+} from 'modules/instructor/data/queries/course/Course.query';
+import { useSearchParams } from 'react-router-dom';
 
 function BasicInformation() {
   const { BasicInformation, setBasicInformations } = useCourseCreation();
-  const onSubmit: SubmitHandler<any> = async (data) => {
-    setBasicInformations(data);
+  const { mutateAsync: updateCourseStep } = useUpdateCourseMutation();
+  let [searchParams, setSearchParams] = useSearchParams();
+  const course_id = searchParams.get('id') || undefined;
+
+  const { data: current_course_data, isFetching: course_loading } = course_id
+    ? useGetCourseById(course_id)
+    : { data: null, isFetching: null };
+
+  const {
+    mutateAsync: createCourse,
+    isPending: createCourse_loading,
+    data: course_data,
+  } = useCreateCourseMutation();
+
+  const onSubmit: SubmitHandler<any> = async (submitData) => {
+    if (!current_course_data) {
+      const createdCourse = await createCourse({
+        ...submitData,
+        isDraft: true,
+      });
+      setSearchParams({ id: createdCourse?.id });
+    } else {
+      await updateCourseStep({
+        course: submitData,
+        courseId: course_id,
+      });
+    }
+    setBasicInformations(submitData);
     setCurrentStep(1);
   };
-
-  const { data, isFetching } = useAllCategory();
-  const { setCurrentStep } = useSteps();
-
+   const basicInformationCourse = {
+     title: current_course_data?.title,
+     subtitle: current_course_data?.subtitle,
+     course_category_id: current_course_data?.course_category?.id,
+     course_sub_category_id: current_course_data?.course_sub_category?.id,
+     course_topic: current_course_data?.course_topic,
+     course_language_id: current_course_data?.course_language?.id,
+     subtitle_language_id: current_course_data?.subtitle_language?.id,
+     course_level_id: current_course_data?.course_level?.id,
+     durations: current_course_data?.durations,
+   };
   const {
     handleSubmit,
     control,
@@ -28,49 +73,67 @@ function BasicInformation() {
   } = useForm<BasicInformationType>({
     resolver: yupResolver(
       yup.object().shape({
-        tittle: yup.string().required('Tittle is required'),
-        subTittle: yup.string().required('Subtittle is required'),
-        courseCategory: yup.string().required('Course Category is required'),
-        courseSubCategory: yup
+        title: yup.string().required('Tittle is required'),
+        subtitle: yup.string().required('Subtittle is required'),
+        course_category_id: yup
+          .string()
+          .required('Course Category is required'),
+        course_sub_category_id: yup
           .string()
           .required('Course Sub-category is required'),
-        courseTopic: yup.string().required('Course Topic is required'),
-        courseLanguage: yup.string().required('Course Language is required'),
-        subtitleLanguage: yup.string(),
-        courseLevel: yup.string().required('Course Level is required'),
-        courseDuration: yup.string().required('Course Duration is required'),
+        course_topic: yup.string().required('Course Topic is required'),
+        course_language_id: yup
+          .number()
+          .required('Course Language is required'),
+        subtitle_language_id: yup.number(),
+        course_level_id: yup.number().required('Course Level is required'),
+        durations: yup.string().required('Course Duration is required'),
       })
     ),
   });
+  useEffect(() => {
+    if (BasicInformation || basicInformationCourse) {
+      Object.entries(BasicInformation || basicInformationCourse).forEach(
+        ([key, value]) => {
+          console.log([key, value]);
+          setValue(key as keyof BasicInformationType, value as any);
+        }
+      );
+    }
+  }, [BasicInformation]);
 
-useEffect(() => {
-  if (BasicInformation) {
-    Object.entries(BasicInformation).forEach(([key, value]) => {
-        setValue(key as keyof BasicInformationType, value as any);
-      
-    });
-  }
-}, [BasicInformation]);
+  const { data: category_data, isFetching: category_loading } =
+    useAllCategory();
+
+  const { data: level_data, isFetching: level_loading } = useLevelsQuery();
+  const { data: language_data, isFetching: language_loading } =
+    uselanguagesQuery();
+  const { setCurrentStep } = useSteps();
+
+ 
+  console.log(current_course_data);
+  console.log(basicInformationCourse);
+  
 
   return (
     <div className="flex justify-center w-full py-6 mt-2">
       <form className="w-[95%] flex flex-col" onSubmit={handleSubmit(onSubmit)}>
         <Controller
-          name="tittle"
+          name="title"
           control={control}
           defaultValue=""
           render={({ field }) => (
             <Input
-              id="tittle"
-              label="Tittle"
-              placeholder="your course tittle"
+              id="title"
+              label="title"
+              placeholder="your course title"
               {...field}
               errors={errors}
             />
           )}
         />
         <Controller
-          name="subTittle"
+          name="subtitle"
           control={control}
           defaultValue=""
           render={({ field }) => (
@@ -85,16 +148,19 @@ useEffect(() => {
         />
         <div className="flex gap-[2rem] max-sm:flex-col">
           <Controller
-            name="courseCategory"
+            name="course_category_id"
             control={control}
             defaultValue=""
             render={({ field }) => (
               <SelectGeneric
                 label="Course Category"
-                isLoading={isFetching}
+                isLoading={category_loading}
                 items={
-                  data && !isFetching
-                    ? data?.map((item: any) => item?.name || '')
+                  category_data && !category_loading
+                    ? category_data?.map((item: any) => ({
+                        label: item?.name,
+                        value: item?.id,
+                      }))
                     : ['Default category']
                 }
                 {...field}
@@ -103,13 +169,21 @@ useEffect(() => {
             )}
           />
           <Controller
-            name="courseSubCategory"
+            name="course_sub_category_id"
             control={control}
             defaultValue=""
             render={({ field }) => (
               <SelectGeneric
                 label="Course Sub-category"
-                items={['ddd']}
+                isLoading={category_loading}
+                items={
+                  category_data && !category_loading
+                    ? category_data?.map((item: any) => ({
+                        label: item?.name,
+                        value: item?.id,
+                      }))
+                    : ['Default category']
+                }
                 {...field}
                 errors={errors}
               />
@@ -117,7 +191,7 @@ useEffect(() => {
           />
         </div>
         <Controller
-          name="courseTopic"
+          name="course_topic"
           control={control}
           defaultValue=""
           render={({ field }) => (
@@ -132,52 +206,78 @@ useEffect(() => {
         />
         <div className="flex gap-[2rem] max-xl: grid-cols-2 max-xl:grid max-sm:flex-col max-sm:flex">
           <Controller
-            name="courseLanguage"
+            name="course_language_id"
             control={control}
-            defaultValue=""
             render={({ field }) => (
               <SelectGeneric
                 label="Course Language"
-                items={['English', 'French', 'Arabic']}
+                isLoading={language_loading}
+                items={
+                  language_data && !language_loading
+                    ? language_data?.map((item: any) => ({
+                        label: item?.name,
+                        value: item?.id,
+                      }))
+                    : ['Default category']
+                }
                 {...field}
                 errors={errors}
               />
             )}
           />
           <Controller
-            name="subtitleLanguage"
+            name="subtitle_language_id"
             control={control}
-            defaultValue=""
             render={({ field }) => (
               <SelectGeneric
                 label="Subtitle Language (Optional)"
-                items={['English', 'French', 'Arabic']}
+                isLoading={language_loading}
+                items={
+                  language_data && !language_loading
+                    ? language_data?.map((item: any) => ({
+                        label: item?.name,
+                        value: item?.id,
+                      }))
+                    : ['Default category']
+                }
                 {...field}
                 errors={errors}
               />
             )}
           />
           <Controller
-            name="courseLevel"
+            name="course_level_id"
             control={control}
-            defaultValue=""
             render={({ field }) => (
               <SelectGeneric
                 label="Course Level"
-                items={['Beginner', 'Intermediate', 'Advanced']}
+                isLoading={level_loading}
+                items={
+                  level_data && !level_loading
+                    ? level_data?.map((item: any) => ({
+                        label: item?.name,
+                        value: item?.id,
+                      }))
+                    : ['Default level']
+                }
                 {...field}
                 errors={errors}
               />
             )}
           />
           <Controller
-            name="courseDuration"
+            name="durations"
             control={control}
             defaultValue=""
             render={({ field }) => (
               <SelectGeneric
                 label="Durations"
-                items={['1 month', '3 months', '6 months', '1 year']}
+                items={[
+                  { label: '1 month', value: '1 month' },
+                  { label: '2 month', value: '2 month' },
+                  { label: '3 month', value: '3 month' },
+                  { label: '3 month', value: '4 month' },
+                ]}
                 {...field}
                 errors={errors}
               />
@@ -193,8 +293,9 @@ useEffect(() => {
           <Button
             type="submit"
             variant="primary"
+            disabled={createCourse_loading}
             additionnalClasses="!p-4 !px-8 !text-lg"
-            text={'Save & Next'}
+            text={createCourse_loading ? 'saving ...' : 'Save & Next'}
           />
         </div>
       </form>

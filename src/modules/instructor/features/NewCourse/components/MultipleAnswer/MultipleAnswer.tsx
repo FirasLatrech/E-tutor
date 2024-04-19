@@ -5,7 +5,7 @@ import Input from 'modules/shared/components/Input';
 interface MultipleAnswerPropsType {
   label: string;
   onChange: (newValue: string, index: number) => void;
-  defaultValue: Record<string, string>;
+  defaultValue: Object | undefined;
 }
 
 function MultipleAnswer({
@@ -13,7 +13,7 @@ function MultipleAnswer({
   onChange,
   defaultValue,
 }: MultipleAnswerPropsType) {
-  const [value, setValue] = useState<Record<string, string>>(defaultValue);
+  const [value, setValue] = useState<Object>(defaultValue || {'0':''});
   console.log(value);
   return (
     <div className="w-full flex flex-col gap-[1rem]">
