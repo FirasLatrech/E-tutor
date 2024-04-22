@@ -1,12 +1,12 @@
 import UploadVideoIcon from 'modules/shared/assets/icons/Upload/UploadVideoIcon';
 import InputFile from 'modules/shared/components/InputFile';
 
-function UploadVideo({ label }: { label: string }) {
+function UploadVideo({ label, onChange }: { label: string; onChange: any }) {
   return (
     <div className="w-full flex-col gap-[1rem] flex items-start justify-start">
       <p className="font-medium	leading-5 text-lg">{label}</p>
-      <div className="w-full gap-[2rem] flex items-start justify-start">
-        <div className="bg-gray-50 p-6 w-full flex items-center justify-center">
+      <div className="w-full max-3xl:h-[13rem] h-full  gap-[2rem] flex items-start justify-start">
+        <div className="bg-gray-50 p-6 h-full w-full flex items-center justify-center">
           <UploadVideoIcon />
         </div>
         <div className="w-full h-full flex flex-col items-start justify-between   ">

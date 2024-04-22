@@ -22,12 +22,9 @@ export default function GoogleAuth() {
 
   const onSuccess = async (tokenResponse: Omit<CodeResponse, "error" | "error_description" | "error_uri">  )=> {
     const idToken = await exchangeCodeForIdToken(tokenResponse?.code);
-    console.log(tokenResponse);
     const { status, data } = await authGoogleLoginService({
       idToken,
     });
-    console.log(data);
-    console.log(status);
 
     if (status === HTTP_CODES_ENUM.OK) {
       toast({

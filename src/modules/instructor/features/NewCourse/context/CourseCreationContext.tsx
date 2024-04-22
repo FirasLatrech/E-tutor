@@ -17,9 +17,9 @@ interface CourseCreationContextType {
   setSections: React.Dispatch<React.SetStateAction<sectionType[] | null>>;
   Instructors: instructorType[] | null;
   setInstructors: React.Dispatch<React.SetStateAction<instructorType[] | null>>;
-  AdvancedInformation: CourseInformationType | null;
+  AdvancedInformation: CourseInformationType | null ;
   setAdvancedInformation: React.Dispatch<
-    React.SetStateAction<CourseInformationType | null>
+    React.SetStateAction<CourseInformationType | null >
   >;
 }
 
@@ -81,12 +81,14 @@ export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
   const [Instructors, setInstructors] = useState<instructorType[] | null>([]);
   const [BasicInformation, setBasicInformations] = useState<any[] | null>(null);
   const [AdvancedInformation, setAdvancedInformation] =
-    useState<CourseInformationType | null>({
+    useState<CourseInformationType | null>(null
+      /*{
       course_thumbnail: '',
       course_content: { '0': '' },
       target_audience: { '0': '' },
       course_requirements: { '0': '' },
-    });
+      course_descriptions: '',
+    }*/);
 
   const contextValue: CourseCreationContextType = {
     Sections,

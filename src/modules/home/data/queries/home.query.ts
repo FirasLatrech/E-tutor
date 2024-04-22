@@ -132,6 +132,7 @@ export const useGetCourseById = (id: string) => {
     },
   });
 };
+
 export const useCourseDetailsByIds = () =>
   useMutation({
     mutationFn: async (body: string[]) => {

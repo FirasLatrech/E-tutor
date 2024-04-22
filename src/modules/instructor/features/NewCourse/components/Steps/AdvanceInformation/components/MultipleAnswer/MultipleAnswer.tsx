@@ -14,7 +14,6 @@ function MultipleAnswer({
   defaultValue,
 }: MultipleAnswerPropsType) {
   const [value, setValue] = useState<Object>(defaultValue || {'0':''});
-  console.log(value);
   return (
     <div className="w-full flex flex-col gap-[1rem]">
       <div className="flex w-full justify-between">

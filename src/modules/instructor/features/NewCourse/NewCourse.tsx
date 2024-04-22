@@ -4,6 +4,7 @@ import { CreateCourseSteps } from 'modules/instructor/constants/createCourseStep
 import { StepsProvider, useSteps } from './context/StepsContext';
 import CreateCourseLayout from './layout/CreateCourseLayout/CreateCourseLayout';
 import { CourseSectionsProvider } from './context/CourseCreationContext';
+import { useSearchParams } from 'react-router-dom';
 
 function NewCourse() {
   const { currentStep } = useSteps();

@@ -1,13 +1,13 @@
 import { Droppable, Draggable } from '@hello-pangea/dnd';
 import { DragDropContext } from '@hello-pangea/dnd';
 import {
-  type sectionType,
   useCourseCreation,
 } from '../../../context/CourseCreationContext';
 import { useSteps } from '../../../context/StepsContext';
 import CourseLesson from './components/CourseLesson/CourseLesson';
 import CourseSection from './components/CourseSection/CourseSection';
 import Button from 'modules/shared/components/Button';
+import { lessonType, sectionType } from 'modules/instructor/types/CrouseSteps.type';
 
 function Curriculum() {
   const { Sections, setSections } = useCourseCreation();
@@ -159,7 +159,7 @@ function Curriculum() {
                                 className="py-3 w-full flex flex-col items-center justify-center gap-[1rem]"
                               >
                                 {section?.lessons?.map(
-                                  (lesson, indexLesson) => {
+                                  (lesson:lessonType, indexLesson:number) => {
                                     return (
                                       <CourseLesson
                                         index={indexLesson}

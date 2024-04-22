@@ -4,6 +4,7 @@ import React, {
   useContext,
   useState,
 } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 interface StepsContextType {
   currentStep: number;
