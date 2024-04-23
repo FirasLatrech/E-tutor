@@ -13,7 +13,6 @@ import { useTopInstructorForMonth } from '../data/queries/home.query';
 
 export default function BecomeAnInstructor() {
   const { data, error, isPending } = useTopInstructorForMonth();
-  console.log(data);
   const { t, i18n } = useTranslation('home');
   const companies = [
     {

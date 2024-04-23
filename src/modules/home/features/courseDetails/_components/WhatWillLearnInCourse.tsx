@@ -11,7 +11,6 @@ type Props = {
 };
 export const WhatWillLearnInCourse = ({ courseDetails }: Props) => {
   const course_content = courseDetails?.course_content;
-  console.log(course_content);
   return (
     <div className="pt-6 w-[70%] max-lg:w-full flex flex-col gap-8 h-full pb-6">
       <div className="w-full h-[300px] bg-[#E1F7E366] p-6 flex flex-col gap-6">

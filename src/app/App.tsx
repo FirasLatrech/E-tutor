@@ -12,7 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const queryClient = new QueryClient();
   const { i18n } = useTranslation('translation');
-  // console.log(i18n);
   document.body.dir = i18n?.dir();
 
 

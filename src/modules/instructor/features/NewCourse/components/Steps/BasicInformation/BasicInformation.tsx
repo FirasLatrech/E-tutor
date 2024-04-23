@@ -22,6 +22,10 @@ import {
 } from 'modules/instructor/data/queries/course/Course.query';
 import { useSearchParams } from 'react-router-dom';
 import CreateCourseLoader from 'modules/instructor/assets/icons/CreateCourse/Loader';
+import { X } from 'lucide-react';
+import { PATH } from 'modules/instructor/routes/paths';
+import { useToast } from 'modules/shared/components/ui/use-toast';
+import { ToastAction } from 'modules/shared/components/ui/toast';
 
 function BasicInformation() {
   const { BasicInformation, setBasicInformations } = useCourseCreation();
@@ -39,7 +43,7 @@ function BasicInformation() {
     isPending: createCourse_loading,
     data: course_data,
   } = useCreateCourseMutation();
-
+  const { toast } = useToast();
   const onSubmit: SubmitHandler<any> = async (submitData) => {
     if (!current_course_data) {
       const createdCourse = await createCourse({
@@ -47,14 +51,28 @@ function BasicInformation() {
         isDraft: true,
       });
       setSearchParams({ id: createdCourse?.id });
+      setBasicInformations(submitData);
+      setCurrentStep(1);
     } else {
-      await updateCourseStep({
+      const response = await updateCourseStep({
         course: submitData,
         courseId: course_id,
       });
+      if (response) {
+        setBasicInformations(submitData);
+        setCurrentStep(1);
+      } else {
+        toast({
+          variant: 'error',
+          title: 'something went wrong',
+          action: (
+            <ToastAction altText="Try again">
+              <X className="w-5 h-5 bg-transparent" />
+            </ToastAction>
+          ),
+        });
+      }
     }
-    setBasicInformations(submitData);
-    setCurrentStep(1);
   };
   const basicInformationCourse = {
     title: current_course_data?.title,

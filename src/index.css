@@ -18,3 +18,8 @@
       scrollbar-width: none;  /* Firefox */
 }
 }
+.gridMinMax{
+     display: grid;
+    grid-template-columns: repeat(12, minmax(auto, 8.3333333333%));
+    grid-gap: 20px;
+}

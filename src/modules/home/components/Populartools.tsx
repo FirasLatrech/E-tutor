@@ -4,7 +4,6 @@ import arrowRight from 'modules/shared/assets/icons/category/arrowright.svg';
 import { useWindowSize } from 'modules/shared/lib/useWindowSize';
 
 export default function Populartools({ id }: { id: string | undefined }) {
-  console.log(id);
   const tools = [
     {
       name: 'HTML 5',

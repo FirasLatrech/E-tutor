@@ -41,7 +41,6 @@ function SearchUser({
   useDebounce(() => {
     setSearchValue(inputValue);
   }, 500);
-
   return (
     <div className="w-[38rem] max-lg:w-full relative ">
       <SearchIcon className="absolute top-[25%] left-[0.8rem]" />
@@ -61,8 +60,11 @@ function SearchUser({
             </div>
           ) : data?.data?.length > 0 && !isAllSelected ? (
             data?.data?.map((user: User, index: number) => {
-              console.log(User?.id, Instructors);
-              if (Instructors?.some((instructor) => user?.id == instructor?.id))
+              if (
+                Instructors?.some(
+                  (instructor) => user?.id == instructor?.id || user?.id == User?.id
+                )
+              )
                 return;
               return (
                 <UserCard

@@ -34,11 +34,9 @@ type Category = {
 };
 export default function TopCategory() {
   const { status, data, error, isPending } = useAllCategory();
-  console.log(data);
 
   const { t, i18n } = useTranslation('home');
 
-  console.log(i18n.language);
   const categories = [
     {
       label: 'Label',

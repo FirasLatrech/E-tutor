@@ -23,7 +23,6 @@ function Cart() {
 
   const { toast } = useToast();
   const { isAuthenticated } = useAuthStore();
-  console.log(isAuthenticated);
   const { data, setData } = useCartStore();
 
   const [courseDetails, setCourseDetails] = useState([]);

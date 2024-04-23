@@ -1,5 +1,5 @@
-import { useMutation } from '@tanstack/react-query';
-import { createCourse, updateCourse } from '../../api/course/Course.service';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { createCourse, getMyCourseQuery, updateCourse } from '../../api/course/Course.service';
 
 export const useCreateCourseMutation = () =>
   useMutation({
@@ -18,6 +18,14 @@ export const useUpdateCourseMutation = () =>
       courseId: string | undefined;
     }) => {
       const res = await updateCourse(course, courseId);
+      return res;
+    },
+  });
+export const useGetMyCourseQuery = () =>
+  useQuery({
+    queryKey: ['Level'],
+    queryFn: async () => {
+      const res = await getMyCourseQuery();
       return res;
     },
   });

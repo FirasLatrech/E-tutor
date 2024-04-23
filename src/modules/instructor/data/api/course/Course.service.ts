@@ -18,9 +18,26 @@ export const updateCourse = async (
 ) => {
   try {
     const res = await api.patch(`/courses/${courseId}`, course);
-    if (res.status !== 201) {
+    if (res.status !== 200) {
       throw new Error(`Unexpected status code: ${res.status}`);
     }
+    return res?.data;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
+};
+
+export const getMyCourseQuery= async () => {
+  try {
+    const res = await api.get(`/courses/me`, {
+      params: {
+        orderBy: {
+          orderBy: 'createdAt',
+          order: 'DESC',
+        },
+        order: 'asc',
+      },
+    });
     return res?.data;
   } catch (error: any) {
     return error?.response?.data;

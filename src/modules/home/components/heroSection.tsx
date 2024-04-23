@@ -3,7 +3,6 @@ import homeImage from 'modules/shared/assets/images/home.png';
 import Button from 'modules/shared/components/Button';
 export default function HeroSection() {
   const { t } = useTranslation('home');
-  console.log(t('home.button'));
   return (
     <main
       className="flex items-center justify-between w-full bg-[#fdfdfe]"

@@ -14,9 +14,6 @@ export default function PopularInstructor({
   categoryDetails: categoryDetails;
 }) {
   const { data } = useGetInstructorByCategoryId(id);
-  console.log(data);
-
-  console.log(id);
   return (
     <div className="flex items-center justify-center bg-gray-50">
       <div className="w-[82%] h-[520px] items-center flex justify-center flex-col gap-10">

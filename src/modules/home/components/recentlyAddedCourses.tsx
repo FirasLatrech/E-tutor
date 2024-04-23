@@ -87,7 +87,6 @@ export default function RecentlyAddedCourses() {
     }>;
   }
   const { data, isPending } = useRecentlyCourses();
-  console.log(data);
   const { t, i18n } = useTranslation('home');
   return (
     <div
@@ -165,7 +164,6 @@ export default function RecentlyAddedCourses() {
                 <div className="p-2">{course?.title}</div>
                 <div className="flex items-center justify-between h-[70px] p-2">
                   {course?.instructor?.map((item, index: number) => {
-                    console.log(item);
                     return (
                       <div className="flex items-center gap-1 " key={index}>
                         <Avatar>

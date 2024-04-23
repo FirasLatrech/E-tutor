@@ -10,7 +10,6 @@ interface MainLayoutPropsType {
 function MainLayout({ children }: MainLayoutPropsType) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  console.log(pathname);
   return (
     <div className="flex items-center flex-col justify-center h-screen w-full max-md:h-auto ">
       <div className="border-b w-full flex items-center justify-center border-gray-100">

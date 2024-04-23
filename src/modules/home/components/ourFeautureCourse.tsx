@@ -22,7 +22,6 @@ import { useBestCourse } from '../data/queries/home.query';
 export default function OurFeautureCourse() {
   const { t } = useTranslation('home');
   const { data, error, isPending } = useBestCourse();
-  console.log(data);
   interface Course {
     id: number;
     title: string;

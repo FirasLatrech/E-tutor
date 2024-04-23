@@ -25,7 +25,6 @@ export default function BestSellingCoursesForCategory({
   categoryDetails: categoryDetails;
 }) {
   const { data } = useGetBestCourseByCategoryId(id);
-  console.log(data);
   const { t } = useTranslation('home');
   const goTo = useNavigation();
   const handelNaviage = (id: string) => {
@@ -46,7 +45,6 @@ export default function BestSellingCoursesForCategory({
         {data &&
           Array.isArray(data) &&
           data?.map((item: ICourse) => {
-            console.log(item);
             return (
               <div
                 className="flex flex-col items-center justify-center w-full bg-white border min-w-[297px]"

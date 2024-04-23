@@ -6,10 +6,12 @@ import {
   useCourseCreation,
 } from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 import { instructorType } from 'modules/instructor/types/CourseSteps.type';
+import useAuthStore from 'modules/shared/store/useAuthStore';
 
 function AddInstructor() {
   const [searchValue, setSearchValue] = useState('');
   const { Instructors } = useCourseCreation();
+  const { user: User } = useAuthStore((state) => state);
   const { data, refetch, isFetching } = useInstructorsQuery({
     page: 1,
     limit: 5,
@@ -37,6 +39,12 @@ function AddInstructor() {
       </div>
       <div className="flex min-h-[9rem] items-start flex-wrap gap-4 w-full justify-start">
         {Instructors?.map((user: instructorType, index: number) => {
+          if (
+            Instructors?.some(
+              (instructor) =>  user?.id == User?.id
+            )
+          )
+            return;
           return (
             <div key={index} className="w-[30%]">
               <UserCard

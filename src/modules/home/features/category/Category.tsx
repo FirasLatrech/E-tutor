@@ -11,13 +11,11 @@ interface CategoryDetails {
 
 const Category = () => {
   const params = useParams<{ id: string }>();
-  console.log(params);
   if (!params?.id) return null;
   const { data: categoryDetails } = useGetCategoryDetails(params.id) as {
     data: CategoryDetails;
   };
 
-  console.log(categoryDetails);
 
   return (
     <div className="flex flex-col h-full">

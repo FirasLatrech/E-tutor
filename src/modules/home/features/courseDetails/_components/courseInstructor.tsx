@@ -33,7 +33,6 @@ const data = [
 ];
 export const CourseInstructor = ({ courseDetails }: Props) => {
   const instructor = courseDetails?.instructor;
-  console.log(instructor);
   return (
     <div className="pt-6 w-[70%] max-lg:w-full flex flex-col gap-8 h-full pb-6">
       <div className="flex flex-col items-start justify-between gap-5">

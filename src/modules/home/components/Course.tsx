@@ -59,7 +59,6 @@ export default function Course({ id }: { id: string }) {
     const currentDate = new Date();
 
     const currentMonth = currentDate.getMonth();
-    console.log(currentMonth);
     const currentYear = currentDate.getFullYear();
     const months = [
       'January',
@@ -95,7 +94,6 @@ export default function Course({ id }: { id: string }) {
     return lastThreeMonths;
   }
 
-  console.log(LastThreeMonths());
   const [filterState, setFilterState] = useState(false);
   const [search, setSearch] = useState('');
   const [month, setMonth] = useState('');
@@ -112,7 +110,6 @@ export default function Course({ id }: { id: string }) {
     month
   );
   const { data: allCategory } = useAllCategory();
-  console.log(allCategory);
   interface Category {
     id: string;
     name: string;

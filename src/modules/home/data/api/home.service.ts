@@ -40,7 +40,6 @@ export const getBestSellingCourse = async () => {
     const res = await api.get(
       '/courses?limit=10&sort=[{"orderBy":"enrollmentCount","order":"DESC"}]'
     );
-    console.log(res);
     if (res.status !== 200) {
       throw new Error(`Unexpected status code: ${res.status}`);
     }
@@ -84,11 +83,9 @@ export const getCoursByCategoryId = async (
 ) => {
   try {
     const data = new Date(month);
-    console.log(data);
     const res = await api.get(
       `/category/${categoryId}/courses?search=${search}&sort=[{"orderBy":"createdAt","order":"DESC"}]`
     );
-    console.log(res);
     if (res.status !== 200) {
       throw new Error(`Unexpected status code: ${res.status}`);
     }
@@ -106,7 +103,6 @@ export const getAllCourse = async (
     const res = await api.get(
       `/courses?search=${search}&sort=[{"orderBy":"createdAt","order":"DESC"}]&page=${page}&limit=8`
     );
-    console.log(res);
     if (res.status !== 200) {
       throw new Error(`Unexpected status code: ${res.status}`);
     }

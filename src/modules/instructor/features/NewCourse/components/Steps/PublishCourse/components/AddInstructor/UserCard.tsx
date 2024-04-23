@@ -19,7 +19,6 @@ function UserCard({ username, pictureLink, job, id }: UserCardPropsType) {
     <div className="p-4 w-full hover:bg-gray-100 cursor-pointer ease-linear duration-200 min-w-[18rem] bg-gray-50 flex gap-[1rem] items-center justify-between">
       <div
         onClick={() => {
-          console.log('added');
           setInstructors((prev) => {
             if (prev?.some((user) => user?.id === id)) return prev;
             return [
@@ -27,7 +26,6 @@ function UserCard({ username, pictureLink, job, id }: UserCardPropsType) {
               { id, username, pictureLink: '', job: 'UI/Ux Designer' },
             ];
           });
-          console.log('added');
         }}
         className="flex gap-[1rem] items-center justify-center"
       >

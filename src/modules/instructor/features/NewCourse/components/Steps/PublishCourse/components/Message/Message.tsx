@@ -10,18 +10,9 @@ function MessageSection() {
    let [searchParams] = useSearchParams();
    const courseId = searchParams.get('id') || undefined;
 
-   const { data: current_course_data, isFetching: course_loading } = courseId
-     ? useGetCourseById(courseId)
-     : { data: null, isFetching: null };
 
-     useEffect(() => {
-       if (current_course_data) {
-         setMessage({
-           welcome_message: current_course_data.welcome_message,
-           congratulation_message: current_course_data.congratulation_message,
-         });
-       }
-     }, [current_course_data]);
+
+ 
 
   return (
     <div className="flex flex-col gap-[1.5rem] w-full">
