@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import {
-  type lessonType,
-  sectionType,
-  useCourseCreation,
-} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 import Button from 'modules/shared/components/Button';
 import Input from 'modules/shared/components/Input';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
 import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
+import { lessonType } from 'modules/instructor/types/CourseSteps.type';
 
 interface EditSectionModalPropsType {
   Lesson: lessonType | undefined;
   Submit: (NewName: string) => boolean;
 }
 function EditLessonModal({ Lesson, Submit }: EditSectionModalPropsType) {
-  const [value, setValue] = useState<string | null>(Lesson?.name || null);
+  const [value, setValue] = useState<string | null>(Lesson?.title || null);
   const [error, setError] = useState<string | null>(null);
   const { setClose } = useModal();
 
   const ChangeLessonNameHandler = () => {
-    const submitted: boolean = Submit(value || Lesson?.name || '');
+    const submitted: boolean = Submit(value || Lesson?.title || '');
     if (!submitted) {
       setError('lesson name already exist');
       return;

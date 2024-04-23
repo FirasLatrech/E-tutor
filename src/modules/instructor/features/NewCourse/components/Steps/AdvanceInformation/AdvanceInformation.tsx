@@ -8,7 +8,7 @@ import { useCourseCreation } from '../../../context/CourseCreationContext';
 import TextEditor from 'modules/shared/components/TextEditor';
 import MultipleAnswer from './components/MultipleAnswer';
 import { useUpdateCourseMutation } from 'modules/instructor/data/queries/course/Course.query';
-import { CourseInformationType } from 'modules/instructor/types/CrouseSteps.type';
+import { CourseInformationType } from 'modules/instructor/types/CourseSteps.type';
 import { useSearchParams } from 'react-router-dom';
 import { useGetCourseById } from 'modules/home/data/queries/home.query';
 import { ArrayToObject } from 'modules/instructor/utils/array.utils';
@@ -63,7 +63,7 @@ function AdvanceInformation() {
       },
       courseId: course_id,
     });
-   
+
     setCurrentStep((old) => old + 1);
   };
   return (

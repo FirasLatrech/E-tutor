@@ -1,8 +1,9 @@
 import {
   CourseInformationType,
   instructorType,
+  messageType,
   sectionType,
-} from 'modules/instructor/types/CrouseSteps.type';
+} from 'modules/instructor/types/CourseSteps.type';
 import React, {
   createContext,
   type ReactNode,
@@ -11,15 +12,17 @@ import React, {
 } from 'react';
 
 interface CourseCreationContextType {
-  BasicInformation: any;
+  Message: messageType;
+  setMessage: React.Dispatch<React.SetStateAction<messageType>>;
+  BasicInformation: any | null;
   setBasicInformations: React.Dispatch<React.SetStateAction<any[] | null>>;
   Sections: sectionType[] | null;
   setSections: React.Dispatch<React.SetStateAction<sectionType[] | null>>;
   Instructors: instructorType[] | null;
   setInstructors: React.Dispatch<React.SetStateAction<instructorType[] | null>>;
-  AdvancedInformation: CourseInformationType | null ;
+  AdvancedInformation: CourseInformationType | null;
   setAdvancedInformation: React.Dispatch<
-    React.SetStateAction<CourseInformationType | null >
+    React.SetStateAction<CourseInformationType | null>
   >;
 }
 
@@ -56,21 +59,21 @@ export const useCourseCreation = (): CourseCreationContextType => {
 export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
   const [Sections, setSections] = useState<sectionType[] | null>([
     {
-      name: 'section 1',
+      title: 'section 1',
       lessons: [
         {
-          name: 'lecture 1',
-          video: null,
+          title: 'lecture 1',
+          Video: null,
           File: '',
-          captions: '',
+          Captions: '',
           Description: '',
           Notes: '',
         },
         {
-          name: 'lecture 2',
-          video: null,
+          title: 'lecture 2',
+          Video: null,
           File: '',
-          captions: '',
+          Captions: '',
           Description: '',
           Notes: '',
         },
@@ -79,21 +82,20 @@ export const CourseSectionsProvider = ({ children }: StepsProviderType) => {
   ]);
 
   const [Instructors, setInstructors] = useState<instructorType[] | null>([]);
+  const [Message, setMessage] = useState<messageType>({
+    congratulation_message: 'string',
+    welcome_message: 'string',
+  });
   const [BasicInformation, setBasicInformations] = useState<any[] | null>(null);
   const [AdvancedInformation, setAdvancedInformation] =
-    useState<CourseInformationType | null>(null
-      /*{
-      course_thumbnail: '',
-      course_content: { '0': '' },
-      target_audience: { '0': '' },
-      course_requirements: { '0': '' },
-      course_descriptions: '',
-    }*/);
+    useState<CourseInformationType | null>(null);
 
   const contextValue: CourseCreationContextType = {
     Sections,
     setSections,
     Instructors,
+    Message,
+    setMessage,
     setInstructors,
     setBasicInformations,
     BasicInformation,

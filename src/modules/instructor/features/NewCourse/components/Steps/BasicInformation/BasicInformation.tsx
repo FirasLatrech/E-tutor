@@ -68,6 +68,17 @@ function BasicInformation() {
     durations: current_course_data?.durations,
   };
 
+  const updateBasicInformation = (
+    key: keyof BasicInformationType,
+    value: any
+  ) => {
+    setBasicInformations((prev) => ({
+      ...(prev || []),
+      [key]: value,
+    }));
+    setValue(key, value);
+  };
+
   const {
     handleSubmit,
     control,
@@ -139,6 +150,9 @@ function BasicInformation() {
                   placeholder="your course title"
                   {...field}
                   errors={errors}
+                  onChange={(e) =>
+                    updateBasicInformation('title', e.target.value)
+                  }
                 />
               )}
             />
@@ -153,6 +167,9 @@ function BasicInformation() {
                   placeholder="your course subtittle"
                   {...field}
                   errors={errors}
+                  onChange={(e) =>
+                    updateBasicInformation('subtitle', e.target.value)
+                  }
                 />
               )}
             />
@@ -175,6 +192,9 @@ function BasicInformation() {
                     }
                     {...field}
                     errors={errors}
+                    onChange={(e) =>
+                      updateBasicInformation('course_category_id', e)
+                    }
                   />
                 )}
               />
@@ -196,6 +216,9 @@ function BasicInformation() {
                     }
                     {...field}
                     errors={errors}
+                    onChange={(e) =>
+                      updateBasicInformation('course_sub_category_id', e)
+                    }
                   />
                 )}
               />
@@ -211,6 +234,9 @@ function BasicInformation() {
                   placeholder="What is primarily taught in your course?"
                   {...field}
                   errors={errors}
+                  onChange={(e) =>
+                    updateBasicInformation('course_topic', e.target.value)
+                  }
                 />
               )}
             />
@@ -232,6 +258,9 @@ function BasicInformation() {
                     }
                     {...field}
                     errors={errors}
+                    onChange={(e) =>
+                      updateBasicInformation('course_language_id', e)
+                    }
                   />
                 )}
               />
@@ -252,6 +281,9 @@ function BasicInformation() {
                     }
                     {...field}
                     errors={errors}
+                    onChange={(e) =>
+                      updateBasicInformation('subtitle_language_id', e)
+                    }
                   />
                 )}
               />
@@ -272,6 +304,9 @@ function BasicInformation() {
                     }
                     {...field}
                     errors={errors}
+                    onChange={(e) =>
+                      updateBasicInformation('course_level_id', e)
+                    }
                   />
                 )}
               />
@@ -290,6 +325,7 @@ function BasicInformation() {
                     ]}
                     {...field}
                     errors={errors}
+                    onChange={(e) => updateBasicInformation('durations', e)}
                   />
                 )}
               />

@@ -4,11 +4,7 @@ import AddIcon from 'modules/instructor/assets/icons/CreateCourse/AddIcon';
 import DeleteIcon from 'modules/instructor/assets/icons/CreateCourse/deleteIcon';
 import DragIcon from 'modules/instructor/assets/icons/CreateCourse/DragIcon';
 import EditIcon from 'modules/instructor/assets/icons/CreateCourse/EditIcon';
-import {
-  lessonType,
-  type sectionType,
-  useCourseCreation,
-} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
+import { useCourseCreation } from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 import {
   Dialog,
   DialogContent,
@@ -19,6 +15,10 @@ import {
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
 import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
 import EditSectionModal from './EditSectionModal';
+import {
+  lessonType,
+  sectionType,
+} from 'modules/instructor/types/CourseSteps.type';
 
 interface CourseSectionPropsType {
   courseSection: sectionType;
@@ -48,7 +48,7 @@ function CourseSection({
     const IsExistSectionName =
       Sections?.filter(
         (section: sectionType) =>
-          section?.name.toUpperCase() == NewName.toUpperCase()
+          section?.title.toUpperCase() == NewName.toUpperCase()
       ) || [];
     if (IsExistSectionName?.length > 0) return false;
     setSections((old): sectionType[] => {
@@ -59,7 +59,7 @@ function CourseSection({
         if (index === SectionNumber) {
           return {
             ...section,
-            name: NewName,
+            title: NewName,
           };
         } else {
           return section;
@@ -76,7 +76,7 @@ function CourseSection({
 
       const existingNames = new Set<string>();
       old[SectionNumber]?.lessons?.forEach((lesson) => {
-        existingNames.add(lesson.name);
+        existingNames.add(lesson.title);
       });
 
       let newLessonName = `lecture ${
@@ -93,7 +93,7 @@ function CourseSection({
             lessons: [
               ...(section?.lessons || []),
               {
-                name: newLessonName,
+                title: newLessonName,
               } as lessonType,
             ],
           };
@@ -118,7 +118,7 @@ function CourseSection({
             <label className="font-medium flex items-center justify-center gap-3 leading-5">
               {`Section ${String(SectionNumber + 1).padStart(2, '0')}:`}
               <p className="text-gray-900 leading-5 font-normal">
-                {courseSection?.name || 'section name'}
+                {courseSection?.title || 'section name'}
               </p>
             </label>
           </div>

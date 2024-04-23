@@ -2,12 +2,7 @@ import DragIcon from 'modules/instructor/assets/icons/CreateCourse/DragIcon';
 import EditIcon from 'modules/instructor/assets/icons/CreateCourse/EditIcon';
 import { Draggable } from '@hello-pangea/dnd';
 import DeleteIcon from 'modules/instructor/assets/icons/CreateCourse/deleteIcon';
-import {
-  type lessonType,
-  type sectionType,
-  videoLessonType,
-  useCourseCreation,
-} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
+import { useCourseCreation } from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 import DropDownGeneric from 'modules/shared/components/DropDownGeneric';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
 import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
@@ -17,6 +12,11 @@ import AddDescription from './AddDescription';
 import AddCaptions from './AddCaptionsModal';
 import AddNotes from './AddNotes';
 import AddVideo from './AddVideoModal';
+import {
+  lessonType,
+  sectionType,
+  videoLessonType,
+} from 'modules/instructor/types/CourseSteps.type';
 
 interface CourseLessonPropsType {
   Lesson: lessonType;
@@ -38,7 +38,7 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
             ...section,
             lessons:
               section?.lessons?.filter(
-                (lesson: lessonType, index) => lesson?.name != LessonName
+                (lesson: lessonType, index) => lesson?.title != LessonName
               ) || null,
           };
         } else {
@@ -63,7 +63,7 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
             ...section,
             lessons:
               section?.lessons?.map((lesson: lessonType): lessonType => {
-                if (lesson?.name.toUpperCase() == LessonName.toUpperCase()) {
+                if (lesson?.title.toUpperCase() == LessonName.toUpperCase()) {
                   return {
                     ...lesson,
                     Description: Description || lesson?.Description || '',
@@ -94,10 +94,10 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
             ...section,
             lessons:
               section?.lessons?.map((lesson: lessonType): lessonType => {
-                if (lesson?.name.toUpperCase() == LessonName.toUpperCase()) {
+                if (lesson?.title.toUpperCase() == LessonName.toUpperCase()) {
                   return {
                     ...lesson,
-                    captions: captions || lesson?.captions || '',
+                    Captions: captions || lesson?.Captions || '',
                   } as lessonType;
                 } else return lesson;
               }) || null,
@@ -126,7 +126,7 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
             ...section,
             lessons:
               section?.lessons?.map((lesson: lessonType): lessonType => {
-                if (lesson?.name.toUpperCase() == LessonName.toUpperCase()) {
+                if (lesson?.title.toUpperCase() == LessonName.toUpperCase()) {
                   return {
                     ...lesson,
                     Notes: notes || lesson?.Notes || '',
@@ -157,10 +157,10 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
             ...section,
             lessons:
               section?.lessons?.map((lesson: lessonType): lessonType => {
-                if (lesson?.name.toUpperCase() == LessonName.toUpperCase()) {
+                if (lesson?.title.toUpperCase() == LessonName.toUpperCase()) {
                   return {
                     ...lesson,
-                    video: video || lesson?.video || '',
+                    Video: video || lesson?.Video || '',
                   } as lessonType;
                 } else return lesson;
               }) || null,
@@ -177,7 +177,7 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
     Sections?.forEach((section: sectionType) => {
       IsExistLessonName = section?.lessons?.filter(
         (lesson: lessonType) =>
-          lesson?.name.toUpperCase() == NewName.toUpperCase()
+          lesson?.title.toUpperCase() == NewName.toUpperCase()
       );
     });
     if (IsExistLessonName?.length > 0) return false;
@@ -192,10 +192,10 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
             ...section,
             lessons:
               section?.lessons?.map((lesson: lessonType): lessonType => {
-                if (lesson?.name == Lesson?.name) {
+                if (lesson?.title == Lesson?.title) {
                   return {
                     ...lesson,
-                    name: NewName,
+                    title: NewName,
                   };
                 } else return lesson;
               }) || null,
@@ -207,12 +207,11 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
     });
     return true;
   };
-
   return (
     <Draggable
-      draggableId={`Section-${SectionNumber}-${Lesson.name}`}
+      draggableId={`Section-${SectionNumber}-${Lesson.title}`}
       index={index}
-      key={`Section-${SectionNumber}-${Lesson.name}`}
+      key={`Section-${SectionNumber}-${Lesson.title}`}
     >
       {(draggableProvider) => (
         <motion.div
@@ -232,7 +231,7 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
               <div className="flex items-center justify-start gap-2">
                 <DragIcon />
                 <p className="text-sm leading-5 text-gray-900">
-                  {Lesson?.name}
+                  {Lesson?.title}
                 </p>
               </div>
               <div className="flex items-center justify-center gap-2">
@@ -315,7 +314,7 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
                 />
                 <DeleteIcon
                   className="cursor-pointer"
-                  onClick={() => DeleteLesson(SectionNumber, Lesson?.name)}
+                  onClick={() => DeleteLesson(SectionNumber, Lesson?.title)}
                 />
               </div>
             </div>

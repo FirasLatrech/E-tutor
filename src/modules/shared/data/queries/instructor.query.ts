@@ -1,13 +1,13 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { type QueryType } from 'modules/shared/types/query';
 import { UploadFile } from '../api/File.service';
-import { getAllUsers } from '../api/user.service';
+import { getAllInstructors } from '../api/user.service';
 
-export const useUsersQuery = (Query: QueryType) =>
+export const useInstructorsQuery = (Query: QueryType) =>
   useQuery({
-    queryKey: ['users'],
+    queryKey: ['Instructors'],
     queryFn: async () => {
-      const res = await getAllUsers(Query);
+      const res = await getAllInstructors(Query);
       return res;
     },
   });

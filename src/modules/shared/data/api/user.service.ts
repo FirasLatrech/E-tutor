@@ -1,7 +1,7 @@
 import { api } from 'modules/shared/lib/api';
 import { type QueryType } from 'modules/shared/types/query';
 
-export const getAllUsers = async ({
+export const getAllInstructors = async ({
   page = 1,
   limit = 10,
   search = '',
@@ -9,7 +9,7 @@ export const getAllUsers = async ({
   sort,
 }: QueryType) => {
   try {
-    const res = await api.get('/users', {
+    const res = await api.get('/Instructors', {
       params: {
         page,
         limit,

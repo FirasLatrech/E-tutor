@@ -7,19 +7,19 @@ export interface instructorType {
 
 export interface sectionType {
   lessons: lessonType[] | null;
-  name: string;
+  title: string;
 }
 
 export interface videoLessonType {
-  url: string;
-  file: File;
+  path: string;
+  name:string;
   id: string;
 }
 export interface lessonType {
-  name: string;
-  video: videoLessonType | null;
+  title: string;
+  Video: videoLessonType | null;
   File: string;
-  captions: string;
+  Captions: string;
   Description: string;
   Notes: string;
 }
@@ -29,5 +29,10 @@ export interface CourseInformationType {
   course_content: Object;
   target_audience: Object;
   course_requirements: Object;
-  course_descriptions:string;
+  course_descriptions: string;
+}
+
+export interface messageType {
+  congratulation_message: string;
+  welcome_message:string;
 }

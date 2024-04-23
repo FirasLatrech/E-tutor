@@ -9,7 +9,7 @@ import UploadVideoLesson from './UploadVideo';
 import {
   lessonType,
   videoLessonType,
-} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
+} from 'modules/instructor/types/CourseSteps.type';
 
 interface AddVideoPropsType {
   AddVideoToLesson: (
@@ -34,7 +34,7 @@ function AddVideo({
         <UploadVideoLesson
           Lesson={Lesson}
           AddVideoToLesson={(video: videoLessonType) =>
-            AddVideoToLesson(SectionNumber, Lesson.name, video)
+            AddVideoToLesson(SectionNumber, Lesson.title, video)
           }
         />
         <div className="flex gap-1">

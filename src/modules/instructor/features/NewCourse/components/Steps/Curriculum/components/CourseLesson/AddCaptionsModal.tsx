@@ -1,8 +1,4 @@
-import {
-  lessonType,
-  sectionType,
-  useCourseCreation,
-} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
+import { lessonType } from 'modules/instructor/types/CourseSteps.type';
 import Button from 'modules/shared/components/Button';
 import TextArea from 'modules/shared/components/TextArea/TextArea';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
@@ -24,7 +20,7 @@ function AddCaptions({
 }: AddCaptionsPropsType) {
   const { isOpen, setClose } = useModal();
   const [LessonCaptionsValue, setLessonCaptionsValue] = useState<string>(
-    Lesson?.captions
+    Lesson?.Captions
   );
 
   return (
@@ -46,7 +42,7 @@ function AddCaptions({
           onClick={() =>
             AddCaptionsToLesson(
               SectionNumber,
-              Lesson?.name,
+              Lesson?.title,
               LessonCaptionsValue
             )
           }

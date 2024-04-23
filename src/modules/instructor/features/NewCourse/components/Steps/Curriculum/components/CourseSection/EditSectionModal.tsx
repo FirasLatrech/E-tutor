@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import {
-  type sectionType,
-  useCourseCreation,
-} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
+import { useCourseCreation } from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
 import Button from 'modules/shared/components/Button';
 import Input from 'modules/shared/components/Input';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
 import ModalContainer from 'modules/shared/providers/Modal/ModalContainer';
+import { sectionType } from 'modules/instructor/types/CourseSteps.type';
 
 interface EditSectionModalPropsType {
   Section: sectionType | undefined;
   Submit: (NewName: string) => boolean;
 }
 function EditSectionModal({ Section, Submit }: EditSectionModalPropsType) {
-  const [value, setValue] = useState<string | null>(Section?.name || null);
+  const [value, setValue] = useState<string | null>(Section?.title || null);
   const [error, setError] = useState<string | null>(null);
   const { setClose } = useModal();
 
   const ChangeSectionNameHandler = () => {
-    const submitted: boolean = Submit(value || Section?.name || '');
+    const submitted: boolean = Submit(value || Section?.title || '');
     if (!submitted) {
       setError('section name already exist');
       return;

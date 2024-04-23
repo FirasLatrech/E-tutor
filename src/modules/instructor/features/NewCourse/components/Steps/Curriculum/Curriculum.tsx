@@ -1,17 +1,61 @@
 import { Droppable, Draggable } from '@hello-pangea/dnd';
 import { DragDropContext } from '@hello-pangea/dnd';
-import {
-  useCourseCreation,
-} from '../../../context/CourseCreationContext';
+import { useCourseCreation } from '../../../context/CourseCreationContext';
 import { useSteps } from '../../../context/StepsContext';
 import CourseLesson from './components/CourseLesson/CourseLesson';
 import CourseSection from './components/CourseSection/CourseSection';
 import Button from 'modules/shared/components/Button';
-import { lessonType, sectionType } from 'modules/instructor/types/CrouseSteps.type';
+import {
+  lessonType,
+  sectionType,
+} from 'modules/instructor/types/CourseSteps.type';
+import { useUpdateCourseMutation } from 'modules/instructor/data/queries/course/Course.query';
+import { useSearchParams } from 'react-router-dom';
+import { useGetCourseById } from 'modules/home/data/queries/home.query';
+import { useEffect } from 'react';
 
 function Curriculum() {
   const { Sections, setSections } = useCourseCreation();
   const { currentStep, setCurrentStep } = useSteps();
+
+  const { mutateAsync: updateCourse, isPending: isLoadingUpdate } =
+    useUpdateCourseMutation();
+
+  let [searchParams, setSearchParams] = useSearchParams();
+  const courseId = searchParams.get('id') || undefined;
+
+  const { data: current_course_data, isFetching: course_loading } = courseId
+    ? useGetCourseById(courseId)
+    : { data: null, isFetching: null };
+
+  useEffect(() => {
+    if (
+      current_course_data?.chapters &&
+      current_course_data?.chapters.length > 0
+    ) {
+      setSections(current_course_data?.chapters || []);
+    }
+  }, [current_course_data]);
+
+  async function HandleSubmit() {
+    await updateCourse({
+      course: {
+        chapters: Sections?.map((chapter, chapterIndex) => ({
+          ...chapter,
+          rang: chapterIndex + 1,
+          lessons:
+            chapter?.lessons &&
+            chapter?.lessons.map((lesson, lessonIndex) => ({
+              ...lesson,
+              rang: lessonIndex + 1,
+          //    Video: { path: lesson?.Video?.path,n id: lesson?.Video?.id },
+            })),
+        })),
+      },
+      courseId,
+    });
+    setCurrentStep((old) => old + 1);
+  }
 
   const onDragEndLessons = (result: any) => {
     const { destination, source } = result;
@@ -36,8 +80,8 @@ function Curriculum() {
               ...section,
               lessons: reorderLessons(
                 section.lessons || [],
-                section?.lessons?.[result?.destination?.index]?.name || '',
-                section?.lessons?.[result?.source?.index]?.name || ''
+                section?.lessons?.[result?.destination?.index]?.title || '',
+                section?.lessons?.[result?.source?.index]?.title || ''
               ),
             };
           }
@@ -66,8 +110,8 @@ function Curriculum() {
         }
         return reorderLessons(
           old || [],
-          old?.[result?.destination?.index]?.name || '',
-          old?.[result?.source?.index]?.name || ''
+          old?.[result?.destination?.index]?.title || '',
+          old?.[result?.source?.index]?.title || ''
         );
       });
     }
@@ -79,10 +123,10 @@ function Curriculum() {
     draggedName: string
   ): any[] => {
     const draggedIndex = sections.findIndex(
-      (section) => section.name === draggedName
+      (section) => section.title === draggedName
     );
     const droppedIndex = sections.findIndex(
-      (section) => section.name === droppedOnName
+      (section) => section.title === droppedOnName
     );
 
     if (draggedIndex === -1 || droppedIndex === -1) {
@@ -103,10 +147,10 @@ function Curriculum() {
     draggedName: string
   ): any[] => {
     const draggedIndex = lessons.findIndex(
-      (lesson) => lesson.name === draggedName
+      (lesson) => lesson.title === draggedName
     );
     const droppedIndex = lessons.findIndex(
-      (lesson) => lesson.name === droppedOnName
+      (lesson) => lesson.title === droppedOnName
     );
 
     if (draggedIndex === -1 || droppedIndex === -1) {
@@ -134,9 +178,9 @@ function Curriculum() {
               {Sections?.map((section: sectionType, indexSection: number) => {
                 return (
                   <Draggable
-                    draggableId={section?.name}
+                    draggableId={section?.title}
                     index={indexSection}
-                    key={section?.name}
+                    key={section?.title}
                   >
                     {(draggableProvider) => (
                       <div
@@ -159,7 +203,7 @@ function Curriculum() {
                                 className="py-3 w-full flex flex-col items-center justify-center gap-[1rem]"
                               >
                                 {section?.lessons?.map(
-                                  (lesson:lessonType, indexLesson:number) => {
+                                  (lesson: lessonType, indexLesson: number) => {
                                     return (
                                       <CourseLesson
                                         index={indexLesson}
@@ -190,13 +234,13 @@ function Curriculum() {
             setSections((old: sectionType[] | null) => [
               ...(old || []),
               {
-                name: `section ${(old || []).length + 1}`,
+                title: `section ${(old || []).length + 1}`,
                 lessons: [
                   {
-                    name: 'lecture 1',
-                    video: null,
+                    title: 'lecture 1',
+                    Video: null,
                     File: '',
-                    captions: '',
+                    Captions: '',
                     Description: '',
                     Notes: '',
                   },
@@ -219,7 +263,7 @@ function Curriculum() {
             variant="primary"
             additionnalClasses="!p-4 !px-8 !text-lg"
             text={'Save & Next'}
-            onClick={() => setCurrentStep((old) => old + 1)}
+            onClick={HandleSubmit}
           />
         </div>
       </DragDropContext>

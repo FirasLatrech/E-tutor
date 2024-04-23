@@ -1,8 +1,4 @@
-import {
-  lessonType,
-  sectionType,
-  useCourseCreation,
-} from 'modules/instructor/features/NewCourse/context/CourseCreationContext';
+import { lessonType } from 'modules/instructor/types/CourseSteps.type';
 import Button from 'modules/shared/components/Button';
 import TextArea from 'modules/shared/components/TextArea/TextArea';
 import { useModal } from 'modules/shared/providers/Modal/modal-provider';
@@ -44,7 +40,7 @@ function AddNotes({
         />
         <Button
           onClick={() =>
-            AddNotesToLesson(SectionNumber, Lesson?.name, LessonNotesValue)
+            AddNotesToLesson(SectionNumber, Lesson?.title, LessonNotesValue)
           }
           variant="primary"
           additionnalClasses="!py-3 !px-6  "
