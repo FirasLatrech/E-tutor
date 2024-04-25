@@ -1,10 +1,15 @@
+import DropDownIcon from 'modules/instructor/assets/icons/Courses/DropDownIcon';
 import DownArrowIcon from 'modules/shared/assets/icons/arrow/ArrowDown';
-import { DropdownMenuSubTrigger,DropdownMenu,
+import {
+  DropdownMenuSubTrigger,
+  DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuRadioGroup,
-  DropdownMenuTrigger, } from 'modules/shared/components/ui/dropdown-menu';
-
+  DropdownMenuTrigger,
+} from 'modules/shared/components/ui/dropdown-menu';
+import { useState } from 'react';
+import { string } from 'yup';
 
 interface optionType {
   action: () => any;
@@ -13,36 +18,50 @@ interface optionType {
 interface SelectGenericTypeProps {
   Options: optionType[];
   label?: string;
+  isLoading?: boolean;
   text?: string;
 }
-function DropDownGeneric({ Options, label, text }: SelectGenericTypeProps) {
+function DropDownGeneric({
+  Options,
+  label,
+  text,
+  isLoading,
+}: SelectGenericTypeProps) {
+  const [value, setValue] = useState<string | null>(null);
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex w-full relative items-start flex-col gap-2">
+      <h1 className="absolute -top-6 text-sm font-light text-gray-500">
+        {label}
+      </h1>
       <DropdownMenu>
-        <DropdownMenuSubTrigger
-          
-          className="cursor-pointer py-2 group min-w-[4rem] bg-primary-100"
-        >
+        <DropdownMenuTrigger className="cursor-pointer outline-none w-full h-full py-2 group min-w-[4rem] bg-white">
           <span
-            className={`text-[16px] gap-2 text-primary-500 px-4 font-medium flex items-center justify-between`}
+            className={`text-[16px]  leading-5 text-gray-700 font-normal	 px-4 flex items-center justify-between`}
           >
-            {text || ''}
-            <DownArrowIcon className="!text-primary-400 ease-linear duration-200 group-aria-expanded:rotate-180" />
+            {value || text || ''}
+            <DropDownIcon className="!text-gray-700 ease-linear duration-200 group-aria-expanded:rotate-180" />
           </span>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-full">
           <DropdownMenuRadioGroup className="w-full">
-            {Options?.map((item, index) => {
-              return (
-                <DropdownMenuItem
-                  key={index}
-                  className="w-full text-sm font-normal leading-5 text-gray-700 duration-200 ease-linear cursor-pointer"
-                  onClick={(e) => item?.action()}
-                >
-                  {item?.name}
-                </DropdownMenuItem>
-              );
-            })}
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              Options?.map((item, index) => {
+                return (
+                  <DropdownMenuItem
+                    key={index}
+                    className="w-full font-normal leading-5 text-gray-700 duration-200 ease-linear cursor-pointer"
+                    onClick={(e) => {
+                      item?.action();
+                      setValue(item?.name);
+                    }}
+                  >
+                    {item?.name}
+                  </DropdownMenuItem>
+                );
+              })
+            )}
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>

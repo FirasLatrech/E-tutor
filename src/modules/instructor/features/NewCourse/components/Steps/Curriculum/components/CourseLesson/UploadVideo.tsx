@@ -31,10 +31,13 @@ function UploadVideoLesson({ AddVideoToLesson, Lesson }: UploadVideoPropsType) {
     if (file) {
       const data = await mutateAsync(file);
       setSelectedFile(file?.name);
-      AddVideoToLesson({ path: data?.file?.path, name:file?.name, id: data?.file.id });
+      AddVideoToLesson({
+        path: data?.file?.path,
+        name: file?.name,
+        id: data?.file.id,
+      });
     }
   };
-  console.log(Lesson?.Video);
 
   return (
     <>

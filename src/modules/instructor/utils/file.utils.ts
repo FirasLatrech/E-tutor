@@ -8,7 +8,7 @@ export const getVideoDuration = async (file: File) => {
       const blob = new Blob([e?.target?.result || ''], { type: file.type });
       try {
         const duration = await getVideoDurationInSeconds(blob);
-        console.log(duration);
+
         resolve(duration);
       } catch (error) {
         reject(error);
@@ -21,11 +21,11 @@ export const getVideoDuration = async (file: File) => {
   });
 };
 
-export function isValidImage(file:File) {
+export function isValidImage(file: File) {
   // const supportedFormats = ['image/jpeg', 'image/jpg', 'image/png'];
   // const maxAllowedWidth = 1200;
   // const maxAllowedHeight = 800;
-  // const aspectRatio = 12 / 8; 
+  // const aspectRatio = 12 / 8;
 
   // if (!file || !supportedFormats.includes(file.type)) {
   //   return false;

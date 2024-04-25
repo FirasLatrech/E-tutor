@@ -20,8 +20,6 @@ i18n
       useSuspense: false,
     },
   })
-  .catch((err) => {
-    console.log(err);
-  });
+  .catch((err) => {});
 
 export default i18n;

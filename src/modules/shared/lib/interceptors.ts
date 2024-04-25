@@ -40,37 +40,33 @@ export const errorInterceptor = async (error: AxiosError): Promise<void> => {
     } else if (error.request) {
       console.error(error.request);
     } else {
-      console.log(error);
       console.error('Error', error.message);
     }
     await Promise.reject(error);
   }
 };
 
-export  const RefreshTokenInterceptor = async (error:any) => {
-      console.log('refresh');
-
-  const { clearToken, setToken } =
-  useAuthStore((state) => state);
+export const RefreshTokenInterceptor = async (error: any) => {
+  const { clearToken, setToken } = useAuthStore((state) => state);
   if (error?.response?.status === 503) {
-    window.location.reload()
+    window.location.reload();
   }
-  const previousRequest = error?.config
+  const previousRequest = error?.config;
 
   if (error?.response?.status === 401 && !previousRequest?.sent) {
-    previousRequest.sent = true
+    previousRequest.sent = true;
 
     try {
-      const response = await api.get('/auth/refresh')
-      const { accessToken } = response.data.payload
-      setToken(accessToken)
-      previousRequest.headers['Authorization'] = `Bearer ${accessToken}`
-      return api(previousRequest)
+      const response = await api.get('/auth/refresh');
+      const { accessToken } = response.data.payload;
+      setToken(accessToken);
+      previousRequest.headers['Authorization'] = `Bearer ${accessToken}`;
+      return api(previousRequest);
     } catch (err) {
-      clearToken()
-      window.location.replace('/')
+      clearToken();
+      window.location.replace('/');
     }
   }
 
-  return Promise.reject(error?.response?.data || error)
-}
+  return Promise.reject(error?.response?.data || error);
+};

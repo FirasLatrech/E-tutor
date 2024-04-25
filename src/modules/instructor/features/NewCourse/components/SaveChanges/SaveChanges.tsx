@@ -10,10 +10,9 @@ interface SaveChangesPropsType {
 function SaveChanges({ currentStep }: SaveChangesPropsType) {
   const { Sections, Instructors, BasicInformation, AdvancedInformation } =
     useCourseCreation();
-  function saveCurrentStep(){
+  function saveCurrentStep() {
     switch (currentStep) {
       case 0:
-      console.log(BasicInformation);
         break;
       case 1:
         break;
@@ -21,8 +20,8 @@ function SaveChanges({ currentStep }: SaveChangesPropsType) {
         break;
       case 3:
         break;
+    }
   }
-}
   return (
     <div className="w-full max-xs:px-2 flex items-center justify-between py-6 px-8 border-b border-gray-100 max-lg:flex-col max-lg:gap-[2rem] max-lg:items-start">
       <p className="text-2xl font-semibold">

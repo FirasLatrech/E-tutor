@@ -50,38 +50,33 @@ export const Dashbord = (props: Props) => {
     <div className="flex flex-col pt-6 gap-y-6">
       <div className="text-xl font-[600]">Dashboard</div>
       <div className="grid grid-cols-4 gap-4" style={{ direction: 'ltr' }}>
-        {categories.map(
-          (category, index) => (
-            console.log(category.bg),
-            (
-              <div
-                key={index}
-                className={cn(
-                  'flex items-center justify-start gap-5 p-6 hover:shadow-md duration-300 min-w-[25%] cursor-pointer',
-                  `bg-${category.bg}`
-                )}
-                style={{
-                  backgroundColor: category.bg,
-                }}
-                // onClick={() => {
-                //   navigate(`/category/${category.id}`);
-                // }}
-              >
-                <div
-                  className="bg-white w-[70px] h-[70px]   flex items-center justify-center"
-                  style={{ backgroundColor: category.color }}
-                >
-                  <img src={category.icon} alt={category.label} />
-                </div>
+        {categories.map((category, index) => (
+          <div
+            key={index}
+            className={cn(
+              'flex items-center justify-start gap-5 p-6 hover:shadow-md duration-300 min-w-[25%] cursor-pointer',
+              `bg-${category.bg}`
+            )}
+            style={{
+              backgroundColor: category.bg,
+            }}
+            // onClick={() => {
+            //   navigate(`/category/${category.id}`);
+            // }}
+          >
+            <div
+              className="bg-white w-[70px] h-[70px]   flex items-center justify-center"
+              style={{ backgroundColor: category.color }}
+            >
+              <img src={category.icon} alt={category.label} />
+            </div>
 
-                <div className="flex flex-col justify-center">
-                  <span className="text-gray-900">{category.label} </span>
-                  <span className="text-gray-600">{category.cont} Courses</span>
-                </div>
-              </div>
-            )
-          )
-        )}
+            <div className="flex flex-col justify-center">
+              <span className="text-gray-900">{category.label} </span>
+              <span className="text-gray-600">{category.cont} Courses</span>
+            </div>
+          </div>
+        ))}
       </div>
       <div className="text-xl font-[600] w-full flex justify-between">
         <div>Let’s start learning, Kevin</div>

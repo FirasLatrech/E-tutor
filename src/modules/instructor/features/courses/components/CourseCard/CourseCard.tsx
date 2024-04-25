@@ -4,14 +4,15 @@ import ThreeDots from 'modules/instructor/assets/icons/Courses/ThreeDots';
 import UploadFileIcon from 'modules/instructor/assets/icons/CreateCourse/UploadFileIcon';
 import { Badge } from 'modules/shared/components/Tag/Tag';
 
-function CourseCard({ course_thumbnail, course_category, title }: any) {
+function CourseCard({ course_thumbnail, course_category, title, isDarft }: any) {
+  console.log(isDarft);
   return (
-    <div className="min-w-[19rem] w-full max-md:col-span-12 col-span-3 max-4xl:col-span-4 max-xl:col-span-5 flex rounded-sm flex-col items-center justify-start bg-white">
+    <div className="min-w-[20.5rem] w-full max-md:col-span-12 col-span-3 max-4xl:col-span-4 max-xl:col-span-5 flex rounded-sm flex-col items-center justify-start bg-white">
       <div className="w-full overflow-hidden  border-t border-r border-l shadow-sm border-gray-100 bg-gray-50 flex items-center h-[15rem] justify-center">
         {course_thumbnail ? (
           <img
             src={course_thumbnail?.path}
-            className="object-cover w-full duration-300 cursor-pointer hover:scale-125 h-full"
+            className="object-cover w-full duration-300 cursor-pointer hover:scale-110 h-full"
           />
         ) : (
           <UploadFileIcon />
@@ -20,7 +21,9 @@ function CourseCard({ course_thumbnail, course_category, title }: any) {
       <div className="border-b-[1.7px] border-gray-100 flex items-center w-full py-4 gap-[1rem] flex-col">
         <div className="w-[90%] flex items-start flex-col gap-3">
           <Badge variant="secondary">{course_category?.name}</Badge>
-          <p>{title}</p>
+          <p className="h-[3rem] w-full overflow-hidden text-ellipsis">
+            {title}
+          </p>
         </div>
       </div>
       <div className="border-b-[1.7px] border-gray-100 flex items-center w-full py-4 gap-[1rem] flex-col">

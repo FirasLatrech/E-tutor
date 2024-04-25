@@ -20,7 +20,7 @@ const UnderHeader = () => {
   const { isAuthenticated, user } = useAuthStore();
   const Fallback = isAuthenticated && user?.firstName[0] + user?.lastName[0];
   const { t } = useTranslation('underheader');
-  console.log(user?.photo?.path ?? user?.photo_url);
+
   // routes data
 
   // check if route is active

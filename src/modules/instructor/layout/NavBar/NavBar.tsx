@@ -12,7 +12,7 @@ interface NavBarPropsType {
 
 function NavBar({ setOpenSideBar, isOpenSideBar }: NavBarPropsType) {
   const { pathname } = useLocation();
-  console.log(isOpenSideBar);
+
   return (
     <div className="w-full bg-white">
       <div className="w-full py-4 h-[6.25rem] flex items-center justify-center ">

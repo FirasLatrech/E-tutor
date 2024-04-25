@@ -73,12 +73,10 @@ export const VideoPlayer = ({
           onCanPlay={() => {
             setIsReady(true);
           }}
-          onEnded={() => {
-            console.log('ended');
-          }}
+          onEnded={() => {}}
           autoPlay
           accentColor="#FF6636"
-          // onProgress={(e) => console.log(e.target.currentTime)}
+          // onProgress={(e) =>
           playbackId={playbackId}
         />
       )}

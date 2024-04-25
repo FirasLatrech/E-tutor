@@ -10,6 +10,7 @@ import { PATH } from 'modules/instructor/routes/paths';
 import menuSideBar from 'modules/instructor/assets/icons/Sidebar/menu.svg';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import MenuLogo from 'modules/instructor/assets/icons/Sidebar/MenuLogo';
+import Footer from '../Footer/Footer';
 interface MainLayoutPropsType {
   children: ReactNode;
 }
@@ -32,8 +33,8 @@ function MainLayout({ children }: MainLayoutPropsType) {
   return (
     <div className="w-screen min-h-screen h-screen pb-full flex">
       <div
-        className={`max-w-[17.5rem] z-50 ease-linear duration-300 h-full bg-gray-900 ${
-          isOpenSideBar ? 'w-[17.5rem]' : 'w-[5rem] '
+        className={`min-w-[17.5rem] z-50 ease-linear duration-300 h-full bg-gray-900 ${
+          isOpenSideBar ? 'w-[17.5rem]' : '!min-w-[5rem] '
         } ${hideSideBar && !isOpenSideBar ? 'fixed -left-[5rem]' : ''} ${
           hideSideBar ? 'fixed' : ''
         }`}
@@ -78,7 +79,7 @@ function MainLayout({ children }: MainLayoutPropsType) {
                 } ease-linear duration-200`}
                 to={Route?.path}
                 key={index}
-                onClick={() => setOpenSideBar(false)}
+                onClick={() => hideSideBarToggle && setOpenSideBar(false)}
               >
                 <Icon className=" !text-primary-500" />
                 {isOpenSideBar && (
@@ -107,6 +108,7 @@ function MainLayout({ children }: MainLayoutPropsType) {
           isOpenSideBar={isOpenSideBar || !hideSideBar}
         />
         {children}
+        <Footer />
       </div>
     </div>
   );

@@ -44,6 +44,8 @@ function BasicInformation() {
     data: course_data,
   } = useCreateCourseMutation();
   const { toast } = useToast();
+
+  //submit step data
   const onSubmit: SubmitHandler<any> = async (submitData) => {
     if (!current_course_data) {
       const createdCourse = await createCourse({
@@ -73,17 +75,6 @@ function BasicInformation() {
         });
       }
     }
-  };
-  const basicInformationCourse = {
-    title: current_course_data?.title,
-    subtitle: current_course_data?.subtitle,
-    course_category_id: current_course_data?.course_category?.id,
-    course_sub_category_id: current_course_data?.course_sub_category?.id,
-    course_topic: current_course_data?.course_topic,
-    course_language_id: current_course_data?.course_language?.id,
-    subtitle_language_id: current_course_data?.subtitle_language?.id,
-    course_level_id: current_course_data?.course_level?.id,
-    durations: current_course_data?.durations,
   };
 
   const updateBasicInformation = (
@@ -123,20 +114,32 @@ function BasicInformation() {
       })
     ),
   });
+
+  //set step data
+  const basicInformationCourse = {
+    title: current_course_data?.title,
+    subtitle: current_course_data?.subtitle,
+    course_category_id: current_course_data?.course_category?.id,
+    course_sub_category_id: current_course_data?.course_sub_category?.id,
+    course_topic: current_course_data?.course_topic,
+    course_language_id: current_course_data?.course_language?.id,
+    subtitle_language_id: current_course_data?.subtitle_language?.id,
+    course_level_id: current_course_data?.course_level?.id,
+    durations: current_course_data?.durations,
+  };
   useEffect(() => {
     if (BasicInformation || basicInformationCourse) {
       Object.entries(BasicInformation || basicInformationCourse).forEach(
         ([key, value]) => {
-          console.log([key, value]);
           setValue(key as keyof BasicInformationType, value as any);
         }
       );
     }
   }, [BasicInformation, current_course_data]);
 
+  //get category and level and language data
   const { data: category_data, isFetching: category_loading } =
     useAllCategory();
-
   const { data: level_data, isFetching: level_loading } = useLevelsQuery();
   const { data: language_data, isFetching: language_loading } =
     uselanguagesQuery();

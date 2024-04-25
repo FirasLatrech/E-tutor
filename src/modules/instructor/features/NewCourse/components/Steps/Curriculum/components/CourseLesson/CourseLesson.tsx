@@ -115,7 +115,6 @@ function CourseLesson({ Lesson, SectionNumber, index }: CourseLessonPropsType) {
     LessonName: string,
     notes: string | null
   ) => {
-    console.log(notes);
     setSections((old): sectionType[] => {
       if (!old) {
         return [];

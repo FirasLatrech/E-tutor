@@ -1,3 +1,4 @@
+import { QueryOptionsType } from 'modules/instructor/store/course/courseStore';
 import { api } from 'modules/shared/lib/api';
 
 export const createCourse = async (course: Course) => {
@@ -27,15 +28,11 @@ export const updateCourse = async (
   }
 };
 
-export const getMyCourseQuery= async () => {
+export const getMyCourses = async (queryOptions: QueryOptionsType) => {
   try {
     const res = await api.get(`/courses/me`, {
       params: {
-        orderBy: {
-          orderBy: 'createdAt',
-          order: 'DESC',
-        },
-        order: 'asc',
+        ...queryOptions,
       },
     });
     return res?.data;

@@ -38,6 +38,7 @@ function PublishCourse() {
       course: {
         course_instructor: Instructors?.map((Instructor) => Instructor.id),
         ...Message,
+        isDraft: false,
       },
       courseId,
     });
@@ -83,7 +84,7 @@ function PublishCourse() {
       });
     }
   }, [current_course_data]);
-  
+
   return (
     <div className="w-full px-9 min-h-[60vh] items-center justify-center  py-4 h-full flex flex-col gap-[3rem]">
       {course_loading ? (

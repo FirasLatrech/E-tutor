@@ -23,7 +23,7 @@ function UploadVideo({ label, onChange }: { label: string; onChange: any }) {
       {/*  <MuxUploader
         className="opacity"
         endpoint="https://httpbin.org/put"
-        onSuccess={(object) => console.log(object)}
+        onSuccess={(object) => 
   /> */}
     </div>
   );

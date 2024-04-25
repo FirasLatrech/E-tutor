@@ -11,14 +11,12 @@ type Props = {
 };
 
 function HeroSection({ courseDetails }: Props) {
-  console.log(courseDetails);
   const { setOpen, setClose } = useModal();
 
   const handleClick = () => {
     setOpen(<CustomModal title="Write a Review" />);
   };
   const courseDescription = courseDetails && courseDetails.course_descriptions;
-  console.log(courseDescription);
 
   return (
     <div className="w-full h-[80px] bg-gray-50 flex items-center justify-between">

@@ -9,7 +9,6 @@ import Course from './_components/courseDetails';
  */
 const Courses = () => {
   const params = useParams();
-  console.log(params);
 
   return (
     // <div className="flex items-center justify-center h-screen">

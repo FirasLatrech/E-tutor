@@ -101,7 +101,7 @@ const Button: React.FC<ButtonProps> = ({
       ${additionnalClasses}
     `;
   };
-  console.log(size);
+
   const getSizeClasses = () => {
     switch (size) {
       case 'sm':
