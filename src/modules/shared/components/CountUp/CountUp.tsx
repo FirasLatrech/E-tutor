@@ -10,7 +10,7 @@ function CountUp({
   duration: number;
 }) {
   const [count, setCount] = useState(start || 0);
-  const frames = Math.ceil((duration / 1000) * 60);
+  const frames = Math.ceil((duration / 1000) * 30);
   const increment = (end - start) / frames;
 
   useEffect(() => {
@@ -25,12 +25,12 @@ function CountUp({
         }
         return nextCount;
       });
-    }, 1000 / 60); 
+    }, 1000 / 60);
 
     return () => clearInterval(interval);
   }, [start, end, increment, frames]);
 
-  return <span>{Math.round(count)}</span>;
+  return <span className="easeInOut duration-1000">{Math.round(count)}</span>;
 }
 
 export default CountUp;

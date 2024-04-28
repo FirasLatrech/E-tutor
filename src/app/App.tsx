@@ -8,6 +8,7 @@ import GoogleAuthProvider from 'modules/auth/social-auth/google/google-auth-prov
 import { Toaster } from 'modules/shared/components/ui/toaster';
 import routes, { renderRoutes } from '../modules/shared/routes';
 import 'react-toastify/dist/ReactToastify.css';
+import SocketProvider from 'modules/shared/providers/socketProvider';
 
 function App() {
   const queryClient = new QueryClient();
@@ -16,18 +17,20 @@ function App() {
 
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <Suspense>
-          <div className="h-screen ">
-            {/* <Router /> */}
-            <Grafana />
-            {renderRoutes(routes)}
-          </div>
-        </Suspense>
-        <Toaster />
-      </HelmetProvider>
-    </QueryClientProvider>
+    <SocketProvider>
+      <QueryClientProvider client={queryClient}>
+        <HelmetProvider>
+          <Suspense>
+            <div className="h-screen ">
+              {/* <Router /> */}
+              <Grafana />
+              {renderRoutes(routes)}
+            </div>
+          </Suspense>
+          <Toaster />
+        </HelmetProvider>
+      </QueryClientProvider>
+    </SocketProvider>
   );
 }
 
